@@ -5,14 +5,14 @@
    ```sh
    git clone https://github.com/Ankit628792/TheNeuronClub.git
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. change directory to TheNeuronClub 
+2. change directory to TheNeuronClub 
    ```sh
    cd TheNeuronClub
    ```   
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
 4. run the project
    ```sh
    npm run dev
