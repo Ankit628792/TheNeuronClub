@@ -18,4 +18,6 @@
    npm run dev
    ```   
    
-Preview: https://neuron-club.vercel.app/
+Preview on Local system : http://localhost:3000/
+<br />
+Live Preview: https://neuron-club.vercel.app/
