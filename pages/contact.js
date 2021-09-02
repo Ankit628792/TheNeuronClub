@@ -50,6 +50,10 @@ function contact() {
                         className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       />
                     </div>
+                    <div className="mb-1 sm:mb-2">
+                    <button className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">Send Message</button>
+                    </div>
+
 
                     <p className="text-xs text-gray-600 sm:text-sm">
                       Thanks for contacting us. We respect your privacy.

@@ -11,9 +11,8 @@ export default function Home({ questions }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
-        <QuestionGroup questions={questions.slice(0, 7)} category={"Popular"} />
-        <QuestionGroup questions={questions.slice(7, 14)} category={"Recent"} />
-        <QuestionGroup questions={questions.slice(0, 7)} category={"Large Volume"} />
+        <QuestionGroup questions={questions.slice(0, 9)} category={"Popular"} />
+        <QuestionGroup questions={questions.slice(7, 16)} category={"Recent"} />
       </div>
     </>
   )

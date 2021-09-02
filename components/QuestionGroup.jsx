@@ -14,14 +14,14 @@ function QuestionGroup({ questions, category }) {
                 <h1 className="flex items-center text-base sm:text-lg cursor-pointer text-blue-400 sm:pr-4">View All <ArrowRightIcon className="h-7 mx-2" /></h1>
                 </Link> */}
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                     {
                         questions.map((item, i) => (
                             <Question question={item} key={i} />
                         ))
                     }
                     <div className="grid place-items-center text-blue-400 cursor-pointer p-5">
-                        <Link href='/'>
+                        <Link href='/subscribe'>
                             <h1 className="flex items-center text-lg">
                                 View All
                                 <ArrowRightIcon className="h-7 mx-2" />

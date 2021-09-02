@@ -1,8 +1,11 @@
 import { LockClosedIcon, MailIcon, UserIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 
 function login() {
+    const router = useRouter()
+    router.push('/subscribe')
     return (
         <>
             <div className="min-h-screen w-full">
@@ -12,7 +15,9 @@ function login() {
                 </Head>
                 <div className="md:flex relative min-h-screen">
                     <div className="relative min-h-[300px] p-7 gradient-bg w-full flex flex-col items-center justify-end md:justify-center">
-                        <h1 className="absolute top-5 left-5 text-white text-3xl lg:text-4xl font-bold">LOGO.</h1>
+                        <Link href="/">
+                        <h1 className="absolute top-5 left-5 text-white text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1>
+                        </Link>
                         <div className="max-w-sm lg:max-w-md text-white">
                             <h1 className="text-3xl md:text-5xl mb-3 font-semibold">Start Betting Now</h1>
                             <p className="text-lg md:text-xl">Join TheNeuron.club to bet directly on the outcome of events. We've built a next gen betting platform for you to bet on your opinion.</p>
