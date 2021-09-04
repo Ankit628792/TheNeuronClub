@@ -2,7 +2,6 @@ import { ArrowRightIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import Question from "./Question";
 
-
 function QuestionGroup({ questions, category }) {
     return (
         <>
