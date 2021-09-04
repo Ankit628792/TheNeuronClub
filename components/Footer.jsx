@@ -10,7 +10,12 @@ function Footer() {
                 </svg>
             </div>
             <div>
-                <h1 className="text-3xl font-bold leading-snug">LOGO.</h1>
+            <Link href="/">
+                {/* <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
+                <div className="relative h-10 w-48">
+                    <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md" />
+                </div>
+                </Link>
                 <p className="py-2 max-w-md">TheNeuron.club is the next generation betting platform that allows users to be on the outcome of a wide range of events. Sign up is now open for early access!</p>
             </div>
 

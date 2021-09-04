@@ -28,7 +28,10 @@ function Navbar() {
         <>
             <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
-                <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1>
+                {/* <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
+                <div className="relative h-12 w-48">
+                    <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
+                </div>
                 </Link>
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
@@ -39,7 +42,7 @@ function Navbar() {
                         <Link href="/contact">Contact Us</Link>
                     </ul>
                     <Link href="/subscribe">
-                        <button className="btn">Subscribe</button>
+                        <button className="btn hidden md:inline-block">Subscribe</button>
                     </Link>
                     <MenuAlt1Icon className="w-10 h-10 ml-3 cursor-pointer md:hidden active:scale-95 transition-sm" onClick={() => setIsActive(true)} />
                 </div>
@@ -48,7 +51,7 @@ function Navbar() {
             {isActive &&
                 <div className="fixed md:hidden z-50 bg-white top-0 left-0 right-0 bottom-0 w-full h-full flex justify-center items-center">
                     <XIcon className="h-10 w-10 md:hidden absolute top-4 right-5 cursor-pointer active:scale-95 transition-sm" onClick={() => setIsActive(false)} />
-                    <ul className="flex flex-col justify-center items-center text-3xl font-bold space-y-4">
+                    <ul className="flex flex-col justify-center items-center text-3xl font-bold space-y-5">
                         <Link href="/">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">Home</h1>
                         </Link>

@@ -2,6 +2,7 @@ import 'tailwindcss/tailwind.css'
 import '../styles/global.css'
 import { Provider } from 'next-auth/client'
 import Router, { useRouter } from 'next/router'
+import Head from 'next/head'
 import ProgressBar from '@badrap/bar-of-progress'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -21,9 +22,14 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   return (
     <Provider session={pageProps.session}>
-      {(router.pathname !== '/login' && router.pathname !== '/register') &&<Navbar />}
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+      </Head>
+      {(router.pathname !== '/login' && router.pathname !== '/register') && <Navbar />}
       <Component {...pageProps} />
-      {(router.pathname !== '/login' && router.pathname !== '/register') &&<Footer />}
+      {(router.pathname !== '/login' && router.pathname !== '/register') && <Footer />}
     </Provider>
   )
 }

@@ -20,7 +20,7 @@ function privacy_policy() {
             </h1>
                 <h2>Website visitors</h2>
             <p className="font-medium">
-                We may collect the following information about people who visit our website (https://www.theneuron.club/ ) to generate statistics which we use to improve our services and communication channels:
+                We may collect the following information about people who visit our website <a className="text-blue-500 hover:text-blue-600">(https://www.theneuron.club/ )</a> to generate statistics which we use to improve our services and communication channels:
             </p>
             <ul>
                 <li><p>Number of visitors to the different pages</p></li>
