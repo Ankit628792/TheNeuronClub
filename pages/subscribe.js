@@ -20,6 +20,7 @@ function subscribe() {
       
           const response = await res.json();
           if(response){
+              setMail('');
               setSubscribed(true);
           }
           setIsSending(false)
@@ -39,7 +40,7 @@ function subscribe() {
                                 <input type="text" className="flex-grow max-w-xs p-3 px-4 focus:outline-none focus:border focus:border-blue-500 placeholder-gray-400 font-normal" value={mail} required placeholder="Type Your Email Address ..." onChange={(e) => setMail(e.target.value)} />
                                 <button className="px-6 py-3 text-lg text-white font-semibold gradient-bg" onClick={subscribe}>{isSending ? `Subscribing..` : `Subscribe`}</button>
                             </div>
-                           {subscribed && <h1 className="text-4xl md:text-5xl mt-4 font-semibold">Thanks for Subscribing</h1>}
+                           {subscribed && <h1 className="text-3xl md:text-4xl mt-4 font-semibold">Thanks for Subscribing</h1>}
                         </div>
             </div>
         </>
