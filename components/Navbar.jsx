@@ -33,7 +33,7 @@ function Navbar() {
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
                         <Link href="/">Markets</Link>
-                        <Link href="/">My Portfolio</Link>
+                        <Link href="/subscribe">My Portfolio</Link>
                         <Link href="/how_it_works">How it Works</Link>
                         <Link href="/faq">FAQs</Link>
                         <Link href="/contact">Contact Us</Link>

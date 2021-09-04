@@ -6,6 +6,9 @@
         display: none;
         background: #f1faff;
     }
+    body{
+      background: rgb(245,255,255);
+    }
     .line-clamp-1{
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -42,60 +45,53 @@
       .gradient-shadow-lg{
         box-shadow: 0px 0px 40px rgba(30, 165,255,0.3);
       }
-      .custom-shape-divider-bottom-1630315513 {
+    
+      .custom-shape-divider-bottom-1630315778 {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         overflow: hidden;
         line-height: 0;
-        transform: rotate(180deg);
-    }
-    
-    .custom-shape-divider-bottom-1630315778 {
+      }
+  
+      .custom-shape-divider-bottom-1630315778 svg {
+          position: relative;
+          display: block;
+          width: calc(100% + 1.3px);
+          height: 60px;
+      }
+
+    .custom-shape-divider-top-1630316193 {
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       width: 100%;
       overflow: hidden;
       line-height: 0;
-  }
-  
-  .custom-shape-divider-bottom-1630315778 svg {
+      transform: rotate(180deg);
+    }
+
+    .custom-shape-divider-top-1630316193 svg {
       position: relative;
       display: block;
       width: calc(100% + 1.3px);
-      height: 60px;
-  }
-  .custom-shape-divider-top-1630316045 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1630316193 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-
-.custom-shape-divider-top-1630316193 svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 50px;
-}
+      height: 50px;
+    }
   
-  .shape-fill {
-      fill: #FFFFFF;
-  }
+    .shape-fill {
+        fill: #f5ffff;
+    }
+    .policy h1{
+      @apply text-2xl mt-10 font-semibold text-gray-700 my-2
+    }
+    .policy h2{
+      @apply text-lg font-semibold text-gray-600 my-2
+    }
+    .policy p{
+      @apply text-base text-gray-500 my-2
+    }
+
     .footer__social{
       @apply relative h-10 w-10 p-1 grid place-items-center bg-white rounded-full hover:scale-105 hover:shadow-lg cursor-pointer active:scale-[0.98] transition duration-150
     }
@@ -114,6 +110,9 @@
     }
     .transition-sm{
       @apply transition-all duration-100 ease-in-out
+    }
+    .transition-md{
+      @apply transition-all duration-150 ease-in-out
     }
 
     @media(max-width: 640px){

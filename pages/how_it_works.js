@@ -24,7 +24,7 @@ function how_it_works() {
     return (
         <>
         <div className="py-10 pt-20">
-            <h1 className="mt-20 text-5xl font-bold text-center text-gray-700">How it Works</h1>
+            <h1 className="mt-20 text-5xl font-bold text-center text-gray-700">How to get Started?</h1>
             <div className="h-1 w-48 mx-auto my-4 bg-gray-500"></div>
 
         <div className="py-10 min-h-screen space-y-20">

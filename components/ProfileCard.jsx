@@ -2,7 +2,7 @@ import Image from 'next/image'
 function ProfileCard() {
     return (
         <>
-            <div className="max-w-xs py-5 gradient-shadow hover:gradient-shadow-md rounded-xl flex flex-col items-center justify-center mx-auto min-w-[300px]">
+            <div className="max-w-xs py-5 gradient-shadow hover:gradient-shadow-md bg-white rounded-xl flex flex-col items-center justify-center mx-auto min-w-[300px]">
                     <div className="relative w-40 h-40 rounded-full border-8 border-gray-200">
                         <Image src="/images/hiw1.webp" layout="fill" objectFit="cover" className="rounded-full " />
                     </div>

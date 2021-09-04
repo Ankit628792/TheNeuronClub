@@ -19,7 +19,7 @@ function Footer() {
                     <Link href="/about_us">About Us</Link>
                     <Link href="/how_it_works"> How It Works</Link>
                     <Link href="/faq">FAQs</Link>
-                    <Link href="/">Privacy Policy</Link>
+                    <Link href="/privacy_policy">Privacy Policy</Link>
                     <Link href="/contact">Contact Us</Link>
                 </ul>
                 <ul className="space-x-5 my-2 text-lg font-medium py-2 flex">

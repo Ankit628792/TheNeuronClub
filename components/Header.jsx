@@ -2,10 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 function Header() {
-//     <div className="mb-4">
-//     <h1 className="line-clamp-4 text-base">{question.question}</h1>
-//     <h1 className="text-center flex mt-2"><ClockIcon className="h-7 text-blue-400" /> <span className="block w-14">4h left</span></h1>
-// </div>
     return (
         <div className="relative gradient-bg min-h-screen md:min-h-[550px] lg:min-h-[600px]">
             <div className="absolute flex flex-col-reverse md:flex-row w-full items-center bottom-0 p-10 lg:px-28 left-0 text-white">

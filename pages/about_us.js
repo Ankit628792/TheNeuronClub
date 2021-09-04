@@ -14,7 +14,7 @@ function about_us() {
             <h1 className="text-3xl md:text-5xl font-bold text-gray-700 text-center leading-snug md:leading-normal">
             Our awesome team
             </h1>
-                <p className="text-lg text-gray-500 px-5 max-w-2xl mx-auto text-center">            Our team and our shared values are our right to play in this business</p>
+                <p className="text-lg text-gray-500 px-5 max-w-2xl mx-auto text-center"> Our team and our shared values are our right to play in this business</p>
             <div className="max-w-7xl mx-auto p-10 pb-20 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <ProfileCard />
                 <ProfileCard />

@@ -17,7 +17,7 @@ function Accordion({ title, content }) {
                         </svg>
                 }
             </div>
-            {isActive && <p className="text-base text-gray-600 py-3 px-6 text-justify">{content}</p>}
+            {isActive && <p className="text-base text-gray-600 bg-white py-3 px-6 text-justify">{content}</p>}
         </div>
     )
 }

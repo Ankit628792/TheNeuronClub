@@ -46,8 +46,8 @@ function faq() {
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-700 text-center mt-10">Frequently Asked Questions</h1>
                 <div className="h-1 w-48 mx-auto my-3 md:my-5 bg-gray-500"></div>
                 <div className="p-5">
-                    {accordionData.map(({ title, content }, i) => (
-                        <Accordion key={i} title={title} content={content} />
+                    {accordionData.map((item, i) => (
+                        <Accordion key={i} title={item.title} content={item.content} />
                     ))}
                 </div>
             </div>

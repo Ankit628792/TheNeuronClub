@@ -5,7 +5,9 @@ import { useRouter } from 'next/router'
 
 function register() {
     const router = useRouter();
-    router.push('/subscribe')
+    if(router){
+        router.push('/subscribe')
+    }
     return (
         <>
             <div className="min-h-screen w-full">
@@ -61,3 +63,5 @@ function register() {
 }
 
 export default register
+
+
