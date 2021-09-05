@@ -26,14 +26,6 @@ function MyApp({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XCR4DVHQZ"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
-          gtag('js', new Date());
-
-          gtag('config', 'G-1XCR4DVHQZ');
-        </script>
       </Head>
       {(router.pathname !== '/login' && router.pathname !== '/register') && <Navbar />}
       <Component {...pageProps} />

@@ -7,7 +7,7 @@ function Question({ question }) {
                 <h1 className="line-clamp-4 text-base mt-1 sm:mt-0">{question.question}</h1>
                 <img src={question.image} layout="fill" className="w-10 h-10 border-4 border-blue-100 gradient-shadow-lg hover:scale-105 transition-md object-cover rounded-full -translate-x-3 sm:-translate-x-0" />
             </div>
-            <h1 className="text-center flex my-2"><ClockIcon className="h-7 text-blue-500" /> <span className="block w-14">{Math.floor(Math.random() * 10)}h left</span></h1>
+            <h1 className="text-center flex my-2"><ClockIcon className="h-7 text-blue-500" /> <span className="inline-block w-14">{Math.floor(Math.random() * 10)}h left</span></h1>
             <div className="flex items-center justify-between mt-auto">
                 <div className="text-sm">
                     <h1 className="text-gray-400">Volume</h1>
