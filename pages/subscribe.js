@@ -31,7 +31,7 @@ function subscribe() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                    
-                        <div className="p-5 sm:px-10 max-w-3xl text-center bg-white mx-2 text-gray-700 mx-auto">
+                        <div className="p-5 sm:px-10 max-w-3xl text-center bg-white text-gray-700 mx-auto">
                             <h1 className="text-4xl md:text-5xl mb-3 font-semibold">Subscribe to Our Newsletter</h1>
                             <p className="text-lg md:text-xl">Join TheNeuron.club to bet directly on the outcome of events. We've built a next gen betting platform for you to bet on your opinion.</p>
                      
