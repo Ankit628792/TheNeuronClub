@@ -53,19 +53,19 @@ function Navbar() {
                     <XIcon className="h-10 w-10 md:hidden absolute top-4 right-5 cursor-pointer active:scale-95 transition-sm" onClick={() => setIsActive(false)} />
                     <ul className="flex flex-col justify-center items-center text-3xl font-bold space-y-5">
                         <Link href="/">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">Home</h1>
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Home</h1>
                         </Link>
                         <Link href="/about_us">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">About us</h1>
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >About us</h1>
                         </Link>
                         <Link href="/how_it_works">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">How it Works</h1>
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How it Works</h1>
                         </Link>
                         <Link href="/contact">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">Contact us</h1>
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
                         </Link>
                         <Link href="/subscribe">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm">Subscribe</h1>
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Subscribe</h1>
                         </Link>
                     </ul>
                 </div>

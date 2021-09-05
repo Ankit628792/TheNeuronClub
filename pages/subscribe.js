@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 function subscribe() {
     const [isSending, setIsSending] = useState(false)
-    const [mail, setMail] = useState()
+    const [mail, setMail] = useState('')
     const [subscribed, setSubscribed] = useState(false);
     
     const handleSubmit = async () => {
@@ -18,7 +18,6 @@ function subscribe() {
       
           const response = await res.json();
           if(response){
-              setMail('');
               setSubscribed(true);
           }
           setIsSending(false)
@@ -36,9 +35,9 @@ function subscribe() {
                             <p className="text-lg md:text-xl">Join TheNeuron.club to bet directly on the outcome of events. We've built a next gen betting platform for you to bet on your opinion.</p>
                      
                            {subscribed ? <h1 className="text-3xl md:text-4xl mt-6 text-blue-500 font-semibold">Thanks for Subscribing</h1> : 
-                            <div className="flex max-w-md my-8 rounded-lg gradient-shadow mx-auto">
-                                <form onSubmit={handleSubmit}>
-                                <input type="text" className="flex-grow max-w-xs p-3 px-4 focus:outline-none focus:border focus:border-blue-500 placeholder-gray-400 font-normal" value={mail} required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Type Your Email Address ..." onChange={(e) => setMail(e.target.value)} />
+                            <div className="max-w-md my-8 rounded-lg gradient-shadow mx-auto">
+                                <form onSubmit={handleSubmit} className="flex">
+                                <input type="email" className="flex-grow max-w-xs p-3 px-4 focus:outline-none focus:border focus:border-blue-500 placeholder-gray-400 font-normal" value={mail} required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Type Your Email Address ..." onChange={(e) => setMail(e.target.value)} />
                                 <button type="submit" className="px-6 py-3 text-lg text-white font-semibold gradient-bg">{isSending ? `Subscribing..` : `Subscribe`}</button>
                                 </form>
                             </div>
