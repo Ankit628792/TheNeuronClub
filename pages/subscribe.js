@@ -6,7 +6,8 @@ function subscribe() {
     const [mail, setMail] = useState('')
     const [subscribed, setSubscribed] = useState(false);
     
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setIsSending(true);
         const res = await fetch(`/api/newsletter`, {
             method: 'POST',

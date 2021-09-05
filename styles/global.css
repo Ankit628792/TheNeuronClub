@@ -10,7 +10,8 @@
         background: #f1faff;
     }
     body{
-      background: #e7fdfd;
+      /* background: #e7fdfd; */
+      background: #e6faff;
     }
     .line-clamp-1{
         display: -webkit-box;

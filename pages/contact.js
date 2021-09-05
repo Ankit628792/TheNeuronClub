@@ -65,6 +65,7 @@ function contact() {
                         minLength="2"
                         type="text"
                         name="name"
+                        value={data.name}
                         onChange={handleChange}
                         className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       />
@@ -76,6 +77,7 @@ function contact() {
                         required
                         type="email"
                         name="email"
+                        value={data.email}
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                         onChange={handleChange}
                         className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
@@ -89,6 +91,7 @@ function contact() {
                         minLength="2"
                         type="text"
                         name="message"
+                        value={data.message}
                         onChange={handleChange}
                         className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       />
