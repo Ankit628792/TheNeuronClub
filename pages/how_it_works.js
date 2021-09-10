@@ -5,20 +5,20 @@ function how_it_works() {
         {
             no: 1,
             img:"/images/step1.svg",
-            heading: "Choose an Event",
-            desc: "Select an event that matters to you. At TheNeuron.club you get opportunity to beton a wide range of events curated by us everyday"
+            heading: "Choose a Topic",
+            desc: "Select a topic that matters to you. At TheNeuron.club (TNC) you get an opportunity to predict across wide range of topics curated by us everyday"
         },
         {
             no: 2,
             img:"/images/step2.svg",
-            heading: "Place your bet",
-            desc: "Place your bet on the expected outcome. You can place multiple bets, as well as take several positions"
+            heading: "Predict the outcome",
+            desc: "Predict the expected outcome of the topic."
         },
         {
             no: 3,
             img:"/images/step3.svg",
             heading: "Wait for settlement",
-            desc: "Monitor the event as it unfolds, and wait for the final settlement."
+            desc: "Monitor the topic as it unfolds, and wait for the final settlement."
         }
     ]
     return (

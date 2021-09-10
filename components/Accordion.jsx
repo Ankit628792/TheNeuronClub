@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Accordion({ title, content }) {
+function Accordion({ title, content, desc }) {
     const [isActive, setIsActive] = useState(false)
     return (
         <div className={`max-w-xl md:max-w-2xl lg:max-w-3xl mb-5 md:mb-8 cursor-pointer mx-auto rounded-lg gradient-shadow`}>
@@ -17,7 +17,15 @@ function Accordion({ title, content }) {
                         </svg>
                 }
             </div>
-            {isActive && <p className="text-base text-gray-600 bg-white py-3 px-6 text-justify">{content}</p>}
+            {isActive &&
+                <> <p className="text-base text-gray-600 bg-white py-3 px-6 pb-4 text-justify">{content}
+                    {desc &&
+                        <ul className="bg-white">
+                            {desc.map((item) => <li className="text-sm list-disc ml-6 mt-2">{item} </li>)}
+                        </ul>
+                    }
+                    </p>
+                </>}
         </div>
     )
 }

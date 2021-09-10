@@ -1,6 +1,6 @@
 function privacy_policy() {
     return (
-        <div className="policy max-w-4xl bg-white mx-auto p-10 pt-28">
+        <div className="policy max-w-4xl bg-white mx-auto p-10 mb-10 pt-28">
             <h2 className="mt-10"> We take the protection of personal information seriously and are committed to handling personal data in accordance with the applicable privacy regulations.
                 ‍</h2>
 

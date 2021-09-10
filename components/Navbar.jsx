@@ -3,12 +3,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid'
+import { userSession } from '../lib/user-session'
 
 function Navbar() {
     const router = useRouter();
-
+    const session = userSession();
     const [scrolled, setScrolled] = useState(false)
     const [isActive, setIsActive] = useState(false)
+
+    const logout = async () => {
+        window.localStorage.setItem('token', '');
+        const res = await fetch(`/api/account/logout`);
+        if (res.status === 200) {
+            location.reload();
+        }
+    }
+
     const checkScrollTop = () => {
         if (window.pageYOffset > 75) {
             setScrolled(true)
@@ -28,22 +38,27 @@ function Navbar() {
         <>
             <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
-                {/* <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
-                <div className="relative h-12 w-48">
-                    <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
-                </div>
+                    {/* <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
+                    <div className="relative h-12 w-48">
+                        <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
+                    </div>
                 </Link>
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
-                        <Link href="/">Markets</Link>
-                        <Link href="/subscribe">My Portfolio</Link>
+                        <Link href="/">Topics</Link>
+                        {session && <Link href="/signup">My Portfolio</Link>}
                         <Link href="/how_it_works">How it Works</Link>
                         <Link href="/faq">FAQs</Link>
                         <Link href="/contact">Contact Us</Link>
                     </ul>
-                    <Link href="/subscribe">
-                        <button className="btn hidden md:inline-block">Subscribe</button>
-                    </Link>
+                    {
+                        session ?
+                            <button onClick={logout} className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Logout</button>
+                            :
+                            <Link href="/signup">
+                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Sign Up</button>
+                            </Link>
+                    }
                     <MenuAlt1Icon className="w-10 h-10 ml-3 cursor-pointer md:hidden active:scale-95 transition-sm" onClick={() => setIsActive(true)} />
                 </div>
             </div>
@@ -55,17 +70,17 @@ function Navbar() {
                         <Link href="/">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Home</h1>
                         </Link>
-                        <Link href="/about_us">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >About us</h1>
-                        </Link>
                         <Link href="/how_it_works">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How it Works</h1>
+                        </Link>
+                        <Link href="/privacy_policy">
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Privacy Policy</h1>
                         </Link>
                         <Link href="/contact">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
                         </Link>
-                        <Link href="/subscribe">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Subscribe</h1>
+                        <Link href="/signup">
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Sign Up</h1>
                         </Link>
                     </ul>
                 </div>

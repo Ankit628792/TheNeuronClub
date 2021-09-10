@@ -1,8 +1,8 @@
 import connectDB from '../../server/db/mongodb';
-import Contact from '../../server/db/models/contact';
+import EarlySignup from '../../server/db/models/earlySignup';
 const nodemailer = require('nodemailer')
 
-const sendMail = ({ name, email, message }) => {
+const sendMail = (email) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.in',
@@ -16,10 +16,9 @@ const sendMail = ({ name, email, message }) => {
         const mailData = {
             from: process.env.mail_user,
             to: process.env.mail_to,
-            subject: `Message From ${name}`,
-            text: message + " | Sent from: " + email,
-            html: `<div>${message}</div><p>Sent from:
-          ${email}</p>`
+            subject: `New Signup`,
+            text:   " Sent from: " + email,
+            html: `<div>${email} recently Sign Up The Neuron club</div>`
         }
 
         transporter.sendMail(mailData, function (err, info) {
@@ -35,16 +34,15 @@ const sendMail = ({ name, email, message }) => {
     }
 }
 
-const contacts = async (req, res) => {
+const early_signup = async (req, res) => {
     if (req.method === 'POST') {
-        const { name, email, message } = req.body;
         try {
-            const userContact = new Contact({ name, email, message });
-            const contactSaved = await userContact.save();
-            if (contactSaved) {
-                sendMail({ name, email, message })
+            const earlySignup = new EarlySignup({ email:req.body});
+            const emailRegistered = await earlySignup.save();
+            if(emailRegistered){
+                sendMail(req.body)
             }
-            res.status(201).send({ msg: "Message sent" })
+            res.status(201).send(emailRegistered)
         }
         catch (error) {
             console.log(error)
@@ -55,4 +53,4 @@ const contacts = async (req, res) => {
     }
 }
 
-export default connectDB(contacts);
+export default connectDB(early_signup);
