@@ -52,11 +52,11 @@ function login() {
                     <title>TheNeuron | Login</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <div className="md:flex relative min-h-screen">
+                <div className="md:flex md:flex-col-reverse relative min-h-screen">
                     <div className="relative min-h-[300px] p-7 gradient-bg w-full flex flex-col items-center justify-end md:justify-center">
                         <Link href="/">
                             {/* <h1 className="absolute top-5 left-5 text-white text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
-                            <div className="absolute top-5 left-5 h-12 w-48">
+                            <div className="absolute top-5 left-5 h-12 w-48 cursor-pointer">
                                 <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
                             </div>
                         </Link>
@@ -80,7 +80,7 @@ function login() {
 
                                 <h1><a href="/account/forget_password" className="text-blue-500 font-medium">Forget Password ?</a></h1>
                                 <div className="flex items-center space-x-2 mt-2">
-                                        <input required className="w-4 h-4" type="checkbox" />
+                                        <input className="w-4 h-4" type="checkbox" />
                                         <h1>Remember me</h1>
                                     </div>
                                 <button type="submit" className="w-full px-6 py-3 text-lg text-white font-semibold rounded-md my-4 gradient-bg focus:border-none focus:outline-none active:scale-95 transition-sm">{isSending ? 'Validating' : 'Login'}</button>

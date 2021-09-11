@@ -25,13 +25,16 @@ const sendMail = async (data) => {
             html: `${data.html}`
         }
         transporter.sendMail(mailData, function (err, info) {
-            if (err)
+            if (err) {
+                res.status(400).send('Unable to send confirmation link')
                 console.log(err)
+            }
             else
-                console.log(info)
+            console.log(info)
         })
     }
     catch (error) {
+        res.status(400).send('Unable to send confirmation link')
         console.log(error)
     }
 }
