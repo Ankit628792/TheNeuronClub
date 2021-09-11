@@ -23,10 +23,6 @@ function signup() {
         }
         setIsSending(false)
     }
-    
-    console.log(process.env.mail_to)
-    console.log(process.env.mail_user)
-    console.log(process.env.mail_pass)
     return (
         <>
             <div className="w-full min-h-[500px] pt-36">
