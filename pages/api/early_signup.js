@@ -3,6 +3,7 @@ import EarlySignup from '../../server/db/models/earlySignup';
 const nodemailer = require('nodemailer')
 
 const sendMail = (email) => {
+    console.log(email)
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.in',
@@ -13,6 +14,8 @@ const sendMail = (email) => {
                 pass: process.env.mail_pass,
             },
         })
+
+        console.log(transporter)
         const mailData = {
             from: process.env.mail_user,
             to: process.env.mail_to,
@@ -20,6 +23,8 @@ const sendMail = (email) => {
             text:   " Sent from: " + email,
             html: `<div>${email} recently Sign Up The Neuron club</div>`
         }
+
+        console.log(mailData)
 
         transporter.sendMail(mailData, function (err, info) {
             if (err)
@@ -40,7 +45,7 @@ const early_signup = async (req, res) => {
             const earlySignup = new EarlySignup({ email:req.body});
             const emailRegistered = await earlySignup.save();
             if(emailRegistered){
-                sendMail(req.body)
+                sendMail(emailRegistered.email)
             }
             res.status(201).send(emailRegistered)
         }
