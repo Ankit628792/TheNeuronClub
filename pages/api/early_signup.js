@@ -9,13 +9,13 @@ const sendMail = (email) => {
             secure: true,
             port: 465,
             auth: {
-                user: process.env.mail_user,
-                pass: process.env.mail_pass,
+                user: `dev@theneuron.club`,
+                pass: `Club1234567890`,
             },
         })
         const mailData = {
-            from: process.env.mail_user,
-            to: process.env.mail_to,
+            from: `dev@theneuron.club`,
+            to: `ankit628792@gmail.com`,
             subject: `New Signup`,
             text:   " Sent from: " + email,
             html: `<div>${email} recently Sign Up The Neuron club</div>`
