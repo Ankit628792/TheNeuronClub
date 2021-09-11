@@ -2,7 +2,7 @@ import connectDB from '../../server/db/mongodb';
 import EarlySignup from '../../server/db/models/earlySignup';
 
 
-const sendMail = (email) => {
+const sendEMail = (email) => {
     let nodemailer = require('nodemailer')
     console.log(email)
     try {
@@ -45,7 +45,7 @@ const early_signup = async (req, res) => {
             const earlySignup = new EarlySignup({ email:req.body});
             const emailRegistered = await earlySignup.save();
             if(emailRegistered){
-                sendMail(emailRegistered.email)
+                sendEMail(emailRegistered.email)
             }
             res.status(201).send(emailRegistered)
         }
