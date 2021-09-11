@@ -1,6 +1,5 @@
 import 'tailwindcss/tailwind.css'
 import '../styles/global.css'
-import { Provider as AuthProvider } from 'next-auth/client'
 import { Provider } from 'react-redux'
 import Router, { useRouter } from 'next/router'
 import * as ga from '../lib/ga'
@@ -39,7 +38,6 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
   return (
-    <AuthProvider session={pageProps.session}>
       <Provider store={store}>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,7 +48,6 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
         {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Footer />}
       </Provider>
-    </AuthProvider>
   )
 }
 
