@@ -2,7 +2,7 @@ import connectDB from '../../server/db/mongodb';
 import EarlySignup from '../../server/db/models/earlySignup';
 const nodemailer = require('nodemailer')
 
-const sendMail = (email) => {
+const sendMail = (emailRegistered) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.in',
@@ -17,18 +17,18 @@ const sendMail = (email) => {
             from: `dev@theneuron.club`,
             to: `ankit628792@gmail.com`,
             subject: `New Signup`,
-            text:   " Sent from: " + email,
-            html: `<div>${email} recently Sign Up The Neuron club</div>`
+            text:   " Sent from: " + emailRegistered,
+            html: `<div>${emailRegistered.email} recently Sign Up The Neuron club</div>`
         }
 
         transporter.sendMail(mailData, function (err, info) {
             if (err){
                 console.log(err)
-                res.status(301).send({ms: 'error'})
+                res.status(301).send({ms: 'error', ss: emailRegistered})
             }
             else
             {
-                res.status(302).send({ms: 'sent'})
+                res.status(302).send({ms: 'sent', ss: emailRegistered})
                 console.log(info)
             }
         })
@@ -45,7 +45,7 @@ const early_signup = async (req, res) => {
             const earlySignup = new EarlySignup({ email:req.body});
             const emailRegistered = await earlySignup.save();
             if(emailRegistered){
-                sendMail(req.body)
+                sendMail(emailRegistered)
             }
             res.status(201).send(emailRegistered)
         }
