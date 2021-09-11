@@ -18,8 +18,8 @@ function signup() {
         })
 
         const response = await res.json();
-console.log(res.status)
-console.log(response)
+        console.log(res.status)
+        console.log(response)
         if (response) {
             setSubscribed(true);
         }
@@ -36,7 +36,7 @@ console.log(response)
                     <h1 className="text-3xl md:text-4xl mb-3 font-semibold">Sign Up for our early launch</h1>
                     <p className="text-lg md:text-xl">Be the first one to be notified when we launch! Please share your email</p>
 
-                    {subscribed ? <h1 className="text-2xl md:text-3xl mt-6 text-blue-500 font-medium">Thank you for your interest.<br/> We'll let you know when we launch! </h1> :
+                    {subscribed ? <h1 className="text-2xl md:text-3xl mt-6 text-blue-500 font-medium">Thank you for your interest.<br /> We'll let you know when we launch! </h1> :
                         <div className="max-w-sm my-8 rounded-lg gradient-shadow mx-auto">
                             <form onSubmit={handleSubmit} className="flex">
                                 <input type="email" className="flex-grow max-w-xs p-3 px-4 focus:outline-none focus:border focus:border-blue-500 placeholder-gray-400 font-normal" value={mail} required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email Address ..." onChange={(e) => setMail(e.target.value)} />

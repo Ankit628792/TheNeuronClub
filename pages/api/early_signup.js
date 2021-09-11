@@ -23,7 +23,6 @@ const sendMail = (email) => {
             text:   " Sent from: " + email,
             html: `<div>${email} recently Sign Up The Neuron club</div>`
         }
-
         console.log(mailData)
 
         transporter.sendMail(mailData, function (err, info) {
