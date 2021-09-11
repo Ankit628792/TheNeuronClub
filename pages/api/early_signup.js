@@ -1,12 +1,11 @@
 import connectDB from '../../server/db/mongodb';
 import EarlySignup from '../../server/db/models/earlySignup';
+import * as nodemailer from 'nodemailer'
 
-
-const sendEMail = (email) => {
-    let nodemailer = require('nodemailer')
+const sendEMail = async (email) => {
     console.log(email)
     try {
-        const transporter = nodemailer.createTransport({
+        const transporter = await nodemailer.createTransport({
             host: 'smtp.zoho.in',
             secure: true,
             port: 465,
@@ -26,7 +25,7 @@ const sendEMail = (email) => {
         }
         console.log(mailData)
 
-        transporter.sendMail(mailData, function (err, info) {
+        await transporter.sendMail(mailData, function (err, info) {
             if (err)
                 console.log(err)
             else
