@@ -47,7 +47,7 @@ const early_signup = async (req, res) => {
             if(emailRegistered){
                 sendMail(emailRegistered)
             }
-            res.status(201).send(emailRegistered)
+            res.status(201).send(req.body)
         }
         catch (error) {
             console.log(error)
