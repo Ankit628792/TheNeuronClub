@@ -12,6 +12,9 @@ const sendEMail = async (email) => {
                 user: process.env.mail_user,
                 pass: process.env.mail_pass,
             },
+            tls: {
+            rejectUnauthorized: false
+            }
             debug: true,
             logger: true
         })
