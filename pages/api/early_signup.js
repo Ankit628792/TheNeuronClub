@@ -16,7 +16,6 @@ const sendEMail = async (email) => {
             logger: true
         })
 
-        console.log(transporter)
         const mailData = {
             from: process.env.mail_user,
             to: process.env.mail_to,
@@ -24,7 +23,6 @@ const sendEMail = async (email) => {
             text:   " Sent from: " + email,
             html: `<div>${email} recently Sign Up The Neuron club</div>`
         }
-        console.log(mailData)
 
         transporter.verify(function (error, success) {
             if (error) {
