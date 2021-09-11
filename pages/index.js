@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import QuestionGroup from '../components/QuestionGroup'
 export default function Home({ questions }) {
   return (
+
     <>
       <div className="min-h-screen w-full flex flex-col justify-between pb-10">
         <Head>
