@@ -24,11 +24,11 @@ const sendMail = (email) => {
         transporter.sendMail(mailData, function (err, info) {
             if (err){
                 console.log(err)
-                res.status.(301).send({ms: 'error'})
+                res.status(301).send({ms: 'error'})
             }
             else
             {
-                res.status.(302).send({ms: 'sent'})
+                res.status(302).send({ms: 'sent'})
                 console.log(info)
             }
         })
