@@ -14,7 +14,7 @@ const sendEMail = async (email) => {
             },
             tls: {
             rejectUnauthorized: false
-            }
+            },
             debug: true,
             logger: true
         })
