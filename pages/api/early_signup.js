@@ -24,11 +24,11 @@ const sendMail = (emailRegistered) => {
         transporter.sendMail(mailData, function (err, info) {
             if (err){
                 console.log(err)
-                res.status(301).send({ms: 'error', ss: emailRegistered})
+                res.status(301).send({ms: 'error'})
             }
             else
             {
-                res.status(302).send({ms: 'sent', ss: emailRegistered})
+                res.status(302).send({ms: 'sent'})
                 console.log(info)
             }
         })
@@ -65,11 +65,11 @@ const early_signup = async (req, res) => {
         transporter.sendMail(mailData, function (err, info) {
             if (err){
                 console.log(err)
-                res.status(301).send({ms: 'error', ss: emailRegistered})
+                res.status(301).send({ms: 'error'})
             }
             else
             {
-                res.status(302).send({ms: 'sent', ss: emailRegistered})
+                res.status(302).send({ms: 'sent'})
                 console.log(info)
             }
         })
@@ -78,7 +78,7 @@ const early_signup = async (req, res) => {
     catch (error) {
         console.log(error)
     }
-            res.status(201).send(req.body)
+            res.status(201).send(emailRegistered)
         }
         catch (error) {
             console.log(error)
