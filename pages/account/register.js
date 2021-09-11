@@ -57,8 +57,10 @@ function register() {
                     <div className="relative min-h-[300px] p-7 gradient-bg w-full flex flex-col items-center justify-end md:justify-center">
                         <Link href="/">
                             {/* <h1 className="absolute top-5 left-5 text-white text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
-                            <div className="absolute top-5 left-5 h-12 w-48 cursor-pointer">
-                                <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
+                            <div className="absolute top-5 left-5 cursor-pointer">
+                                <div className="relative h-12 w-48">
+                                    <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
+                                </div>
                             </div>
                         </Link>
                         <div className="max-w-sm lg:max-w-md text-white text-center">

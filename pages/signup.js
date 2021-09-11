@@ -23,7 +23,6 @@ function signup() {
         }
         setIsSending(false)
     }
-
     return (
         <>
             <div className="w-full min-h-[500px] pt-36">

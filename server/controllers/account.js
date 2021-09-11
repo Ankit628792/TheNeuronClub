@@ -26,7 +26,6 @@ const sendMail = async (data) => {
         }
         transporter.sendMail(mailData, function (err, info) {
             if (err) {
-                res.status(400).send('Unable to send confirmation link')
                 console.log(err)
             }
             else
@@ -34,7 +33,6 @@ const sendMail = async (data) => {
         })
     }
     catch (error) {
-        res.status(400).send('Unable to send confirmation link')
         console.log(error)
     }
 }
@@ -118,7 +116,6 @@ const resetPassword = async (req, res) => {
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body)
     try {
         const userLogin = await User.findOne({ email: email }) || await User.findOne({ username: email })
         if (userLogin) {
@@ -135,8 +132,9 @@ const login = async (req, res) => {
             if (!isMatch) {
                 res.status(400).json({ error: 'Invalid Credentials' })
             } else {
+                console.log(userLogin)
                 if (userLogin.isVerified === false) {
-                    res.status(203).send('Verification pending')
+                    res.status(203).send({msg: 'User unverified'})
                 } else {
                     res.status(200).send({ token });
                 }
