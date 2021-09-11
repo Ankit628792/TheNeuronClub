@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 const sendEMail = async (email) => {
     console.log(email)
     try {
-        const transporter = await nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.in',
             secure: true,
             port: 465,
@@ -12,6 +12,8 @@ const sendEMail = async (email) => {
                 user: process.env.mail_user,
                 pass: process.env.mail_pass,
             },
+            debug: true,
+            logger: true
         })
 
         console.log(transporter)
@@ -24,11 +26,22 @@ const sendEMail = async (email) => {
         }
         console.log(mailData)
 
-        await transporter.sendMail(mailData, function (err, info) {
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log("error");
+                console.log(error);
+            } else {
+                console.log(success)
+                console.log('Server is ready to take our messages');
+            }
+        });
+
+        transporter.sendMail(mailData, function (err, info) {
             if (err)
-                console.log(err)
+                console.log(err);
+
             else
-                console.log(info)
+                console.log(info);
         })
        
     }
