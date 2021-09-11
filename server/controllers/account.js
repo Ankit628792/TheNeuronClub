@@ -1,14 +1,14 @@
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcryptjs'
-import * as nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
 import Cookies from 'cookies'
 
 import User from '../db/models/user'
 const host = process.env.HOST
 
-const sendMail = async (data) => {
+const sendEMail = async (data) => {
     try {
-        const transporter = nodemailer.createTransport({
+        const transporter = await nodemailer.createTransport({
             host: 'smtp.zoho.in',
             secure: true,
             port: 465,
@@ -16,6 +16,8 @@ const sendMail = async (data) => {
                 user: process.env.mail_user,
                 pass: process.env.mail_pass,
             },
+            debug: true, // show debug output
+            logger: true // log information in console
         })
         const mailData = {
             from: process.env.mail_user,
@@ -24,12 +26,20 @@ const sendMail = async (data) => {
             text: `${data.text}`,
             html: `${data.html}`
         }
-        transporter.sendMail(mailData, function (err, info) {
+        await transporter.verify(function (error, success) {
+            if (error) {
+                console.log("error");
+                console.log(error);
+            } else {
+                console.log('Server is ready to take our messages');
+            }
+        });
+        await transporter.sendMail(mailData, function (err, info) {
             if (err) {
                 console.log(err)
             }
             else
-            console.log(info)
+                console.log(info)
         })
     }
     catch (error) {
@@ -56,7 +66,7 @@ const register = async (req, res) => {
                     const token = await userRegistered.generateAuthToken();
                     const link = `${host}/account/verify?token=${token}`;
                     const data = { subject: `Confirmation for TheNeuron.Club Account`, text: link, email: userRegistered.email, html: `Click <a href="${link}" target="_blank">Here</a>  to verify your account.` };
-                    sendMail(data);
+                    sendEMail(data);
                     res.status(201).json({ message: "User registered successfully" });
                 }
 
@@ -91,7 +101,7 @@ const forgetPassword = async (req, res) => {
     if (userFound) {
         const link = `${host}/account/reset_password?_id=${userFound._id}&username=${userFound.username}`;
         const data = { subject: `Reset Password request for TheNeuron.Club Account`, text: `Reset password`, email: userFound.email, html: `Click <a href="${link}" target="_blank">Here</a>  to reset password of your TheNeuron.Club account.` }
-        sendMail(data);
+        sendEMail(data);
         res.status(200).send({ msg: 'Reset password request' })
     }
     else {
@@ -134,7 +144,7 @@ const login = async (req, res) => {
             } else {
                 console.log(userLogin)
                 if (userLogin.isVerified === false) {
-                    res.status(203).send({msg: 'User unverified'})
+                    res.status(203).send({ msg: 'User unverified' })
                 } else {
                     res.status(200).send({ token });
                 }
