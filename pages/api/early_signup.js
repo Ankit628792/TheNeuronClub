@@ -1,8 +1,9 @@
 import connectDB from '../../server/db/mongodb';
 import EarlySignup from '../../server/db/models/earlySignup';
-const nodemailer = require('nodemailer')
+
 
 const sendMail = (email) => {
+    let nodemailer = require('nodemailer')
     console.log(email)
     try {
         const transporter = nodemailer.createTransport({
