@@ -8,6 +8,7 @@ module.exports = {
         mail_user: process.env.MAIL_USER,
         mail_pass: process.env.MAIL_PASS,
         mail_to: process.env.MAIL_TO,
+        host:process.env.HOST,
         NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
     }
 }
