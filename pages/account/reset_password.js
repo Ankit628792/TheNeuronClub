@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { useState } from 'react'
@@ -47,6 +48,10 @@ function reset_password({ _id, username }) {
     }
     return (
         <>
+        <Head>
+          <title>The Neuron | Reset Password</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
             <div className="w-full min-h-[500px] pt-32 pb-10">
                 <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto">
 

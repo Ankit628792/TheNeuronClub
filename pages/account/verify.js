@@ -1,8 +1,13 @@
+import Head from "next/head";
 import { useRouter } from "next/router"
 
 function verify({ verified }) {
     const router = useRouter();
     return (
+        <>
+        <Head>
+          <title>The Neuron | Verify</title>
+        </Head>
         <div className="py-28">
             <div className="max-w-lg bg-white py-10 px-5 mx-auto text-center">
                 {verified ?
@@ -15,6 +20,7 @@ function verify({ verified }) {
                 }
             </div>
         </div>
+        </>
     )
 }
 

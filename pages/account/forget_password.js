@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useState } from 'react'
 
 function forget_password() {
@@ -27,6 +28,9 @@ function forget_password() {
     }
     return (
         <>
+        <Head>
+          <title>The Neuron | Forget Password</title>
+        </Head>
             <div className="w-full min-h-[500px] pt-32 pb-10">
                 <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto">
 

@@ -50,7 +50,6 @@ function login() {
             <div className="min-h-screen w-full">
                 <Head>
                     <title>TheNeuron | Login</title>
-                    <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <div className="md:flex md:flex-row-reverse relative min-h-screen">
                     <div className="min-h-[300px] p-7 gradient-bg w-full flex flex-col items-center justify-end md:justify-center">
