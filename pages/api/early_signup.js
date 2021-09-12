@@ -12,19 +12,15 @@ const sendEMail = async (email) => {
                 user: process.env.mail_user,
                 pass: process.env.mail_pass,
             },
-            debug: true,
-            logger: true
         })
 
-        console.log(transporter)
         const mailData = {
             from: process.env.mail_user,
             to: process.env.mail_to,
             subject: `New Signup`,
-            text:   " Sent from: " + email,
+            text: " Sent from: " + email,
             html: `<div>${email} recently Sign Up The Neuron club</div>`
         }
-        console.log(mailData)
 
         transporter.verify(function (error, success) {
             if (error) {
@@ -36,14 +32,10 @@ const sendEMail = async (email) => {
             }
         });
 
-        transporter.sendMail(mailData, function (err, info) {
-            if (err)
-                console.log(err);
+        const info = await transporter.sendMail(mailData);
+        console.log("result : ", info);
+        return 'message sent to ak'
 
-            else
-                console.log(info);
-        })
-       
     }
     catch (error) {
         console.log(error)
@@ -53,11 +45,10 @@ const sendEMail = async (email) => {
 const early_signup = async (req, res) => {
     if (req.method === 'POST') {
         try {
-            const earlySignup = new EarlySignup({ email:req.body});
+            const earlySignup = new EarlySignup({ email: req.body });
             const emailRegistered = await earlySignup.save();
-            if(emailRegistered){
-                sendEMail(emailRegistered.email)
-            }
+            const result = await sendEMail(emailRegistered.email);
+            console.log(result)
             res.status(201).send(emailRegistered)
         }
         catch (error) {

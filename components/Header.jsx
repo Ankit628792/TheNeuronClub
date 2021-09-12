@@ -9,7 +9,7 @@ function Header() {
                     <h1 className='text-4xl font-bold leading-tight max-w-md sm:text-5xl md:text-6xl lg:text-7xl'>Predict future and win rewards!</h1>
                     <p className="py-4 text-base sm:text-lg max-w-lg xl:max-w-xl lg:text-xl">The Neuron Club (TNC) is an online gaming platform that allows users to predict global events across categories and win rewards</p>
                     <Link href="/signup">
-                        <button className="btn lg:text-xl mt-2">Sign Up</button>
+                        <button className="btn text-xl mt-2">Sign Up</button>
                     </Link>
                 </div>
                 <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:scale-125 mx-auto">
