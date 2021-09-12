@@ -38,16 +38,17 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
   return (
-      <Provider store={store}>
-        <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-        </Head>
-        {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Navbar />}
-        <Component {...pageProps} />
-        {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Footer />}
-      </Provider>
+    <Provider store={store}>
+      <Head>
+        <link rel="icon" href="/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+      </Head>
+      {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Navbar />}
+      <Component {...pageProps} />
+      {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Footer />}
+    </Provider>
   )
 }
 
