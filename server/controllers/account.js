@@ -1,53 +1,55 @@
-import * as jwt from 'jsonwebtoken'
-import * as bcrypt from 'bcryptjs'
-import nodemailer from 'nodemailer';
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 import Cookies from 'cookies'
 
 import User from '../db/models/user'
+
+import sendEMail from '../../lib/Mail/sendMail'
+
 const host = process.env.HOST
 
-const sendEMail = async (data) => {
-    try {
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.zoho.in',
-            secure: true,
-            port: 465,
-            auth: {
-                user: process.env.mail_user,
-                pass: process.env.mail_pass,
-            },
-            debug: true,
-            logger: true 
-        })
-        const mailData = {
-            from: process.env.mail_user,
-            to: `${data.email}`,
-            subject: `${data.subject}`,
-            text: `${data.text}`,
-            html: `${data.html}`
-        }
-        transporter.verify(function (error, success) {
-            if (error) {
-                console.log("error");
-                console.log(error);
-            } else {
-                console.log('Server is ready to take our messages');
-                console.log(success)
-            }
-        });
-        transporter.sendMail(mailData, function (err, info) {
-            if (err) {
-                console.log(err);
-            }
+// const sendEMail = async (data) => {
+//     try {
+//         const transporter = nodemailer.createTransport({
+//             host: 'smtp.zoho.in',
+//             secure: true,
+//             port: 465,
+//             auth: {
+//                 user: process.env.mail_user,
+//                 pass: process.env.mail_pass,
+//             },
+//             debug: true,
+//             logger: true
+//         })
+//         const mailData = {
+//             from: process.env.mail_user,
+//             to: `${data.email}`,
+//             subject: `${data.subject}`,
+//             text: `${data.text}`,
+//             html: `${data.html}`
+//         }
+//         transporter.verify(function (error, success) {
+//             if (error) {
+//                 console.log("error");
+//                 console.log(error);
+//             } else {
+//                 console.log('Server is ready to take our messages');
+//                 console.log(success)
+//             }
+//         });
+//         transporter.sendMail(mailData, function (err, info) {
+//             if (err) {
+//                 console.log(err);
+//             }
 
-            else
-                console.log(info);
-        })
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
+//             else
+//                 console.log(info);
+//         })
+//     }
+//     catch (error) {
+//         console.log(error)
+//     }
+// }
 
 const register = async (req, res) => {
     const { username, email, password, country } = req.body;
@@ -68,7 +70,8 @@ const register = async (req, res) => {
                     const token = await userRegistered.generateAuthToken();
                     const link = `${host}/account/verify?token=${token}`;
                     const data = { subject: `Confirmation for TheNeuron.Club Account`, text: link, email: userRegistered.email, html: `Click <a href="${link}" target="_blank">Here</a>  to verify your account.` };
-                    sendEMail(data);
+                    const result = await sendEMail(data);
+                    console.log(result)
                     res.status(201).json({ message: "User registered successfully" });
                 }
 
@@ -103,7 +106,8 @@ const forgetPassword = async (req, res) => {
     if (userFound) {
         const link = `${host}/account/reset_password?_id=${userFound._id}&username=${userFound.username}`;
         const data = { subject: `Reset Password request for TheNeuron.Club Account`, text: `Reset password`, email: userFound.email, html: `Click <a href="${link}" target="_blank">Here</a>  to reset password of your TheNeuron.Club account.` }
-        sendEMail(data);
+        const result = await sendEMail(data);
+        console.log(result)
         res.status(200).send({ msg: 'Reset password request' })
     }
     else {
@@ -137,7 +141,7 @@ const login = async (req, res) => {
             const cookies = new Cookies(req, res)
 
             // Set a cookie
-            cookies.set('jwtoken', token, {
+            cookies.set('neuron', token, {
                 expires: new Date(Date.now() + 1000 * 60 * 10 * 6 * 24),
                 httpOnly: true // true by default
             })
@@ -165,7 +169,7 @@ const logout = async (req, res) => {
     const cookies = new Cookies(req, res)
 
     // Get a cookie
-    const token = cookies.get('jwtoken')
+    const token = cookies.get('neuron')
     const verifyToken = jwt.verify(token, process.env.secret_key);
 
     const userFound = await User.findById({ _id: verifyToken._id });
@@ -173,7 +177,7 @@ const logout = async (req, res) => {
         res.status(400).send('Problem in Logout');
     }
     else {
-        cookies.set('jwtoken')
+        cookies.set('neuron')
         userFound.Tokens = []
         await userFound.save();
         res.status(200).send({ msg: 'Logout successfully' })

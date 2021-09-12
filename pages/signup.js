@@ -19,7 +19,6 @@ function signup() {
 
         const response = await res.json();
         console.log(res.status)
-        console.log(response)
         if (response) {
             setSubscribed(true);
         }

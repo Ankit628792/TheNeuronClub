@@ -1,4 +1,4 @@
-import * as jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import Cookies from 'cookies'
 
 import User from '../db/models/user'

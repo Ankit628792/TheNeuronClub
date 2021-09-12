@@ -12,7 +12,7 @@ function Navbar() {
     const [isActive, setIsActive] = useState(false)
 
     const logout = async () => {
-        window.localStorage.setItem('token', '');
+        window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`);
         if (res.status === 200) {
             location.reload();

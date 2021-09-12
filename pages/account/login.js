@@ -35,7 +35,7 @@ function login() {
         })
         const response = await res.json();
         if (res.status === 200) {
-            window.localStorage.setItem('token', JSON.stringify(response))
+            window.localStorage.setItem('neuron-token', JSON.stringify(response))
             router.push('/')
         } else if (res.status === 203) {
             setIsVerified(false)
