@@ -78,7 +78,8 @@ function CreateQ() {
                 status: '',
                 creationTime: Date.now(),
             })
-            setDesc([])
+            setReference([]);
+            setDesc([]);
         }
         setIsSending(false)
     }
