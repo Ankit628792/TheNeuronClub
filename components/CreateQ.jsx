@@ -14,6 +14,7 @@ function CreateQ() {
         userId: 'a1b2c3d4',
         category: '',
         bidClosing: '',
+        options: ['Yes', 'No'],
         settlementClosing: '',
         qstatus: '',
     })
@@ -101,7 +102,7 @@ function CreateQ() {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="category" className="inline-block mb-1 font-medium">Category</label>
+                            <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category</label>
                             <input
                                 placeholder="Coronavirus, Business ..."
                                 required
@@ -113,7 +114,7 @@ function CreateQ() {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="qstatus" className="inline-block mb-1 font-medium">Status</label>
+                            <label htmlFor="qstatus" className="inline-block mb-1 font-medium">Question Current Status</label>
                             <select
                                 placeholder="Status"
                                 type="text"
@@ -129,7 +130,7 @@ function CreateQ() {
                             </select>
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing</label>
+                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time</label>
                             <input
                                 placeholder="Bit Closing"
                                 type="datetime-local"
@@ -141,7 +142,7 @@ function CreateQ() {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing</label>
+                            <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time</label>
                             <input
                                 placeholder="Settlement Closing"
                                 type="datetime-local"
@@ -154,9 +155,9 @@ function CreateQ() {
                         </div>
                         <div className="mb-1 sm:mb-3">
                             <div className="flex justify-between">
-                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Reference</label>
+                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Reference Links</label>
                                 <div className="flex items-center mb-1 cursor-pointer" onClick={addReference}>
-                                    Add Link
+                                    Add another link
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                                     </svg>
@@ -175,7 +176,7 @@ function CreateQ() {
                             <div className="flex justify-between">
                                 <label htmlFor="description" className="inline-block mb-1 font-medium">Description</label>
                                 <div className="flex items-center mb-1 cursor-pointer" onClick={addDesc}>
-                                    Add Paragraph
+                                    Add another paragraph
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                                     </svg>

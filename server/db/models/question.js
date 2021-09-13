@@ -20,6 +20,9 @@ const questionSchema = new mongoose.Schema({
     qstatus: {
         type: String,
     },
+    options: {
+        type: Array
+    },
     reference: {
         type: Array
     },
