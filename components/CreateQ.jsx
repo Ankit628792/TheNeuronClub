@@ -154,7 +154,7 @@ function CreateQ() {
                                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                             />
                         </div>
-                        <div className="mb-1 sm:mb-3">
+                        <div className="mb-3">
                             <div className="flex justify-between">
                                 <label htmlFor="reference" className="inline-block mb-1 font-medium">Reference Links</label>
                                 <div className="flex items-center mb-1 cursor-pointer" onClick={addReference}>
