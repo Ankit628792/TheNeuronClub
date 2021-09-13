@@ -8,49 +8,6 @@ import sendEMail from '../../lib/Mail/sendMail'
 
 const host = process.env.HOST
 
-// const sendEMail = async (data) => {
-//     try {
-//         const transporter = nodemailer.createTransport({
-//             host: 'smtp.zoho.in',
-//             secure: true,
-//             port: 465,
-//             auth: {
-//                 user: process.env.mail_user,
-//                 pass: process.env.mail_pass,
-//             },
-//             debug: true,
-//             logger: true
-//         })
-//         const mailData = {
-//             from: process.env.mail_user,
-//             to: `${data.email}`,
-//             subject: `${data.subject}`,
-//             text: `${data.text}`,
-//             html: `${data.html}`
-//         }
-//         transporter.verify(function (error, success) {
-//             if (error) {
-//                 console.log("error");
-//                 console.log(error);
-//             } else {
-//                 console.log('Server is ready to take our messages');
-//                 console.log(success)
-//             }
-//         });
-//         transporter.sendMail(mailData, function (err, info) {
-//             if (err) {
-//                 console.log(err);
-//             }
-
-//             else
-//                 console.log(info);
-//         })
-//     }
-//     catch (error) {
-//         console.log(error)
-//     }
-// }
-
 const register = async (req, res) => {
     const { username, email, password, country } = req.body;
     try {

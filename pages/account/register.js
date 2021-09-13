@@ -14,7 +14,7 @@ function register() {
         username: '',
         email: '',
         password: '',
-        country: ''
+        country: 'Sweden'
     })
 
     const handleChange = (e) => {
@@ -83,12 +83,12 @@ function register() {
                                     {isEmail && <p className="text-xs text-red-400">Email already exist</p>}
                                     <div className="flex border-b border-gray-700 py-2 my-6">
                                         <LockClosedIcon className="h-6" />
-                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" value={data.password} required placeholder="Password " />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" minLength="6" value={data.password} required placeholder="Password " />
                                     </div>
                                     <div className="flex border-b border-gray-700 py-2 my-6">
                                         <GlobeAltIcon className="h-6" />
                                         <select onChange={handleChange} className="outline-none flex-grow px-2" type="country" name="country" value={data.country} required placeholder="Country ">
-                                            {countries.map((country, i) => <option key={i}>{country.country}</option>)}
+                                            {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
                                         </select>
                                     </div>
                                     <div className="flex items-center space-x-2">

@@ -67,11 +67,11 @@ function reset_password({ _id, username }) {
                             <form onSubmit={handleSubmit} >
                                 <div className="flex border-b-2 border-gray-700 py-2 my-6">
                                     <LockClosedIcon className="h-6" />
-                                    <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" value={data.password} required placeholder="New Password " />
+                                    <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" minLength="6" value={data.password} required placeholder="New Password " />
                                 </div>
                                 <div className="flex border-b-2 border-gray-700 py-2 my-6">
                                     <LockClosedIcon className="h-6" />
-                                    <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="confirm_password" value={data.confirm_password} required placeholder="Confirm Password " />
+                                    <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="confirm_password" minLength="6" value={data.confirm_password} required placeholder="Confirm Password " />
                                 </div>
                             {!isValid && <p className="text-xs text-red-400 mb-2 text-left">Password doesn't match </p>}
                                 <button type="submit" className="px-6 py-2 text-lg text-white font-semibold gradient-bg rounded-lg active:scale-95 transition-sm">{isSending ? `Please Wait` : `Reset`}</button>

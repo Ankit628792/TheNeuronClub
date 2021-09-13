@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react'
+import Modal from './Modal'
 
 function CreateQ() {
     const [isSending, setIsSending] = useState(false)
-    const [Paragraph, setParagraph] = useState([])
-    const [desc, setDesc] = useState('')
+    const [isSent, setIsSent] = useState(false)
+    const [paragraph, setParagraph] = useState('')
+    const [desc, setDesc] = useState([])
+    const [link, setLink] = useState('')
+    const [reference, setReference] = useState([])
     const [currentDate, setCurrentDate] = useState('')
     const [data, setData] = useState({
         question: '',
+        userId: 'a1b2c3d4',
         category: '',
-        options: '',
-        closing: currentDate,
+        bidClosing: '',
+        settlementClosing: '',
+        qstatus: '',
     })
 
     useEffect(() => {
@@ -23,16 +29,24 @@ function CreateQ() {
         if (mm < 10) {
             mm = '0' + mm
         }
-        today = yyyy + '-' + mm + '-' + dd;
+        // today = yyyy + '-' + mm + '-' + dd;
+        today = `${yyyy}-${mm}-${dd}T${today.getHours()}:${today.getMinutes()}`
         setCurrentDate(today)
     }, [currentDate])
 
-    const addParagraph = (e) => {
+    const addDesc = (e) => {
         e.preventDefault();
-        if(desc.length > 1){
-            setParagraph((prev) => [...prev, desc])
-            setDesc('')
+        if (paragraph.length > 1) {
+            setDesc((prev) => [...prev, paragraph])
+            setParagraph('')
             setCurrentDate('')
+        }
+    }
+    const addReference = (e) => {
+        e.preventDefault();
+        if (link.length > 1) {
+            setReference((prev) => [...prev, link])
+            setLink('')
         }
     }
     const handleChange = (e) => {
@@ -43,7 +57,7 @@ function CreateQ() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSending(true);
-        const question = {...data,Paragraph}
+        const question = { ...data, desc, reference }
         const res = await fetch(`/api/question/create_question`, {
             method: 'POST',
             headers: {
@@ -52,15 +66,19 @@ function CreateQ() {
             body: JSON.stringify(question)
         })
 
+        console.log(res.status)
         if (res.status === 201) {
             setIsSent(true)
             setData({
                 question: '',
+                userId: 'a1b2c3d4',
                 category: '',
-                options: '',
-                closing: currentDate,
+                bidClosing: '',
+                settlementClosing: '',
+                status: '',
+                creationTime: Date.now(),
             })
-            setParagraph([])
+            setDesc([])
         }
         setIsSending(false)
     }
@@ -95,51 +113,91 @@ function CreateQ() {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="options" className="inline-block mb-1 font-medium">Options</label>
-                            <input
-                                placeholder="Options"
+                            <label htmlFor="qstatus" className="inline-block mb-1 font-medium">Status</label>
+                            <select
+                                placeholder="Status"
                                 type="text"
-                                name="options"
-                                value={data.options}
+                                name="qstatus"
+                                value={data.qstatus}
                                 onChange={handleChange}
                                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                            />
+                            >
+                                <option value="created">Created</option>
+                                <option value="verified">Verified</option>
+                                <option value="completed">Completed</option>
+                                <option value="settled">settled</option>
+                            </select>
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="closing" className="inline-block mb-1 font-medium">Closing Date</label>
+                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing</label>
                             <input
-                                placeholder="Closing Date"
-                                type="date"
-                                name="closing"
+                                placeholder="Bit Closing"
+                                type="datetime-local"
+                                name="bidClosing"
                                 min={`${currentDate}`}
-                                value={data.closing}
+                                value={data.bidClosing}
                                 onChange={handleChange}
                                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
+                            <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing</label>
+                            <input
+                                placeholder="Settlement Closing"
+                                type="datetime-local"
+                                name="settlementClosing"
+                                min={`${currentDate}`}
+                                value={data.settlementClosing}
+                                onChange={handleChange}
+                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                            />
+                        </div>
+                        <div className="mb-1 sm:mb-3">
+                            <div className="flex justify-between">
+                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Reference</label>
+                                <div className="flex items-center mb-1 cursor-pointer" onClick={addReference}>
+                                    Add Link
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <input
+                                placeholder="Reference Link ..."
+                                type="text"
+                                value={link}
+                                onChange={(e) => setLink(e.target.value)}
+                                className="flex-grow w-full resize-none py-2 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                            />
+                            {reference && reference.map((item, i) => <a key={i} className="mb-1 max-w-lg break-all text-blue-600 block">{item}</a>)}
+                        </div>
+                        <div className="my-1 sm:my-3">
                             <div className="flex justify-between">
                                 <label htmlFor="description" className="inline-block mb-1 font-medium">Description</label>
-                                <svg onClick={addParagraph} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                </svg>
+                                <div className="flex items-center mb-1 cursor-pointer" onClick={addDesc}>
+                                    Add Paragraph
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
                             </div>
                             <textarea
                                 placeholder="Question Description ..."
                                 minLength="2"
                                 type="text"
-                                value={desc}
-                                onChange={(e) => setDesc(e.target.value)}
+                                value={paragraph}
+                                onChange={(e) => setParagraph(e.target.value)}
                                 className="flex-grow w-full resize-none py-2 h-24 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                             />
-                            {Paragraph && Paragraph.map((item, i) => <p key={i} className="my-2 max-w-lg break-all">{item}</p>)}
+                            {desc && desc.map((item, i) => <p key={i} className="my-2 max-w-lg break-all">{item}</p>)}
                         </div>
-                        <div className="my-2 sm:my-3 mt-4">
+                        <div className="my-2 sm:my-3">
                             <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding` : `Add Question`}</button>
                         </div>
                     </form>
                 </div>
             </div>
+            {isSent && <Modal state={isSent} text="Question created successfully" />}
         </>
     )
 }

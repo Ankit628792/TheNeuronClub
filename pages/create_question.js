@@ -1,7 +1,7 @@
 import Head from "next/head"
 import CreateQ from "../components/CreateQ"
 
-function test() {
+function create_question() {
     return (
         <>
             <Head>
@@ -12,4 +12,4 @@ function test() {
     )
 }
 
-export default test
+export default create_question
