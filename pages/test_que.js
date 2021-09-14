@@ -1,7 +1,8 @@
+import Head from "next/head"
 import { useState, useEffect } from 'react'
-import Modal from './Modal'
+import Modal from "../components/Modal"
 
-function CreateQ() {
+function create_question() {
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [paragraph, setParagraph] = useState('')
@@ -16,7 +17,7 @@ function CreateQ() {
         bidClosing: '',
         options: ['Yes', 'No'],
         settlementClosing: '',
-        qstatus: '',
+        qstatus: 'created',
     })
 
     useEffect(() => {
@@ -59,7 +60,7 @@ function CreateQ() {
         e.preventDefault();
         setIsSending(true);
         const question = { ...data, desc, reference }
-        const res = await fetch(`/api/question/create_question`, {
+        const res = await fetch(`/api/question/test_que`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,6 +87,9 @@ function CreateQ() {
     }
     return (
         <>
+            <Head>
+                <title>Create Test Question</title>
+            </Head>
             <div className="w-full pt-28 pb-16">
                 <div className="bg-white rounded gradient-shadow mx-auto p-7 sm:p-10 max-w-xl">
                     <form onSubmit={handleSubmit}>
@@ -204,4 +208,4 @@ function CreateQ() {
     )
 }
 
-export default CreateQ
+export default create_question

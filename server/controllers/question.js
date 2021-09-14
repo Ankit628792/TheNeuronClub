@@ -1,10 +1,23 @@
 
 import Question from '../db/models/question'
+import testQ from '../db/models/testQ'
 
 const createQuestion = async (req, res) => {
 
     // const { question, userId, category, bidClosing, settlementClosing, qstatus, desc } = req.body;
     const questionCreated = new Question(req.body);
+    const saveQuestion = await questionCreated.save();
+    if (!saveQuestion) {
+        res.status(400).send('Error');
+    }
+    else {
+        res.status(201).send(questionCreated)
+    }
+}
+const testQuestion = async (req, res) => {
+
+    // const { question, userId, category, bidClosing, settlementClosing, qstatus, desc } = req.body;
+    const questionCreated = new testQ(req.body);
     const saveQuestion = await questionCreated.save();
     if (!saveQuestion) {
         res.status(400).send('Error');
@@ -24,4 +37,4 @@ const getQuestions = async (req, res) => {
     }
 }
 
-export { createQuestion, getQuestions }
+export { createQuestion, getQuestions, testQuestion }
