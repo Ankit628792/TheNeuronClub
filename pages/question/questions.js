@@ -2,7 +2,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import Question from "../../components/Question";
 import { useState } from 'react'
 
-function index({ data }) {
+function questions({ data }) {
     const [questions, setQuestions] = useState(data)
     const [filter, setFilter] = useState({
         category: '',
@@ -90,8 +90,8 @@ function index({ data }) {
 
                 </div>
                 <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    { questions && questions.length > 0 && 
-                        questions.map((item, i) => item.question.toLowerCase().includes(filter.search) && <Question key={i} question={item} />)
+                    { questions && questions?.length > 0 && 
+                        questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                     }
                 </div>
             </div>
@@ -99,7 +99,7 @@ function index({ data }) {
     )
 }
 
-export default index
+export default questions
 
 
 export async function getServerSideProps(context) {
