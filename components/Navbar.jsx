@@ -39,13 +39,13 @@ function Navbar() {
             <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
                     {/* <h1 className="text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
-                    <div className="relative h-12 w-48">
+                    <div className="relative h-12 w-48 cursor-pointer">
                         <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
                     </div>
                 </Link>
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
-                        <Link href="/">Topics</Link>
+                        <Link href="/question">Topics</Link>
                         {session && <Link href="/signup">My Portfolio</Link>}
                         <Link href="/how_it_works">How it Works</Link>
                         <Link href="/faq">FAQs</Link>
