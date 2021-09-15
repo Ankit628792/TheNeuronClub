@@ -2,7 +2,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import Question from "../../components/Question";
 import { useState } from 'react'
 
-function questions({ data }) {
+function index({ data }) {
     const [questions, setQuestions] = useState(data)
     const [filter, setFilter] = useState({
         category: '',
@@ -99,7 +99,7 @@ function questions({ data }) {
     )
 }
 
-export default questions
+export default index
 
 
 export async function getServerSideProps(context) {
