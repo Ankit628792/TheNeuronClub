@@ -2,10 +2,20 @@ import { GlobeAltIcon, LockClosedIcon, MailIcon, UserIcon } from '@heroicons/rea
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { countries } from '../../util'
+import { userSession } from '../../lib/user-session'
+import Router from 'next/router'
 
 function register() {
+    const session = userSession();
+    useEffect(() => {
+        if (session) {
+            Router.push('/')
+        }
+    }, [session])
+
+
     const [isSending, setIsSending] = useState(false)
     const [isForm, setIsForm] = useState(true);
     const [isEmail, setIsEmail] = useState(false)
@@ -70,7 +80,7 @@ function register() {
                     <div className="flex flex-col items-center w-full justify-center p-10 px-5">
                         {
                             isForm ?
-                                <form className="max-w-lg p-10 min-w-[350px] bg-white shadow-md" onSubmit={handleSubmit}>
+                                <form className="max-w-lg p-10 min-w-[350px] bg-white gradient-shadow" onSubmit={handleSubmit}>
                                     <div className="flex border-b border-gray-700 py-2">
                                         <UserIcon className="h-6" />
                                         <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="username" value={data.username} required placeholder="User Name " />
@@ -112,7 +122,7 @@ function register() {
                                     </div> */}
                                 </form>
                                 :
-                                <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 shadow-md">Verification link is sent to your Email</h1>
+                                <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">Verification link is sent to your Email</h1>
                         }
                     </div>
                 </div>
@@ -122,5 +132,3 @@ function register() {
 }
 
 export default register
-
-

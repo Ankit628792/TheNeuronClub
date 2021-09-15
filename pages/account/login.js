@@ -2,13 +2,18 @@ import { LockClosedIcon, MailIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from "next/dist/client/router"
-import { useState } from 'react'
+import Router from "next/router"
+import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session'
 
 function login() {
-    const router = useRouter()
-    const session = userSession;
+    const session = userSession();
+    useEffect(() => {
+        if (session) {
+            Router.push('/')
+        }
+    }, [session])
+
     const [isSending, setIsSending] = useState(false)
     const [isValid, setIsValid] = useState(true)
     const [isVerified, setIsVerified] = useState(true);
@@ -36,7 +41,7 @@ function login() {
         const response = await res.json();
         if (res.status === 200) {
             window.localStorage.setItem('neuron-token', JSON.stringify(response))
-            router.push('/')
+            Router.push('/')
         } else if (res.status === 203) {
             setIsVerified(false)
         } else {
@@ -67,7 +72,7 @@ function login() {
                     </div>
                     <div className="flex flex-col items-center w-full justify-center p-10 px-5">
                         {isVerified ?
-                            <form className="max-w-lg p-10 min-w-[350px] bg-white shadow-md" onSubmit={handleSubmit}>
+                            <form className="max-w-lg p-10 min-w-[350px] bg-white gradient-shadow" onSubmit={handleSubmit}>
                                 {!isValid && <p className="text-xs text-red-400 mb-2">Invalid Credentials </p>}
                                 <div className="flex border-b-2 border-gray-700 py-2 mb-6">
                                     <MailIcon className="h-6" />
@@ -95,7 +100,7 @@ function login() {
                                 </div> */}
                             </form>
                             :
-                            <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 shadow-md">User aleady registered, Verify your account to continue</h1>
+                            <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">User aleady registered, Verify your account to continue</h1>
                         }
                     </div>
                 </div>
@@ -105,3 +110,21 @@ function login() {
 }
 
 export default login
+
+
+// export function getServerSideProps() {
+//     const session = userSession();
+//     if (session) {
+//         return {
+//             redirect: {
+//                 destination: '/',
+//                 parmanent: false
+//             }
+//         }
+//     }
+//     return {
+//         props: {
+//             session: null
+//         }
+//     }
+// }

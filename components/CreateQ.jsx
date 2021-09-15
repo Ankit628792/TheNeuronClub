@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react'
 import Modal from './Modal'
+import dynamic from 'next/dynamic'
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+    ssr: false,
+    loading: () => <p>Loading ...</p>,
+})
 
-function CreateQ() {
+
+function CreateQ({session}) {
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
-    const [paragraph, setParagraph] = useState('')
-    const [desc, setDesc] = useState([])
     const [link, setLink] = useState('')
     const [reference, setReference] = useState([])
     const [currentDate, setCurrentDate] = useState('')
     const [data, setData] = useState({
         question: '',
-        userId: 'a1b2c3d4',
+        userId: session._id || 'a1b2c3d4',
         category: '',
         bidClosing: '',
         options: ['Yes', 'No'],
         settlementClosing: '',
         qstatus: '',
     })
+    const [desc, setDesc] = useState('')
+    function createMarkup() {
+        return { __html: value };
+    }
 
     useEffect(() => {
         var today = new Date();
@@ -35,14 +43,6 @@ function CreateQ() {
         setCurrentDate(today)
     }, [currentDate])
 
-    const addDesc = (e) => {
-        e.preventDefault();
-        if (paragraph.length > 1) {
-            setDesc((prev) => [...prev, paragraph])
-            setParagraph('')
-            setCurrentDate('')
-        }
-    }
     const addReference = (e) => {
         e.preventDefault();
         if (link.length > 1) {
@@ -72,7 +72,7 @@ function CreateQ() {
             setIsSent(true)
             setData({
                 question: '',
-                userId: 'a1b2c3d4',
+                userId: session._id || 'a1b2c3d4',
                 category: '',
                 bidClosing: '',
                 settlementClosing: '',
@@ -80,10 +80,47 @@ function CreateQ() {
                 creationTime: Date.now(),
             })
             setReference([]);
-            setDesc([]);
+            setDesc('');
         }
         setIsSending(false)
     }
+
+    const modules = {
+        toolbar: [
+            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [
+                { list: 'ordered' },
+                { list: 'bullet' },
+                { indent: '-1' },
+                { indent: '+1' },
+            ],
+            ['link', 'image', 'video'],
+            ['clean'],
+        ],
+        clipboard: {
+            matchVisual: false,
+        },
+    }
+
+    const formats = [
+        'header',
+        'font',
+        'size',
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'blockquote',
+        'list',
+        'bullet',
+        'indent',
+        'link',
+        'image',
+        'video',
+    ]
+
     return (
         <>
             <div className="w-full pt-28 pb-16">
@@ -156,7 +193,7 @@ function CreateQ() {
                         </div>
                         <div className="mb-3">
                             <div className="flex justify-between">
-                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Reference Links</label>
+                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Source of Settlement</label>
                                 <div className="flex items-center mb-1 cursor-pointer" onClick={addReference}>
                                     Add this link
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
@@ -165,7 +202,7 @@ function CreateQ() {
                                 </div>
                             </div>
                             <input
-                                placeholder="Reference Link ..."
+                                placeholder="Settlement Link ..."
                                 type="text"
                                 value={link}
                                 onChange={(e) => setLink(e.target.value)}
@@ -173,26 +210,7 @@ function CreateQ() {
                             />
                             {reference && reference.map((item, i) => <a key={i} className="mb-1 max-w-lg break-all text-blue-600 block">{item}</a>)}
                         </div>
-                        <div className="my-1 sm:my-3">
-                            <div className="flex justify-between">
-                                <label htmlFor="description" className="inline-block mb-1 font-medium">Description</label>
-                                <div className="flex items-center mb-1 cursor-pointer" onClick={addDesc}>
-                                    Add this paragraph
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <textarea
-                                placeholder="Question Description ..."
-                                minLength="2"
-                                type="text"
-                                value={paragraph}
-                                onChange={(e) => setParagraph(e.target.value)}
-                                className="flex-grow w-full resize-none py-2 h-24 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                            />
-                            {desc && desc.map((item, i) => <p key={i} className="my-2 max-w-lg break-all">{item}</p>)}
-                        </div>
+                        <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' style={{ minHeight: '150px',fontSize: '16px', fontFamily: 'Barlow' }} value={desc} onChange={setDesc} formats={formats} theme="snow" />
                         <div className="my-2 sm:my-3">
                             <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding` : `Add Question`}</button>
                         </div>

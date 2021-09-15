@@ -1,7 +1,15 @@
 import Head from 'next/head'
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import { userSession } from '../../lib/user-session'
+import Router from 'next/router'
 function forget_password() {
+    const session = userSession();
+    useEffect(() => {
+        if (session) {
+            Router.push('/')
+        }
+    }, [session])
+
     const [isSending, setIsSending] = useState(false)
     const [mail, setMail] = useState('')
     const [isValid, setIsValid] = useState(true)
@@ -28,11 +36,11 @@ function forget_password() {
     }
     return (
         <>
-        <Head>
-          <title>The Neuron | Forget Password</title>
-        </Head>
+            <Head>
+                <title>The Neuron | Forget Password</title>
+            </Head>
             <div className="w-full min-h-[500px] pt-32 pb-10">
-                <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto">
+                <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto gradient-shadow-md">
 
                     {verify ? <h1 className="text-2xl md:text-3xl text-blue-500 font-semibold">Reset Password link is sent to your email </h1> :
                         <>

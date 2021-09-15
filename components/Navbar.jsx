@@ -46,6 +46,7 @@ function Navbar() {
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
                         <Link href="/question/">Topics</Link>
                         {session && <Link href="/signup">My Portfolio</Link>}
+                        {session && <Link href="/create_question">Create Question</Link> }
                         <Link href="/how_it_works">How it Works</Link>
                         <Link href="/faq">FAQs</Link>
                         <Link href="/contact">Contact Us</Link>
@@ -54,8 +55,8 @@ function Navbar() {
                         session ?
                             <button onClick={logout} className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Logout</button>
                             :
-                            <Link href="/signup">
-                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Sign Up</button>
+                            <Link href="/account/register">
+                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Register</button>
                             </Link>
                     }
                     <MenuAlt1Icon className="w-10 h-10 ml-3 cursor-pointer md:hidden active:scale-95 transition-sm" onClick={() => setIsActive(true)} />
@@ -78,8 +79,8 @@ function Navbar() {
                         <Link href="/contact">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
                         </Link>
-                        <Link href="/signup">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Sign Up</h1>
+                        <Link href="/account/register">
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Register</h1>
                         </Link>
                     </ul>
                 </div>

@@ -1,10 +1,17 @@
 import Head from 'next/head';
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { useRouter } from 'next/router';
-import { useState } from 'react'
+import Router from 'next/router';
+import { useState, useEffect } from 'react'
+import { userSession } from '../../lib/user-session';
 
 function reset_password({ _id, username }) {
-    const router = useRouter();
+    const session = userSession();
+    useEffect(() => {
+        if (session) {
+            Router.push('/')
+        }
+    }, [session])
+
     const [isSending, setIsSending] = useState(false)
     const [isValid, setIsValid] = useState(true)
     const [verify, setVerify] = useState(false);
@@ -39,7 +46,7 @@ function reset_password({ _id, username }) {
 
             if (res.status === 200) {
                 setVerify(true);
-                router.push('/account/login')
+                Router.push('/account/login')
             } else {
                 setIsValid(false);
             }
@@ -53,12 +60,12 @@ function reset_password({ _id, username }) {
           <link rel="icon" href="/favicon.png" />
         </Head>
             <div className="w-full min-h-[500px] pt-32 pb-10">
-                <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto">
+                <div className="p-5 sm:px-10 sm:py-10 max-w-3xl text-center bg-white text-gray-700 mx-auto gradient-shadow">
 
                     {verify ?
                         <>
                             <h1 className="text-3xl font-bold text-blue-500">Your Password is Reset</h1>
-                            <button onClick={() => router.push('/account/login')} className="inline-block px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">Login</button>
+                            <button onClick={() => Router.push('/account/login')} className="inline-block px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">Login</button>
                         </>
                         :
                         <>
@@ -86,14 +93,3 @@ function reset_password({ _id, username }) {
 }
 
 export default reset_password
-
-export async function getServerSideProps(context) {
-    const _id = context.query._id;
-    const username = context.query.username;
-    return {
-        props: {
-            _id,
-            username
-        }
-    }
-}

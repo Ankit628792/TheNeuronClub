@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css'
+import 'react-quill/dist/quill.snow.css'
 import '../styles/global.css'
 import { Provider } from 'react-redux'
 import Router, { useRouter } from 'next/router'

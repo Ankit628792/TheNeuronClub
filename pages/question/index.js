@@ -1,6 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Question from "../../components/Question";
 import { useState } from 'react'
+import Head from "next/head";
 
 function index({ data }) {
     const [questions, setQuestions] = useState(data)
@@ -32,6 +33,9 @@ function index({ data }) {
     }
     return (
         <>
+        <Head>
+            <title>The Neuron | Questions</title>
+        </Head>
             <div className="px-5 sm:px-10 pt-28 pb-20 min-h-screen max-w-screen-2xl">
 
                 <div className="filter max-w-2xl sm:ml-auto">

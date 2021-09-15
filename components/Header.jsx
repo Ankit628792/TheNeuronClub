@@ -15,8 +15,8 @@ function Header() {
                             <button className="btn text-xl mt-2"> Explore</button>
                         </Link>
                         :
-                        <Link href="/signup">
-                            <button className="btn text-xl mt-2">Sign Up</button>
+                        <Link href="/account/register">
+                            <button className="btn text-xl mt-2">Register Now</button>
                         </Link>
                     }
                 </div>
