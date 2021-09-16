@@ -87,7 +87,7 @@ function Navbar() {
                         </Link>
 {
 session ?
-                            <h1 onClick={logout} className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1>
+                          <button onClick={logout}> <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1> </button>
                        
 :
                         <Link href="/account/register">
