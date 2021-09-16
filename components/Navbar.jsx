@@ -73,15 +73,27 @@ function Navbar() {
                         <Link href="/how_it_works">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How it Works</h1>
                         </Link>
+{ session  ?
+<Link href="/create_question">
+                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Create Question</h1>
+                        </Link>
+:
                         <Link href="/privacy_policy">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Privacy Policy</h1>
                         </Link>
+}
                         <Link href="/contact">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
                         </Link>
+{
+session ?
+                            <h1 onClick={logout} className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1>
+                       
+:
                         <Link href="/account/register">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Register</h1>
                         </Link>
+}
                     </ul>
                 </div>
             }
