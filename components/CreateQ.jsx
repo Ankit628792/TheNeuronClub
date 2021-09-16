@@ -15,7 +15,7 @@ function CreateQ({session}) {
     const [currentDate, setCurrentDate] = useState('')
     const [data, setData] = useState({
         question: '',
-        userId: session._id || 'a1b2c3d4',
+        userId: session?._id || 'a1b2c3d4',
         category: '',
         bidClosing: '',
         options: ['Yes', 'No'],
