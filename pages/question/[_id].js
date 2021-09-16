@@ -1,8 +1,8 @@
 function QuestionDetail({ question }) {
     return (
         <div className="pt-28 pb-10">
-            <div className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5">
-                <div className="text-xl font-medium p-5 sm:flex sm:space-x-4 items-center">
+            <div className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5 lg:p-10">
+                <div className="text-xl font-medium mb-2 sm:mb-4 p-5 sm:flex sm:space-x-4 items-center">
                     <img src={`/images/que/${question?.category.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
                     <h1 className="my-3 sm:my-0"> {question?.question} </h1>
                 </div>

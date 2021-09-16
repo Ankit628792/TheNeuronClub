@@ -66,6 +66,9 @@
       .bet table tr td:nth-child(1){
         @apply font-medium
       }
+      .bet table tr td:nth-child(2){
+        font-size: 16px;
+      }
       .bet table td{
         @apply px-4 text-left
       }

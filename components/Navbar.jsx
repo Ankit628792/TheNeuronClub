@@ -46,7 +46,7 @@ function Navbar() {
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
                         <Link href="/question/">Topics</Link>
                         {session && <Link href="/signup">My Portfolio</Link>}
-                        {session && <Link href="/create_question">Create Question</Link> }
+                        {session && <Link href="/create_question">Create Question</Link>}
                         <Link href="/how_it_works">How it Works</Link>
                         <Link href="/faq">FAQs</Link>
                         <Link href="/contact">Contact Us</Link>
@@ -73,27 +73,26 @@ function Navbar() {
                         <Link href="/how_it_works">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How it Works</h1>
                         </Link>
-{ session  ?
-<Link href="/create_question">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Create Question</h1>
-                        </Link>
-:
+                        {session &&
+                            <Link href="/create_question">
+                                <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Create Question</h1>
+                            </Link>
+                        }
                         <Link href="/privacy_policy">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Privacy Policy</h1>
                         </Link>
-}
                         <Link href="/contact">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
                         </Link>
-{
-session ?
-                          <button onClick={logout} className="font-bold" > <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1> </button>
-                       
-:
-                        <Link href="/account/register">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Register</h1>
-                        </Link>
-}
+                        {
+                            session ?
+                                <button onClick={logout} className="font-bold" > <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1> </button>
+
+                                :
+                                <Link href="/account/register">
+                                    <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Register</h1>
+                                </Link>
+                        }
                     </ul>
                 </div>
             }
