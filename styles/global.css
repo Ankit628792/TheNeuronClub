@@ -53,8 +53,9 @@
         box-shadow: 0px 0px 40px rgba(30, 165,255,0.3);
       }
       .question{
-        background: #e6e6fa;
-        box-shadow: 0 0 30px rgb(141 30 255 / 10%);
+        /* background: #e6e6fa; */
+        background: radial-gradient(#fff, #e6e6fa);
+        box-shadow: 0 0 25px rgb(141 30 255 / 10%);
       }
       .bet .bet__container{
         @apply p-5 mb-5 text-center min-w-[350px] grid place-items-center rounded-xl shadow-md
@@ -206,4 +207,78 @@
         max-width: 92rem;
       }
     }
+
+
+    /**===== Loader =====*/
+#loader {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 14rem;
+  width: 14rem;
+  margin: -7rem 0 0 -7rem;
+  border: 3px solid transparent;
+  border-top-color: #008744;
+  border-radius: 50%;
+  /* box-shadow: 0 0 20px rgba(0, 135, 68, 0.1); */
+  -webkit-animation: spinLoader 2s linear infinite;
+          animation: spinLoader 2s linear infinite;
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 4.5rem;
+  right: 4.5rem;
+  bottom: 4.5rem;
+  left: 4.5rem;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  /* box-shadow: 0 0 20px rgb(214 45 32 / 10%) ; */
+  border-top-color: #d62d20;
+  -webkit-animation: spinLoader 3s linear infinite;
+          animation: spinLoader 3s linear infinite;
+}
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  left: 2rem;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  /* box-shadow: 0 0 20px rgb(255 167 0 / 10%); */
+  border-top-color: #ffa700;
+  -webkit-animation: spinLoader 1.5s linear infinite;
+          animation: spinLoader 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinLoader {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+@keyframes spinLoader {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+/** END of Loader*/
 }
