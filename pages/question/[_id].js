@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Loader from '../../components/Loader'
-
+import {useState} from 'react'
+ 
 function QuestionDetail({ question }) {
+    const [bid, setBid] = useState(1)
     return (
         <>
             <Head>
@@ -22,8 +24,14 @@ function QuestionDetail({ question }) {
                                         <button className="px-4 py-2 leading-loose gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
                                     </div>
                                     <div className="my-4">
-                                        <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">$50</span> </h1>
-                                        <h1>Progress Bar</h1>
+                                        <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">{bid}</span> </h1>
+                                        <div className="relative">
+                                            <input type="range" name="bid" min="1" max="100" value={bid} id="slider" onChange={(e) => setBid(e.target.value)} />
+                                            <div id="selector" style={{left: `${bid}%`}}>
+                                                <div className={`selectBtn`}><div classNameName="selectBtn__inner"> </div></div>
+                                                {/* <div className="selectValue">{bid}</div> */}
+                                            </div>
+                                        </div>
                                     </div>
                                     <table>
                                         <tbody>
