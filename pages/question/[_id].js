@@ -17,43 +17,47 @@ function QuestionDetail({ question }) {
                             <h1>Progress Bar</h1>
                         </div>
                         <table>
-                            <tr>
-                                <td>Bet in favour</td>
-                                <td>30%</td>
-                            </tr>
-                            <tr>
-                                <td>Fees</td>
-                                <td>2%</td>
-                            </tr>
-                            <tr>
-                                <td>Likely earnings</td>
-                                <td>$350</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Bet in favour</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>Fees</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Likely earnings</td>
+                                    <td>$350</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
                     <div className="bet__container">
                         <table>
-                            <tr>
-                                <td>Volume</td>
-                                <td>$1000</td>
-                            </tr>
-                            <tr>
-                                <td>Open Date</td>
-                                <td>{new Date(question?.createdAt).toDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Date</td>
-                                <td>{new Date(question?.bidClosing).toDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td>Settlement Date</td>
-                                <td>{new Date(question?.settlementClosing).toDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td>Creator</td>
-                                <td>{question?.userId}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Volume</td>
+                                    <td>$1000</td>
+                                </tr>
+                                <tr>
+                                    <td>Open Date</td>
+                                    <td>{new Date(question?.createdAt).toDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Date</td>
+                                    <td>{new Date(question?.bidClosing).toDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <td>Settlement Date</td>
+                                    <td>{new Date(question?.settlementClosing).toDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <td>Creator</td>
+                                    <td>{question?.userId}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -61,13 +65,13 @@ function QuestionDetail({ question }) {
                 <div className="p-5">
                     <h1 className="text-2xl font-semibold my-2">About the question</h1>
                     <div className="sm:text-lg">
-                        {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p> )}
+                        {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p>)}
                     </div>
                 </div>
                 <div className="px-5 pb-10">
                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
                     <div className="sm:text-lg">
-                        {question && question?.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a> )}
+                        {question && question?.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a>)}
                     </div>
                 </div>
             </div>
@@ -96,6 +100,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const question = await fetch(`${process.env.HOST}/api/question/${params._id}`).then(res => res.json())
+    if (!question) {
+        return {
+            redirect: {
+                destination: '/page_not_found',
+                parmanent: false
+            }
+        }
+    }
     return {
         props: {
             question
