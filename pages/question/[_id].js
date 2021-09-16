@@ -3,8 +3,8 @@ function QuestionDetail({ question }) {
         <div className="pt-28 pb-10">
             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5">
                 <div className="text-xl font-medium p-5 sm:flex sm:space-x-4 items-center">
-                    <img src={`/images/que/${question.category.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
-                    <h1 className="my-3 sm:my-0"> {question.question} </h1>
+                    <img src={`/images/que/${question?.category.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
+                    <h1 className="my-3 sm:my-0"> {question?.question} </h1>
                 </div>
                 <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">
                     <div className="bet__container">
@@ -40,19 +40,19 @@ function QuestionDetail({ question }) {
                             </tr>
                             <tr>
                                 <td>Open Date</td>
-                                <td>{new Date(question.createdAt).toDateString()}</td>
+                                <td>{new Date(question?.createdAt).toDateString()}</td>
                             </tr>
                             <tr>
                                 <td>Last Date</td>
-                                <td>{new Date(question.bidClosing).toDateString()}</td>
+                                <td>{new Date(question?.bidClosing).toDateString()}</td>
                             </tr>
                             <tr>
                                 <td>Settlement Date</td>
-                                <td>{new Date(question.settlementClosing).toDateString()}</td>
+                                <td>{new Date(question?.settlementClosing).toDateString()}</td>
                             </tr>
                             <tr>
                                 <td>Creator</td>
-                                <td>{question.userId}</td>
+                                <td>{question?.userId}</td>
                             </tr>
                         </table>
                     </div>
@@ -61,13 +61,13 @@ function QuestionDetail({ question }) {
                 <div className="p-5">
                     <h1 className="text-2xl font-semibold my-2">About the question</h1>
                     <div className="sm:text-lg">
-                        {question.desc.map((item, i) => <p key={i} className="py-2">{item}</p> )}
+                        {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p> )}
                     </div>
                 </div>
                 <div className="px-5 pb-10">
                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
                     <div className="sm:text-lg">
-                        {question.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a> )}
+                        {question && question?.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a> )}
                     </div>
                 </div>
             </div>
