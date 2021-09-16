@@ -25,6 +25,16 @@ const getQuestions = async (req, res) => {
     }
 }
 
+const queDetail = async (req, res) => {
+    const detail = await testQ.findById({_id: req.query._id});
+    if(detail){
+        res.status(200).send(detail)
+    }
+    else{
+        res.status(400).send({mg: error})
+    }
+}
+
 const filter = async (req, res) => {
     const { category, sort } = req.body;
     let sorting, filter;
@@ -74,4 +84,4 @@ const testQuestion = async (req, res) => {
 }
 
 
-export { createQuestion, getQuestions, testQuestion, filter }
+export { createQuestion, getQuestions, testQuestion, filter, queDetail }
