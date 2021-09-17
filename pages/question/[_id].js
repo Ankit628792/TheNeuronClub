@@ -5,7 +5,7 @@ import moment from 'moment'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 
 function QuestionDetail({ question }) {
-    const [bid, setBid] = useState(1)
+    const [bid, setBid] = useState(10)
     return (
         <>
             <Head>
