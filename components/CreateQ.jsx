@@ -7,7 +7,7 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 
-function CreateQ({session}) {
+function CreateQ({ session }) {
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [link, setLink] = useState('')
@@ -29,7 +29,7 @@ function CreateQ({session}) {
     useEffect(() => {
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
         if (dd < 10) {
             dd = '0' + dd
@@ -79,17 +79,14 @@ function CreateQ({session}) {
 
     const modules = {
         toolbar: [
-            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ header: '1' }, { header: '2' }],
             [{ size: [] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [
                 { list: 'ordered' },
                 { list: 'bullet' },
-                { indent: '-1' },
-                { indent: '+1' },
-            ],
-            ['link', 'image', 'video'],
-            ['clean'],
+                'link'
+            ]
         ],
         clipboard: {
             matchVisual: false,
@@ -168,6 +165,7 @@ function CreateQ({session}) {
                             />
                         </div>
                         <div className="mb-3">
+                            <label className="inline-block mb-1 font-medium">Settlement Link</label>
                             <input
                                 placeholder="Settlement Link ..."
                                 type="text"
@@ -176,7 +174,10 @@ function CreateQ({session}) {
                                 className="flex-grow w-full resize-none py-2 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
-                        <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' style={{ minHeight: '150px',fontSize: '16px', fontFamily: 'Barlow' }} value={desc} onChange={setDesc} formats={formats} theme="snow" />
+                        <div className="mb-3">
+                            <label className="inline-block mb-1 font-medium">Question Description</label>
+                            <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
+                        </div>
                         <div className="my-2 sm:my-3">
                             <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding` : `Add Question`}</button>
                         </div>

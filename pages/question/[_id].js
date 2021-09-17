@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Loader from '../../components/Loader'
 import { useState } from 'react'
 import moment from 'moment'
+import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 
 function QuestionDetail({ question }) {
     const [bid, setBid] = useState(1)
@@ -21,14 +22,17 @@ function QuestionDetail({ question }) {
                             <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">
                                 <div className="bet__container">
                                     <div>
-                                        <button className="px-4 py-2 leading-loose border border-blue-500 hover:gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">Yes</button>
-                                        <button className="px-4 py-2 leading-loose border border-blue-500 hover:gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
+                                        <button className="px-3 py-1 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">Yes</button>
+                                        <button className="px-3 py-1 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
                                     </div>
                                     <div className="my-4">
                                         <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
-                                        <div className="relative flex items-center space-x-4">
-                                            <label className="font-bold">$ </label>
-                                            <input type="range" name="bid" id="slider" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} />
+                                        <div className="relative flex items-center space-x-4 mt-4">
+                                            {/* <label className="font-bold">$ </label> */}
+                                            {/* <input type="range" name="bid" id="slider" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} /> */}
+                                            <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid > 10 && setBid(bid - 10)} />
+                                            <input disabled type="number" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                            <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid < 100 && setBid(+bid + +10)} />
                                         </div>
                                     </div>
                                     <table>

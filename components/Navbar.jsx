@@ -45,11 +45,15 @@ function Navbar() {
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
                         <Link href="/question/">Explore</Link>
-                        {session && <Link href="/signup">My Portfolio</Link>}
+                        {session && <Link href="/signup">Portfolio</Link>}
                         {session && <Link href="/create_question">Create Question</Link>}
                         <Link href="/how_it_works">How it Works</Link>
-                        <Link href="/faq">FAQs</Link>
-                        <Link href="/contact">Contact Us</Link>
+                        {!session &&
+                            <>
+                                <Link href="/faq">FAQs</Link>
+                                <Link href="/contact">Contact Us</Link>
+                            </>
+                        }
                     </ul>
                     {
                         session ?

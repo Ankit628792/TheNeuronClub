@@ -4,6 +4,7 @@
 @layer components{
     *{
       font-family: 'Barlow', sans-serif;
+      user-select: none;
     }
     *::-webkit-scrollbar{
         display: none;
@@ -298,6 +299,17 @@
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(30, 165, 252 ,0.5) ;
 }
-
  /* End of Range Slider in Question Detail */
+
+ input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+}
+

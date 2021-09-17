@@ -69,8 +69,8 @@ function index({ data }) {
                                 value={filter.sort}
                                 onChange={handleChange}
                             >
-                                <option value="recent">Most Recent</option>
-                                <option value="volume">By Volume</option>
+                                <option value="recent">Newest First</option>
+                                <option value="volume">Top Trending</option>
                                 <option value="closing">Closing Soon</option>
                                 <option value="oldest">Oldest First</option>
                             </select>
