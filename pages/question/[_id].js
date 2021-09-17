@@ -31,7 +31,7 @@ function QuestionDetail({ question }) {
                                             {/* <label className="font-bold">$ </label> */}
                                             {/* <input type="range" name="bid" id="slider" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} /> */}
                                             <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid > 10 && setBid(bid - 10)} />
-                                            <input disabled type="number" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                            <input disabled type="number" min="10" max="100" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
                                             <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid < 100 && setBid(+bid + +10)} />
                                         </div>
                                     </div>
