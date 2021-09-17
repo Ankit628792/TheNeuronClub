@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Loader from '../../components/Loader'
-import {useState} from 'react'
- 
+import { useState } from 'react'
+import moment from 'moment'
+
 function QuestionDetail({ question }) {
     const [bid, setBid] = useState(1)
     return (
@@ -24,13 +25,10 @@ function QuestionDetail({ question }) {
                                         <button className="px-4 py-2 leading-loose gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
                                     </div>
                                     <div className="my-4">
-                                        <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">{bid}</span> </h1>
-                                        <div className="relative">
-                                            <input type="range" name="bid" min="1" max="100" value={bid} id="slider" onChange={(e) => setBid(e.target.value)} />
-                                            <div id="selector" style={{left: `${bid}%`}}>
-                                                <div className={`selectBtn`}><div classNameName="selectBtn__inner"> </div></div>
-                                                {/* <div className="selectValue">{bid}</div> */}
-                                            </div>
+                                        <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
+                                        <div className="relative flex items-center space-x-4">
+                                            <label className="font-bold">$ </label>
+                                            <input type="range" name="bid" id="slider" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} />
                                         </div>
                                     </div>
                                     <table>
@@ -60,15 +58,15 @@ function QuestionDetail({ question }) {
                                             </tr>
                                             <tr>
                                                 <td>Open Date</td>
-                                                <td>{new Date(question?.createdAt).toDateString()}</td>
+                                                <td>{moment(question?.createdAt).format('ll')}</td>
                                             </tr>
                                             <tr>
                                                 <td>Last Date</td>
-                                                <td>{new Date(question?.bidClosing).toDateString()}</td>
+                                                <td>{moment(question?.bidClosing).format('ll')}</td>
                                             </tr>
                                             <tr>
                                                 <td>Settlement Date</td>
-                                                <td>{new Date(question?.settlementClosing).toDateString()}</td>
+                                                <td>{moment(question?.settlementClosing).format('ll')}</td>
                                             </tr>
                                             <tr>
                                                 <td>Creator</td>

@@ -1,5 +1,6 @@
 import { ClockIcon } from '@heroicons/react/solid'
 import Router from 'next/router'
+import moment from 'moment';
 
 function Question({ question }) {
     const handleClick = () => {
@@ -20,7 +21,10 @@ function Question({ question }) {
                     <h2>{question?.category}</h2>
                 </div>
                 <div className="text-right flex flex-col items-end text-sm">
-                    <ClockIcon className="h-6 sm:h-7 text-blue-500" /> <span className="">{Math.floor(Math.random() * 10)}h left</span>
+                    <ClockIcon className="h-6 sm:h-7 text-blue-500" /> <span className="">
+                        {/* {Math.floor(Math.random() * 10)}h left */}
+                        {moment(question.bidClosing).fromNow(true)} left
+                        </span>
                 </div>
             </div>
         </div>
