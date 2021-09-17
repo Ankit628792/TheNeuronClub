@@ -11,16 +11,15 @@ function CreateQ({session}) {
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [link, setLink] = useState('')
-    const [reference, setReference] = useState([])
     const [currentDate, setCurrentDate] = useState('')
     const [data, setData] = useState({
         question: '',
-        userId: session?._id || 'a1b2c3d4',
+        userId: session?.username || 'a1b2c3d4',
         category: '',
         bidClosing: '',
         options: ['Yes', 'No'],
         settlementClosing: '',
-        qstatus: '',
+        qstatus: 'verified',
     })
     const [desc, setDesc] = useState('')
     function createMarkup() {
@@ -43,13 +42,6 @@ function CreateQ({session}) {
         setCurrentDate(today)
     }, [currentDate])
 
-    const addReference = (e) => {
-        e.preventDefault();
-        if (link.length > 1) {
-            setReference((prev) => [...prev, link])
-            setLink('')
-        }
-    }
     const handleChange = (e) => {
         e.preventDefault();
         setData({ ...data, [e.target.name]: e.target.value })
@@ -58,7 +50,7 @@ function CreateQ({session}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSending(true);
-        const question = { ...data, desc, reference }
+        const question = { ...data, desc, link }
         const res = await fetch(`/api/question/create_question`, {
             method: 'POST',
             headers: {
@@ -72,14 +64,14 @@ function CreateQ({session}) {
             setIsSent(true)
             setData({
                 question: '',
-                userId: session._id || 'a1b2c3d4',
+                userId: session?.username || 'a1b2c3d4',
                 category: '',
                 bidClosing: '',
+                options: ['Yes', 'No'],
                 settlementClosing: '',
-                status: '',
-                creationTime: Date.now(),
+                qstatus: 'verified',
             })
-            setReference([]);
+            setLink('');
             setDesc('');
         }
         setIsSending(false)
@@ -152,22 +144,6 @@ function CreateQ({session}) {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="qstatus" className="inline-block mb-1 font-medium">Question Current Status</label>
-                            <select
-                                placeholder="Status"
-                                type="text"
-                                name="qstatus"
-                                value={data.qstatus}
-                                onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                            >
-                                <option value="created">Created</option>
-                                <option value="verified">Verified</option>
-                                <option value="completed">Completed</option>
-                                <option value="settled">settled</option>
-                            </select>
-                        </div>
-                        <div className="mb-1 sm:mb-2">
                             <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time</label>
                             <input
                                 placeholder="Bit Closing"
@@ -192,15 +168,6 @@ function CreateQ({session}) {
                             />
                         </div>
                         <div className="mb-3">
-                            <div className="flex justify-between">
-                                <label htmlFor="reference" className="inline-block mb-1 font-medium">Source of Settlement</label>
-                                <div className="flex items-center mb-1 cursor-pointer" onClick={addReference}>
-                                    Add this link
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:scale-110" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
                             <input
                                 placeholder="Settlement Link ..."
                                 type="text"
@@ -208,7 +175,6 @@ function CreateQ({session}) {
                                 onChange={(e) => setLink(e.target.value)}
                                 className="flex-grow w-full resize-none py-2 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
-                            {reference && reference.map((item, i) => <a key={i} className="mb-1 max-w-lg break-all text-blue-600 block">{item}</a>)}
                         </div>
                         <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' style={{ minHeight: '150px',fontSize: '16px', fontFamily: 'Barlow' }} value={desc} onChange={setDesc} formats={formats} theme="snow" />
                         <div className="my-2 sm:my-3">

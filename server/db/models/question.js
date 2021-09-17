@@ -24,10 +24,10 @@ const questionSchema = new mongoose.Schema({
         type: Array
     },
     reference: {
-        type: Array
+        type: String
     },
     desc: {
-        type: Array
+        type: String
     }
 }, { timestamps: true })
 
