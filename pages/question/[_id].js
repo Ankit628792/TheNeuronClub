@@ -21,8 +21,8 @@ function QuestionDetail({ question }) {
                             <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">
                                 <div className="bet__container">
                                     <div>
-                                        <button className="px-4 py-2 leading-loose gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">Yes</button>
-                                        <button className="px-4 py-2 leading-loose gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
+                                        <button className="px-4 py-2 leading-loose border border-blue-500 hover:gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">Yes</button>
+                                        <button className="px-4 py-2 leading-loose border border-blue-500 hover:gradient-bg text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
                                     </div>
                                     <div className="my-4">
                                         <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
