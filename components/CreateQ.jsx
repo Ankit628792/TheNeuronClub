@@ -14,7 +14,7 @@ function CreateQ({ session }) {
     const [currentDate, setCurrentDate] = useState('')
     const [data, setData] = useState({
         question: '',
-        userId: session?.username || 'a1b2c3d4',
+        userId: session?.username || 'Ankit628792',
         category: '',
         bidClosing: '',
         options: ['Yes', 'No'],
@@ -64,7 +64,7 @@ function CreateQ({ session }) {
             setIsSent(true)
             setData({
                 question: '',
-                userId: session?.username || 'a1b2c3d4',
+                userId: session?.username || 'Ankit628792',
                 category: '',
                 bidClosing: '',
                 options: ['Yes', 'No'],
