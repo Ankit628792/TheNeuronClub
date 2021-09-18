@@ -16,7 +16,7 @@ function Header() {
                         </Link>
                         :
                         <Link href="/account/register">
-                            <button className="btn text-xl mt-2">Register Now</button>
+                            <button className="btn text-xl mt-2">Get Started</button>
                         </Link>
                     }
                 </div>

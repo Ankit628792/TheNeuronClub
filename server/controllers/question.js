@@ -53,7 +53,6 @@ const filter = async (req, res) => {
     }
     try {
         const getQuestions = await testQ.find(filter).sort(sorting);
-        console.log(getQuestions)
         res.status(200).send(getQuestions)
     } catch (error) {
         res.status(400).send({ msg: 'unable to get question' })

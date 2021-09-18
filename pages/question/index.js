@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Question from "../../components/Question";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from "next/head";
 
 function index({ data }) {
@@ -16,8 +16,14 @@ function index({ data }) {
         setFilter({ ...filter, [e.target.name]: e.target.value })
     }
 
+    useEffect(() => {
+        searchFilter()
+    }, [filter])
+
     const searchFilter = async (e) => {
-        e.preventDefault();
+        if(e){
+            e.preventDefault();
+        }
         const res = await fetch(`/api/question/filter`, {
             method: 'POST',
             headers: {
@@ -27,15 +33,15 @@ function index({ data }) {
         })
         console.log(res.status)
         const response = await res.json();
-        if(res.status === 200){
+        if (res.status === 200) {
             setQuestions(response)
         }
     }
     return (
         <>
-        <Head>
-            <title>The Neuron | Questions</title>
-        </Head>
+            <Head>
+                <title>The Neuron | Questions</title>
+            </Head>
             <div className="px-5 sm:px-10 pt-28 pb-20 min-h-screen max-w-screen-2xl">
 
                 <div className="filter max-w-2xl sm:ml-auto">
@@ -94,7 +100,7 @@ function index({ data }) {
 
                 </div>
                 <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    { questions && questions?.length > 0 && 
+                    {questions && questions?.length > 0 &&
                         questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                     }
                 </div>

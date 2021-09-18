@@ -59,10 +59,16 @@ function Navbar() {
                         session ?
                             <button onClick={logout} className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Logout</button>
                             :
-                            <Link href="/account/register">
-                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Register</button>
+                            <>
+                            <Link href="/account/login" className="hidden lg:inline-block">
+                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Login</button>
                             </Link>
+                            <Link href="/account/register">
+                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>
+                            </Link>
+                            </>
                     }
+
                     <MenuAlt1Icon className="w-10 h-10 ml-3 cursor-pointer md:hidden active:scale-95 transition-sm" onClick={() => setIsActive(true)} />
                 </div>
             </div>
