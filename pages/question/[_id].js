@@ -26,10 +26,14 @@ import {
 
 function QuestionDetail({ question }) {
     const [bid, setBid] = useState(50)
-    const [odd, setOdd] = useState('')
+    const [odd, setOdd] = useState('Favour')
     const [isShare, setIsShare] = useState(false)
     const [Volume, Favour, Against] = [1000000, 130000, 870000]
-    const urlSrc=location.href
+    const urlSrc=`${process.env.HOST}/question/${question?._id}`
+
+    function DESC() {
+        return {__html: question?.desc};
+      }
     return (
         <>
             <Head>
@@ -103,6 +107,10 @@ function QuestionDetail({ question }) {
                                                     <td>{(odd=='Favour') ?  ( Favour*100/Volume).toFixed(2):  (Against*100/Volume).toFixed(2)}%</td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Amount {`in ${odd}`}</td>
+                                                    <td>${odd== 'Favour' ? Favour : Against}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>Likely earnings</td>
                                                     <td>{(odd == 'Favour') ? ((bid)*Volume/(Favour + bid)).toFixed(2) : (( bid)*Volume/(Against+bid)).toFixed(2)}</td>
                                                 </tr>
@@ -111,22 +119,22 @@ function QuestionDetail({ question }) {
                                     </div>
 
                                     <div className="bet__container">
-                                        <table>
+                                        <table className="min-h-[250px]">
                                             <tbody>
                                                 <tr>
                                                     <td>Volume</td>
                                                     <td>${Volume}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Open Date</td>
+                                                    <td>Open Date &amp; Time</td>
                                                     <td>{moment(question?.createdAt).format('lll')}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Last Date</td>
+                                                    <td>Last Date &amp; Time</td>
                                                     <td>{moment(question?.bidClosing).format('lll')}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Settlement Date</td>
+                                                    <td>Settlement Date &amp; Time</td>
                                                     <td>{moment(question?.settlementClosing).format('lll')}</td>
                                                 </tr>
                                                 <tr>
@@ -141,16 +149,17 @@ function QuestionDetail({ question }) {
 
                                 <div className="p-5">
                                     <h1 className="text-2xl font-semibold my-2">About the question</h1>
-                                    <div className="sm:text-lg">
+                                    <div className="sm:text-lg" dangerouslySetInnerHTML={DESC()}>
                                         {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p>)}
                                     </div>
                                 </div>
-                                <div className="px-5 pb-10">
+                                {question?.reference && <div className="px-5 pb-10">
                                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
-                                    <div className="sm:text-lg">
-                                        {question && question?.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a>)}
+                                    <div className="sm:text-lg" >
+                                        <a href={question?.reference} target="_blank" noreferer="true">{question?.reference} </a>
+                                        {/* {question && question?.reference.map((item, i) => <a key={i} href={item} className="my-2 text-blue-500 block">{item}</a>)} */}
                                     </div>
-                                </div>
+                                </div>}
                             </div>
                         </>
                         :

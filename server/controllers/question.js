@@ -16,7 +16,6 @@ const createQuestion = async (req, res) => {
 const getQuestions = async (req, res) => {
     try {
         const getQuestions = await Question.find().sort({ _id: -1 });
-        console.log(getQuestions)
         res.status(200).send(getQuestions)
     } catch (error) {
         res.status(400).send({ msg: 'unable to get question' })
@@ -24,7 +23,7 @@ const getQuestions = async (req, res) => {
 }
 
 const queDetail = async (req, res) => {
-    const detail = await testQ.findById({_id: req.query._id});
+    const detail = await Question.findById({_id: req.query._id});
     if(detail){
         res.status(200).send(detail)
     }
@@ -50,7 +49,7 @@ const filter = async (req, res) => {
         sorting = { createdAt: -1 }
     }
     try {
-        const getQuestions = await testQ.find(filter).sort(sorting);
+        const getQuestions = await Question.find(filter).sort(sorting);
         res.status(200).send(getQuestions)
     } catch (error) {
         res.status(400).send({ msg: 'unable to get question' })
