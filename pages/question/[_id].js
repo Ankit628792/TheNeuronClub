@@ -29,7 +29,7 @@ function QuestionDetail({ question }) {
     const [odd, setOdd] = useState('Favour')
     const [isShare, setIsShare] = useState(false)
     const [Volume, Favour, Against] = [1000000, 130000, 870000]
-    const urlSrc=`${process.env.HOST}/question/${question?._id}`
+    const urlSrc=`https://neuron-club.vercel.app/question/${question?._id}`
 
     function DESC() {
         return {__html: question?.desc};
