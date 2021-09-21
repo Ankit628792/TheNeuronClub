@@ -2,9 +2,11 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import Question from "../../components/Question";
 import { useState, useEffect } from 'react'
 import Head from "next/head";
+import Image from 'next/image'
 
 function index({ data }) {
     const [questions, setQuestions] = useState(data)
+    const [isData, setIsData] = useState(true)
     const [filter, setFilter] = useState({
         category: '',
         sort: 'recent',
@@ -16,12 +18,31 @@ function index({ data }) {
         setFilter({ ...filter, [e.target.name]: e.target.value })
     }
 
+    const checkData = async () => {
+        const checkData = empty();
+        checkData === false ? setIsData(false) : setIsData(checkData.some(element => element));
+    }
+
+    const empty = () => {
+        if (questions && questions?.length > 0) {
+            const result = questions.map(item => item.question.toLowerCase().includes(filter.search.toLowerCase()));
+            return result
+        }
+        else {
+            return false
+        }
+    }
+
+    useEffect(() => {
+        checkData()
+    }, [questions])
+
     useEffect(() => {
         searchFilter()
-    }, [filter])
+    }, [filter]);
 
     const searchFilter = async (e) => {
-        if(e){
+        if (e) {
             e.preventDefault();
         }
         const res = await fetch(`/api/question/filter`, {
@@ -31,7 +52,6 @@ function index({ data }) {
             },
             body: JSON.stringify(filter)
         })
-        console.log(res.status)
         const response = await res.json();
         if (res.status === 200) {
             setQuestions(response)
@@ -64,6 +84,7 @@ function index({ data }) {
                                 <option value="Crypto">Crypto</option>
                                 <option value="Science">Science</option>
                                 <option value="Chess">Chess</option>
+                                <option value="Universe">Universe</option>
                             </select>
                             <ChevronDownIcon className="absolute top-1/2 transform -translate-y-1/2 right-1 h-7 w-7" />
                         </div>
@@ -103,6 +124,9 @@ function index({ data }) {
                     {questions && questions?.length > 0 &&
                         questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                     }
+                    {!isData && <div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
+                        <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
+                    </div>}
                 </div>
             </div>
         </>
