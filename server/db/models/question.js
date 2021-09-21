@@ -17,6 +17,15 @@ const questionSchema = new mongoose.Schema({
     settlementClosing: {
         type: String,
     },
+    Volume: {
+        type: Number,
+    },
+    Favour: {
+        type: Number
+    },
+    Against: {
+        type: Number
+    },
     qstatus: {
         type: String,
     },

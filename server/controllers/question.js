@@ -3,8 +3,6 @@ import Question from '../db/models/question'
 import testQ from '../db/models/testQ'
 
 const createQuestion = async (req, res) => {
-
-    // const { question, userId, category, bidClosing, settlementClosing, qstatus, desc } = req.body;
     const questionCreated = new Question(req.body);
     const saveQuestion = await questionCreated.save();
     if (!saveQuestion) {

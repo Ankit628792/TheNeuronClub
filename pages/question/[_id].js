@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Router from 'next/router'
 import Loader from '../../components/Loader'
 import { useState } from 'react'
 import moment from 'moment'
@@ -30,11 +29,7 @@ function QuestionDetail({ question }) {
     const [odd, setOdd] = useState('')
     const [isShare, setIsShare] = useState(false)
     const [Volume, Favour, Against] = [1000000, 130000, 870000]
-    console.log(Router)
-    const handleBid = (e) => {
-        e.preventDefault();
-        setOdd(e.target.value)
-    }
+    const urlSrc=location.href
     return (
         <>
             <Head>
@@ -49,28 +44,28 @@ function QuestionDetail({ question }) {
                                 <h1 className="my-3 sm:my-0 sm:pr-6"> {question?.question} </h1>
                                 <div className="absolute top-5 right-6 sm:top-5 sm:right-5">
                                     {!isShare ?
-                                        <ShareIcon className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
+                                        <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
                                         : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
                                             <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700" onClick={() => setIsShare(false)} />
-                                            <FacebookShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <FacebookIcon size={40} round={true} />
                                             </FacebookShareButton>
-                                            <TwitterShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <TwitterShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <TwitterIcon size={40} round={true} />
                                             </TwitterShareButton>
-                                            <WhatsappShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <WhatsappIcon size={40} round={true} />
                                             </WhatsappShareButton>
-                                            <PinterestShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <PinterestShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <PinterestIcon size={40} round={true} />
                                             </PinterestShareButton>
-                                            <TelegramShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <TelegramShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <TelegramIcon size={40} round={true} />
                                             </TelegramShareButton>
-                                            <RedditShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <RedditShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <RedditIcon size={40} round={true} />
                                             </RedditShareButton>
-                                            <LinkedinShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                            <LinkedinShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <LinkedinIcon size={40} round={true} />
                                             </LinkedinShareButton>
 
@@ -169,7 +164,7 @@ function QuestionDetail({ question }) {
 export default QuestionDetail
 
 export async function getStaticPaths() {
-    const questions = await fetch(`${process.env.HOST}/api/question/test_que`).then(res => res.json())
+    const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json())
     const data = questions.map(question => {
         return {
             params: {
