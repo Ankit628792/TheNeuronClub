@@ -150,7 +150,7 @@ function QuestionDetail({ question }) {
                                 <div className="p-5">
                                     <h1 className="text-2xl font-semibold my-2">About the question</h1>
                                     <div className="sm:text-lg" dangerouslySetInnerHTML={DESC()}>
-                                        {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p>)}
+                                        {/* {question && question?.desc.map((item, i) => <p key={i} className="py-2">{item}</p>)} */}
                                     </div>
                                 </div>
                                 {question?.reference && <div className="px-5 pb-10">
