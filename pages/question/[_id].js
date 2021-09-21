@@ -26,11 +26,11 @@ import {
 } from "react-share";
 
 function QuestionDetail({ question }) {
-    const [bid, setBid] = useState(10)
-    const [odd, setOdd] = useState(null)
+    const [bid, setBid] = useState(50)
+    const [odd, setOdd] = useState('')
     const [isShare, setIsShare] = useState(false)
     const [Volume, Favour, Against] = [1000000, 130000, 870000]
-console.log(Router)
+    console.log(Router)
     const handleBid = (e) => {
         e.preventDefault();
         setOdd(e.target.value)
@@ -48,69 +48,68 @@ console.log(Router)
                                 <img src={`/images/que/${question?.category.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
                                 <h1 className="my-3 sm:my-0 sm:pr-6"> {question?.question} </h1>
                                 <div className="absolute top-5 right-6 sm:top-5 sm:right-5">
-                                {!isShare ?
-                                <ShareIcon className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
-                                   : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
-                                        <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700" onClick={() => setIsShare(false)} />
-                                        <FacebookShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <FacebookIcon size={40} round={true} />
-                                        </FacebookShareButton>
-                                        <TwitterShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <TwitterIcon size={40} round={true} />
-                                        </TwitterShareButton>
-                                        <WhatsappShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <WhatsappIcon size={40} round={true} />
-                                        </WhatsappShareButton>
-                                        <PinterestShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <PinterestIcon size={40} round={true} />
-                                        </PinterestShareButton>
-                                        <TelegramShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <TelegramIcon size={40} round={true} />
-                                        </TelegramShareButton>
-                                        <RedditShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <RedditIcon size={40} round={true} />
-                                        </RedditShareButton>
-                                        <LinkedinShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
-                                            <LinkedinIcon size={40} round={true} />
-                                        </LinkedinShareButton>
-                                        
-                                    </div>
-                                }
+                                    {!isShare ?
+                                        <ShareIcon className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
+                                        : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
+                                            <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700" onClick={() => setIsShare(false)} />
+                                            <FacebookShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <FacebookIcon size={40} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <TwitterIcon size={40} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <WhatsappIcon size={40} round={true} />
+                                            </WhatsappShareButton>
+                                            <PinterestShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <PinterestIcon size={40} round={true} />
+                                            </PinterestShareButton>
+                                            <TelegramShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <TelegramIcon size={40} round={true} />
+                                            </TelegramShareButton>
+                                            <RedditShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <RedditIcon size={40} round={true} />
+                                            </RedditShareButton>
+                                            <LinkedinShareButton url="https://neuron-club.vercel.app" className="w-10 h-10 shadow-md rounded-full">
+                                                <LinkedinIcon size={40} round={true} />
+                                            </LinkedinShareButton>
+
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5 lg:p-10">
                                 <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">
                                     <div className="bet__container">
                                         <div>
-                                            {/* <label htmlFor="favour"><input id="favour" type="radio" value="Favour" onChange={() => handleBid(e.target.value)} />Yes</label>
-                                            <label htmlFor="against"><input id="against" type="radio" value="Against" onChange={() => handleBid(e.target.value)} />No</label> */}
-                                            <button className="px-3 py-1 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">Yes</button>
-                                            <button className="px-3 py-1 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4">No</button>
+                                            <input type="radio" value="Favour" id="Favour" className="hidden"
+                                                onChange={(e) => setOdd(e.target.value)} name="gender" />
+                                            <label htmlFor="Favour" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'gradient-bg text-white'} cursor-pointer`}>Yes</label>
+
+                                            <input type="radio" value="Against" id="Against" className="hidden"
+                                                onChange={(e) => setOdd(e.target.value)} name="gender" />
+                                            <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
-                                        <div className="my-4">
+                                        <div className="my-4 flex flex-col items-center">
                                             <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 {/* <label className="font-bold">$ </label> */}
                                                 {/* <input type="range" name="bid" id="slider" min="1" max="100" value={bid} onChange={(e) => setBid(e.target.value)} /> */}
-                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid > 10 && setBid(bid - 10)} />
+                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid > 50 && setBid(bid - 50)} />
                                                 <input disabled type="number" min="10" max="100" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid < 100 && setBid(+bid + +10)} />
+                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => bid < 1000 && setBid(+bid + +50)} />
                                             </div>
-                                            <button className="px-3 py-1 leading-loose gradient-bg shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">Apply Bid</button>
                                         </div>
+                                            <button className="px-3 py-1 mt-2 mb-4 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">Apply Bid</button>
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    <td>Bet in {odd}</td>
-                                                    <td>30%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fees</td>
-                                                    <td>2%</td>
+                                                    <td>% Bet {`in ${odd}`}</td>
+                                                    <td>{(odd=='Favour') ?  ( Favour*100/Volume).toFixed(2):  (Against*100/Volume).toFixed(2)}%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Likely earnings</td>
-                                                    <td>$350</td>
+                                                    <td>{(odd == 'Favour') ? ((bid)*Volume/(Favour + bid)).toFixed(2) : (( bid)*Volume/(Against+bid)).toFixed(2)}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
