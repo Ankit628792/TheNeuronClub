@@ -132,6 +132,9 @@
     .filter__item{
       @apply relative mr-5 h-12 my-2 min-w-max inline-flex items-center justify-center transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none
     }
+    .filter__item.user{
+      @apply my-0
+    }
     .filter__item select{
       @apply h-10 z-20 bg-transparent cursor-pointer w-full px-4 pr-8 appearance-none focus:outline-none
     }

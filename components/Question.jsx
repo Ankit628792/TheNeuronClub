@@ -2,11 +2,11 @@ import { ClockIcon } from '@heroicons/react/solid'
 import Router from 'next/router'
 import moment from 'moment';
 
-function Question({ question }) {
+function Question({ question, user }) {
     const handleClick = () => {
-            Router.push({
-              pathname: `/question/${question._id}`,
-            })
+        Router.push({
+            pathname: `/question/${user ? question?.questionId : question._id}`,
+        })
     }
     return (
         <div className="question max-w-xs min-h-[175px] mx-auto p-4 rounded-lg bg-white flex flex-col transition-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer" onClick={handleClick}>
@@ -16,15 +16,21 @@ function Question({ question }) {
             </div>
             <div className="h-4 w-full"></div>
             <div className="flex items-center justify-between mt-auto">
-                <div className="text-sm">
-                    <h1 className="text-gray-400">Category</h1>
-                    <h2>{question?.category}</h2>
+                {user ? <div className="text-sm">
+                    <h1 className="text-gray-400">Invested</h1>
+                    <h2>${question?.amount}</h2>
                 </div>
+                    :
+                    <div className="text-sm">
+                        <h1 className="text-gray-400">Category</h1>
+                        <h2>{question?.category}</h2>
+                    </div>
+                }
                 <div className="text-right flex flex-col items-end text-sm">
                     <ClockIcon className="h-6 sm:h-7 text-blue-500" /> <span className="">
                         {/* {Math.floor(Math.random() * 10)}h left */}
-                        {moment(question.bidClosing).fromNow(true)} left
-                        </span>
+                        {user ? moment(question?.settlementClosing).fromNow(true) :moment(question?.bidClosing).fromNow(true)} left
+                    </span>
                 </div>
             </div>
         </div>

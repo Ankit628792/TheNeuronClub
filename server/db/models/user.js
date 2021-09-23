@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     balance: {
         type: Number,
+        default: 1000
     },
     isVerified: {
         type: Boolean,
@@ -29,10 +30,6 @@ const userSchema = new mongoose.Schema({
     },
     country: {
         type: String,
-    },
-    amount: {
-        type: Number,
-        default: 1000
     },
     Tokens: [{
         token: {
@@ -52,7 +49,7 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.generateAuthToken = async function () {
     try {
-        let token = jwt.sign({ _id: this._id, username: this.username, name: this.name, email: this.email, isVerified: this.isVerified, balance: this.balance, country: this.country, amount: this.amount }, process.env.secret_key)
+        let token = jwt.sign({ _id: this._id, username: this.username, name: this.name, email: this.email, isVerified: this.isVerified, country: this.country }, process.env.secret_key)
         this.Tokens = this.Tokens.concat({ token: token })
         await this.save();
         return token;

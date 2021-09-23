@@ -19,12 +19,15 @@ const questionSchema = new mongoose.Schema({
     },
     Volume: {
         type: Number,
+        default: 0
     },
     Favour: {
-        type: Number
+        type: Number,
+        default:0
     },
     Against: {
-        type: Number
+        type: Number,
+        default:0
     },
     qstatus: {
         type: String,

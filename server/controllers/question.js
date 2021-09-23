@@ -23,14 +23,27 @@ const getQuestions = async (req, res) => {
 }
 
 const queDetail = async (req, res) => {
-    const detail = await Question.findById({_id: req.query._id});
-    if(detail){
+    console.log(req.query)
+    const detail = await Question.findById({ _id: req.query._id });
+    if (detail) {
         res.status(200).send(detail)
     }
-    else{
-        res.status(400).send({mg: error})
+    else {
+        res.status(400).send({ mg: "error" })
     }
 }
+const update_que = async (req, res) => {
+    console.log(req.body)
+    const { Volume, Favour, Against } = req.body;
+    const updatedq = await Question.updateOne({}, { Volume, Favour, Against });
+    if (updatedq) {
+        res.status(200).send(updatedq)
+    }
+    else {
+        res.status(400).send({ mg: "error" })
+    }
+}
+
 
 const filter = async (req, res) => {
     const { category, sort } = req.body;
@@ -80,4 +93,4 @@ const testQuestion = async (req, res) => {
 }
 
 
-export { createQuestion, getQuestions, testQuestion, filter, queDetail }
+export { createQuestion, getQuestions, testQuestion, filter, queDetail, update_que }
