@@ -49,7 +49,7 @@ function QuestionDetail({ questionData }) {
     }
     useEffect(() => {
         getUser();
-    }, [])
+    }, [que])
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
@@ -88,7 +88,7 @@ function QuestionDetail({ questionData }) {
     return (
         <>
             <Head>
-                <title>Question Detail</title>
+                <title>Question: {que?.question}</title>
             </Head>
             <div className="pt-28 pb-10">
                 {
@@ -148,7 +148,9 @@ function QuestionDetail({ questionData }) {
                                                 <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 1000 && setBid(+bid + +50); setLowBalance(false) }} />
                                             </div>
                                         </div>
-                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{isSending ? 'Wait...' : 'Apply Bid'}</button>
+                                        {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
+                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Apply Bid'}</button>
+                                        }
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
                                         <table>
                                             <tbody>
@@ -162,7 +164,7 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Likely earnings</td>
-                                                    <td>{(odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2)}</td>
+                                                    <td>{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -6,7 +6,6 @@ import Image from 'next/image'
 
 function QuestionGroup({ questions, category, user }) {
     const [filter, setFilter] = useState('')
-    console.log(user)
     return (
         <>
             <div className={`p-5 py-10 sm:p-10 ${!user && 'xl:px-20'} ${user && 'min-w-full xl:min-w-[900px]'}`}>
