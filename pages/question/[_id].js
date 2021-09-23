@@ -30,6 +30,11 @@ function QuestionDetail({ questionData }) {
     const [userData, setUserData] = useState(null)
     const [lowBalance, setLowBalance] = useState(false)
     const [bid, setBid] = useState(50)
+    const [bidData, setBidData] = useState({
+        Volume: questionData?.Volume,
+        Favour: questionData?.Favour,
+        Against: questionData?.Against,
+    })
     const [odd, setOdd] = useState('Favour')
     const [isShare, setIsShare] = useState(false)
     const [isSending, setIsSending] = useState(false)
@@ -46,7 +51,7 @@ function QuestionDetail({ questionData }) {
         getUser();
     }, [])
 
-    let { Volume, Favour, Against } = questionData || que
+    let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
         setIsSending(true)
         const { username, balance } = userData;
@@ -65,8 +70,13 @@ function QuestionDetail({ questionData }) {
             console.log(res.status)
             const response = await res.json();
             setQue(response)
+            setBidData({
+                Volume: response?.Volume,
+                Favour: response?.Favour,
+                Against: response?.Against
+            })
         }
-        else{
+        else {
             setLowBalance(true)
         }
         setIsSending(false)
@@ -133,13 +143,13 @@ function QuestionDetail({ questionData }) {
                                         <div className="my-4 flex flex-col items-center">
                                             <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
-                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() =>{ bid > 50 && setBid(bid - 50); setLowBalance(false)}} />
+                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
                                                 <input disabled type="number" min="50" max="1000" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => {bid < 1000 && setBid(+bid + +50); setLowBalance(false)}} />
+                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 1000 && setBid(+bid + +50); setLowBalance(false) }} />
                                             </div>
                                         </div>
-                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{ isSending ? 'Wait...' : 'Apply Bid'}</button>
-                                       {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
+                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{isSending ? 'Wait...' : 'Apply Bid'}</button>
+                                        {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
                                         <table>
                                             <tbody>
                                                 <tr>
