@@ -77,14 +77,16 @@ function index({ data }) {
                             >
                                 <option value="">All</option>
                                 <option value="Politics">Politics</option>
+                                <option value="Entertainment">Entertainment</option>
                                 <option value="Sports">Sports</option>
-                                <option value="Science">Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Climate">Climate</option>
                                 <option value="Coronavirus">Coronavirus</option>
-                                <option value="Business">Business</option>
                                 <option value="Crypto">Crypto</option>
-                                <option value="Science">Science</option>
-                                <option value="Chess">Chess</option>
-                                <option value="Universe">Universe</option>
+                                <option value="Business">Business</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Technology">Technology</option>
                             </select>
                             <ChevronDownIcon className="absolute top-1/2 transform -translate-y-1/2 right-1 h-7 w-7" />
                         </div>
