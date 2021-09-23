@@ -27,6 +27,7 @@ import {
 
 function QuestionDetail({ questionData }) {
     const session = userSession();
+    let { Volume, Favour, Against } = questionData;
     const [userData, setUserData] = useState(null)
     const [lowBalance, setLowBalance] = useState(false)
     const [bid, setBid] = useState(50)
@@ -46,7 +47,6 @@ function QuestionDetail({ questionData }) {
         getUser();
     }, [])
 
-    let { Volume, Favour, Against } = questionData || que
     const handleBet = async () => {
         setIsSending(true)
         const { username, balance } = userData;
