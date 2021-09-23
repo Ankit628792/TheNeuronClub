@@ -46,7 +46,7 @@ function QuestionDetail({ questionData }) {
         getUser();
     }, [])
 
-    let [ Volume, Favour, Against ] = [1000,500,566]
+    let { Volume, Favour, Against } = questionData || que
     const handleBet = async () => {
         setIsSending(true)
         const { username, balance } = userData;
