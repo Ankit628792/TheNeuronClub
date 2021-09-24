@@ -3,6 +3,7 @@ import Link from "next/link";
 import Question from "./Question";
 import { useState } from 'react'
 import Image from 'next/image'
+import Row from "./Row";
 
 function QuestionGroup({ questions, category, user }) {
     const [filter, setFilter] = useState('')
@@ -31,21 +32,71 @@ function QuestionGroup({ questions, category, user }) {
                             <h1 className="flex items-center text-base sm:text-lg cursor-pointer text-blue-500 sm:pr-4">View All <ArrowRightIcon className="h-7 mx-2" /></h1>
                         </Link>}
                 </div>
-                <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {
-                        (questions && questions?.length > 0 && filter !== 'Win' && filter !== 'Lose') ?
-                            <>
-                                {questions.map((item, i) => (
-                                    <Question question={item} key={i} user={user} />
-                                ))}
-                            </>
-                            :
-                            <>
-                                {<div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
-                                    <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
-                                </div>}</>
-                    }
-                </div>
+                {user ?
+                    <div class="flex flex-col w-full overflow-x-scroll max-w-[90vw]">
+                        <div class="overflow-x-auto">
+                            <div class="py-2 align-middle inline-block min-w-full">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                    Category
+                                                </th>
+                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                    Question
+                                                </th>
+                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                    Bid-Date
+                                                </th>
+                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                    Investment
+                                                </th>
+                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                    Status
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {
+                                                (questions && questions?.length > 0 && filter !== 'Win' && filter !== 'Lose') ?
+                                                    <>
+                                                        {questions.map((item, i) => (
+                                                            <Row question={item} key={i} />
+                                                        ))}
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <td></td>
+                                                        <td>
+                                                            <div className="p-5 mx-auto relative min-w-[300px] min-h-[300px]">
+                                                                <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
+                                                            </div>
+                                                        </td>
+                                                    </>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    : <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {
+                            (questions && questions?.length > 0 && filter !== 'Win' && filter !== 'Lose') ?
+                                <>
+                                    {questions.map((item, i) => (
+                                        <Question question={item} key={i} user={user} />
+                                    ))}
+                                </>
+                                :
+                                <>
+                                    {<div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
+                                        <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
+                                    </div>}</>
+                        }
+                    </div>}
             </div>
         </>
     )

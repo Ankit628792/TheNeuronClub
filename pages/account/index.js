@@ -42,28 +42,28 @@ function index() {
             {userData ?
                 <>
                     <QuestionGroup questions={userData?.questions} category={"Question Transaction"} user={true} />
-                    <div className="mx-auto sm:flex sm:space-x-4 xl:flex-col sm:space-x-0">
-                        <div className="max-w-sm gradient-shadow-md rounded-xl px-4 py-6 space-y-2 min-w-[300px]">
+                    <div className="mx-auto sm:flex sm:space-x-4 xl:flex-col space-x-0 space-y-4 sm:space-y-0 xl:space-y-5">
+                        <div className="max-w-sm gradient-shadow rounded-xl p-6 space-y-2">
                             <div className="w-20 h-20 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-5xl grid place-items-center text-white">
                                 {userData?.username && userData?.username[0]}
                             </div>
                             <div className="flex text-lg items-center justify-between space-x-1">
                                 <h1 className="font-medium">Username:</h1> <h2>{userData?.username}</h2>
                             </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
+                            {/* <div className="flex text-lg items-center justify-between space-x-1">
                                 <h1 className="font-medium">Email:</h1> <h2 className="break-all leading-5">{userData?.email}</h2>
                             </div>
                             <div className="flex text-lg items-center justify-between space-x-1">
                                 <h1 className="font-medium">Country:</h1> <h2>{userData?.country}</h2>
-                            </div>
+                            </div> */}
                             <div className="flex text-lg items-center justify-between space-x-1">
                                 <h1 className="font-medium">Balance:</h1> <h2>${userData?.balance}</h2>
                             </div>
                         </div>
 
-                        <div className="max-w-sm gradient-shadow-md rounded-xl px-4 py-6 space-y-2 min-w-[300px]">
+                        <div className="max-w-sm gradient-shadow rounded-xl p-6 space-y-3 ">
                             <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Total Investment:</h1> <h2>${investment?.total}</h2>
+                                <h1 className="font-medium leading-5">Total Investment:</h1> <h2>${investment?.total}</h2>
                             </div>
                             <div className="flex text-lg items-center justify-between space-x-1">
                                 <h1 className="font-medium">Total Win:</h1> <h2>${investment?.win}</h2>
