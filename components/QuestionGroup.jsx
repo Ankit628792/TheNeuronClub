@@ -33,32 +33,32 @@ function QuestionGroup({ questions, category, user }) {
                         </Link>}
                 </div>
                 {user ?
-                    <div class="flex flex-col w-full overflow-x-scroll max-w-[90vw]">
-                        <div class="overflow-x-auto">
-                            <div class="py-2 align-middle inline-block min-w-full">
-                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
+                    <div className="flex flex-col w-full overflow-x-scroll max-w-[90vw]">
+                        <div className="overflow-x-auto">
+                            <div className="py-2 align-middle inline-block min-w-full">
+                                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table className="min-w-full divide-y divide-gray-200">
+                                        <thead className="bg-gray-50">
                                             <tr>
-                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                                     Category
                                                 </th>
-                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                                     Question
                                                 </th>
-                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                                     Bid-Date
                                                 </th>
-                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                                     Investment
                                                 </th>
-                                                <th scope="col" class="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                                <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                                     Status
                                                 </th>
 
                                             </tr>
                                         </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        <tbody className="bg-white divide-y divide-gray-200">
                                             {
                                                 (questions && questions?.length > 0 && filter !== 'Win' && filter !== 'Lose') ?
                                                     <>
