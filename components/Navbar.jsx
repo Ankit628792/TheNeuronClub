@@ -60,7 +60,7 @@ function Navbar() {
                             <button onClick={logout} className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Logout</button>
                             :
                             <>
-                            <Link href="/account/login" className="hidden lg:inline-block">
+                            <Link href="/account/login" className="hidden lg:inline-block mr-2">
                                 <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Login</button>
                             </Link>
                             <Link href="/account/register">

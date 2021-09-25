@@ -28,6 +28,7 @@ import {
 function QuestionDetail({ questionData }) {
     const session = userSession();
     const [userData, setUserData] = useState(null)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [lowBalance, setLowBalance] = useState(false)
     const [bid, setBid] = useState(50)
     const [bidData, setBidData] = useState({
@@ -53,6 +54,7 @@ function QuestionDetail({ questionData }) {
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
+        if(userData){
         setIsSending(true)
         const { username, balance } = userData;
         if (balance > 0 && balance >= bid) {
@@ -80,6 +82,10 @@ function QuestionDetail({ questionData }) {
             setLowBalance(true)
         }
         setIsSending(false)
+    }
+    else{
+        setIsLoggedIn(true)
+    }
     }
 
     function DESC() {
@@ -216,6 +222,7 @@ function QuestionDetail({ questionData }) {
                         <Loader />
                 }
             </div>
+            {isLoggedIn && <Modal state={isLoggedIn} text="Please login to place a bid" />}
         </>
     )
 }
