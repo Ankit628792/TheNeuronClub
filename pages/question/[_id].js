@@ -119,9 +119,9 @@ function QuestionDetail({ questionData }) {
                                             <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <WhatsappIcon size={40} round={true} />
                                             </WhatsappShareButton>
-                                            <PinterestShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${que?.question}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <PinterestIcon size={40} round={true} />
-                                            </PinterestShareButton>
+                                            </a>
                                             <TelegramShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <TelegramIcon size={40} round={true} />
                                             </TelegramShareButton>
