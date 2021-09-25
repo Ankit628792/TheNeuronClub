@@ -6,6 +6,9 @@
       font-family: 'Barlow', sans-serif;
       user-select: none;
     }
+    #__next{
+      overflow-x: hidden;
+    }
     *::-webkit-scrollbar{
         display: none;
         background: #f1faff;
@@ -39,6 +42,21 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
+      }
+      .balance__border{
+        border-color: #00bfff;
+      }
+      .invest__border{
+        border-color: #333;
+      }
+      .win__border{
+        border-color: #00ff00;
+      }
+      .lose__border{
+        border-color: #ff4500;
+      }
+      .info__border{
+        border-color: #999;
       }
       
       .gradient-bg{

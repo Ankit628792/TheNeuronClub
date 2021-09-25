@@ -77,12 +77,14 @@ function Navbar() {
                 <div className="fixed md:hidden z-50 bg-white top-0 left-0 right-0 bottom-0 w-full h-full flex justify-center items-center">
                     <XIcon className="h-10 w-10 md:hidden absolute top-4 right-5 cursor-pointer active:scale-95 transition-sm" onClick={() => setIsActive(false)} />
                     <ul className="flex flex-col justify-center items-center text-3xl font-bold space-y-5">
-                        <Link href="/">
-                            <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Home</h1>
-                        </Link>
                         <Link href="/question/">
                             <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Explore</h1>
                         </Link>
+                        {session &&
+                            <Link href="/account/">
+                                <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Portfolio</h1>
+                            </Link>
+                        }
                         {session &&
                             <Link href="/create_question">
                                 <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Create Question</h1>

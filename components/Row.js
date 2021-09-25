@@ -9,13 +9,13 @@ function Row({question}) {
     }
     return (
         <>
-            <tr className="hover:bg-blue-50 transition delay-75 cursor-pointer" onClick={handleClick}>
+            <tr className="hover:bg-gray-50 transition delay-75 cursor-pointer" onClick={handleClick}>
                 <td className="p-4 whitespace-nowrap">
                     <div className="flex items-center flex-col sm:flex-row">
                         <div className="flex-shrink-0 h-10 w-10 m-2">
                             <img className="h-10 w-10 rounded-full shadow-lg border-2 border-white hover:scale-[1.02] transition-md" src={`/images/que/${question?.category.toLowerCase()}.jfif`} alt="" />
                         </div>
-                        <div className="sm:ml-4">
+                        <div className="sm:ml-2">
                             <div className="text-sm sm:text-base font-medium text-gray-900">
                                 {question?.category}
                             </div>
@@ -25,7 +25,7 @@ function Row({question}) {
                 <td className="p-4">
                     <div className="text-sm sm:text-base text-gray-900 max-w-sm min-w-[384px] break-words">{question?.question}</div>
                 </td>
-                <td className="p-4 whitespace-nowrap text-sm sm:text-base text-gray-600">
+                <td className="p-4 whitespace-nowrap text-sm sm:text-base text-gray-600 text-center">
                 {moment(question?.createdAt).format('lll')}
                 </td>
                 <td className="p-4 whitespace-nowrap text-sm sm:text-base text-gray-600 text-center">
