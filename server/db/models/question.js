@@ -17,6 +17,9 @@ const questionSchema = new mongoose.Schema({
     settlementClosing: {
         type: String,
     },
+    result: {
+        type: String,
+    },
     Volume: {
         type: Number,
         default: 0

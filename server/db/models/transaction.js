@@ -16,6 +16,9 @@ const transactionSchema = new mongoose.Schema({
     category: {
         type: String
     },
+    result: {
+        type: String
+    },
     odd: {
         type: String
     },
