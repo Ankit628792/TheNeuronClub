@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import moment from 'moment'
 import { userSession } from '../../lib/user-session'
 import { MinusIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
+import Modal from '../../components/Modal'
 import {
     EmailShareButton,
     FacebookShareButton,
