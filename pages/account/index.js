@@ -2,9 +2,15 @@ import { userSession } from "../../lib/user-session"
 import { useState, useEffect } from 'react'
 import QuestionGroup from "../../components/QuestionGroup";
 import Loader from "../../components/Loader";
+import Router from 'next/router'
 
 function index() {
     const session = userSession();
+    useEffect(() => {
+        if (!session) {
+            Router.push('/')
+        }
+    }, [session])
     const [userData, setUserData] = useState(null);
     const [investment, setInvestment] = useState({
         total: 0,
