@@ -48,37 +48,6 @@ function index() {
             {userData ?
                 <>
                     <QuestionGroup questions={userData?.questions} category={"Question Transaction"} user={true} />
-                    {/* <div className="mx-auto sm:flex sm:space-x-4 xl:flex-col space-x-0 space-y-4 sm:space-y-0 xl:space-y-5">
-                        <div className="max-w-sm gradient-shadow rounded-xl p-6 space-y-2">
-                            <div className="w-20 h-20 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-5xl grid place-items-center text-white">
-                                {userData?.username && userData?.username[0]}
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Username:</h1> <h2>{userData?.username}</h2>
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Email:</h1> <h2 className="break-all leading-5">{userData?.email}</h2>
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Country:</h1> <h2>{userData?.country}</h2>
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Balance:</h1> <h2>${userData?.balance}</h2>
-                            </div>
-                        </div>
-
-                        <div className="max-w-sm gradient-shadow rounded-xl p-6 space-y-3 ">
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium leading-5">Total Investment:</h1> <h2>${investment?.total}</h2>
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Total Win:</h1> <h2>${investment?.win}</h2>
-                            </div>
-                            <div className="flex text-lg items-center justify-between space-x-1">
-                                <h1 className="font-medium">Total Lose:</h1> <h2>${investment?.lose}</h2>
-                            </div>
-                        </div>
-                    </div> */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4 mx-auto text-right">
                         <div className="max-w-xs gradient-shadow rounded-xl p-6 m-2 space-y-2 border-b-4 invest__border">
                             <h1 className="font-semibold text-2xl text-gray-700">Investment</h1>
@@ -99,13 +68,13 @@ function index() {
                         <div className="col-span-2 md:col-span-1 m-2">
                             <div className="max-w-[250px] mx-auto gradient-shadow rounded-xl p-6 space-x-4 flex items-center border-b-4 info__border">
 
-                            <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-4xl grid place-items-center text-white">
-                                {userData?.username && userData?.username[0]}
-                            </div>
-                            <div className="text-lg">
-                            <h2>{userData?.username}</h2>
-                            <h1 className="text-gray-500 text-base">{userData?.country}</h1>
-                            </div>
+                                <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-4xl grid place-items-center text-white">
+                                    {userData?.username && userData?.username[0]}
+                                </div>
+                                <div className="text-lg">
+                                    <h2>{userData?.username}</h2>
+                                    <h1 className="text-gray-500 text-base">{userData?.country}</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
