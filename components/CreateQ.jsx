@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from './Modal'
 import dynamic from 'next/dynamic'
+import { ChevronDownIcon } from '@heroicons/react/solid'
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
@@ -130,15 +131,28 @@ function CreateQ({ session }) {
                         </div>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category</label>
-                            <input
-                                placeholder="Coronavirus, Business ..."
-                                required
+                            <select
+                                placeholder="category"
                                 type="text"
                                 name="category"
+                                required
                                 value={data.category}
                                 onChange={handleChange}
                                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                            />
+                            >
+                                <option value="" disabled>Choose a category</option>
+                                <option value="politics">Politics</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="sports">Sports</option>
+                                <option value="economics">Economics</option>
+                                <option value="climate">Climate</option>
+                                <option value="coronavirus">Coronavirus</option>
+                                <option value="crypto">Crypto</option>
+                                <option value="business">Business</option>
+                                <option value="crime">Crime</option>
+                                <option value="arts">Arts</option>
+                                <option value="technology">Technology</option>
+                            </select>
                         </div>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time</label>

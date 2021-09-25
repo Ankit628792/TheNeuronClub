@@ -1,7 +1,8 @@
 import moment from 'moment'
 import Router from 'next/router'
+import Coin from './Coin'
 
-function Row({question}) {
+function Row({ question }) {
     const handleClick = () => {
         Router.push({
             pathname: `/question/${question?.questionId}`,
@@ -26,14 +27,16 @@ function Row({question}) {
                     <div className="text-sm sm:text-base text-gray-900 max-w-sm min-w-[384px] break-words">{question?.question}</div>
                 </td>
                 <td className="p-4 whitespace-nowrap text-sm sm:text-base text-gray-600 text-center">
-                {moment(question?.createdAt).format('lll')}
+                    {moment(question?.createdAt).format('lll')}
                 </td>
                 <td className="p-4 whitespace-nowrap text-sm sm:text-base text-gray-600 text-center">
-                    ${question?.amount}
+                    <div className="flex items-center justify-center">
+                        <Coin width="4" height="4" />{question?.amount}
+                    </div>
                 </td>
                 <td className="p-4 whitespace-nowrap text-center">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                        Pending
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                        Active
                     </span>
                 </td>
             </tr>

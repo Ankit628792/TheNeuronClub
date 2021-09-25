@@ -25,6 +25,7 @@ import {
     TwitterIcon,
     WhatsappIcon,
 } from "react-share";
+import Coin from '../../components/Coin'
 
 function QuestionDetail({ questionData }) {
     const session = userSession();
@@ -140,19 +141,19 @@ function QuestionDetail({ questionData }) {
                                     <div className="bet__container">
                                         <div>
                                             <input type="radio" value="Favour" id="Favour" className="hidden"
-                                                onChange={(e) => setOdd(e.target.value)} name="gender" />
+                                                onChange={(e) => setOdd(e.target.value)} name="odd" />
                                             <label htmlFor="Favour" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'gradient-bg text-white'} cursor-pointer`}>Yes</label>
 
                                             <input type="radio" value="Against" id="Against" className="hidden"
-                                                onChange={(e) => setOdd(e.target.value)} name="gender" />
+                                                onChange={(e) => setOdd(e.target.value)} name="odd" />
                                             <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            <h1 className="font-medium">Amount to Bet : <span className="text-blue-600">${bid}</span> </h1>
+                                            <h1 className="font-medium">Amount to Bet : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
-                                                <input disabled type="number" min="50" max="1000" value={bid} onChange={(e) => setBid(e.target.value)} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 1000 && setBid(+bid + +50); setLowBalance(false) }} />
+                                                <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={(e) => { setBid(e.target.value); setLowBalance(false) }} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
                                             </div>
                                         </div>
                                         {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
@@ -167,11 +168,11 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Amount {`in ${odd}`}</td>
-                                                    <td>${odd == 'Favour' ? Favour : Against}</td>
+                                                    <td className="inline-flex items-center"><Coin width="4" height="4" />{odd == 'Favour' ? Favour : Against}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Likely earnings</td>
-                                                    <td>{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}</td>
+                                                    <td className="inline-flex items-center"><Coin width="4" height="4" />{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -182,7 +183,7 @@ function QuestionDetail({ questionData }) {
                                             <tbody>
                                                 <tr>
                                                     <td>Volume</td>
-                                                    <td>${Volume}</td>
+                                                    <td><Coin width="4" height="4" />{Volume}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Open Date &amp; Time</td>
