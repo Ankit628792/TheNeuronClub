@@ -31,6 +31,8 @@ function QuestionDetail({ questionData }) {
     const session = userSession();
     const [userData, setUserData] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isBidPlaced, setIsBidPlaced] = useState(false)
+    const [isActive, setIsActive] = useState(false)
     const [lowBalance, setLowBalance] = useState(false)
     const [bid, setBid] = useState(50)
     const [bidData, setBidData] = useState({
@@ -42,11 +44,10 @@ function QuestionDetail({ questionData }) {
     const [isShare, setIsShare] = useState(false)
     const [isSending, setIsSending] = useState(false)
     const [que, setQue] = useState(questionData);
-    const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
+    const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}&description=${que?.question}`
 
     const getUser = async () => {
         const res = await fetch(`/api/user/getUser?_id=${session?._id}`);
-        console.log(res.status)
         const response = await res.json();
         setUserData(response)
     }
@@ -56,38 +57,42 @@ function QuestionDetail({ questionData }) {
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
-        if(userData){
-        setIsSending(true)
-        const { username, balance } = userData;
-        if (balance > 0 && balance >= bid) {
-            Volume = Volume + bid
-            odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
+        if (userData) {
+            setIsActive(false)
+            setIsSending(true)
+            const { username, balance } = userData;
+            if (balance > 0 && balance >= bid) {
+                Volume = Volume + bid
+                odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
 
-            const { _id, question, category, settlementClosing } = que
-            const res = await fetch(`/api/transaction/question`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, bid, _id, question, category, odd, settlementClosing })
-            })
-            console.log(res.status)
-            const response = await res.json();
-            setQue(response)
-            setBidData({
-                Volume: response?.Volume,
-                Favour: response?.Favour,
-                Against: response?.Against
-            })
+                const { _id, question, category, settlementClosing } = que
+                const res = await fetch(`/api/transaction/question`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, bid, _id, question, category, odd, settlementClosing })
+                })
+                console.log(res.status)
+                const response = await res.json();
+                if (res.status == 201) {
+                    setIsBidPlaced(true)
+                    setQue(response)
+                    setBidData({
+                        Volume: response?.Volume,
+                        Favour: response?.Favour,
+                        Against: response?.Against
+                    })
+                }
+            }
+            else {
+                setLowBalance(true)
+            }
+            setIsSending(false)
         }
         else {
-            setLowBalance(true)
+            setIsLoggedIn(true)
         }
-        setIsSending(false)
-    }
-    else{
-        setIsLoggedIn(true)
-    }
     }
 
     function DESC() {
@@ -149,7 +154,7 @@ function QuestionDetail({ questionData }) {
                                             <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            <h1 className="font-medium">Amount to Bet : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                                            <h1 className="font-medium">Amount to Bid : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
                                                 <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={(e) => { setBid(e.target.value); setLowBalance(false) }} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
@@ -157,7 +162,7 @@ function QuestionDetail({ questionData }) {
                                             </div>
                                         </div>
                                         {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
-                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Apply Bid'}</button>
+                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(true)}>{'Apply Bid'}</button>
                                         }
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
                                         <table>
@@ -168,11 +173,19 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Amount {`in ${odd}`}</td>
-                                                    <td className="inline-flex items-center"><Coin width="4" height="4" />{odd == 'Favour' ? Favour : Against}</td>
+                                                    <td className="inline-flex items-center">
+                                                        <div className="flex items-center">
+                                                            <Coin width="4" height="4" />{odd == 'Favour' ? Favour : Against}
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Likely earnings</td>
-                                                    <td className="inline-flex items-center"><Coin width="4" height="4" />{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}</td>
+                                                    <td className="inline-flex items-center">
+                                                        <div className="flex items-center">
+                                                            <Coin width="4" height="4" />{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -183,7 +196,11 @@ function QuestionDetail({ questionData }) {
                                             <tbody>
                                                 <tr>
                                                     <td>Volume</td>
-                                                    <td><Coin width="4" height="4" />{Volume}</td>
+                                                    <td>
+                                                        <div className="flex items-center">
+                                                            <Coin width="4" height="4" />{Volume}
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Open Date &amp; Time</td>
@@ -224,7 +241,22 @@ function QuestionDetail({ questionData }) {
                         <Loader />
                 }
             </div>
-            {isLoggedIn && <Modal state={isLoggedIn} text="Please login to place a bid" />}
+            {isActive && <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-full grid place-items-center z-50" >
+                <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 bg-white rounded-xl shadow-2xl m-4">
+                    <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-gray-800 z-50 leading-tight">
+                        Please confirm that you want to place a bid of <div className="flex items-center justify-center">
+                            <Coin width="4" height="4" />{bid}
+                        </div>
+                    </h1>
+                    <div className="flex items-center justify-around mt-6">
+                    <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(false)}>{'Cancel'}</button>
+                    <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Place Bid'}</button>
+                    </div>
+                </div>
+            </div>}
+            {isBidPlaced && <div onClick={() => setIsBidPlaced(false)} ><Modal state={isBidPlaced} text="Bid Placed Successfully" /> </div>}
+            {isLoggedIn && <div onClick={() => setIsLoggedIn(false)}><Modal state={isLoggedIn} text="Please login to place a bid" /> </div>}
+
         </>
     )
 }

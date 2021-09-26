@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Router from "next/router"
 import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function login() {
     const session = userSession();
@@ -40,6 +42,15 @@ function login() {
         })
         const response = await res.json();
         if (res.status === 200) {
+            toast("🦄 Wow, You've won 1000 Neuron coins! 🥳", {
+                position: "top-center",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             window.localStorage.setItem('neuron-token', JSON.stringify(response))
             Router.push('/')
         } else if (res.status === 203) {
@@ -90,14 +101,6 @@ function login() {
                                 </div>
                                 <button type="submit" className="w-full px-6 py-3 text-lg text-white font-semibold rounded-md my-4 gradient-bg focus:border-none focus:outline-none active:scale-95 transition-sm">{isSending ? 'Validating' : 'Login'}</button>
                                 <h1>Don't have an account ? <a href="/account/register" className="text-blue-500 font-medium">Register</a></h1>
-                                {/* <div className="flex space-x-6 sm:px-5 mt-5">
-                                    <div className="px-4 py-2 border border-gray-700 text-gray-700 font-semibold cursor-pointer hover:bg-gray-800 hover:text-white rounded-full transition duration-100 ease-linear">
-                                        Google G+
-                                    </div>
-                                    <div className="px-4 py-2 border border-gray-700 text-gray-700 font-semibold cursor-pointer hover:bg-gray-800 hover:text-white rounded-full transition duration-100 ease-linear">
-                                        Facebook F+
-                                    </div>
-                                </div> */}
                             </form>
                             :
                             <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">User aleady registered, Verify your account to continue</h1>
@@ -105,6 +108,7 @@ function login() {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

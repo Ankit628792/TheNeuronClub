@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import QuestionGroup from "../../components/QuestionGroup";
 import Loader from "../../components/Loader";
 import Router from 'next/router'
+import Head from 'next/head'
 import Coin from "../../components/Coin";
 
 function index() {

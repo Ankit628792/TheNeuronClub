@@ -109,7 +109,7 @@ function contact() {
           </div>
         </div>
       </div>
-      {isSent && <Modal state={isSent} text="Thanks for contacting us. We’ll respond as soon as possible." />}
+      {isSent && <div onClick={() => setIsSent(false)}><Modal state={isSent} text="Thanks for contacting us. We’ll respond as soon as possible." /> </div>}
     </>
   )
 }
