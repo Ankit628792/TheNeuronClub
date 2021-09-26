@@ -162,7 +162,7 @@ function QuestionDetail({ questionData }) {
                                             </div>
                                         </div>
                                         {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
-                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(true)}>{'Apply Bid'}</button>
+                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => bid>0 && setIsActive(true)}>{'Apply Bid'}</button>
                                         }
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
                                         <table>
