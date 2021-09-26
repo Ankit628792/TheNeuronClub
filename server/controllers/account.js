@@ -105,7 +105,6 @@ const login = async (req, res) => {
             if (!isMatch) {
                 res.status(400).json({ error: 'Invalid Credentials' })
             } else {
-                console.log(userLogin)
                 if (userLogin.isVerified === false) {
                     res.status(203).send({ msg: 'User unverified' })
                 } else {
