@@ -146,7 +146,7 @@ function CreateQ({ session }) {
                         </div>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="Question Image" className="inline-block mb-1 font-medium">Question Image</label>
-                            <input type="file" name="image" required accept="image/*"
+                            <input type="file" name="image" accept="image/*"
                                 onChange={(e) => setQImage(e.target.files[0])}
                                 className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
