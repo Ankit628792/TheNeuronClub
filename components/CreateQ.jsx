@@ -13,7 +13,7 @@ function CreateQ({ session }) {
     const [isSent, setIsSent] = useState(false)
     const [link, setLink] = useState('')
     const [currentDate, setCurrentDate] = useState('')
-    const [qImage, setQImage] = useState('');
+    const [qImage, setQImage] = useState(null);
     const [data, setData] = useState({
         question: '',
         userId: session?.username || 'Ankit628792',
@@ -48,6 +48,7 @@ function CreateQ({ session }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(qImage?.size < 1100000 ){
         setIsSending(true);
         const formData = new FormData();
         formData.append("image", qImage);
@@ -81,6 +82,7 @@ function CreateQ({ session }) {
             setDesc('');
         }
         setIsSending(false)
+    }
     }
 
     const modules = {
@@ -140,6 +142,7 @@ function CreateQ({ session }) {
                                 onChange={(e) => setQImage(e.target.files[0])}
                                 className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
+                            {(qImage?.size > 1100000 ) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p> }
                         </div>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category</label>
