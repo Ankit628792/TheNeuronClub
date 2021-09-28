@@ -62,6 +62,9 @@ function CreateQ({ session }) {
         formData.append("link", link);
         const res = await fetch(`/api/question/create_question`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
             body: formData
         })
 
