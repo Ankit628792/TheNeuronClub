@@ -108,7 +108,10 @@ const login = async (req, res) => {
                 if (userLogin.isVerified === false) {
                     res.status(203).send({ msg: 'User unverified' })
                 } else {
-                    res.status(200).send({ token });
+                    const newUser = userLogin.isNewUser
+                    userLogin.isNewUser = false;
+                    await userLogin.save();
+                    res.status(200).send({ token, newUser });
                 }
             }
         }
@@ -127,8 +130,7 @@ const logout = async (req, res) => {
     // Get a cookie
     const token = cookies.get('neuron')
     const verifyToken = jwt.verify(token, process.env.secret_key);
-
-    const userFound = await User.findById({ _id: verifyToken._id });
+    const userFound = await User.findById({ _id: verifyToken._id || req.body });
     if (!userFound) {
         res.status(400).send('Problem in Logout');
     }

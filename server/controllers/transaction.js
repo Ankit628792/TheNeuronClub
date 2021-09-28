@@ -6,9 +6,9 @@ import Question from '../db/models/question'
 import Transaction from '../db/models/transaction'
 
 const question = async (req, res) => {
-    const { Volume, Favour, Againt, question, _id, category, odd, bid, username, settlementClosing } = req.body
+    const { Volume, Favour, Againt, question, _id, category, odd, bid, username, settlementClosing, image_url } = req.body
     try {
-        const createTransaction = new Transaction({ username, amount: bid, questionId: _id, question, category, odd, settlementClosing });
+        const createTransaction = new Transaction({ username, amount: bid, questionId: _id, question, category, odd, settlementClosing, image_url });
         const transactionRegistered = await createTransaction.save();
         if (transactionRegistered) {
             const updatedUser = await User.findOneAndUpdate({ username: username }, { $inc: { balance: -bid } }, { new: true },);

@@ -1,6 +1,4 @@
-
 import Question from '../db/models/question'
-import testQ from '../db/models/testQ'
 
 const createQuestion = async (req, res) => {
     const questionCreated = new Question(req.body);
@@ -32,8 +30,9 @@ const queDetail = async (req, res) => {
         res.status(400).send({ mg: "error" })
     }
 }
-const update_que = async (req, res) => {
-    console.log(req.body)
+
+
+const update_que =  async (req, res) => {
     const { Volume, Favour, Against } = req.body;
     const updatedq = await Question.updateOne({}, { Volume, Favour, Against });
     if (updatedq) {
@@ -69,28 +68,5 @@ const filter = async (req, res) => {
     }
 }
 
-// testing purpose
-const testQuestion = async (req, res) => {
-    if (req.method === 'POST') {
-        const questionCreated = new testQ(req.body);
-        const saveQuestion = await questionCreated.save();
-        if (!saveQuestion) {
-            res.status(400).send('Error');
-        }
-        else {
-            res.status(201).send(questionCreated)
-        }
-    }
-    else {
-        try {
-            const getQuestions = await testQ.find().sort({ _id: -1 });
-            res.status(200).send(getQuestions)
-        } catch (error) {
-            res.status(400).send({ msg: 'unable to get question' })
-        }
-    }
 
-}
-
-
-export { createQuestion, getQuestions, testQuestion, filter, queDetail, update_que }
+export { createQuestion, getQuestions, filter, queDetail, update_que }

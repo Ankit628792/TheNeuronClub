@@ -13,6 +13,7 @@ function CreateQ({ session }) {
     const [isSent, setIsSent] = useState(false)
     const [link, setLink] = useState('')
     const [currentDate, setCurrentDate] = useState('')
+    const [qImage, setQImage] = useState('');
     const [data, setData] = useState({
         question: '',
         userId: session?.username || 'Ankit628792',
@@ -23,9 +24,6 @@ function CreateQ({ session }) {
         qstatus: 'verified',
     })
     const [desc, setDesc] = useState('')
-    function createMarkup() {
-        return { __html: value };
-    }
 
     useEffect(() => {
         var today = new Date();
@@ -51,13 +49,20 @@ function CreateQ({ session }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSending(true);
-        const question = { ...data, desc, link }
+        const formData = new FormData();
+        formData.append("image", qImage);
+        formData.append("question", data.question);
+        formData.append("userId", data.userId);
+        formData.append("category", data.category);
+        formData.append("bidClosing", data.bidClosing);
+        formData.append("settlementClosing", data.settlementClosing);
+        formData.append("options", data.options);
+        formData.append("qstatus", data.qstatus);
+        formData.append("desc", desc);
+        formData.append("link", link);
         const res = await fetch(`/api/question/create_question`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(question)
+            body: formData
         })
 
         console.log(res.status)
@@ -126,7 +131,14 @@ function CreateQ({ session }) {
                                 name="question"
                                 value={data.question}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                            />
+                        </div>
+                        <div className="mb-1 sm:mb-2">
+                            <label htmlFor="Question Image" className="inline-block mb-1 font-medium">Question Image</label>
+                            <input type="file" name="image" required accept="image/*"
+                                onChange={(e) => setQImage(e.target.files[0])}
+                                className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
@@ -138,7 +150,7 @@ function CreateQ({ session }) {
                                 required
                                 value={data.category}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             >
                                 <option value="" disabled>Choose a category</option>
                                 <option value="politics">Politics</option>
@@ -163,7 +175,7 @@ function CreateQ({ session }) {
                                 min={`${currentDate}`}
                                 value={data.bidClosing}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
@@ -175,7 +187,7 @@ function CreateQ({ session }) {
                                 min={`${currentDate}`}
                                 value={data.settlementClosing}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <div className="mb-3">

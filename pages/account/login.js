@@ -5,8 +5,6 @@ import Image from 'next/image'
 import Router from "next/router"
 import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function login() {
     const session = userSession();
@@ -41,17 +39,10 @@ function login() {
             body: JSON.stringify(data)
         })
         const response = await res.json();
+        console.log(response)
         if (res.status === 200) {
-            toast("🦄 Wow, You've won 1000 Neuron coins! 🥳", {
-                position: "top-center",
-                autoClose: false,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                });
-            window.localStorage.setItem('neuron-token', JSON.stringify(response))
+            window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
+            window.localStorage.setItem('neuron-newUser', JSON.stringify(response.newUser))
             Router.push('/')
         } else if (res.status === 203) {
             setIsVerified(false)
@@ -108,7 +99,6 @@ function login() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </>
     )
 }

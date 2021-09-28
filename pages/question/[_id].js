@@ -108,9 +108,9 @@ function QuestionDetail({ questionData }) {
                     que && que?.category ?
                         <>
                             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 text-xl md:text-2xl font-medium mb-2 sm:mb-4 p-5 px-10 sm:flex sm:space-x-4 items-center text-gray-700 relative">
-                                <img src={`/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
+                                <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
                                 <h1 className="my-3 sm:my-0 sm:pr-6"> {que?.question} </h1>
-                                <div className="absolute top-5 right-6 sm:top-5 sm:right-5">
+                                <div className="absolute top-5 right-6 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm sm:right-5">
                                     {!isShare ?
                                         <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
                                         : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
@@ -154,6 +154,7 @@ function QuestionDetail({ questionData }) {
                                             <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
+                                            <h1 className="font-medium">Balance : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{userData?.balance}</span> </h1>
                                             <h1 className="font-medium">Amount to Bid : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />

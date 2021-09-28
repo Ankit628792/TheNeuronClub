@@ -9,7 +9,7 @@ function QuestionGroup({ questions, category, user }) {
     const [filter, setFilter] = useState('')
     return (
         <>
-            <div className={`p-5 py-10 sm:p-10 xl:px-20 min-w-full`}>
+            <div className={`p-5 py-10 sm:p-10 xl:px-20 min-w-full mx-auto`}>
                 <div className="flex justify-between border-b-2 mb-4 pb-2 border-gray-200">
                     <h1 className="text-2xl sm:text-3xl font-semibold  text-gray-700">{category}</h1>
                     {user ?

@@ -43,6 +43,9 @@ const questionSchema = new mongoose.Schema({
     },
     desc: {
         type: String
+    },
+    image_url: {
+        type: String
     }
 }, { timestamps: true })
 

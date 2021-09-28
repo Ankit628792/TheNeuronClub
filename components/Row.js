@@ -14,7 +14,7 @@ function Row({ question }) {
                 <td className="p-4 whitespace-nowrap">
                     <div className="flex items-center flex-col sm:flex-row">
                         <div className="flex-shrink-0 h-10 w-10 m-2">
-                            <img className="h-10 w-10 rounded-full shadow-lg border-2 border-white hover:scale-[1.02] transition-md" src={`/images/que/${question?.category.toLowerCase()}.jfif`} alt="" />
+                            <img className="h-10 w-10 rounded-full shadow-lg border-2 border-white hover:scale-[1.02] transition-md" src={question?.image_url || `/images/que/${question?.category.toLowerCase()}.jfif`} alt="" />
                         </div>
                         <div className="sm:ml-2">
                             <div className="text-sm sm:text-base font-medium text-gray-900">

@@ -13,6 +13,9 @@ const transactionSchema = new mongoose.Schema({
     question: {
         type: String
     },
+    image_url: {
+        type: String
+    },
     category: {
         type: String
     },

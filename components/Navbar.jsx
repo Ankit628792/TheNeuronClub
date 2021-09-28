@@ -13,7 +13,13 @@ function Navbar() {
 
     const logout = async () => {
         window.localStorage.setItem('neuron-token', '');
-        const res = await fetch(`/api/account/logout`);
+        const res = await fetch(`/api/account/logout`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(session._id)
+        });
         if (res.status === 200) {
             location.reload();
         }
@@ -61,7 +67,7 @@ function Navbar() {
                             :
                             <>
                             <Link href="/account/login" className="hidden lg:inline-block">
-                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm mr-2">Login</button>
+                                <button className="btn hidden lg:inline-block cursor-pointer active:scale-95 transition-sm mr-2">Login</button>
                             </Link>
                             <Link href="/account/register">
                                 <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>

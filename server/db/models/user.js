@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 1000
     },
+    isNewUser: {
+        type: Boolean,
+        default: true
+    },
     isVerified: {
         type: Boolean,
         default: false

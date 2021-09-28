@@ -18,7 +18,7 @@ const userData = async (req, res) => {
 }
 
 const update_user = async (req, res) => {
-    const updatedUser = await User.updateMany({}, { balance: 1000 });
+    const updatedUser = await User.updateMany({}, { balance: 50000 });
     if (updatedUser) {
         res.status(200).send(updatedUser)
     }
