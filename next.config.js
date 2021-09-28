@@ -1,7 +1,6 @@
 module.exports = {
-    useFileSystemPublicRoutes: false,
     images: {
-        domains: ['sample-api-data.vercel.app', 'images.unsplash.com', 'neuron-club.vercel.app']
+        domains: ['sample-api-data.vercel.app', 'images.unsplash.com']
     },
     env: {
         mongodbURI: process.env.MONGODB_URI,
