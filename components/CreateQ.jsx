@@ -53,41 +53,41 @@ function CreateQ({ session }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(qImage?.size < 1100000 ){
-        setIsSending(true);
-        const formData = new FormData();
-        formData.append("image", qImage);
-        formData.append("question", data.question);
-        formData.append("userId", data.userId);
-        formData.append("category", data.category);
-        formData.append("bidClosing", data.bidClosing);
-        formData.append("settlementClosing", data.settlementClosing);
-        formData.append("options", data.options);
-        formData.append("qstatus", data.qstatus);
-        formData.append("desc", desc);
-        formData.append("link", link);
-        const res = await fetch(`/api/question/create_question`, {
-            method: 'POST',
-            body: formData
-        })
-
-        console.log(res.status)
-        if (res.status === 201) {
-            setIsSent(true)
-            setData({
-                question: '',
-                userId: session?.username || 'unKnown',
-                category: '',
-                bidClosing: '',
-                options: ['Yes', 'No'],
-                settlementClosing: '',
-                qstatus: 'verified',
+        if (qImage?.size < 1100000) {
+            setIsSending(true);
+            const formData = new FormData();
+            formData.append("image", qImage);
+            formData.append("question", data.question);
+            formData.append("userId", data.userId);
+            formData.append("category", data.category);
+            formData.append("bidClosing", data.bidClosing);
+            formData.append("settlementClosing", data.settlementClosing);
+            formData.append("options", data.options);
+            formData.append("qstatus", data.qstatus);
+            formData.append("desc", desc);
+            formData.append("link", link);
+            const res = await fetch(`/api/question/create_question`, {
+                method: 'POST',
+                body: formData
             })
-            setLink('');
-            setDesc('');
+
+            console.log(res.status)
+            if (res.status === 201) {
+                setIsSent(true)
+                setData({
+                    question: '',
+                    userId: session?.username || 'unKnown',
+                    category: '',
+                    bidClosing: '',
+                    options: ['Yes', 'No'],
+                    settlementClosing: '',
+                    qstatus: 'verified',
+                })
+                setLink('');
+                setDesc('');
+            }
+            setIsSending(false)
         }
-        setIsSending(false)
-    }
     }
 
     const modules = {
@@ -147,8 +147,7 @@ function CreateQ({ session }) {
                                 onChange={(e) => setQImage(e.target.files[0])}
                                 className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
-                            <p className="text-red-500 text-sm">don't upload anything, just leave it blank </p>
-                            {(qImage?.size > 1100000 ) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p> }
+                            {(qImage?.size > 1100000) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p>}
                         </div>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category</label>

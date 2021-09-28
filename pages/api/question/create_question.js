@@ -29,7 +29,6 @@ handler.post(async (req, res) => {
             }
         }
     }
-    // const image_url = `${process.env.HOST}/images/question/${req.file.filename}`
 })
 export const config = {
     api: {
