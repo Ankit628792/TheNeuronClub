@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Modal from './Modal'
 import dynamic from 'next/dynamic'
-import { ChevronDownIcon } from '@heroicons/react/solid'
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
@@ -71,7 +70,7 @@ function CreateQ({ session }) {
             setIsSent(true)
             setData({
                 question: '',
-                userId: session?.username || 'Ankit628792',
+                userId: session?.username || 'unKnown',
                 category: '',
                 bidClosing: '',
                 options: ['Yes', 'No'],

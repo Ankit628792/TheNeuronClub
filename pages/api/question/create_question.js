@@ -1,4 +1,5 @@
 import connectDB from '../../../server/db/mongodb'
+import Question from '../../../server/db/models/question'
 import middleware from '../../../lib/uploadFile/middleware'
 import nextConnect from 'next-connect'
 
