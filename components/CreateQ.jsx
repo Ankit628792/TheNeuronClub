@@ -6,6 +6,12 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     loading: () => <p>Loading ...</p>,
 })
 
+// const [createObjectURL, setCreateObjectURL] = useState(null);
+
+// setImage(i);
+// setCreateObjectURL(URL.createObjectURL(i));
+
+// img src=""
 
 function CreateQ({ session }) {
     const [isSending, setIsSending] = useState(false)
