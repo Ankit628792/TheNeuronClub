@@ -8,8 +8,10 @@ handler.use(middleware)
 
 handler.post(async (req, res) => {
     const image_url = `${process.env.HOST}/images/question/${req.file.filename}`
+    console.log("image: " ,image_url)
     const questionCreated = new Question({...req.body, image_url});
     const saveQuestion = await questionCreated.save();
+    console.log(savedQuestion)
     if (!saveQuestion) {
         res.status(400).send('Error');
     }
