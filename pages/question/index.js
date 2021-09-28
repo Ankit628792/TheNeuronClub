@@ -139,10 +139,10 @@ export default index
 
 
 export async function getServerSideProps(context) {
-    // const data = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json());
-    // return {
-    //     props: {
-    //         data
-    //     }
-    // }
+    const data = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json());
+    return {
+        props: {
+            data
+        }
+    }
 }
