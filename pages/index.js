@@ -32,8 +32,8 @@ export default function Home({ questions }) {
           <link rel="icon" href="/favicon.png" />
         </Head>
         <Header />
-        <QuestionGroup questions={questions.slice(0, 8)} category={"Trending Topics"} />
-        <QuestionGroup questions={questions.slice(8, 16)} category={"New Topics"} />
+        <QuestionGroup questions={questions?.slice(0, 8)} category={"Trending Topics"} />
+        <QuestionGroup questions={questions?.slice(8, 16)} category={"New Topics"} />
       </div>
       <ToastContainer style={{ textAlign: 'center' }} onClick={() => Router.push('/account/')} />
     </>
@@ -42,11 +42,11 @@ export default function Home({ questions }) {
 
 export async function getStaticProps() {
   // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
-  const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then((res) => res.json());
-  return {
-    props: {
-      questions
-    }
-  }
+  // const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then((res) => res.json());
+  // return {
+  //   props: {
+  //     questions
+  //   }
+  // }
 }
 
