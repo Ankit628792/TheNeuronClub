@@ -215,7 +215,7 @@ function CreateQ({ session }) {
                             <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
                         </div>
                         <div className="my-2 sm:my-3">
-                            <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding` : `Add Question`}</button>
+                            <button type="submit" className="btn-primary">{isSending ? `Adding` : `Add Question`}</button>
                         </div>
                     </form>
                 </div>

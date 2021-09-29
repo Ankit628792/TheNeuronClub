@@ -1,12 +1,15 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Header from '../components/Header'
 import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import OnBoarding from '../components/OnBoarding'
 
 export default function Home({ questions }) {
+
+  const [isNewUser, setIsNewUser] = useState(false)
 
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
@@ -20,12 +23,13 @@ export default function Home({ questions }) {
         draggable: true,
         progress: undefined,
       });
+      setIsNewUser(true);
     }
     window.localStorage.setItem('neuron-newUser', false)
   }, [])
-
   return (
     <>
+      {isNewUser && <OnBoarding />}
       <div className="min-h-screen w-full flex flex-col justify-between pb-10">
         <Head>
           <title>The Neuron</title>

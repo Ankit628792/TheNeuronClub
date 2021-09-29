@@ -205,6 +205,9 @@
     .btn-invert{
         @apply px-4 py-2 leading-loose gradient-bg min-w-max text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
     }
+    .btn-primary{
+      @apply px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm
+    }
     .transition-sm{
       @apply transition-all duration-100 ease-in-out
     }
