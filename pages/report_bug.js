@@ -109,7 +109,7 @@ function report_bug() {
                     </div>
                 </div>
             </div>
-            {isSent && <div onClick={() => setIsSent(false)}><Modal state={isSent} text="Thanks for contacting us. We’ll respond as soon as possible." /> </div>}
+            {isSent && <div onClick={() => setIsSent(false)}><Modal state={isSent} text="Thanks for your feedback. We'll resolve the issue soon" /> </div>}
         </>
     )
 }
