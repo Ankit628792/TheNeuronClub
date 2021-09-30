@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 import Router from 'next/router'
 import Head from 'next/head'
 import Coin from "../../components/Coin";
+import Notification from "../../components/Notification";
 
 function index() {
     const session = userSession();
@@ -81,6 +82,7 @@ function index() {
                         </div>
                     </div>
                     <QuestionGroup questions={userData?.questions} category={"Question Transaction"} user={true} />
+                    <Notification bids={userData?.questions} />
                 </>
                 :
                 <Loader />
