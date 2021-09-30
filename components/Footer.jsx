@@ -37,6 +37,7 @@ function Footer() {
                     <Link href="/faq">FAQs</Link>
                     <Link href="/privacy_policy">Privacy Policy</Link>
                     <Link href="/contact">Contact Us</Link>
+                    <Link href="/report_bug">Report a Bug</Link>
                 </ul>
                 <ul className="space-x-5 my-2 text-lg font-medium py-2 flex">
                     <Link href="https://www.facebook.com/TheNeuronC">
