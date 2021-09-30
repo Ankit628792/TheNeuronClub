@@ -1,9 +1,9 @@
-import connectDB from '../../../server/db/mongodb'
-import Bug from '../../../server/db/models/bug'
-import middleware from '../../../lib/uploadFile/middleware'
+import connectDB from '../../server/db/mongodb'
+import Bug from '../../server/db/models/bug'
+import middleware from '../../lib/uploadFile/middleware'
 import nextConnect from 'next-connect'
 import DatauriParser from 'datauri/parser'
-import { uploader, cloudinaryConfig } from '../../../lib/config/cloudinaryConfig'
+import { uploader, cloudinaryConfig } from '../../lib/config/cloudinaryConfig'
 
 const handler = nextConnect()
 handler.use(middleware)
