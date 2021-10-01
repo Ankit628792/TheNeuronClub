@@ -26,9 +26,12 @@ import {
     WhatsappIcon,
 } from "react-share";
 import Coin from '../../components/Coin'
+import { updateBalance } from '../../slices/userBalance'
+import { useDispatch } from 'react-redux'
 
 function QuestionDetail({ questionData }) {
     const session = userSession();
+    const dispatch = useDispatch();
     const [userData, setUserData] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isBidPlaced, setIsBidPlaced] = useState(false)
@@ -76,6 +79,7 @@ function QuestionDetail({ questionData }) {
                 console.log(res.status)
                 const response = await res.json();
                 if (res.status == 201) {
+                    dispatch(updateBalance(balance - bid))
                     setIsBidPlaced(true)
                     setQue(response)
                     setBidData({
@@ -154,7 +158,7 @@ function QuestionDetail({ questionData }) {
                                             <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            <h1 className="font-medium">Balance : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{userData?.balance}</span> </h1>
+                                            {/* <h1 className="font-medium">Balance : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{userData?.balance}</span> </h1> */}
                                             <h1 className="font-medium">Amount to Bid : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />

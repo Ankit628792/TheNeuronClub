@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid'
 import { userSession } from '../lib/user-session'
+import UserDropDown from './UserDropDown'
 
 function Navbar() {
     const router = useRouter();
@@ -13,7 +14,7 @@ function Navbar() {
 
     const logout = async () => {
         window.localStorage.setItem('neuron-token', '');
-        const res = await fetch(`/api/account/logout`,{
+        const res = await fetch(`/api/account/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +43,7 @@ function Navbar() {
 
     return (
         <>
-            <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
+            <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
                     <div className="relative h-12 w-48 cursor-pointer">
                         <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
@@ -51,7 +52,6 @@ function Navbar() {
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
                         <Link href="/question/">Explore</Link>
-                        {session && <Link href="/account/">Portfolio</Link>}
                         {session && <Link href="/create_question">Create Question</Link>}
                         <Link href="/how_it_works">How it Works</Link>
                         {!session &&
@@ -63,15 +63,15 @@ function Navbar() {
                     </ul>
                     {
                         session ?
-                            <button onClick={logout} className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Logout</button>
+                            <UserDropDown session={session} />
                             :
                             <>
-                            <Link href="/account/login" className="hidden lg:inline-block">
-                                <button className="btn hidden lg:inline-block cursor-pointer active:scale-95 transition-sm mr-2">Login</button>
-                            </Link>
-                            <Link href="/account/register">
-                                <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>
-                            </Link>
+                                <Link href="/account/login" className="hidden lg:inline-block">
+                                    <button className="btn hidden lg:inline-block cursor-pointer active:scale-95 transition-sm mr-2">Login</button>
+                                </Link>
+                                <Link href="/account/register">
+                                    <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>
+                                </Link>
                             </>
                     }
 

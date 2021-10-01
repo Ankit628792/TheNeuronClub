@@ -59,7 +59,18 @@
       .info__border{
         border-color: #1EA5FC;
       }
-      
+      .text-blue-400{
+        color: #1EA5FC;
+      }
+      .bg-blue-400{
+        background: #1EA5FC;
+      }
+      .text-blue-500{
+        color: #1380F9;
+      }
+      .bg-blue-500{
+        background: #1380F9;
+      }
       .gradient-bg{
         background: linear-gradient(45deg, #1380F9 40%, #1EA5FC);
       }
@@ -186,6 +197,20 @@
       background:#333;
       clip-path: polygon(100% 0, 0 0, 50% 100%);
     }
+    
+    .clip-path-sm{
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .share__icons{
+      background: #fff;
+      padding: 1rem;
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%)
+    }
+
     .footer__social span.copy__email{
       opacity: 0;
       transition: all 0.3s ease-in
