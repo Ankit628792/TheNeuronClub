@@ -50,13 +50,13 @@ function report_bug() {
             <Head>
                 <title>The Neuron | Report a Bug</title>
             </Head>
-            <div className="relative pt-24">
+            <div className="relative pt-24 pb-10">
 
                 <div className="w-full max-w-xl xl:px-8 xl:w-5/12 mx-auto">
                     <div className="bg-white rounded gradient-shadow p-7 sm:p-10 m-2">
                         <form onSubmit={handleSubmit}>
                             <div className="mb-1 sm:mb-2">
-                                <label htmlFor="email" className="inline-block mb-1 font-medium">Your E-mail</label>
+                                <label htmlFor="email" className="inline-block mb-1 font-medium">Your E-mail<span className="mx-1 text-red-500">*</span> </label>
                                 <input
                                     placeholder="john.doe@example.com"
                                     required
@@ -69,7 +69,7 @@ function report_bug() {
                                 />
                             </div>
                             <div className="mb-1 sm:mb-2">
-                                <label htmlFor="Name" className="inline-block mb-1 font-medium">Issue Name</label>
+                                <label htmlFor="Name" className="inline-block mb-1 font-medium">Issue Name<span className="mx-1 text-red-500">*</span></label>
                                 <input
                                     placeholder="Short description "
                                     required
@@ -93,7 +93,6 @@ function report_bug() {
                                 <label htmlFor="message" className="inline-block mb-1 font-medium">Issue Description</label>
                                 <textarea
                                     placeholder="Describe the issue here in more detail ..."
-                                    required
                                     minLength="2"
                                     type="text"
                                     name="desc"

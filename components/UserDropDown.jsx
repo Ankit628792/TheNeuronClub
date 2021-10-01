@@ -55,28 +55,28 @@ function UserDropDown({ session }) {
 
     return (
         <>
-            <h1 className="font-medium text-center mx-2 hidden sm:inline-block">Balance <br /><span className="inline-flex items-center"><Coin width="4" height="4" />{amount}</span> </h1>
-            <div className="relative text-blue-400 font-medium">
+            <span className="inline-flex mr-2 items-center font-medium text-lg"><Coin width="4" height="4" />{amount}</span>
+            <div className="relative font-medium">
 
-                <div className="flex items-center px-1 bg-white rounded-full cursor-pointer" onClick={() => setIsActive(!isActive)}>
-                    <UserCircleIcon className="w-10 h-10" />
+                <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
+                    <div class="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">{session?.username?.[0]}</div>
                     {!isActive && <ChevronDownIcon className="w-5 h-5" />}
                     {isActive && <ChevronUpIcon className="w-5 h-5" />}
                 </div>
                 {isActive && <div className="bg-white gradient-shadow-md absolute min-w-max rounded-md p-3 top-[130%] left-1/2 transform -translate-x-1/2">
-                    <ul className="space-y-4 text-lg">
-                        <li className="hover:text-blue-500 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1" />Portfolio</li>
-                        {/* <li className="hover:text-blue-500 cursor-pointer transition-sm flex items-center"><BellIcon className="w-6 h-6 mr-1" />Notifications</li> */}
-                        <li className="hover:text-blue-500 cursor-pointer transition-sm flex items-center sm:hidden"><BriefcaseIcon className="w-6 h-6 mr-1" /> <span className="inline-flex items-center"><Coin width="4" height="4" />{amount}</span></li>
-                        <li className="hover:text-blue-500 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1" />Invite a Friend</li>
-                        <li onClick={logout} className="hover:text-blue-500 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1" />Logout </li>
+                    <ul className="space-y-4 text-lg text-gray-500">
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1 text-gray-700" />Portfolio</li>
+                        {/* <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><BellIcon className="w-6 h-6 mr-1 text-gray-700" />Notifications</li> */}
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center sm:hidden"><BriefcaseIcon className="w-6 h-6 mr-1 text-gray-700" /> <span className="inline-flex items-center"><Coin width="4" height="4" />{amount}</span></li>
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
+                        <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>
                     <div className="bg-white absolute -top-2 left-1/2 transform -translate-x-1/2 w-10 h-5 clip-path-sm"></div>
                 </div>
                 }
             </div>
 
-            {isShare && <div className="share__icons rounded-tl-2xl rounded-bl-2xl w-12 h-auto flex flex-col items-center justify-center space-y-2">
+            {isShare && <div className="share__icons rounded-tl-2xl rounded-bl-2xl h-auto p-4 lg:pr-8 flex flex-col items-center justify-center space-y-2 gradient-shadow-md">
                 <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700 transform active:rotate-180" onClick={() => setIsShare(false)} />
                 <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                     <FacebookIcon size={40} round={true} />

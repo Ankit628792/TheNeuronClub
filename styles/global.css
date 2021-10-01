@@ -204,7 +204,6 @@
 
     .share__icons{
       background: #fff;
-      padding: 1rem;
       position: fixed;
       top: 50%;
       right: 0;
@@ -361,6 +360,23 @@
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+.MuiAvatar-root {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 600;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1;
+  user-select: none;
+  border-radius: 50%;
+  justify-content: center;
 }
 
 }

@@ -16,7 +16,7 @@ export default function Home({ questions }) {
     if (data === true) {
       toast("🦄 Wow, You've won 1000 Neuron coins! 🥳", {
         position: "top-center",
-        autoClose: false,
+        autoClose: 10000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

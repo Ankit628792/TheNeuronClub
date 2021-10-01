@@ -129,7 +129,7 @@ function CreateQ({ session }) {
                 <div className="bg-white rounded gradient-shadow mx-auto p-7 sm:p-10 max-w-xl">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="Question" className="inline-block mb-1 font-medium">Question</label>
+                            <label htmlFor="Question" className="inline-block mb-1 font-medium">Question<span className="mx-1 text-red-500">*</span></label>
                             <input
                                 placeholder="Question"
                                 required
@@ -142,7 +142,7 @@ function CreateQ({ session }) {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="Question Image" className="inline-block mb-1 font-medium">Question Image</label>
+                            <label htmlFor="Question Image" className="inline-block mb-1 font-medium">Question Image<span className="mx-1 text-red-500">*</span></label>
                             <input type="file" required name="image" accept="image/*"
                                 onChange={(e) => setQImage(e.target.files[0])}
                                 className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
@@ -150,7 +150,7 @@ function CreateQ({ session }) {
                             {(qImage?.size > 1100000) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p>}
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category</label>
+                            <label htmlFor="category" className="inline-block mb-1 font-medium">Question Category<span className="mx-1 text-red-500">*</span></label>
                             <select
                                 placeholder="category"
                                 type="text"
@@ -175,7 +175,7 @@ function CreateQ({ session }) {
                             </select>
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time</label>
+                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
                             <input
                                 placeholder="Bit Closing"
                                 type="datetime-local"
@@ -188,7 +188,7 @@ function CreateQ({ session }) {
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time</label>
+                            <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
                             <input
                                 placeholder="Settlement Closing"
                                 type="datetime-local"
