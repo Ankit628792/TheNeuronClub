@@ -1,5 +1,5 @@
 import { useState } from 'react'
-function OnBoarding() {
+function OnBoarding(props) {
     const data = [
         { id: 0, imgSrc: 'https://images.unsplash.com/photo-1605165566807-508fb529cf3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80' },
         { id: 1, imgSrc: 'https://images.unsplash.com/photo-1526933970935-5b59e720c628?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80' },
@@ -17,7 +17,7 @@ function OnBoarding() {
                     <img src={state?.imgSrc} className="object-contain object-fill h-80 rounded-xl" />
                     <div className="mt-6 sm:mt-8">
                       {state?.id !== 0 && <button className="btn-primary float-left" onClick={() => setState(data[state.id - 1])}>Previous</button>}
-                    {state?.id < data?.length && <button className="btn-primary float-right" onClick={() => setState(data[state.id + 1])}>{state?.id < data?.length - 1 ? 'Next' : 'Exit'}</button> }
+                    {state?.id < data?.length && <button className="btn-primary float-right" onClick={() => state?.id < data?.length - 1 ? setState(data[state.id + 1]) : props.onSelect()}>{state?.id < data?.length - 1 ? 'Next' : 'Exit'}</button> }
                     </div>
 
                 </div>

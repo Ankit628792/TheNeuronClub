@@ -16,7 +16,7 @@ export default function Home({ questions }) {
     if (data === true) {
       toast("🦄 Wow, You've won 1000 Neuron coins! 🥳", {
         position: "top-center",
-        autoClose: 10000,
+        autoClose: 100000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -29,7 +29,7 @@ export default function Home({ questions }) {
   }, [])
   return (
     <>
-      {isNewUser && <OnBoarding />}
+      {/* {isNewUser && <OnBoarding />} */}
       <div className="min-h-screen w-full flex flex-col justify-between pb-10">
         <Head>
           <title>The Neuron</title>

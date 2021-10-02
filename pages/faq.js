@@ -27,7 +27,7 @@ function faq() {
 
     ];
     return (
-        <div>
+        <>
             <Head>
                 <title>The Neuron | FAQs</title>
             </Head>
@@ -40,7 +40,7 @@ function faq() {
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
