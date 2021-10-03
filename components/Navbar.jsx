@@ -1,5 +1,4 @@
 import { useRouter } from 'next/dist/client/router'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid'
@@ -45,8 +44,12 @@ function Navbar() {
         <>
             <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
-                    <div className="relative h-12 w-48 cursor-pointer">
-                        <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
+                    <div className="relative cursor-pointer">
+                        <picture>
+                            <source media="(max-width: 640px)" srcSet="/favicon.png" />
+                            <source media="(min-width: 640px)" srcSet="/images/logo.png" />
+                            <img src="/images/logo.png" layout="fill" className="h-12 w-12 sm:w-48 object-contain drop-shadow-md overflow-hidden" />
+                        </picture>
                     </div>
                 </Link>
                 <div className="flex items-center">
