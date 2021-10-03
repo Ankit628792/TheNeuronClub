@@ -8,7 +8,8 @@
     }
     #__next{
       overflow-x: hidden;
-      max-width: 1800px;
+      max-width: 1900px;
+      margin: auto;
     }
     *::-webkit-scrollbar{
         display: none;
@@ -217,12 +218,20 @@
     .footer__social:hover span.copy__email{
       opacity: 1;
     }
-    .footer ul a{
-      margin-right: 12px;
+    .footer ul a:hover{
+      color: #ffcb00
     }
-    .footer ul a:nth-child(3){
-      display: inline-block
+    .footer .max-w-xs .h3::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 70%;
+      height: 3px;
+      border-radius: 10px;
+      background: #ffcb00;
     }
+    
 
     .btn{
         @apply bg-white text-blue-600 py-2 px-4 rounded-xl font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
@@ -252,7 +261,7 @@
     }
     }
 
-    @media(min-width: 1660px){
+    @media(min-width: 1700px){
       .question__group{
         grid-template-columns: repeat(5, minmax(0, 1fr));
         max-width: 92rem;

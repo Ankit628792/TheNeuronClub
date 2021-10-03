@@ -46,9 +46,11 @@ function MyApp({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </Head>
+      <div className="w-full relative">
       {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Navbar />}
       <Component {...pageProps} />
       {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Footer />}
+      </div>
     </Provider>
   )
 }

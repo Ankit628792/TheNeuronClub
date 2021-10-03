@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {ArrowCircleLeftIcon, ArrowCircleRightIcon, XCircleIcon} from '@heroicons/react/solid'
+import { ArrowCircleLeftIcon, ArrowCircleRightIcon, ArrowLeftIcon, ArrowRightIcon, XCircleIcon, XIcon } from '@heroicons/react/solid'
 
 const data = [
     { id: 0, imgSrc: 'https://images.unsplash.com/photo-1605165566807-508fb529cf3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80' },
@@ -14,13 +14,14 @@ export const CarouselItem = ({ children, width }) => (
         <img src={children} className="w-full h-full rounded-lg object-contain" alt="" />
     </div>
 )
+
 function Carousel(props) {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
         <>
-          {data?.[activeIndex] && <div className="h-screen top-0 left-0 absolute z-50 w-full bg-black bg-opacity-50">
+            {data?.[activeIndex] && <div className="h-screen top-0 left-0 absolute z-50 w-full bg-black bg-opacity-50">
                 <div className="carousel fixed top-1/2 transform -translate-y-1/2">
-                  {activeIndex > 0 &&  <button className="absolute h-1/2 top-1/2 -translate-y-1/2 left-0 z-50" onClick={() => setActiveIndex(activeIndex - 1)}><ArrowCircleLeftIcon className="w-10 h-10 sm:w-16 sm:h-16 p-1 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>}
+                    {activeIndex > 0 && <button className="absolute h-1/2 top-1/2 -translate-y-1/2 left-0 z-50" onClick={() => setActiveIndex(activeIndex - 1)}><ArrowLeftIcon className="w-10 h-10 p-1 opacity-50 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>}
                     <div className="inner relative" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
 
                         {
@@ -30,9 +31,9 @@ function Carousel(props) {
                         }
 
                     </div>
-                    <button className="absolute h-1/2 top-1/2 -translate-y-1/2 right-0 z-50" onClick={() => activeIndex===data?.length-1 ? props.onSelect() : setActiveIndex(activeIndex + 1)} ><ArrowCircleRightIcon className="w-10 h-10 sm:w-16 sm:h-16 p-1 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>
+                    <button className="absolute h-1/2 top-1/2 -translate-y-1/2 right-0 z-50" onClick={() => activeIndex === data?.length - 1 ? props.onSelect() : setActiveIndex(activeIndex + 1)} ><ArrowRightIcon className="w-10 h-10 p-1 opacity-50 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>
                 </div>
-                <button className="absolute top-5 right-5" onClick={() => props.onSelect()}><XCircleIcon className="w-10 h-10 sm:w-16 sm:h-16 p-1 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>
+                <button className="absolute top-5 right-8" onClick={() => props.onSelect()}><XIcon className="w-10 h-10 p-1 opacity-60 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>
             </div>}
         </>
     )

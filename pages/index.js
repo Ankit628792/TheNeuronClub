@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import OnBoarding from '../components/OnBoarding'
+import Carousel from '../components/Carousel'
 
 export default function Home({ questions }) {
 
@@ -29,7 +29,7 @@ export default function Home({ questions }) {
   }, [])
   return (
     <>
-      {/* {isNewUser && <OnBoarding />} */}
+      {isNewUser && <Carousel />}
       <div className="min-h-screen w-full flex flex-col justify-between pb-10">
         <Head>
           <title>The Neuron</title>
