@@ -24,7 +24,7 @@ function Notification({ bids }) {
                 </div>
                 <XIcon className="w-12 h-12 text-gray-700 gradient-shadow-lg border border-gray-500 rounded-full float-right p-2 m-3 cursor-pointer" onClick={() => setIsActive(false)} />
             </div>}
-            {!isActive && <BellIcon className="w-12 h-12 text-blue-600 gradient-shadow-lg border border-blue-500 rounded-full float-right p-2 m-3 cursor-pointer fixed bg-white bottom-3 right-3 sm:bottom-5 sm:right-5 z-40 animate-bounce" onClick={() => setIsActive(true)} />}
+            {!isActive && <BellIcon className="w-12 h-12 text-white gradient-bg gradient-shadow-lg rounded-full float-right p-2 m-3 cursor-pointer fixed bottom-3 right-3 sm:bottom-5 sm:right-5 btn__float" onClick={() => setIsActive(true)} />}
 
         </>
     )

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Steps from "../components/Steps";
 import { useState } from 'react'
+import ScrollToTop from "../components/ScrollToTop";
 
 function how_it_works() {
     const steps = [
@@ -43,6 +44,7 @@ function how_it_works() {
                     {steps.map(item => (<Steps key={item.no} step={item} />))}
                 </div>
             </div>
+            <ScrollToTop />
         </>
     )
 }
