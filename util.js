@@ -246,5 +246,55 @@ const countries = [
     { country: "Zimbabwe", abbreviation: "ZW" },
 ];
 
+const getCurrentDate = () => {
+    var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        // today = yyyy + '-' + mm + '-' + dd;
+        today = `${yyyy}-${mm}-${dd}T${today.getHours()}:${today.getMinutes()}`
+        return today
+}
 
-export { countries }
+const modules = {
+    toolbar: [
+        [{ header: '1' }, { header: '2' }],
+        [{ size: [] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [
+            { list: 'ordered' },
+            { list: 'bullet' },
+            'link'
+        ]
+    ],
+    clipboard: {
+        matchVisual: false,
+    },
+}
+
+const formats = [
+    'header',
+    'font',
+    'size',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'video',
+]
+
+
+
+export { countries, modules, formats, getCurrentDate }

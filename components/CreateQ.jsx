@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from './Modal'
 import dynamic from 'next/dynamic'
+import { formats, modules } from '../util'
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
@@ -90,39 +91,7 @@ function CreateQ({ session }) {
         }
     }
 
-    const modules = {
-        toolbar: [
-            [{ header: '1' }, { header: '2' }],
-            [{ size: [] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [
-                { list: 'ordered' },
-                { list: 'bullet' },
-                'link'
-            ]
-        ],
-        clipboard: {
-            matchVisual: false,
-        },
-    }
-
-    const formats = [
-        'header',
-        'font',
-        'size',
-        'bold',
-        'italic',
-        'underline',
-        'strike',
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        'link',
-        'image',
-        'video',
-    ]
-
+    
     return (
         <>
             <div className="w-full pt-28 pb-16">

@@ -32,9 +32,9 @@ const queDetail = async (req, res) => {
 }
 
 
-const update_que =  async (req, res) => {
-    const { Volume, Favour, Against } = req.body;
-    const updatedq = await Question.updateOne({}, { Volume, Favour, Against });
+const update_que = async (req, res) => {
+    const { _id, bidClosing, settlementClosing, desc } = req.body
+    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc }, {new: true});
     if (updatedq) {
         res.status(200).send(updatedq)
     }

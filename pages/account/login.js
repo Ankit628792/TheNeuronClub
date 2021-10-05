@@ -39,7 +39,6 @@ function login() {
             body: JSON.stringify(data)
         })
         const response = await res.json();
-        console.log(response)
         if (res.status === 200) {
             window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
             window.localStorage.setItem('neuron-newUser', JSON.stringify(response.newUser))

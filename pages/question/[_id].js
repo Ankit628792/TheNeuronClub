@@ -3,36 +3,27 @@ import Loader from '../../components/Loader'
 import { useState, useEffect } from 'react'
 import moment from 'moment'
 import { userSession } from '../../lib/user-session'
-import { MinusIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
+import { MinusIcon, PencilIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
 import Modal from '../../components/Modal'
+import { FacebookShareButton, LinkedinShareButton, RedditShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import {
-    EmailShareButton,
-    FacebookShareButton,
-    LinkedinShareButton,
-    PinterestShareButton,
-    RedditShareButton,
-    TelegramShareButton,
-    TwitterShareButton,
-    WhatsappShareButton,
-} from "react-share";
-import {
-    EmailIcon,
-    FacebookIcon,
-    LinkedinIcon,
-    PinterestIcon,
-    RedditIcon,
-    TelegramIcon,
-    TwitterIcon,
-    WhatsappIcon,
+    FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon
 } from "react-share";
 import Coin from '../../components/Coin'
-import { updateBalance } from '../../slices/userBalance'
-import { useDispatch } from 'react-redux'
+import { balance, updateBalance } from '../../slices/userBalance'
+import { useDispatch, useSelector } from 'react-redux'
+import { modules, formats, getCurrentDate } from '../../util'
+import dynamic from 'next/dynamic'
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+    ssr: false,
+    loading: () => <p>Loading ...</p>,
+})
 
 function QuestionDetail({ questionData }) {
     const session = userSession();
+    const amount = useSelector(balance)
+    const currentDate = getCurrentDate();
     const dispatch = useDispatch();
-    const [userData, setUserData] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isBidPlaced, setIsBidPlaced] = useState(false)
     const [isActive, setIsActive] = useState(false)
@@ -47,24 +38,18 @@ function QuestionDetail({ questionData }) {
     const [isShare, setIsShare] = useState(false)
     const [isSending, setIsSending] = useState(false)
     const [que, setQue] = useState(questionData);
+    const [isDescEdit, setIsDescEdit] = useState(false)
+    const [isDateEdit, setIsDateEdit] = useState(false)
+    const [desc, setDesc] = useState(que?.desc)
     const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}&description=${que?.question}`
-
-    const getUser = async () => {
-        const res = await fetch(`/api/user/getUser?_id=${session?._id}`);
-        const response = await res.json();
-        setUserData(response)
-    }
-    useEffect(() => {
-        getUser();
-    }, [que])
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
-        if (userData) {
+        if (session) {
+            const { username } = session;
             setIsActive(false)
             setIsSending(true)
-            const { username, balance } = userData;
-            if (balance > 0 && balance >= bid) {
+            if (amount > 0 && amount >= bid) {
                 Volume = Volume + bid
                 odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
 
@@ -79,7 +64,7 @@ function QuestionDetail({ questionData }) {
                 console.log(res.status)
                 const response = await res.json();
                 if (res.status == 201) {
-                    dispatch(updateBalance(balance - bid))
+                    dispatch(updateBalance(amount - bid))
                     setIsBidPlaced(true)
                     setQue(response)
                     setBidData({
@@ -97,6 +82,33 @@ function QuestionDetail({ questionData }) {
         else {
             setIsLoggedIn(true)
         }
+    }
+
+    const handleChange = (e) => {
+        setQue({ ...que, [e.target.name]: e.target.value });
+    }
+
+    const updateQuestion = async () => {
+        const { _id, bidClosing, settlementClosing } = que;
+        const res = await fetch(`/api/question/update_que`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ _id, bidClosing, settlementClosing, desc })
+        })
+        console.log(res.status)
+        const response = await res.json();
+        if (res.status == 200) {
+            setIsDescEdit(false);
+            setIsDateEdit(false);
+            setQue(response)
+        }
+    }
+
+    const cancelUpdate = () => {
+        setIsDescEdit(false);
+        setIsDateEdit(false);
     }
 
     function DESC() {
@@ -158,7 +170,6 @@ function QuestionDetail({ questionData }) {
                                             <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            {/* <h1 className="font-medium">Balance : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{userData?.balance}</span> </h1> */}
                                             <h1 className="font-medium">Amount to Bid : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
@@ -198,6 +209,7 @@ function QuestionDetail({ questionData }) {
                                     </div>
 
                                     <div className="bet__container">
+                                        {session?.admin && <span className="flex space-x-1 items-center text-gray-600 hover:text-gray-800 cursor-pointer text-base font-medium absolute top-5 right-5" onClick={() => setIsDateEdit(true)}><PencilIcon className="w-5 h-5" /> Edit </span>}
                                         <table className="min-h-[250px]">
                                             <tbody>
                                                 <tr>
@@ -212,14 +224,50 @@ function QuestionDetail({ questionData }) {
                                                     <td>Open Date &amp; Time</td>
                                                     <td>{moment(que?.createdAt).format('lll')}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Last Date &amp; Time</td>
-                                                    <td>{moment(que?.bidClosing).format('lll')}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Settlement Date &amp; Time</td>
-                                                    <td>{moment(que?.settlementClosing).format('lll')}</td>
-                                                </tr>
+                                                {isDateEdit ?
+                                                    <>
+                                                        <tr><td>
+                                                            <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
+                                                        </td><td>  <input
+                                                            placeholder="Bit Closing"
+                                                            type="datetime-local"
+                                                            name="bidClosing"
+                                                            required
+                                                            min={currentDate}
+                                                            value={que?.bidClosing}
+                                                            onChange={handleChange}
+                                                            className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                                        />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
+                                                            </td><td>  <input
+                                                                placeholder="Settlement Closing"
+                                                                type="datetime-local"
+                                                                name="settlementClosing"
+                                                                required
+                                                                min={currentDate}
+                                                                value={que?.settlementClosing}
+                                                                onChange={handleChange}
+                                                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                                            />
+                                                            </td>
+                                                        </tr>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <tr>
+                                                            <td>Last Date &amp; Time</td>
+                                                            <td>{moment(que?.bidClosing).format('lll')}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Settlement Date &amp; Time</td>
+                                                            <td>{moment(que?.settlementClosing).format('lll')}</td>
+                                                        </tr>
+                                                    </>
+                                                }
                                                 <tr>
                                                     <td>Creator</td>
                                                     <td>{que?.userId}</td>
@@ -231,15 +279,27 @@ function QuestionDetail({ questionData }) {
                                 </div>
 
                                 <div className="p-5">
-                                    <h1 className="text-2xl font-semibold my-2">About the question</h1>
-                                    <div className="sm:text-lg" dangerouslySetInnerHTML={DESC()}>
-                                    </div>
+                                    {
+                                        isDescEdit ?
+                                            <>
+                                                <h1 className="text-2xl font-semibold my-2">Question Description </h1>
+                                                <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
+                                            </>
+                                            :
+                                            <>
+                                                <h1 className="text-2xl font-semibold my-2">About the question{session?.admin && <span className="inline-flex ml-2 text-gray-600 hover:text-gray-800 cursor-pointer space-x-1 items-center text-base font-medium" onClick={() => setIsDescEdit(true)}><PencilIcon className="w-5 h-5" /> Edit </span>} </h1>
+                                                <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}>
+                                                </div>
+                                            </>
+                                    }
                                 </div>
-                                {que?.reference && <div className="px-5 pb-10">
+                                {que?.reference && <div className="p-5 pt-0">
                                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
-                                    <div className="sm:text-lg" >
-                                        <a href={que?.reference} className="my-2 text-blue-500 block" target="_blank" noreferer="true">{que?.reference}</a>
-                                    </div>
+                                        <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                </div>}
+                                {(isDescEdit || isDateEdit) && <div className="px-5 pb-10">
+                                    <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
+                                    <button className={`px-4 py-2 leading-loose text-gray-800 hover:text-white hover:bg-gray-800 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={cancelUpdate}>Cancel</button>
                                 </div>}
                             </div>
                         </>

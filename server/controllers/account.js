@@ -125,20 +125,25 @@ const login = async (req, res) => {
 }
 
 const logout = async (req, res) => {
-    const cookies = new Cookies(req, res)
-
-    // Get a cookie
-    const token = cookies.get('neuron')
-    const verifyToken = jwt.verify(token, process.env.secret_key);
-    const userFound = await User.findById({ _id: verifyToken._id || req.body });
-    if (!userFound) {
-        res.status(400).send('Problem in Logout');
-    }
-    else {
-        cookies.set('neuron')
-        userFound.Tokens = []
-        await userFound.save();
-        res.status(200).send({ msg: 'Logout successfully' })
+    console.log(req.body);
+    try {
+        const cookies = new Cookies(req, res)    
+        // Get a cookie
+        const token = cookies.get('neuron')
+        console.log("token : ", token)
+        const verifyToken = jwt.verify(token, process.env.secret_key);
+        const userFound = await User.findById({ _id: verifyToken._id || req.body._id });
+        if (!userFound) {
+            res.status(400).send('Problem in Logout');
+        }
+        else {
+            cookies.set('neuron')
+            userFound.Tokens = []
+            await userFound.save();
+            res.status(200).send({ msg: 'Logout successfully' })
+        }
+    } catch (error) {
+            res.status(400).send('Logout');
     }
 }
 
