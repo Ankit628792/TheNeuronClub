@@ -25,7 +25,7 @@ function Footer() {
             <div className="sm:flex w-full justify-between sm:space-x-5 max-w-7xl mx-auto">
                 <div className="">
                     <Link href="/">
-                        <div className="relative h-16 w-48">
+                        <div className="relative h-16 w-52">
                             <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md" />
                         </div>
                     </Link>
