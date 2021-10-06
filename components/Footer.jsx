@@ -30,14 +30,9 @@ function Footer() {
                         </div>
                     </Link>
                     {/* <p className="py-2 max-w-xl">The Neuron Club is a revolutionary forecasting platform where users can earn rewards by predicting the outcomes of future events. We cover topics across a wide range of categories. */}
-                     {/* Subscribe for our early access today to start predicting on 100+ topics or create a topic of your own when we launch! */}
-                     {/* </p> */}
+                    {/* Subscribe for our early access today to start predicting on 100+ topics or create a topic of your own when we launch! */}
+                    {/* </p> */}
                     <ul className="space-x-5 my-2 text-lg font-medium py-2 flex">
-                        {/* <Link href="https://www.facebook.com/TheNeuronC">
-                        <div className="footer__social">
-                            <svg className="" viewBox="0 0 24 24" aria-hidden="true" tabIndex="-1" title="Facebook"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"></path></svg>
-                        </div>
-                    </Link> */}
                         <Link href="https://www.instagram.com/TheNeuronClub">
                             <div className="footer__social">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" tabIndex="-1" title="Instagram"><path d="M 21.580078 7 C 13.541078 7 7 13.544938 7 21.585938 L 7 42.417969 C 7 50.457969 13.544938 57 21.585938 57 L 42.417969 57 C 50.457969 57 57 50.455062 57 42.414062 L 57 21.580078 C 57 13.541078 50.455062 7 42.414062 7 L 21.580078 7 z M 47 15 C 48.104 15 49 15.896 49 17 C 49 18.104 48.104 19 47 19 C 45.896 19 45 18.104 45 17 C 45 15.896 45.896 15 47 15 z M 32 19 C 39.17 19 45 24.83 45 32 C 45 39.17 39.169 45 32 45 C 24.83 45 19 39.169 19 32 C 19 24.831 24.83 19 32 19 z M 32 23 C 27.029 23 23 27.029 23 32 C 23 36.971 27.029 41 32 41 C 36.971 41 41 36.971 41 32 C 41 27.029 36.971 23 32 23 z" /></svg>
@@ -59,18 +54,29 @@ function Footer() {
                         </div>
                     </ul>
                 </div>
-                <div className="flex space-x-8 lg:space-x-20 my-6">
-                    <div className="max-w-xs min-w-max">
-                        <h1 className="font-semibold text-xl h3 relative">Quick Links</h1>
+                <div className="sm:flex sm:space-x-8 lg:space-x-20 my-6">
+                    <div className="inline-block mr-14 sm:mr-0 sm:max-w-xs min-w-max">
+                        <h1 className="font-semibold text-xl relative mt-5 sm:mt-0">Quick Links</h1>
+                        <hr className="h-1 w-3/4 bg-yellow-400 rounded-sm text-yellow-400 border border-yellow-400" />
                         <ul className="flex flex-col text-lg font-medium py-2">
+                            <Link href="/">Home</Link>
                             <Link href="/question/">Explore</Link>
+                        </ul>
+
+                    </div>
+                    <div className="inline-block mr-14 sm:mr-0 sm:max-w-xs min-w-max">
+                        <h1 className="font-semibold text-xl relative mt-5 sm:mt-0">Info</h1>
+                        <hr className="h-1 w-3/4 bg-yellow-400 rounded-sm text-yellow-400 border border-yellow-400" />
+                        <ul className="flex flex-col text-lg font-medium py-2">
                             <Link href="/how_it_works"> How It Works</Link>
+                            <Link href="/influencers">Influencers</Link>
                             <Link href="/faq">FAQs</Link>
                         </ul>
 
                     </div>
-                    <div className="max-w-xs min-w-max">
-                        <h1 className="font-semibold text-xl h3 relative">Other Links</h1>
+                    <div className="inline-block mr-14 sm:mr-0 sm:max-w-xs min-w-max">
+                        <h1 className="font-semibold text-xl relative mt-5 sm:mt-0">Other Links</h1>
+                        <hr className="h-1 w-3/4 bg-yellow-400 rounded-sm text-yellow-400 border border-yellow-400" />
                         <ul className="flex flex-col text-lg font-medium py-2">
                             <Link href="/privacy_policy">Privacy Policy</Link>
                             <Link href="/contact">Contact Us</Link>
