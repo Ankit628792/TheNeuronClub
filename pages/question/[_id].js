@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import Loader from '../../components/Loader'
 import { useState, useEffect } from 'react'
+import { MinusIcon, PencilIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
+import Loader from '../../components/Loader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 import { userSession } from '../../lib/user-session'
-import { MinusIcon, PencilIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
 import Modal from '../../components/Modal'
 import { FacebookShareButton, LinkedinShareButton, RedditShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
-import {
-    FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon
-} from "react-share";
+import { FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon } from "react-share";
 import Coin from '../../components/Coin'
 import { balance, updateBalance } from '../../slices/userBalance'
 import { useDispatch, useSelector } from 'react-redux'
@@ -63,15 +63,26 @@ function QuestionDetail({ questionData }) {
                 })
                 console.log(res.status)
                 const response = await res.json();
-                if (res.status == 201) {
-                    dispatch(updateBalance(amount - bid))
+                if (res.status == 201 || res.status == 203) {
+                    dispatch(updateBalance(amount - response?.reductionAmount))
                     setIsBidPlaced(true)
-                    setQue(response)
+                    setQue(response?._doc)
                     setBidData({
-                        Volume: response?.Volume,
-                        Favour: response?.Favour,
-                        Against: response?.Against
+                        Volume: response?._doc?.Volume,
+                        Favour: response?._doc?.Favour,
+                        Against: response?._doc?.Against
                     })
+                    if (res.status === 203) {
+                        toast("You've won 100 Neuron coins for this transaction! 🥳", {
+                            position: "top-center",
+                            autoClose: 20000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
                 }
             }
             else {
@@ -295,7 +306,7 @@ function QuestionDetail({ questionData }) {
                                 </div>
                                 {que?.reference && <div className="p-5 pt-0">
                                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
-                                        <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                    <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
                                 </div>}
                                 {(isDescEdit || isDateEdit) && <div className="px-5 pb-10">
                                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>

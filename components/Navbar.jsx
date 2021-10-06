@@ -4,10 +4,15 @@ import { useState, useEffect } from 'react'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid'
 import { userSession } from '../lib/user-session'
 import UserDropDown from './UserDropDown'
+import { updateBalance } from '../slices/userBalance'
+import { useDispatch } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
     const router = useRouter();
     const session = userSession();
+    const dispatch = useDispatch();
     const [scrolled, setScrolled] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
@@ -24,6 +29,36 @@ function Navbar() {
             location.reload();
         }
     }
+
+    const checkDailyVisit = async () => {
+        const currentDate = new Date().toDateString();
+        const res = await fetch(`/api/user/dailyVisit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ _id: session._id, currentDate: currentDate })
+        });
+        const response = await res.json();
+        if (res.status === 200) {
+            toast("You've won 100 Neuron coins for daily visit! 🥳", {
+                position: "top-center",
+                autoClose: 100000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            dispatch(updateBalance(response.balance))
+        }
+    }
+
+    useEffect(() => {
+        if (session) {
+            checkDailyVisit()
+        }
+    }, [])
 
     const checkScrollTop = () => {
         if (window.pageYOffset > 75) {
@@ -117,6 +152,7 @@ function Navbar() {
                     </ul>
                 </div>
             }
+            <ToastContainer style={{ textAlign: 'center' }} />
         </>
     )
 }

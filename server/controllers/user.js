@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-import Cookies from 'cookies'
 
 import User from '../db/models/user'
 import Transaction from '../db/models/transaction';
@@ -18,7 +16,7 @@ const userData = async (req, res) => {
 }
 
 const update_user = async (req, res) => {
-    const updatedUser = await User.updateMany({}, { balance: 50000 });
+    const updatedUser = await User.updateMany({}, { lastVisit: 'Wed Oct 06 2021' });
     if (updatedUser) {
         res.status(200).send(updatedUser)
     }
@@ -27,4 +25,23 @@ const update_user = async (req, res) => {
     }
 }
 
-export { userData, update_user }
+const dailyVisit = async (req, res) => {
+    const {_id, currentDate} = req.body;
+    const userFound = await User.findById({ _id:_id });
+    if(userFound){
+        if(userFound.lastVisit !== currentDate){
+            userFound.balance += 100;
+            userFound.lastVisit = currentDate;
+            await userFound.save();
+            res.status(200).send({balance: userFound.balance ,msg: "new day visit"});
+        }
+        else{
+            res.status(202).send({msg: "same day visit"});
+        }
+    }
+    else{
+        res.status(400).send({msg: "user not found"})
+    }
+}
+
+export { userData, update_user, dailyVisit }

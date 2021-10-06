@@ -35,6 +35,9 @@ const userSchema = new mongoose.Schema({
     country: {
         type: String,
     },
+    lastVisit: {
+        type: String,
+    },
     admin: {
         type: Boolean
     },

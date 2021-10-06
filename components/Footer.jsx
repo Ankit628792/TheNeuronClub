@@ -22,14 +22,16 @@ function Footer() {
                     <path d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z" className="shape-fill"></path>
                 </svg>
             </div>
-            <div className="sm:flex w-full justify-between sm:space-x-5">
+            <div className="sm:flex w-full justify-between sm:space-x-5 max-w-7xl mx-auto">
                 <div className="">
                     <Link href="/">
-                        <div className="relative h-10 w-48">
+                        <div className="relative h-16 w-48">
                             <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md" />
                         </div>
                     </Link>
-                    <p className="py-2 max-w-3xl">The Neuron Club is a revolutionary forecasting platform where users can earn rewards by predicting the outcomes of future events. We cover topics across a wide range of categories. Subscribe for our early access today to start predicting on 100+ topics or create a topic of your own when we launch!</p>
+                    {/* <p className="py-2 max-w-xl">The Neuron Club is a revolutionary forecasting platform where users can earn rewards by predicting the outcomes of future events. We cover topics across a wide range of categories. */}
+                     {/* Subscribe for our early access today to start predicting on 100+ topics or create a topic of your own when we launch! */}
+                     {/* </p> */}
                     <ul className="space-x-5 my-2 text-lg font-medium py-2 flex">
                         {/* <Link href="https://www.facebook.com/TheNeuronC">
                         <div className="footer__social">
@@ -60,7 +62,7 @@ function Footer() {
                 <div className="flex space-x-8 lg:space-x-20 my-6">
                     <div className="max-w-xs min-w-max">
                         <h1 className="font-semibold text-xl h3 relative">Quick Links</h1>
-                        <ul className="flex flex-col text-base font-medium py-2">
+                        <ul className="flex flex-col text-lg font-medium py-2">
                             <Link href="/question/">Explore</Link>
                             <Link href="/how_it_works"> How It Works</Link>
                             <Link href="/faq">FAQs</Link>
@@ -69,7 +71,7 @@ function Footer() {
                     </div>
                     <div className="max-w-xs min-w-max">
                         <h1 className="font-semibold text-xl h3 relative">Other Links</h1>
-                        <ul className="flex flex-col text-base font-medium py-2">
+                        <ul className="flex flex-col text-lg font-medium py-2">
                             <Link href="/privacy_policy">Privacy Policy</Link>
                             <Link href="/contact">Contact Us</Link>
                             <Link href="/report_bug">Report a Bug</Link>
