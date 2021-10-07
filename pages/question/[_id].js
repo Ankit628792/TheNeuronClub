@@ -99,14 +99,18 @@ function QuestionDetail({ questionData }) {
         setQue({ ...que, [e.target.name]: e.target.value });
     }
 
+    const setQuestionStatus = () => {
+        setQue({ ...que, qstatus: (que.qstatus === 'verified') ? 'closed' : 'verified' });
+    }
+
     const updateQuestion = async () => {
-        const { _id, bidClosing, settlementClosing } = que;
+        const { _id, bidClosing, settlementClosing, qstatus } = que;
         const res = await fetch(`/api/question/update_que`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ _id, bidClosing, settlementClosing, desc })
+            body: JSON.stringify({ _id, bidClosing, settlementClosing, desc, qstatus })
         })
         console.log(res.status)
         const response = await res.json();
@@ -136,7 +140,7 @@ function QuestionDetail({ questionData }) {
                         <>
                             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 text-xl md:text-2xl font-medium mb-2 sm:mb-4 p-5 px-10 sm:flex sm:space-x-4 items-center text-gray-700 relative">
                                 <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
-                                <h1 className="my-3 sm:my-0 sm:pr-6"> {que?.question} </h1>
+                                <h1 className="my-3 sm:my-0 sm:pr-6 md:pr-10"> {que?.question} </h1>
                                 <div className="absolute top-5 right-6 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm sm:right-5">
                                     {!isShare ?
                                         <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
@@ -189,7 +193,7 @@ function QuestionDetail({ questionData }) {
                                             </div>
                                         </div>
                                         {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
-                                            : <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => bid > 0 && setIsActive(true)}>{'Apply Bid'}</button>
+                                            : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' ? 'gradient-bg' : 'bg-gray-200'}`} onClick={() => bid > 0 && que.qstatus == 'verified' && setIsActive(true)} disabled={que.qstatus === 'closed'}>{'Apply Bid'}</button>
                                         }
                                         {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
@@ -247,7 +251,7 @@ function QuestionDetail({ questionData }) {
                                                             min={currentDate}
                                                             value={que?.bidClosing}
                                                             onChange={handleChange}
-                                                            className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                                            className=" w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                                         />
                                                             </td>
                                                         </tr>
@@ -262,7 +266,7 @@ function QuestionDetail({ questionData }) {
                                                                 min={currentDate}
                                                                 value={que?.settlementClosing}
                                                                 onChange={handleChange}
-                                                                className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                                                className=" w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                                             />
                                                             </td>
                                                         </tr>
@@ -283,6 +287,13 @@ function QuestionDetail({ questionData }) {
                                                     <td>Creator</td>
                                                     <td>{que?.userId}</td>
                                                 </tr>
+                                                {isDateEdit && <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={setQuestionStatus}>{que.qstatus === 'closed' ? 'Active' : 'Close'}&nbsp;this Question</button>
+                                                    </td>
+                                                </tr>
+                                                }
                                             </tbody>
                                         </table>
                                     </div>

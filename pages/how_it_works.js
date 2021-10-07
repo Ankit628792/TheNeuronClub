@@ -42,7 +42,7 @@ function how_it_works() {
             no: 3,
             img: "/images/works/c3.svg",
             heading: "Continue to earn",
-            desc: "Earn more coins when you predict the outcome correctly. You also earn coins for many more activities as below. You can check more details on ",
+            desc: "Earn more coins when you predict the outcome correctly. You also earn coins for many more activities as below.",
             other: ['You earn 100 coins every day you visit TheNeuron.club',
                 'You earn 200 coins when you do your first investment on any question',
                 'You earn 500 coins everytime you invest in at least 3 questions in a week']

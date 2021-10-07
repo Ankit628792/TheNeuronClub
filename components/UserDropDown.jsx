@@ -9,10 +9,8 @@ import { useSelector } from 'react-redux'
 import { balance } from '../slices/userBalance';
 import Coin from './Coin';
 import Carousel from './Carousel';
-import OnBoarding from './OnBoarding'
 
 function UserDropDown({ session }) {
-    const [userData, setUserData] = useState(null)
     const [isActive, setIsActive] = useState(false)
     const [isShare, setIsShare] = useState(false)
     const dispatch = useDispatch();
@@ -31,7 +29,6 @@ function UserDropDown({ session }) {
         console.log(res.status)
         if (res.status == 200) {
             const response = await res.json();
-            setUserData(response)
             dispatch(updateBalance(response?.balance))
         }
     }
@@ -53,21 +50,17 @@ function UserDropDown({ session }) {
             location.reload();
         }
     }
-    const [onBoard, setonBoard] = useState(false)
     const [carousel, setcarousel] = useState(false)
 
     const closeOnboard = () => {
         setcarousel(false);
-        setonBoard(false);
     }
 
     return (
         <>
             {carousel && <Carousel onSelect={closeOnboard} />}
-            {onBoard && <OnBoarding onSelect={closeOnboard} />}
             {amount && <span className="inline-flex mr-2 items-center font-medium text-lg"><Coin width="4" height="4" />{amount}</span>}
             <div className="relative font-medium">
-
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
                     <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">{session?.username?.[0]}</div>
                     {isActive ? <ChevronUpIcon className="w-5 h-5" /> : <ChevronDownIcon className="w-5 h-5" />}
@@ -76,10 +69,8 @@ function UserDropDown({ session }) {
                     <ul className="space-y-4 text-lg text-gray-500">
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1 text-gray-700" />Portfolio</li>
                         {/* <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><BellIcon className="w-6 h-6 mr-1 text-gray-700" />Notifications</li> */}
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center sm:hidden"><BriefcaseIcon className="w-6 h-6 mr-1 text-gray-700" /> <span className="inline-flex items-center"><Coin width="4" height="4" />{amount}</span></li>
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setonBoard(true)}><CashIcon className="w-6 h-6 mr-1 text-gray-700" /> OnBoard One</li>
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setcarousel(true)}><CashIcon className="w-6 h-6 mr-1 text-gray-700" /> OnBoard Two</li>
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setcarousel(true)}><CashIcon className="w-6 h-6 mr-1 text-gray-700" /> OnBoard</li>
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>
                     <div className="bg-white absolute -top-2 left-1/2 transform -translate-x-1/2 w-10 h-5 clip-path-sm"></div>

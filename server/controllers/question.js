@@ -33,8 +33,8 @@ const queDetail = async (req, res) => {
 
 
 const update_que = async (req, res) => {
-    const { _id, bidClosing, settlementClosing, desc } = req.body
-    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc }, {new: true});
+    const { _id, bidClosing, settlementClosing, desc, qstatus } = req.body
+    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus }, {new: true});
     if (updatedq) {
         res.status(200).send(updatedq)
     }
@@ -45,9 +45,9 @@ const update_que = async (req, res) => {
 
 
 const filter = async (req, res) => {
-    const { category, sort } = req.body;
+    const { category, sort, qstatus } = req.body;
     let sorting, filter;
-    category && category.length > 2 ? (filter = { category }) : (filter = null)
+    category && category.length > 2 ? (filter = { category, qstatus }) : (filter = {qstatus})
     if (sort === 'volume') {
         sorting = { id: -1 }
     }

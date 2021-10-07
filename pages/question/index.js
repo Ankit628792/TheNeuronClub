@@ -11,7 +11,8 @@ function index({ data }) {
     const [filter, setFilter] = useState({
         category: '',
         sort: 'recent',
-        search: ''
+        search: '',
+        qstatus: 'verified'
     })
 
     const handleChange = (e) => {
