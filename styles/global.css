@@ -293,7 +293,7 @@
     }
     }
 
-    @media(min-width: 1660px){
+    @media(min-width: 1700px){
       .question__group{
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
