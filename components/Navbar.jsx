@@ -77,7 +77,7 @@ function Navbar() {
 
     return (
         <>
-            <div className={`flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
+            <div className={`nav__bar flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
                     <div className="relative cursor-pointer">
                         <picture>

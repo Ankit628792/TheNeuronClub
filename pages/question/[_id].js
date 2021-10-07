@@ -141,10 +141,9 @@ function QuestionDetail({ questionData }) {
                             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 text-xl md:text-2xl font-medium mb-2 sm:mb-4 p-5 px-10 sm:flex sm:space-x-4 items-center text-gray-700 relative">
                                 <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
                                 <h1 className="my-3 sm:my-0 sm:pr-6 md:pr-10"> {que?.question} </h1>
-                                <div className="absolute top-5 right-6 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm sm:right-5">
                                     {!isShare ?
-                                        <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform -translate-x-2" onClick={() => setIsShare(true)} />
-                                        : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
+                                        <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer transform absolute top-5 right-6 sm:top-1/2 sm:-translate-y-1/2 sm:right-5" onClick={() => setIsShare(true)} />
+                                        : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2 absolute top-5 right-6 sm:top-6 sm:right-5">
                                             <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700" onClick={() => setIsShare(false)} />
                                             <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <FacebookIcon size={40} round={true} />
@@ -170,7 +169,6 @@ function QuestionDetail({ questionData }) {
 
                                         </div>
                                     }
-                                </div>
                             </div>
                             <div className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5 lg:p-10">
                                 <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">

@@ -78,7 +78,7 @@ function UserDropDown({ session }) {
                 }
             </div>
 
-            {isShare && <div className="share__icons rounded-tl-2xl rounded-bl-2xl h-auto p-4 lg:pr-8 flex flex-col items-center justify-center space-y-2 gradient-shadow-md">
+            {isShare && <div className="max_w_3xl w-full share__icons"> <div className="rounded-tl-2xl rounded-bl-2xl h-auto p-4 lg:pr-8 flex flex-col items-center justify-center space-y-2 gradient-shadow-md ml-auto max-w-max bg-white">
                 <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700 transform active:rotate-180" onClick={() => setIsShare(false)} />
                 <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                     <FacebookIcon size={40} round={true} />
@@ -101,6 +101,7 @@ function UserDropDown({ session }) {
                 <LinkedinShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                     <LinkedinIcon size={40} round={true} />
                 </LinkedinShareButton>
+            </div>
             </div>}
         </>
     )

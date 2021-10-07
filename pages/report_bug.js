@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import Modal from '../components/Modal'
-import {userSession} from '../lib/user-session/index'
+import { userSession } from '../lib/user-session/index'
 function report_bug() {
     const session = userSession();
     const [isSending, setIsSending] = useState(false)
@@ -20,30 +20,32 @@ function report_bug() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsSending(true);
-        const formData = new FormData();
+        if (bugImage?.size < 1000000) {
+            setIsSending(true);
+            const formData = new FormData();
             formData.append("image", bugImage);
             formData.append("issue", data.issue);
             formData.append("email", data.email);
             formData.append("desc", data.desc);
             formData.append("userId", session?._id);
-        const res = await fetch(`/api/bug`, {
-            method: 'POST',
-            body: formData
-        })
-
-        const response = await res.json();
-        console.log(res.status)
-        if (response) {
-            setIsSent(true)
-            setData({
-                email: '',
-                issue: '',
-                desc: ''
+            const res = await fetch(`/api/bug`, {
+                method: 'POST',
+                body: formData
             })
-            setBugImage(null)
+
+            const response = await res.json();
+            console.log(res.status)
+            if (response) {
+                setIsSent(true)
+                setData({
+                    email: '',
+                    issue: '',
+                    desc: ''
+                })
+                setBugImage(null)
+            }
+            setIsSending(false)
         }
-        setIsSending(false)
     }
     return (
         <>
@@ -87,6 +89,7 @@ function report_bug() {
                                     onChange={(e) => setBugImage(e.target.files[0])}
                                     className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                 />
+                                {(bugImage?.size > 1000000) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p>}
                             </div>
 
                             <div className="mb-1 sm:mb-2">

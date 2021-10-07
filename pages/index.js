@@ -27,10 +27,11 @@ export default function Home({ questions }) {
     }
     window.localStorage.setItem('neuron-newUser', false)
   }, [])
+
   return (
     <>
       {isNewUser && <Carousel />}
-      <div className="min-h-screen w-full flex flex-col justify-between pb-10">
+      <div className="w-full flex flex-col pb-10">
         <Head>
           <title>The Neuron</title>
           <link rel="icon" href="/favicon.png" />

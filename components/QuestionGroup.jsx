@@ -75,7 +75,7 @@ function QuestionGroup({ questions, category, user }) {
                             </tbody>
                         </table>
                     </div>
-                    : <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    : <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 question__group">
                         {
                             (questions && questions?.length > 0 && filter !== 'Win' && filter !== 'Lose') ?
                                 <>

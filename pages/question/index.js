@@ -64,7 +64,7 @@ function index({ data }) {
             <Head>
                 <title>The Neuron | Questions</title>
             </Head>
-            <div className="px-5 sm:px-10 pt-28 pb-20 min-h-screen max-w-screen-2xl">
+            <div className="px-5 sm:px-10 pt-28 pb-20 w-full">
                 <div className="filter max-w-2xl sm:ml-auto">
                     <div className="flex items-center">
                         <div className="filter__item">
