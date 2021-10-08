@@ -47,7 +47,7 @@ export default function Home({ questions }) {
 
 export async function getServerSideProps() {
   // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
-  const questions = await fetch(`https://neuron-club.vercel.app/api/question/get_questions`).then((res) => res.json());
+  const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then((res) => res.json());
   return {
     props: {
       questions

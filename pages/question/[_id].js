@@ -352,7 +352,7 @@ function QuestionDetail({ questionData }) {
 export default QuestionDetail
 
 export async function getStaticPaths() {
-    const questions = await fetch(`https://neuron-club.vercel.app/api/question/get_questions`).then(res => res.json())
+    const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json())
     const data = questions.map(question => {
         return {
             params: {
@@ -369,7 +369,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const questionData = await fetch(`https://neuron-club.vercel.app/api/question/${params._id}`).then(res => res.json())
+    const questionData = await fetch(`${process.env.HOST}/api/question/${params._id}`).then(res => res.json())
     if (!questionData) {
         return {
             redirect: {
