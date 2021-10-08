@@ -35,9 +35,9 @@ function Row({ question }) {
                     </div>
                 </td>
                 <td className="p-4 whitespace-nowrap text-center">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                        Active
-                    </span>
+                    {question?.qstatus === 'verified' ?
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Active</span>
+                        : <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Closed</span>}
                 </td>
             </tr>
         </>
