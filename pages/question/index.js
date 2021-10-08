@@ -6,7 +6,6 @@ import Image from 'next/image'
 import ScrollToTop from "../../components/ScrollToTop";
 
 function index({ data }) {
-    console.log(data)
     const [questions, setQuestions] = useState(data)
     const [isData, setIsData] = useState(true)
     const [filter, setFilter] = useState({
@@ -140,7 +139,7 @@ function index({ data }) {
 export default index
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const data = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json());
     return {
         props: {
