@@ -368,7 +368,7 @@ export async function getStaticPaths() {
 
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const questionData = await fetch(`${process.env.HOST}/api/question/${params._id}`).then(res => res.json())
     if (!questionData) {
         return {
