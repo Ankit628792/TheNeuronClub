@@ -351,22 +351,22 @@ function QuestionDetail({ questionData }) {
 
 export default QuestionDetail
 
-export async function getStaticPaths() {
-    const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json())
-    const data = questions.map(question => {
-        return {
-            params: {
-                _id: question._id
-            }
-        }
+// export async function getStaticPaths() {
+//     const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json())
+//     const data = questions.map(question => {
+//         return {
+//             params: {
+//                 _id: question._id
+//             }
+//         }
 
-    })
-    return {
-        paths: data,
-        fallback: true,
-    }
+//     })
+//     return {
+//         paths: data,
+//         fallback: true,
+//     }
 
-}
+// }
 
 export async function getServerSideProps({ params }) {
     const questionData = await fetch(`${process.env.HOST}/api/question/${params._id}`).then(res => res.json())
