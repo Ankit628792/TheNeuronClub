@@ -5,7 +5,7 @@ import Head from "next/head";
 import Image from 'next/image'
 import ScrollToTop from "../../components/ScrollToTop";
 
-function question({ data }) {
+function index({ data }) {
     const [questions, setQuestions] = useState(data)
     const [isData, setIsData] = useState(true)
     const [filter, setFilter] = useState({
@@ -136,7 +136,7 @@ function question({ data }) {
     )
 }
 
-export default question
+export default index
 
 
 export async function getServerSideProps() {
