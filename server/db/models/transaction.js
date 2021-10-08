@@ -19,6 +19,10 @@ const transactionSchema = new mongoose.Schema({
     category: {
         type: String
     },
+    qstatus: {
+        type: String,
+        default: 'verified'
+    },
     result: {
         type: String
     },

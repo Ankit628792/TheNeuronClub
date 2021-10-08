@@ -1,4 +1,5 @@
 import Question from '../db/models/question'
+import Transaction from '../db/models/transaction';
 
 const createQuestion = async (req, res) => {
     const questionCreated = new Question(req.body);
@@ -36,6 +37,7 @@ const update_que = async (req, res) => {
     const { _id, bidClosing, settlementClosing, desc, qstatus } = req.body
     const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus }, {new: true});
     if (updatedq) {
+        const updatetq = await Transaction.updateMany({ questionId: _id }, { qstatus }, {new: true});
         res.status(200).send(updatedq)
     }
     else {
