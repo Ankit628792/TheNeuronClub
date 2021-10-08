@@ -29,7 +29,7 @@ function Question({ question, user }) {
                 <div className="text-right flex flex-col items-end text-sm">
                     <ClockIcon className="h-6 sm:h-7 text-blue-500" /> <span className="">
                         {/* {Math.floor(Math.random() * 10)}h left */}
-                        {user ? moment(question?.settlementClosing).fromNow(true) :moment(question?.bidClosing).fromNow(true)}
+                        {user ? moment(question?.settlementClosing).fromNow() :moment(question?.bidClosing).fromNow()}
                     </span>
                 </div>
             </div>
