@@ -158,9 +158,12 @@ function QuestionDetail({ questionData }) {
                                             <TwitterShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <TwitterIcon size={40} round={true} />
                                             </TwitterShareButton>
-                                            <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            {/* <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <WhatsappIcon size={40} round={true} />
-                                            </WhatsappShareButton>
+                                            </WhatsappShareButton> */}
+                                            <a href={`whatsapp://send?text=${que?.question}%20https://neuron-club.vercel.app/question/${que?._id}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                                <WhatsappIcon size={40} round={true} />
+                                            </a>
                                             <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${que?.question}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <PinterestIcon size={40} round={true} />
                                             </a>
