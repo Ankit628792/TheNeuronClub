@@ -7,16 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Carousel from '../components/Carousel'
 
-export default function Home({  }) {
-
-  const questions = [{
-    category: 'hello',
-    question: 'check',
-  },
-  {
-    category: 'hello3',
-    question: 'check3',
-  }]
+export default function Home({ questions }) {
 
   const [isNewUser, setIsNewUser] = useState(false)
 
@@ -54,13 +45,13 @@ export default function Home({  }) {
   )
 }
 
-// export async function getServerSideProps() {
-//   const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
-//   // const questions = await fetch(`https://neuron-club.vercel.app/api/question/get_questions`).then((res) => res.json());
-//   return {
-//     props: {
-//       questions
-//     }
-//   }
-// }
+export async function getServerSideProps() {
+  // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
+  const questions = await fetch(`https://neuron-club.vercel.app/api/question/get_questions`).then((res) => res.json());
+  return {
+    props: {
+      questions
+    }
+  }
+}
 
