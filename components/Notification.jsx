@@ -13,7 +13,7 @@ function Notification({ bids }) {
                 <div className="p-4 max-h-96 overflow-auto border border-r-0 border-l-0">
                     {bids?.length > 0 && bids?.map(item =>
                         <div key={item?._id} className="rounded-md flex justify-between items-center border border-gray-200 text-gray-700 px-4 py-2 text-sm my-2">
-                            <div className="flex">You've spend &nbsp; <div className="flex items-center justify-center"><Coin width="4" height="4" />{item?.amount},</div>&nbsp; {moment(item?.createdAt).fromNow()} </div>
+                            <div className="flex">You've spent &nbsp; <div className="flex items-center justify-center"><Coin width="4" height="4" />{item?.amount},</div>&nbsp; {moment(item?.createdAt).fromNow()} </div>
                             <TagIcon className="w-8 h-5 text-blue-500 cursor-pointer" />
                         </div>
                     )}

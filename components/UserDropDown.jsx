@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { BellIcon, BriefcaseIcon, CashIcon, ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookShareButton, LinkedinShareButton, RedditShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
@@ -9,10 +10,12 @@ import { useSelector } from 'react-redux'
 import { balance } from '../slices/userBalance';
 import Coin from './Coin';
 import Carousel from './Carousel';
+import Loader from './Loader';
 
 function UserDropDown({ session }) {
     const [isActive, setIsActive] = useState(false)
     const [isShare, setIsShare] = useState(false)
+    const [isLoader, setIsLoader] = useState(false)
     const dispatch = useDispatch();
     const amount = useSelector(balance)
     const urlSrc = `https://neuron-club.vercel.app/account/register`
@@ -38,17 +41,19 @@ function UserDropDown({ session }) {
 
 
     const logout = async () => {
+        setIsLoader(true)
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(session?._id)
+            body: JSON.stringify({ _id: session?._id })
         });
         if (res.status === 200) {
             location.reload();
         }
+        setIsLoader(false)
     }
     const [carousel, setcarousel] = useState(false)
 
@@ -59,7 +64,7 @@ function UserDropDown({ session }) {
     return (
         <>
             {carousel && <Carousel onSelect={closeOnboard} />}
-            {amount && <span className="inline-flex mr-2 items-center font-medium text-lg"><Coin width="4" height="4" />{amount}</span>}
+            {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/')}><Coin width="4" height="4" />{amount}</span>}
             <div className="relative font-medium">
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
                     <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">{session?.username?.[0]}</div>
@@ -102,6 +107,9 @@ function UserDropDown({ session }) {
                     <LinkedinIcon size={40} round={true} />
                 </LinkedinShareButton>
             </div>
+            </div>}
+            {isLoader && <div className=" w-full h-full bg-white bg-opacity-80 grid place-items-center fixed top-0 right-0">
+                <Loader />
             </div>}
         </>
     )

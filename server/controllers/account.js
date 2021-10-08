@@ -125,11 +125,10 @@ const login = async (req, res) => {
 }
 
 const logout = async (req, res) => {
-    console.log(req.body);
     try {
         const cookies = new Cookies(req, res)    
         // Get a cookie
-        const userFound = await User.findById({_id: req.body});
+        const userFound = await User.findById({_id: req.body._id});
         if (!userFound) {
             res.status(400).send('Problem in Logout');
         }

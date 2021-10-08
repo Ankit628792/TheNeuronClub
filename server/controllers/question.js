@@ -21,6 +21,16 @@ const getQuestions = async (req, res) => {
     }
 }
 
+const ques = async (req, res) => {
+    try {
+        const trending = await Question.find({qstatus: 'verified'}).sort({ Volume: -1 }).limit(8);
+        const newest = await Question.find({qstatus: 'verified'}).sort({ id: -1 }).limit(8);
+        res.status(200).send({ trending, newest })
+    } catch (error) {
+        res.status(400).send({ msg: 'unable to get question' })
+    }
+}
+
 const queDetail = async (req, res) => {
     console.log(req.query)
     const detail = await Question.findById({ _id: req.query._id });
@@ -35,9 +45,9 @@ const queDetail = async (req, res) => {
 
 const update_que = async (req, res) => {
     const { _id, bidClosing, settlementClosing, desc, qstatus } = req.body
-    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus }, {new: true});
+    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus }, { new: true });
     if (updatedq) {
-        const updatetq = await Transaction.updateMany({ questionId: _id }, { qstatus }, {new: true});
+        const updatetq = await Transaction.updateMany({ questionId: _id }, { qstatus }, { new: true });
         res.status(200).send(updatedq)
     }
     else {
@@ -49,9 +59,9 @@ const update_que = async (req, res) => {
 const filter = async (req, res) => {
     const { category, sort, qstatus } = req.body;
     let sorting, filter;
-    category && category.length > 2 ? (filter = { category, qstatus }) : (filter = {qstatus})
+    category && category.length > 2 ? (filter = { category, qstatus }) : (filter = { qstatus })
     if (sort === 'volume') {
-        sorting = { id: -1 }
+        sorting = { Volume: -1 }
     }
     else if (sort === 'oldest') {
         sorting = { createdAt: 0 }
@@ -71,4 +81,4 @@ const filter = async (req, res) => {
 }
 
 
-export { createQuestion, getQuestions, filter, queDetail, update_que }
+export { createQuestion, ques, getQuestions, filter, queDetail, update_que }

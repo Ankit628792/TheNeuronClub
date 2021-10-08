@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Carousel from '../components/Carousel'
 
 export default function Home({ questions }) {
-
   const [isNewUser, setIsNewUser] = useState(false)
 
   useEffect(() => {
@@ -37,8 +36,8 @@ export default function Home({ questions }) {
           <link rel="icon" href="/favicon.png" />
         </Head>
         <Header />
-        <QuestionGroup questions={questions?.slice(0, 8)} category={"Trending Topics"} />
-        <QuestionGroup questions={questions?.slice(8, 16)} category={"New Topics"} />
+        <QuestionGroup questions={questions?.trending} category={"Trending Topics"} />
+        <QuestionGroup questions={questions?.newest} category={"New Topics"} />
       </div>
       <ToastContainer style={{ textAlign: 'center' }} onClick={() => Router.push('/account/')} />
     </>
@@ -47,7 +46,7 @@ export default function Home({ questions }) {
 
 export async function getServerSideProps() {
   // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
-  const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then((res) => res.json());
+  const questions = await fetch(`${process.env.HOST}/api/question/ques`).then((res) => res.json());
   return {
     props: {
       questions
