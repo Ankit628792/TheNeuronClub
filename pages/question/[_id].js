@@ -144,7 +144,7 @@ function QuestionDetail({ questionData }) {
                                 <div className="w-12 h-12 absolute top-5 right-6 sm:top-0 sm:right-0 sm:relative pt-1 grid place-items-center">
                                     {!isShare ?
                                         <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer" onClick={() => setIsShare(true)} />
-                                        : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2">
+                                        : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2 z-50">
                                             <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setIsShare(false)} />
                                             <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
                                                 <FacebookIcon size={40} round={true} />
@@ -343,7 +343,7 @@ function QuestionDetail({ questionData }) {
                 </div>
             </div>}
             {isBidPlaced && <div onClick={() => setIsBidPlaced(false)} ><Modal state={isBidPlaced} text="Bid Placed Successfully" /> </div>}
-            {isLoggedIn && <div onClick={() => setIsLoggedIn(false)}><Modal state={isLoggedIn} text="Please login to place a bid" /> </div>}
+            {isLoggedIn && <div onClick={() => setIsLoggedIn(false)}><Modal state={isLoggedIn} text="Please login to place a bid" link={'/account/login'} /> </div>}
 
         </>
     )

@@ -24,7 +24,7 @@ function QuestionGroup({ questions, category, user }) {
                                 <option value="">All</option>
                                 <option value="Win">Win</option>
                                 <option value="Lose">Lose</option>
-                                <option value="Pending">Pending</option>
+                                <option value="Active">Active</option>
                             </select>
                             <ChevronDownIcon className="absolute top-1/2 transform -translate-y-1/2 right-1 h-7 w-7" />
                         </div>

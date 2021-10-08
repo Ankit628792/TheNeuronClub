@@ -1,7 +1,8 @@
 import { XIcon } from "@heroicons/react/solid"
+import { Router } from "next/router"
 import { useState } from 'react'
 
-function Modal({ state, text }) {
+function Modal({ state, text, link }) {
     const [isActive, setIsActive] = useState(state)
     return (
         <>
@@ -11,6 +12,7 @@ function Modal({ state, text }) {
                     <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-gray-800 z-50 leading-tight">
                         {text}
                     </h1>
+                    {link && <button className="btn-invert mx-auto min-w-[100px]" onClick={() => Router.push(`${link}`)}>Login</button>}
                 </div>
             </div>}
         </>
