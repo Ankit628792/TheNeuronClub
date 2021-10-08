@@ -129,10 +129,7 @@ const logout = async (req, res) => {
     try {
         const cookies = new Cookies(req, res)    
         // Get a cookie
-        const token = cookies.get('neuron')
-        console.log("token : ", token)
-        const verifyToken = jwt.verify(token, process.env.secret_key);
-        const userFound = await User.findById({ _id: verifyToken._id || req.body._id });
+        const userFound = await User.findById({_id: req.body});
         if (!userFound) {
             res.status(400).send('Problem in Logout');
         }
