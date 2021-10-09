@@ -2,12 +2,11 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { MinusIcon, PencilIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
 import Loader from '../../components/Loader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 import { userSession } from '../../lib/user-session'
 import Modal from '../../components/Modal'
-import { FacebookShareButton, LinkedinShareButton, RedditShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon } from "react-share";
 import Coin from '../../components/Coin'
 import { balance, updateBalance } from '../../slices/userBalance'
@@ -95,9 +94,9 @@ function QuestionDetail({ questionData }) {
         }
     }
 
-    const validate =() =>{
-        if(que.qstatus =='verified'){
-            (session && bid>0) ? setIsActive(true): setIsLoggedIn(true)
+    const validate = () => {
+        if (que.qstatus == 'verified') {
+            (session && bid > 0) ? setIsActive(true) : setIsLoggedIn(true)
         }
     }
 
@@ -156,9 +155,9 @@ function QuestionDetail({ questionData }) {
                                                 <FacebookIcon size={40} round={true} />
                                             </a>
                                             <a href={`https://twitter.com/share?text=${que?.question}&url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
-                                                <FacebookIcon size={40} round={true} />
+                                                <TelegramIcon size={40} round={true} />
                                             </a>
-                                            <a href={`https://web.whatsapp.com/send?text=${que?.question}%20https://neuron-club.vercel.app/question/${que?._id}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <a href={`https://web.whatsapp.com/send?text=${que?.question}%20${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <WhatsappIcon size={40} round={true} />
                                             </a>
                                             <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${que?.question}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
@@ -372,3 +371,4 @@ export async function getServerSideProps({ params }) {
         }
     }
 }
+

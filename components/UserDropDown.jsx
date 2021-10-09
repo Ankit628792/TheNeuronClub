@@ -85,27 +85,27 @@ function UserDropDown({ session }) {
 
             {isShare && <div className="max_w_3xl w-full share__icons" onClick={() => setIsShare(false)}> <div className="rounded-tl-2xl rounded-bl-2xl h-auto p-4 lg:pr-8 flex flex-col items-center justify-center space-y-2 gradient-shadow-md ml-auto max-w-max bg-white">
                 <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full p-1 text-gray-700 transform active:rotate-180" onClick={() => setIsShare(false)} />
-                <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <FacebookIcon size={40} round={true} />
-                </FacebookShareButton>
-                <TwitterShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
-                    <TwitterIcon size={40} round={true} />
-                </TwitterShareButton>
-                <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                </a>
+                <a href={`https://twitter.com/share?text=${'Join The Neuron Club Now'}&url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                    <TelegramIcon size={40} round={true} />
+                </a>
+                <a href={`https://web.whatsapp.com/send?text=${'Join The Neuron Club Now'}%20${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <WhatsappIcon size={40} round={true} />
-                </WhatsappShareButton>
-                <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                </a>
+                <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${'Join The Neuron Club Now'}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <PinterestIcon size={40} round={true} />
                 </a>
-                <TelegramShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                <a href={`https://telegram.me/share/url?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <TelegramIcon size={40} round={true} />
-                </TelegramShareButton>
-                <RedditShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                </a>
+                <a href={`https://www.reddit.com/submit?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <RedditIcon size={40} round={true} />
-                </RedditShareButton>
-                <LinkedinShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                </a>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                     <LinkedinIcon size={40} round={true} />
-                </LinkedinShareButton>
+                </a>
             </div>
             </div>}
             {isLoader && <div className=" w-full h-full bg-white bg-opacity-80 grid place-items-center fixed top-0 right-0">

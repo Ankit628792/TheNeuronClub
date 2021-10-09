@@ -146,7 +146,6 @@ function Navbar() {
                     </ul>
                 </div>
             }
-            <ToastContainer style={{ textAlign: 'center' }} />
         </>
     )
 }
