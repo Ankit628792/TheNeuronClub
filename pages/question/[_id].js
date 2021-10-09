@@ -41,7 +41,7 @@ function QuestionDetail({ questionData }) {
     const [isDescEdit, setIsDescEdit] = useState(false)
     const [isDateEdit, setIsDateEdit] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
-    const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}&description=${que?.question}`
+    const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
@@ -152,31 +152,27 @@ function QuestionDetail({ questionData }) {
                                         <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer" onClick={() => setIsShare(true)} />
                                         : <div className="w-12 h-auto flex flex-col items-center justify-center space-y-2 z-50">
                                             <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setIsShare(false)} />
-                                            <FacebookShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <FacebookIcon size={40} round={true} />
-                                            </FacebookShareButton>
-                                            <TwitterShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
-                                                <TwitterIcon size={40} round={true} />
-                                            </TwitterShareButton>
-                                            {/* <WhatsappShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
-                                                <WhatsappIcon size={40} round={true} />
-                                            </WhatsappShareButton> */}
-                                            <a href={`whatsapp://send?text=${que?.question}%20https://neuron-club.vercel.app/question/${que?._id}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            </a>
+                                            <a href={`https://twitter.com/share?text=${que?.question}&url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                                <FacebookIcon size={40} round={true} />
+                                            </a>
+                                            <a href={`https://web.whatsapp.com/send?text=${que?.question}%20https://neuron-club.vercel.app/question/${que?._id}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <WhatsappIcon size={40} round={true} />
                                             </a>
                                             <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${que?.question}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <PinterestIcon size={40} round={true} />
                                             </a>
-                                            <TelegramShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            <a href={`https://telegram.me/share/url?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <TelegramIcon size={40} round={true} />
-                                            </TelegramShareButton>
-                                            <RedditShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            </a>
+                                            <a href={`https://www.reddit.com/submit?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <RedditIcon size={40} round={true} />
-                                            </RedditShareButton>
-                                            <LinkedinShareButton url={urlSrc} className="w-10 h-10 shadow-md rounded-full">
+                                            </a>
+                                            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
                                                 <LinkedinIcon size={40} round={true} />
-                                            </LinkedinShareButton>
-
+                                            </a>
                                         </div>
                                     }
                                 </div>
@@ -359,23 +355,6 @@ function QuestionDetail({ questionData }) {
 }
 
 export default QuestionDetail
-
-// export async function getStaticPaths() {
-//     const questions = await fetch(`${process.env.HOST}/api/question/get_questions`).then(res => res.json())
-//     const data = questions.map(question => {
-//         return {
-//             params: {
-//                 _id: question._id
-//             }
-//         }
-
-//     })
-//     return {
-//         paths: data,
-//         fallback: true,
-//     }
-
-// }
 
 export async function getServerSideProps({ params }) {
     const questionData = await fetch(`${process.env.HOST}/api/question/${params._id}`).then(res => res.json())
