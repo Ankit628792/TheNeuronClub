@@ -43,9 +43,10 @@ const queDetail = async (req, res) => {
 }
 
 
+
 const update_que = async (req, res) => {
-    const { _id, bidClosing, settlementClosing, desc, qstatus } = req.body
-    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus }, { new: true });
+    const { _id, bidClosing, settlementClosing, desc, qstatus, question } = req.body
+    const updatedq = await Question.findByIdAndUpdate({ _id: _id }, { bidClosing, settlementClosing, desc, qstatus, question }, { new: true });
     if (updatedq) {
         const updatetq = await Transaction.updateMany({ questionId: _id }, { qstatus }, { new: true });
         res.status(200).send(updatedq)
