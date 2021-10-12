@@ -68,6 +68,7 @@ function CreateQ({ session }) {
             formData.append("qstatus", data.qstatus);
             formData.append("desc", desc);
             formData.append("link", link);
+            formData.append("goLive", data.goLive);
             const res = await fetch(`/api/question/create_question`, {
                 method: 'POST',
                 body: formData
