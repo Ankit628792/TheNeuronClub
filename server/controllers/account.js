@@ -88,7 +88,10 @@ const resetPassword = async (req, res) => {
     }
 }
 
-
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+  
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -111,13 +114,11 @@ const login = async (req, res) => {
                     res.status(203).send({ msg: 'User unverified' })
                 } else {
                     const newUser = userLogin.isNewUser
-                    console.log(userLogin)
-                    userLogin.referral_code = (userLogin?._id?.toString()).slice(userLogin?._id?.length - 6, userLogin?._id?.length)?.toUpperCase();
-                    console.log(typeof(userLogin?._id))
-                    console.log((userLogin?._id?.toString()).slice(userLogin?._id?.length - 6, userLogin?._id?.length)?.toUpperCase())
+                    userLogin.referral_code = Math.random().toString(36).slice(-6).toUpperCase();
                     console.log(userLogin.referral_code)
                     userLogin.isNewUser = false;
                     await userLogin.save();
+                    console.log(userLogin)
                     res.status(200).send({ token, newUser });
                 }
             }
