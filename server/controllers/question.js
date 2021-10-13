@@ -1,22 +1,6 @@
+import sendEMail from '../../lib/Mail/sendMail';
 import Question from '../db/models/question'
-import { CronJob } from 'cron'
 import Transaction from '../db/models/transaction';
-
-const runFun = (date, req, res) => {
-    const { _id, qstatus } = req.body
-    const job = new CronJob(date, async function () {
-        const d = new Date();
-        console.log('Specific date:', date, ', onTick at:', d);
-        const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
-        if (data) {
-            res.status(200).send({ msg: 'question verified' })
-        }
-        else {
-            res.status(300).send({ msg: 'unable to very question' })
-        }
-    });
-    job.start();
-}
 
 const createQuestion = async (req, res) => {
     const questionCreated = new Question(req.body);
@@ -25,17 +9,23 @@ const createQuestion = async (req, res) => {
         res.status(400).send('Error');
     }
     else {
-        res.status(201).send(questionCreated)
+        const link = `${host}/question/${saveQuestion?._id}`;
+        const data = { subject: `New Question added`, text: link, email: `ankit628792@gmail.com`, html: `Click <a href="${link}" target="_blank">View Question</a>` };
+        const result = await sendEMail(data);
+        console.log(result)
+        res.status(201).send(saveQuestion)
     }
 }
 const verifyQuestion = async (req, res) => {
+    const { _id, qstatus, goLive } = req.body;
     try {
-        console.log('Before job instantiation');
-        let date = new Date(req.body.goLive);
-        console.log(date)
-        runFun(date, req, res);
-        console.log('waiting...')
-        res.status(300).send({ msg: "waiting to verify" })
+        const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus, goLive }, { new: true });
+        if (data) {
+            res.status(200).send({ msg: 'question verified' })
+        }
+        else {
+            res.status(300).send({ msg: 'unable to very question' })
+        }
     } catch (error) {
         console.log(error);
         res.status(403).send(error)

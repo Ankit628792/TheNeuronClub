@@ -245,7 +245,7 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Open Date &amp; Time</td>
-                                                    <td>{moment(que?.createdAt).format('lll')}</td>
+                                                    <td>{que?.goLive ? moment(que?.goLive).format('lll') : moment(que?.createdAt).format('lll')}</td>
                                                 </tr>
                                                 {isQueEdit ?
                                                     <>

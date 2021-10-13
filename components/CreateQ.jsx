@@ -77,7 +77,7 @@ function CreateQ({ session }) {
             console.log(res.status)
             const response = await res.json(); 
             if (res.status === 201) {
-                const cron = {_id: response?._id, qstatus: 'verified', goLive: data?.goLive}
+                // const cron = {_id: response?._id, qstatus: 'verified', goLive: data?.goLive}
                 setIsSent(true)
                 
                 setData({...data,
@@ -91,13 +91,13 @@ function CreateQ({ session }) {
                 setLink('');
                 setDesc('');
                 setIsSending(false)
-                fetch(`/api/question/verifyQue`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(cron)
-                });
+                // fetch(`/api/question/verifyQue`, {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(cron)
+                // });
             }
             setIsSending(false)
         }
