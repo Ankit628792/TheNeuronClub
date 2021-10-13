@@ -1,4 +1,5 @@
 import { CronJob } from 'cron'
+import sendEMail from '../../lib/Mail/sendMail';
 
 export default async function (req, res) {
     // const CronJob = require('../lib/cron.js').CronJob;
@@ -16,7 +17,7 @@ export default async function (req, res) {
         const link = `${process.env.host}/question/${saveQuestion?._id}`;
         const data = { subject: `New Question added`, text: link, email: `ankit628792@gmail.com`, html: `Click <a href="${link}" target="_blank">View Question</a>` };
         const result = await sendEMail(data);
-    
+        console.log(result)
     });
     console.log('After job instantiation');
     job.start();
