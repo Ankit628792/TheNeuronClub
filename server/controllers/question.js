@@ -2,22 +2,6 @@ import sendEMail from '../../lib/Mail/sendMail';
 import Question from '../db/models/question'
 import Transaction from '../db/models/transaction';
 
-const createQuestion = async (req, res) => {
-    const questionCreated = new Question(req.body);
-    const saveQuestion = await questionCreated.save();
-    if (!saveQuestion) {
-        res.status(400).send('Error');
-    }
-    else {
-        const link = `${process.env.host}/question/${saveQuestion?._id}`;
-        console.log(link)
-        const data = { subject: `New Question added`, text: link, email: `ankit628792@gmail.com`, html: `Click <a href="${link}" target="_blank">View Question</a>` };
-        console.log(data)
-        const result = await sendEMail(data);
-        console.log(result)
-        res.status(201).send(saveQuestion)
-    }
-}
 const verifyQuestion = async (req, res) => {
     const { _id, qstatus, goLive } = req.body;
     try {
@@ -104,4 +88,4 @@ const filter = async (req, res) => {
 }
 
 
-export { createQuestion, ques, getQuestions, filter, queDetail, update_que, verifyQuestion }
+export { ques, getQuestions, filter, queDetail, update_que, verifyQuestion }

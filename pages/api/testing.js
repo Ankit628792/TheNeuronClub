@@ -13,6 +13,10 @@ export default async function (req, res) {
     const job = new CronJob(date, function () {
         const d = new Date();
         console.log('Specific date:', date, ', onTick at:', d);
+        const link = `${process.env.host}/question/${saveQuestion?._id}`;
+        const data = { subject: `New Question added`, text: link, email: `ankit628792@gmail.com`, html: `Click <a href="${link}" target="_blank">View Question</a>` };
+        const result = await sendEMail(data);
+    
     });
     console.log('After job instantiation');
     job.start();
