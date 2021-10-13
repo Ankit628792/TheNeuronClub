@@ -16,13 +16,26 @@ const verifyQuestion = async (req, res) => {
     const { _id, qstatus, goLive } = req.body
     console.log('Before job instantiation');
     let date = new Date(goLive);
+try {
+    console.log(date)
     const job = new CronJob(date, async function () {
         const d = new Date();
         console.log('Specific date:', date, ', onTick at:', d);
-        const veifiedQue = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
+        const verifiedQue = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
+        if(verifiedQue){
+            res.status(200).send({msg: 'question verified'})
+        }
+        else{
+            res.status(300).send({msg: 'unable to very question'})
+        }
     });
     console.log('After job instantiation');
     job.start();
+    
+} catch (error) {
+    console.log(error);
+    res.status(403).send(error)
+}
 }
 
 const getQuestions = async (req, res) => {
