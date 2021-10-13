@@ -11,7 +11,7 @@ export default async function (req, res) {
     console.log(date)
     // date.setMinutes(date.getMinutes()+2);
     console.log(date)
-    const job = new CronJob(date, function () {
+    const job = new CronJob(date, async function () {
         const d = new Date();
         console.log('Specific date:', date, ', onTick at:', d);
         const link = `${process.env.host}/question/${saveQuestion?._id}`;
