@@ -20,15 +20,15 @@ const register = async (req, res) => {
             return res.status(422).json({ error: "Username already exist" })
         } else {
             try {
-            const user = new User({ username, email, password, name, country });
+                const user = new User({ username, email, password, name, country });
                 const userRegistered = await user.save();
 
                 const referred = await User.findOne({ referral_code: referral_code });
-                if (referred) { 
-                    referred.balance = 1500; 
+                if (referred) {
+                    referred.balance = 1500;
                     await referred.save()
                 }
-                
+
                 if (userRegistered) {
                     const token = await userRegistered.generateAuthToken();
                     const link = `${host}/account/verify?token=${token}`;
@@ -113,7 +113,7 @@ const login = async (req, res) => {
                     userLogin.referral_code = Math.random().toString(36).slice(-6).toUpperCase();
                     userLogin.isNewUser = false;
                     await userLogin.save();
-                    
+
                     const token = await userLogin.generateAuthToken();
                     const cookies = new Cookies(req, res)
 
