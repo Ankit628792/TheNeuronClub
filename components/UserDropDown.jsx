@@ -58,7 +58,6 @@ function UserDropDown({ session }) {
     const closeOnboard = () => {
         setcarousel(false);
     }
-console.log(session)
     return (
         <>
             {carousel && <Carousel onSelect={closeOnboard} />}
@@ -74,7 +73,7 @@ console.log(session)
                         {/* <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><BellIcon className="w-6 h-6 mr-1 text-gray-700" />Notifications</li> */}
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
                         {session?.referral_code &&
-                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer a Friend : {session?.referral_code}</li>
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
                         }
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setcarousel(true)}><CashIcon className="w-6 h-6 mr-1 text-gray-700" /> OnBoard</li>
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
