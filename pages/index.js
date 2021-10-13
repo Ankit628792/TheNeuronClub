@@ -27,9 +27,15 @@ export default function Home({ questions }) {
     window.localStorage.setItem('neuron-newUser', false)
   }, [])
 
+  const [carousel, setcarousel] = useState(isNewUser)
+
+    const closeOnboard = () => {
+        setcarousel(false);
+    }
+
   return (
     <>
-      {isNewUser && <Carousel />}
+      {carousel && <Carousel onSelect={closeOnboard} />}
       <div className="w-full flex flex-col pb-10">
         <Head>
           <title>The Neuron</title>
