@@ -115,10 +115,8 @@ const login = async (req, res) => {
                 } else {
                     const newUser = userLogin.isNewUser
                     userLogin.referral_code = Math.random().toString(36).slice(-6).toUpperCase();
-                    console.log(userLogin.referral_code)
                     userLogin.isNewUser = false;
                     await userLogin.save();
-                    console.log(userLogin)
                     res.status(200).send({ token, newUser });
                 }
             }

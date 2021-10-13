@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { CashIcon, ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, XIcon } from "@heroicons/react/solid"
+import { CashIcon, ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon } from "react-share";
 import { useDispatch } from 'react-redux'
@@ -58,7 +58,7 @@ function UserDropDown({ session }) {
     const closeOnboard = () => {
         setcarousel(false);
     }
-
+console.log(session)
     return (
         <>
             {carousel && <Carousel onSelect={closeOnboard} />}
