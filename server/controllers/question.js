@@ -2,6 +2,22 @@ import Question from '../db/models/question'
 import { CronJob } from 'cron'
 import Transaction from '../db/models/transaction';
 
+const runFun = (date, req, res) => {
+    const { _id, qstatus } = req.body
+    const job = new CronJob(date, async function () {
+        const d = new Date();
+        console.log('Specific date:', date, ', onTick at:', d);
+        const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
+        if (data) {
+            res.status(200).send({ msg: 'question verified' })
+        }
+        else {
+            res.status(300).send({ msg: 'unable to very question' })
+        }
+    });
+    job.start();
+}
+
 const createQuestion = async (req, res) => {
     const questionCreated = new Question(req.body);
     const saveQuestion = await questionCreated.save();
@@ -13,26 +29,13 @@ const createQuestion = async (req, res) => {
     }
 }
 const verifyQuestion = async (req, res) => {
-    const { _id, qstatus, goLive } = req.body
     try {
-    console.log('Before job instantiation');
-    let date = new Date(goLive);
-    console.log(date)
-        const job = new CronJob(date, async function () {
-            const d = new Date();
-            console.log('Specific date:', date, ', onTick at:', d);
-            const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
-            if (data) {
-                res.status(200).send({ msg: 'question verified' })
-            }
-            else {
-                res.status(300).send({ msg: 'unable to very question' })
-            }
-        });
-        console.log('After job instantiation');
-        await job.start();
+        console.log('Before job instantiation');
+        let date = new Date(req.body.goLive);
+        console.log(date)
+        runFun(date, req, res);
         console.log('waiting...')
-        res.status(300).send({msg: "waiting to verify"})
+        res.status(300).send({ msg: "waiting to verify" })
     } catch (error) {
         console.log(error);
         res.status(403).send(error)

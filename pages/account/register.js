@@ -83,7 +83,7 @@ function register() {
                                 <form className="max-w-lg p-10 min-w-[350px] bg-white gradient-shadow" onSubmit={handleSubmit}>
                                     <div className="flex border-b border-gray-700 py-2">
                                         <UserIcon className="h-6" />
-                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="username" value={data.username} required placeholder="User Name " />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="username" minLength="5" value={data.username} required placeholder="User Name " />
                                     </div>
                                     {isUsername && <p className="text-xs text-red-400">Username already exist</p>}
                                     <div className="flex border-b border-gray-700 py-2 mt-6">
