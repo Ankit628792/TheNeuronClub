@@ -10,7 +10,7 @@ const verifyQuestion = async (req, res) => {
             res.status(200).send({ msg: 'question verified' })
         }
         else {
-            res.status(300).send({ msg: 'unable to very question' })
+            res.status(300).send({ msg: 'unable to verify question' })
         }
     } catch (error) {
         console.log(error);

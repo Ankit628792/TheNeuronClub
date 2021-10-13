@@ -111,7 +111,8 @@ const login = async (req, res) => {
                     res.status(203).send({ msg: 'User unverified' })
                 } else {
                     const newUser = userLogin.isNewUser
-                    userLogin.referral_code = userLogin._id?.slice(userLogin._id.length - 6, userLogin._id.length)?.toUpperCase();
+                    console.log(userLogin)
+                    userLogin.referral_code = userLogin?._id?.slice(userLogin?._id?.length - 6, userLogin?._id?.length)?.toUpperCase();
                     userLogin.isNewUser = false;
                     await userLogin.save();
                     res.status(200).send({ token, newUser });
