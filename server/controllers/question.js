@@ -9,8 +9,10 @@ const createQuestion = async (req, res) => {
         res.status(400).send('Error');
     }
     else {
-        const link = `${host}/question/${saveQuestion?._id}`;
+        const link = `${process.env.host}/question/${saveQuestion?._id}`;
+        console.log(link)
         const data = { subject: `New Question added`, text: link, email: `ankit628792@gmail.com`, html: `Click <a href="${link}" target="_blank">View Question</a>` };
+        console.log(data)
         const result = await sendEMail(data);
         console.log(result)
         res.status(201).send(saveQuestion)
