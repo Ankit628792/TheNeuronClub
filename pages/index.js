@@ -9,6 +9,7 @@ import Carousel from '../components/Carousel'
 
 export default function Home({ questions }) {
   const [isNewUser, setIsNewUser] = useState(false)
+  const [carousel, setCarousel] = useState(isNewUser)
 
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
@@ -23,16 +24,16 @@ export default function Home({ questions }) {
         progress: undefined,
       });
       setIsNewUser(true);
+      setCarousel(true);
     }
     window.localStorage.setItem('neuron-newUser', false)
   }, [])
 
-  const [carousel, setcarousel] = useState(isNewUser)
 
     const closeOnboard = () => {
-        setcarousel(false);
+        setCarousel(false);
     }
-
+console.log(carousel, isNewUser)
   return (
     <>
       {carousel && <Carousel onSelect={closeOnboard} />}
