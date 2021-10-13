@@ -112,7 +112,7 @@ const login = async (req, res) => {
                 } else {
                     const newUser = userLogin.isNewUser
                     console.log(userLogin)
-                    userLogin.referral_code = userLogin?._id?.slice(userLogin?._id?.length - 6, userLogin?._id?.length)?.toUpperCase();
+                    userLogin.referral_code = (userLogin?._id?.toString()).slice(userLogin?._id?.length - 6, userLogin?._id?.length)?.toUpperCase();
                     userLogin.isNewUser = false;
                     await userLogin.save();
                     res.status(200).send({ token, newUser });
