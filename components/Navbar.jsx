@@ -14,10 +14,10 @@ function Navbar() {
     const router = useRouter();
     const session = userSession();
     const dispatch = useDispatch();
-    const [isLoader, setIsLoader] = useState(false)
     const [scrolled, setScrolled] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
+    const [isLoader, setIsLoader] = useState(false)
     const logout = async () => {
         setIsLoader(true)
         window.localStorage.setItem('neuron-token', '');

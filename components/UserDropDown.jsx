@@ -138,7 +138,8 @@ function UserDropDown({ session }) {
                         }
                     </>
                 </div>
-                </div>}
+                </div>
+                }
             {isLoader && <div className=" w-full h-full bg-white bg-opacity-80 grid place-items-center fixed top-0 right-0">
                 <Loader />
             </div>}
