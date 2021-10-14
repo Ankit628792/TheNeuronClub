@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
                 const referred = await User.findOne({ referral_code: referral_code });
                 if (referred) {
-                    referred.balance = 1500;
+                    referred.balance = referred.balance + 500;
                     await referred.save()
                 }
 
