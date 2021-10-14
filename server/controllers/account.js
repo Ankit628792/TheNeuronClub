@@ -82,7 +82,7 @@ const resetPassword = async (req, res) => {
     const userFound = await User.findOne({ _id: _id }) && await User.findOne({ username: username })
     if (userFound) {
         password = await bcrypt.hash(password, 12)
-        const updateUser = await User.findByIdAndUpdate(_id, { password }, { new: true });
+        const updateUser = await User.findByIdAndUpdate({_id: _id}, { password: password }, { new: true });
         updateUser.Tokens = []
         await updateUser.save();
         res.status(200).send({ msg: 'Password updated' })
