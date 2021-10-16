@@ -73,7 +73,7 @@ function index() {
 
                                 <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-4xl grid place-items-center text-white">
                                     {session?.image_url ?
-                                        <img className="w-8 h-8 object-cover" src="https://img.icons8.com/pastel-glyph/2x/facebook-messenger--v2.png" alt="" />
+                                        <img className="w-8 h-8 object-cover" src={session?.image_url} alt="" />
                                         : session?.name?.[0]}
                                 </div>
                                 <div className="text-lg">
