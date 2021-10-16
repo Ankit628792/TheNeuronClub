@@ -68,7 +68,7 @@ function UserDropDown({ session }) {
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
                     <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">
                         {session?.image_url ?
-                            <img className="w-8 h-8 object-cover" src={session?.image_url} alt="" />
+                            <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                             : session?.name?.[0]}
                     </div>
                     {isActive ? <ChevronUpIcon className="w-5 h-5" /> : <ChevronDownIcon className="w-5 h-5" />}
