@@ -9,6 +9,7 @@ import { balance } from '../slices/userBalance';
 import Coin from './Coin';
 import Carousel from './Carousel';
 import Loader from './Loader';
+import { signOut } from 'next-auth/client';
 
 function UserDropDown({ session }) {
     const [isActive, setIsActive] = useState(false)
@@ -50,6 +51,7 @@ function UserDropDown({ session }) {
         });
         if (res.status === 200) {
             location.reload();
+            signOut()
         }
         setIsLoader(false)
     }
@@ -64,7 +66,11 @@ function UserDropDown({ session }) {
             {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/')}><Coin width="4" height="4" />{amount}</span>}
             <div className="relative font-medium">
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
-                    <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">{session?.name?.[0]}</div>
+                    <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">
+                        {session?.image_url ?
+                            <img className="w-8 h-8 object-cover" src="https://img.icons8.com/pastel-glyph/2x/facebook-messenger--v2.png" alt="" />
+                            : session?.name?.[0]}
+                    </div>
                     {isActive ? <ChevronUpIcon className="w-5 h-5" /> : <ChevronDownIcon className="w-5 h-5" />}
                 </div>
                 {isActive && <div className="bg-white gradient-shadow-md absolute min-w-max rounded-md p-3 top-[130%] left-1/2 transform -translate-x-1/2">
