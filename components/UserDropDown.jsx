@@ -38,9 +38,9 @@ function UserDropDown({ session }) {
         getUser();
     }, []);
 
-
+const userSignOut = () => signOut()
     const logout = async () => {
-        signOut()
+        userSignOut();
         setIsLoader(true)
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
