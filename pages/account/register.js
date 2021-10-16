@@ -161,7 +161,7 @@ function register({ referral_code }) {
                         <div className="flex items-center">
                             <button className="px-4 py-1 inline-flex items-center space-x-2 rounded-lg border font-medium text-lg text-gray-700 hover:text-white shadow-lg active:scale-[0.98] transition duration-100 ease-in-out focus:outline-none focus:border-none m-4 min-w-[250px] border-gray-500 hover:bg-gray-800" onClick={() => signIn("google")}>
                                 <img src="/images/google.svg" alt="" className="w-10 h-10" />
-                                <span>Google</span>
+                                <span>Continue With Google</span>
                             </button>
                             {/* <button className="signup__btn border-blue-500 hover:gradient-bg" onClick={() => signIn("facebook")}>
                                 <img src="/images/facebook.svg" alt="" className="w-10 h-10" />
