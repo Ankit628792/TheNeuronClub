@@ -157,7 +157,7 @@ function register({ referral_code }) {
                                 :
                                 <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">You've successfully registered to TheNeuron.Club. To continue, please verify your Email Adress</h1>
                         }
-                        <h1 className="text-xl font-medium mt-6 tracking-wide"> Or Signup With </h1>
+                        <h1 className="text-xl font-medium mt-6 tracking-wide text-gray-700"> Or Signup With </h1>
                         <div className="flex items-center">
                             <button className="signup__btn border-gray-500 hover:bg-gray-800" onClick={() => signIn("google")}>
                                 <img src="/images/google.svg" alt="" className="w-10 h-10" />
