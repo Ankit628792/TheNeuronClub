@@ -191,7 +191,7 @@ body {
 }
 
 .filter__item {
-    @apply relative mr-5 h-12 my-2 min-w-max inline-flex items-center justify-center transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus: outline-none
+    @apply relative mr-5 h-12 my-2 min-w-max inline-flex items-center justify-center transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none
 }
 
 .filter__item.user {
@@ -199,15 +199,15 @@ body {
 }
 
 .filter__item select {
-    @apply h-10 z-20 bg-transparent cursor-pointer w-full px-4 pr-8 appearance-none focus: outline-none
+    @apply h-10 z-20 bg-transparent cursor-pointer w-full px-4 pr-8 appearance-none focus:outline-none
 }
 
 .footer__social {
-    @apply relative h-10 w-10 p-1 grid place-items-center bg-white rounded-full hover: scale-105 hover:shadow-lg cursor-pointer active:scale-[0.98] transition duration-150
+    @apply relative h-10 w-10 p-1 grid place-items-center bg-white rounded-full hover:scale-105 hover:shadow-lg cursor-pointer active:scale-[0.98] transition duration-150
 }
 
 .footer__social svg {
-    @apply focus: outline-none focus:border-none
+    @apply focus:outline-none focus:border-none
 }
 
 .footer__social span {
@@ -310,21 +310,21 @@ body {
 }
 
 .signup__btn {
-    @apply px-4 py-1 inline-flex items-center space-x-2 rounded-lg border font-medium text-lg hover: text-white shadow-lg active:scale-[0.98] transition duration-100 ease-in-out focus:outline-none focus:border-none;
+    @apply px-4 py-1 inline-flex items-center space-x-2 rounded-lg border font-medium text-lg hover:text-white shadow-lg active:scale-[0.98] transition duration-100 ease-in-out focus:outline-none focus:border-none;
     min-width: 150px;
     margin: 1rem;
 }
 
 .btn {
-    @apply bg-white text-blue-600 py-2 px-4 rounded-xl font-semibold active: scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
+    @apply bg-white text-blue-600 py-2 px-4 rounded-xl font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
 }
 
 .btn-invert {
-    @apply px-4 py-2 leading-loose gradient-bg min-w-max text-lg text-white rounded font-semibold active: scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
+    @apply px-4 py-2 leading-loose gradient-bg min-w-max text-lg text-white rounded font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none
 }
 
 .btn-primary {
-    @apply px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active: scale-95 transition-sm
+    @apply px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm
 }
 
 .transition-sm {
