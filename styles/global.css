@@ -111,7 +111,7 @@ body {
 }
 
 .bet .bet__container {
-    @apply p-5 py-10 md: py-5 mb-5 text-center min-w-[350px] grid place-items-center rounded-xl shadow-md relative
+    @apply p-5 py-10 md:py-5 mb-5 text-center min-w-[350px] grid place-items-center rounded-xl shadow-md relative
 }
 
 .bet table {
