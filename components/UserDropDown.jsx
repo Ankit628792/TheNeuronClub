@@ -50,8 +50,8 @@ function UserDropDown({ session }) {
             body: JSON.stringify({ _id: session?._id })
         });
         if (res.status === 200) {
-            location.reload();
             signOut()
+            location.reload();
         }
         setIsLoader(false)
     }
