@@ -7,7 +7,6 @@ import { countries } from '../../util'
 import { userSession } from '../../lib/user-session'
 import { useRouter } from 'next/router'
 import { useSession, signIn } from "next-auth/client"
-import FacebookLogin from 'react-facebook-login';
 
 function register({ referral_code }) {
     const user = userSession();
@@ -19,16 +18,11 @@ function register({ referral_code }) {
             router.push('/')
         }
     }, [user])
-
     useEffect(() => {
         if (session) {
             setData({ email: session?.user?.email, name: session?.user?.name, image_url: session?.user?.image, isVerified: true })
         }
     }, [session])
-
-    const responseFacebook = (res) => {
-        console.log(res)
-    }
 
     const [isSending, setIsSending] = useState(false)
     const [step, setStep] = useState('one')
@@ -169,16 +163,9 @@ function register({ referral_code }) {
                                 <img src="/images/google.svg" alt="" className="w-10 h-10" />
                                 <span>Google</span>
                             </button>
-                            <button className="signup__btn border-blue-500 hover:gradient-bg">
+                            <button className="signup__btn border-blue-500 hover:gradient-bg" onClick={() => signIn("facebook")}>
                                 <img src="/images/facebook.svg" alt="" className="w-10 h-10" />
                                 <span>Facebook</span>
-                                <div className="hidden">
-                                    <FacebookLogin
-                                        appId={process.env.FACEBOOK_ID}
-                                        autoLoad={true}
-                                        fields="name,email,picture"
-                                        callback={responseFacebook} />
-                                </div>
                             </button>
                         </div>
                     </div>
