@@ -187,7 +187,7 @@ body {
 }
 
 .filter {
-    @apply py-4 my-4 md: flex items-center
+    @apply py-4 my-4 md:flex items-center
 }
 
 .filter__item {
