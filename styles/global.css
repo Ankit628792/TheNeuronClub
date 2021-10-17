@@ -296,6 +296,10 @@ body {
     }
 
 }
+.Toastify__toast-container .Toastify__toast-container--top-center{
+    text-align: center;
+    z-index: 49;
+}
 
 .que__desc a {
     @apply text-blue-500
