@@ -44,7 +44,7 @@ export default function Home({ questions }) {
         <QuestionGroup questions={questions?.trending} category={"Trending Topics"} />
         <QuestionGroup questions={questions?.newest} category={"New Topics"} />
       </div>
-      {/* <ToastContainer style={{ textAlign: 'center', zIndex: '49', display: 'none' }} /> */}
+      <ToastContainer style={{ textAlign: 'center', zIndex: '49', opacity: '0' }} />
     </>
   )
 }
