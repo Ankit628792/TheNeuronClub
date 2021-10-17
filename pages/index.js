@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import Router from 'next/router'
 import Header from '../components/Header'
 import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';

@@ -19,8 +19,11 @@ function Navbar() {
     const [isActive, setIsActive] = useState(false)
 
     const [isLoader, setIsLoader] = useState(false)
+    
+    const userSignOut = () => signOut();
     const logout = async () => {
         setIsLoader(true)
+        userSignOut();
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
             method: 'POST',
