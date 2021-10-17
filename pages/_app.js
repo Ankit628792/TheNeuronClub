@@ -11,6 +11,7 @@ import Head from 'next/head'
 import ProgressBar from '@badrap/bar-of-progress'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 
 const progress = new ProgressBar({
   size: 4,
@@ -40,6 +41,8 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
   return (
+    <AnimatePresence exitBeforeEnter>
+    <AnimateSharedLayout>
     <AuthProvider session={pageProps.session}>
       <Provider store={store}>
         <Head>
@@ -55,6 +58,8 @@ function MyApp({ Component, pageProps }) {
         </div>
       </Provider>
     </AuthProvider>
+    </AnimateSharedLayout>
+    </AnimatePresence>
   )
 }
 

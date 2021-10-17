@@ -7,6 +7,8 @@ import ScrollToTop from "../../components/ScrollToTop";
 import Loader from "../../components/Loader";
 import { queFilter, updatedFilter } from "../../slices/filter";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { pageSlide, pageTransition } from "../../util";
 
 function index({ data }) {
     const [questions, setQuestions] = useState(data)
@@ -69,7 +71,11 @@ function index({ data }) {
             <Head>
                 <title>The Neuron | Questions</title>
             </Head>
-            <div className="px-5 sm:px-10 pt-28 pb-20 w-full">
+            <motion.div initial="initial"
+                animate="in"
+                exit="out"
+                variants={pageSlide}
+                transition={pageTransition} className="px-5 sm:px-10 pt-28 pb-20 w-full">
                 <div className="filter max-w-2xl sm:ml-auto">
                     <div className="flex items-center">
                         <div className="filter__item">
@@ -137,7 +143,7 @@ function index({ data }) {
                         </div>}
                     </div>
                 }
-            </div>
+            </motion.div>
             <ScrollToTop />
         </>
     )

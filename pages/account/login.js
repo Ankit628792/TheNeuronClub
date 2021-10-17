@@ -6,6 +6,8 @@ import Router from "next/router"
 import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session'
 import { useSession } from "next-auth/client"
+import { motion } from 'framer-motion'
+import { pageTransition, pageZoom } from '../../util'
 
 function login() {
     const user = userSession();
@@ -18,7 +20,7 @@ function login() {
 
     useEffect(() => {
         if (session) {
-            setData({ email: session?.user?.email})
+            setData({ email: session?.user?.email })
         }
     }, [])
 
@@ -75,11 +77,15 @@ function login() {
                             </div>
                         </Link>
                         <div className="max-w-sm lg:max-w-md text-white">
-                            <h1 className="text-3xl md:text-5xl mb-3 font-semibold">Start Betting Now</h1>
+                            <h1 className="text-3xl md:text-5xl mb-3 font-semibold">Start Predicting Now</h1>
                             <p className="text-lg md:text-xl">Join TheNeuron.club to bet directly on the outcome of events. Use your know-how to predict global events across categories and win rewards</p>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center w-full justify-center p-10 px-5">
+                    <motion.div initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={pageZoom}
+                        transition={pageTransition} className="flex flex-col items-center w-full justify-center p-10 px-5">
                         {isVerified ?
                             <form className="max-w-lg p-10 min-w-[350px] bg-white gradient-shadow" onSubmit={handleSubmit}>
                                 {!isValid && <p className="text-xs text-red-400 mb-2">Invalid Credentials </p>}
@@ -98,12 +104,12 @@ function login() {
                                     <h1>Remember me</h1>
                                 </div>
                                 <button type="submit" className="w-full px-6 py-3 text-lg text-white font-semibold rounded-md my-4 gradient-bg focus:border-none focus:outline-none active:scale-95 transition-sm">{isSending ? 'Wait...' : 'Login'}</button>
-                                <h1>Don't have an account ? <a href="/account/register" className="text-blue-500 font-medium">Register</a></h1>
+                                <h1>Don't have an account ?&nbsp;<a href="/account/register" className="text-blue-500 font-medium">Register</a></h1>
                             </form>
                             :
                             <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">User aleady registered, Verify your email to continue</h1>
                         }
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </>
