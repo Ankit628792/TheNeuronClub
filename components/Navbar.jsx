@@ -152,7 +152,7 @@ function Navbar() {
                     </ul>
                 </div>
             }
-            <ToastContainer style={{textAlign:"center", zIndex: '49'}} />
+            <ToastContainer style={{textAlign:"center", zIndex: '49', display: 'none'}} />
             {isLoader && <div className=" w-full h-full bg-white bg-opacity-80 grid place-items-center fixed top-0 right-0">
                 <Loader />
             </div>}
