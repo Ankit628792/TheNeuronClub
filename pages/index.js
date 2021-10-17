@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Carousel from '../components/Carousel'
 
 export default function Home({ questions }) {
-  const [isNewUser, setIsNewUser] = useState(false)
   const [carousel, setCarousel] = useState(false)
 
   useEffect(() => {
@@ -23,7 +22,6 @@ export default function Home({ questions }) {
         draggable: true,
         progress: undefined,
       });
-      setIsNewUser(true);
       setCarousel(true);
     }
     window.localStorage.setItem('neuron-newUser', false)
