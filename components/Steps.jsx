@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { pageSlide, pageTransition } from "../util"
+
 function Steps({ step, type }) {
     return (
         <motion.div initial="initial"

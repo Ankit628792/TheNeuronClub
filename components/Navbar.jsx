@@ -36,7 +36,6 @@ function Navbar() {
         });
         if (res.status === 200) {
             location.reload();
-            signOut();
         }
         setIsLoader(false)
     }
@@ -69,7 +68,7 @@ function Navbar() {
         if (session) {
             checkDailyVisit()
         }
-    }, [])
+    }, [session])
 
     const checkScrollTop = () => {
         if (window.pageYOffset > 75) {
@@ -88,7 +87,7 @@ function Navbar() {
 
     return (
         <>
-            <div style={{ zIndex: 48 }} className={`nav__bar flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
+            <div style={{ zIndex: 45 }} className={`nav__bar flex items-center justify-between p-5 py-4 fixed w-full z-50 md:px-8 md:pr-14 lg:px-14 text-white ${(router.pathname !== '/' || scrolled) && 'gradient-bg gradient-shadow-md'}`}>
                 <Link href="/">
                     <div className="relative cursor-pointer">
                         <picture>
@@ -106,7 +105,7 @@ function Navbar() {
                         {!session &&
                             <>
                                 <Link href="/faq">FAQs</Link>
-                                <Link href="/contact">Contact Us</Link>
+                                <Link href="/account/login">Login</Link>
                             </>
                         }
                     </ul>
@@ -115,9 +114,6 @@ function Navbar() {
                             <UserDropDown session={session} />
                             :
                             <>
-                                <Link href="/account/login" className="hidden lg:inline-block">
-                                    <button className="btn hidden lg:inline-block cursor-pointer active:scale-95 transition-sm mr-2">Login</button>
-                                </Link>
                                 <Link href="/account/register">
                                     <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>
                                 </Link>
@@ -155,13 +151,13 @@ function Navbar() {
                                 <button onClick={logout} className="font-bold" > <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1> </button>
                                 :
                                 <Link href="/account/register">
-                                    <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Register</h1>
+                                    <h1 className="text-gray-700 hover:text-blue-500 cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Get Started</h1>
                                 </Link>
                         }
                     </ul>
                 </motion.div>
             }
-            <ToastContainer style={{ textAlign: "center", zIndex: '49', opacity: '0' }} />
+            <ToastContainer style={{ textAlign: "center", zIndex: '49' }} />
             {isLoader && <div className=" w-full h-full bg-white bg-opacity-80 grid place-items-center fixed top-0 right-0">
                 <Loader />
             </div>}

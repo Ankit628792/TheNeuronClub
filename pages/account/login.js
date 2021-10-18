@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Router from "next/router"
 import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session'
-import { useSession } from "next-auth/client"
+import { signIn, useSession } from "next-auth/client"
 import { motion } from 'framer-motion'
 import { pageTransition, pageZoom } from '../../util'
 
@@ -18,17 +18,11 @@ function login() {
         }
     }, [user])
 
-    useEffect(() => {
-        if (session) {
-            setData({ email: session?.user?.email })
-        }
-    }, [])
-
     const [isSending, setIsSending] = useState(false)
     const [isValid, setIsValid] = useState(true)
     const [isVerified, setIsVerified] = useState(true);
     const [data, setData] = useState({
-        email: '',
+        email: session?.user?.email || '',
         password: ''
     })
 
@@ -38,10 +32,8 @@ function login() {
         setIsValid(true)
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSending(true);
-        const res = await fetch(`/api/account/login`, {
+    const login = async (data, url) => {
+        const res = await fetch(`${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,8 +51,29 @@ function login() {
             setIsValid(false);
             console.log("User Unauthorized")
         }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSending(true);
+        if (data.email && data.password) {
+            await login(data, '/api/account/login');
+        }
         setIsSending(false)
     }
+
+    const socialSignin = async () => {
+        setIsSending(true);
+        if (session?.user) {
+            await login(session?.user, '/api/account/login?type=social');
+        }
+        setIsSending(false)
+    }
+    useEffect(() => {
+        if (session) {
+            socialSignin()
+        }
+    }, [session])
     return (
         <>
             <div className="min-h-screen w-full">
@@ -109,6 +122,17 @@ function login() {
                             :
                             <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">User aleady registered, Verify your email to continue</h1>
                         }
+                        <h1 className="text-xl font-medium mt-6 tracking-wide text-gray-700">Or Signin With </h1>
+                        <div className="flex items-center">
+                            <button className="signup__btn border-gray-500 hover:bg-gray-800" onClick={() => signIn('google')}>
+                                <img src="/images/google.svg" alt="" className="w-10 h-10" />
+                                <span>Google</span>
+                            </button>
+                            <button className="signup__btn border-blue-500 hover:gradient-bg" onClick={() => signIn('facebook')}>
+                                <img src="/images/facebook.svg" alt="" className="w-10 h-10" />
+                                <span>Facebook</span>
+                            </button>
+                        </div>
                     </motion.div>
                 </div>
             </div>

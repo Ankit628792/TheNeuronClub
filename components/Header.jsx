@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { userSession } from '../lib/user-session'
 import { motion } from 'framer-motion'
-import { pageSlide, pageTransition, pageZoom } from '../util'
+import { pageSlide, pageTransition } from '../util'
 
 function Header() {
     const session = userSession()

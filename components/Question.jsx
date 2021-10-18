@@ -4,10 +4,10 @@ import moment from 'moment';
 import { motion } from 'framer-motion';
 import { pageTransition, pageZoom } from '../util';
 
-function Question({ question, user }) {
+function Question({ question }) {
     const handleClick = () => {
         Router.push({
-            pathname: `/question/${user ? question?.questionId : question._id}`,
+            pathname: `/question/${question._id}`,
         })
     }
     return (
@@ -24,20 +24,13 @@ function Question({ question, user }) {
             </div>
             <div className="h-4 w-full"></div>
             <div className="flex items-center justify-between mt-auto">
-                {user ? <div className="text-sm">
-                    <h1 className="text-gray-400">Invested</h1>
-                    <h2>${question?.amount}</h2>
+                <div className="text-sm">
+                    <h1 className="text-gray-400">Category</h1>
+                    <h2 className="capitalize">{question?.category}</h2>
                 </div>
-                    :
-                    <div className="text-sm">
-                        <h1 className="text-gray-400">Category</h1>
-                        <h2 className="capitalize">{question?.category}</h2>
-                    </div>
-                }
                 <div className="text-right flex flex-col items-end text-sm">
                     <ClockIcon className="h-6 sm:h-7 text-blue-500" /> <span className="">
-                        {/* {Math.floor(Math.random() * 10)}h left */}
-                        {user ? moment(question?.settlementClosing).fromNow() : moment(question?.bidClosing).fromNow()}
+                        {moment(question?.settlementClosing).fromNow() || moment(question?.bidClosing).fromNow()}
                     </span>
                 </div>
             </div>

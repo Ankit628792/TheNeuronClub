@@ -2,6 +2,7 @@ import { BellIcon, GiftIcon, TagIcon, XIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { container, item, pageSlide, pageTransition } from '../util'
+
 function Notification({ notifications }) {
     const [isActive, setIsActive] = useState(false)
     return (

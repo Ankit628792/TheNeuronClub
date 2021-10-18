@@ -64,8 +64,11 @@ function register({ referral_code }) {
             setIsUsername(true);
         }
         else if (res.status == 201) {
+            const response = await res.json();
             if (data.image_url) {
-                router.push('/account/login')
+                window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
+                window.localStorage.setItem('neuron-newUser', true)
+                router.push('/')
             }
             else {
                 setIsForm(false);

@@ -104,7 +104,14 @@ function index() {
                             </motion.div>
                         </div>
                     </div>
-                    <QuestionGroup questions={userData?.questions} category={"Question Transaction"} user={true} />
+                    {userData?.questions?.length > 0 ?
+                        <QuestionGroup questions={userData?.questions} category={"Question Transaction"} user={true} />
+                        :
+                        <div className="text-center p-5">
+                            <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold text-gray-700 my-6">You've not made any transaction yet.</h1>
+                            <button onClick={() => Router.push('/question/')} className="px-5 py-3 gradient-bg text-lg lg:text-xl text-white rounded-xl font-semibold active:scale-95 transition-sm">Place a Bid</button>
+                        </div>
+                    }
                     <Notification notifications={userData?.notification} />
                 </>
                 :

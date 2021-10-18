@@ -42,6 +42,7 @@ function QuestionDetail({ questionData }) {
     const [isQueEdit, setIsQueEdit] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
     const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
+    // const urlSrc = `https://www.theneuron.club/question/${que?._id}`
 
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
@@ -283,7 +284,6 @@ function QuestionDetail({ questionData }) {
                                         exit="out"
                                         variants={pageZoom}
                                         transition={pageTransition} className="bet__container">
-                                        {/* {session?.admin && <span className="flex space-x-1 items-center text-gray-600 hover:text-gray-800 cursor-pointer text-base font-medium absolute top-5 right-5" onClick={() => setIsDateEdit(true)}><PencilIcon className="w-5 h-5" /> Edit </span>} */}
                                         <table className="min-h-[250px]">
                                             <tbody>
                                                 <tr>
@@ -372,11 +372,8 @@ function QuestionDetail({ questionData }) {
                                             </>
                                             :
                                             <>
-                                                <h1 className="text-2xl font-semibold my-2">About the question
-                                                    {/* {session?.admin && <span className="inline-flex ml-2 text-gray-600 hover:text-gray-800 cursor-pointer space-x-1 items-center text-base font-medium" onClick={() => setIsDescEdit(true)}><PencilIcon className="w-5 h-5" /> Edit </span>}  */}
-                                                </h1>
-                                                <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}>
-                                                </div>
+                                                <h1 className="text-2xl font-semibold my-2">About the question</h1>
+                                                <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
                                             </>
                                     }
                                 </motion.div>
@@ -397,10 +394,6 @@ function QuestionDetail({ questionData }) {
                                     }
                                     </>
                                 }
-                                {/* {(isDescEdit || isDateEdit) && <div className="px-5 pb-10">
-                                    <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
-                                    <button className={`px-4 py-2 leading-loose text-gray-800 hover:text-white hover:bg-gray-800 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={cancelUpdate}>Cancel</button>
-                                </div>} */}
                             </motion.div>
                         </>
                         :
