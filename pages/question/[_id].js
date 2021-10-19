@@ -11,6 +11,9 @@ import { FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, Tw
 import Coin from '../../components/Coin'
 import { balance, updateBalance } from '../../slices/userBalance'
 import { useDispatch, useSelector } from 'react-redux'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import addDays from 'date-fns/addDays'
 import { motion } from 'framer-motion';
 import { modules, formats, getCurrentDate, pageSlide, pageTransition, pageZoom } from '../../util'
 import dynamic from 'next/dynamic'
@@ -50,7 +53,7 @@ function QuestionDetail({ questionData }) {
             const { username } = session;
             setIsActive(false)
             setIsSending(true)
-            if (amount > 0 && amount >= bid) {
+            if (amount > 0 && amount >= bid ) {
                 Volume = Volume + bid
                 odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
 
@@ -110,14 +113,21 @@ function QuestionDetail({ questionData }) {
         setUpdateQue({ ...updateQue, qstatus: (updateQue.qstatus === 'verified') ? 'closed' : 'verified' });
     }
 
+    const [bidClosingDate, setBidClosingDate] = useState(new Date())
+    const [settlementClosingDate, setSettlementClosingDate] = useState(addDays(bidClosingDate, 3))
+
+     useEffect(() => {
+        setSettlementClosingDate(addDays(bidClosingDate, 3))
+    }, [bidClosingDate])
+
     const updateQuestion = async () => {
-        const { _id, bidClosing, settlementClosing, qstatus, question } = updateQue;
+        const { _id, qstatus, question } = updateQue;
         const res = await fetch(`/api/question/update_que`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ _id, bidClosing, settlementClosing, desc, qstatus, question })
+            body: JSON.stringify({ _id, bidClosing: bidClosingDate, settlementClosing: settlementClosingDate, desc, qstatus, question })
         })
         console.log(res.status)
         const response = await res.json();
@@ -302,7 +312,9 @@ function QuestionDetail({ questionData }) {
                                                     <>
                                                         <tr><td>
                                                             <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
-                                                        </td><td>  <input
+                                                        </td><td>  
+                                                        <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={bidClosingDate} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
+                                                            {/* <input
                                                             placeholder="Bit Closing"
                                                             type="datetime-local"
                                                             name="bidClosing"
@@ -311,13 +323,15 @@ function QuestionDetail({ questionData }) {
                                                             value={updateQue?.bidClosing}
                                                             onChange={handleChange}
                                                             className=" w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
-                                                        />
+                                                        /> */}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
-                                                            </td><td>  <input
+                                                            </td><td> 
+                                                            <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 3)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
+                                                                 {/* <input
                                                                 placeholder="Settlement Closing"
                                                                 type="datetime-local"
                                                                 name="settlementClosing"
@@ -326,7 +340,7 @@ function QuestionDetail({ questionData }) {
                                                                 value={updateQue?.settlementClosing}
                                                                 onChange={handleChange}
                                                                 className=" w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
-                                                            />
+                                                            /> */}
                                                             </td>
                                                         </tr>
                                                     </>
