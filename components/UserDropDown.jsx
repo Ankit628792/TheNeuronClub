@@ -65,7 +65,7 @@ function UserDropDown({ session }) {
     return (
         <>
             {carousel && <Carousel onSelect={closeOnboard} />}
-            {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/')}><Coin width="4" height="4" />{amount}</span>}
+            {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
             <div className="relative font-medium">
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-blue-400" onClick={() => setIsActive(!isActive)}>
                     <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">
