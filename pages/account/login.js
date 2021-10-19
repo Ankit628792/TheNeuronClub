@@ -116,7 +116,7 @@ function login() {
                         {isVerified ?
                             <form className="max-w-lg p-10 min-w-[350px] bg-white gradient-shadow" onSubmit={handleSubmit}>
                                 {!isValid && <p className="text-xs text-red-400 mb-2">Invalid Credentials </p>}
-                                {isNew && <p className="text-sm text-green-500 mb-2">Welcome {session?.user?.name} </p>}
+                                {isNew && <p className="text-sm text-center text-green-500 mb-2">Welcome {session?.user?.name} </p>}
                                 {
                                     isNew ?
                                         <>
