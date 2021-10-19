@@ -113,7 +113,7 @@ function Portfolio() {
                     }
                 </div>
             </div>
-            <div className="flex flex-col justify-start w-full max-w-xs gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-lg lg:text-xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
+            <div className="flex flex-col justify-start w-full max-w-md gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
                 <div className="flex items-center max-w-max space-x-4">
                     <h1>Name:&nbsp; </h1>
                     {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal break-all">{session?.name}</h2>}

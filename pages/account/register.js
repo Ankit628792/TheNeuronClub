@@ -123,7 +123,7 @@ function register({ referral_code }) {
                                         <div className="flex border-b border-gray-700 py-2 my-4">
                                             <GlobeAltIcon className="h-6" />
                                             <select onChange={handleChange} className="outline-none flex-grow px-2" type="country" name="country" value={data.country} required placeholder="Country ">
-                                                <option disabled>Country </option>
+                                                <option value="" disabled>Country </option>
                                                 {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
                                             </select>
                                         </div>
