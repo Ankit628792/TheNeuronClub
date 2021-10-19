@@ -16,7 +16,10 @@ function login() {
         if (user) {
             Router.push('/')
         }
-    }, [user])
+        else if(session){
+            socialSignin()
+        }
+    }, [user, session])
 
     const [isSending, setIsSending] = useState(false)
     const [isValid, setIsValid] = useState(true)
@@ -69,11 +72,11 @@ function login() {
         }
         setIsSending(false)
     }
-    useEffect(() => {
-        if (session) {
-            socialSignin()
-        }
-    }, [session])
+    // useEffect(() => {
+    //     if (session) {
+    //         socialSignin()
+    //     }
+    // }, [session])
     return (
         <>
             <div className="min-h-screen w-full">
