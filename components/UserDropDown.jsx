@@ -81,8 +81,8 @@ function UserDropDown({ session }) {
                     variants={fadeOut}
                     transition={pageTransition} className="bg-white gradient-shadow-md absolute min-w-max rounded-md p-3 top-[130%] left-1/2 transform -translate-x-1/2">
                     <ul className="space-y-4 text-lg text-gray-500">
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1 text-gray-700" />Portfolio</li>
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/transactions')}><ViewGridIcon className="w-6 h-6 mr-1 text-gray-700" />Transactions</li>
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1 text-gray-700" />My Account</li>
+                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/portfolio')}><ViewGridIcon className="w-6 h-6 mr-1 text-gray-700" />Portfolio</li>
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
                         {session?.referral_code &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>

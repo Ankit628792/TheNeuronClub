@@ -24,8 +24,8 @@ function CreateQ({ session }) {
     const [link, setLink] = useState('')
     const [currentDate, setCurrentDate] = useState(new Date())
     const [goLiveDate, setGoLiveDate] = useState(currentDate)
-    const [bidClosingDate, setBidClosingDate] = useState(addDays(goLiveDate, 7))
-    const [settlementClosingDate, setSettlementClosingDate] = useState(addDays(bidClosingDate, 3))
+    const [bidClosingDate, setBidClosingDate] = useState(addDays(goLiveDate, 1))
+    const [settlementClosingDate, setSettlementClosingDate] = useState(addDays(bidClosingDate, 1))
     const [qImage, setQImage] = useState(null);
     const [data, setData] = useState({
         question: '',
