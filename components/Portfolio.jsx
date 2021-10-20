@@ -89,7 +89,7 @@ function Portfolio() {
                                 :
                                 <img className="w-40 lg:w-48 h-40 lg:h-48 object-cover overflow-hidden rounded-full" src="/images/user.png" alt="profile_pic" onClick={() => (fileInputRef.current.click())} />
                         }
-                        {isEdit && <div className={`cursor-pointer absolute w-40 lg:w-48 h-40 lg:h-48 rounded-full top-0 bg-gray-700 bg-opacity-40 font-semibold text-3xl grid place-items-center text-center text-white ${image && 'hidden'}`} onClick={() => (fileInputRef.current.click())}> Upload <br />Image </div>}
+                        {isEdit && <div className={`cursor-pointer border-8 border-white absolute w-40 lg:w-48 h-40 lg:h-48 rounded-full top-0 bg-gray-700 bg-opacity-40 font-semibold text-3xl grid place-items-center text-center text-white ${image && 'hidden'}`} onClick={() => (fileInputRef.current.click())}> Upload <br />Image </div>}
                         <input type="file" disabled={!isEdit} name="image" className="hidden" ref={fileInputRef} accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
                             if (file && file.type.substring(0, 5) === 'image') {

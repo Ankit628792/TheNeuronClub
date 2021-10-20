@@ -53,7 +53,7 @@ function QuestionDetail({ questionData }) {
             const { username } = session;
             setIsActive(false)
             setIsSending(true)
-            if (amount > 0 && amount >= bid ) {
+            if (amount > 0 && amount >= bid) {
                 Volume = Volume + bid
                 odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
 
@@ -63,7 +63,7 @@ function QuestionDetail({ questionData }) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username, bid, _id, question, category, odd, settlementClosing })
+                    body: JSON.stringify({ username, bid, _id, userId: session?._id, question, category, odd, settlementClosing })
                 })
                 console.log(res.status)
                 const response = await res.json();
@@ -116,7 +116,7 @@ function QuestionDetail({ questionData }) {
     const [bidClosingDate, setBidClosingDate] = useState(new Date())
     const [settlementClosingDate, setSettlementClosingDate] = useState(addDays(bidClosingDate, 1))
 
-     useEffect(() => {
+    useEffect(() => {
         setSettlementClosingDate(addDays(bidClosingDate, 3))
     }, [bidClosingDate])
 
@@ -312,9 +312,9 @@ function QuestionDetail({ questionData }) {
                                                     <>
                                                         <tr><td>
                                                             <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
-                                                        </td><td>  
-                                                        <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={bidClosingDate} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
-                                                            {/* <input
+                                                        </td><td>
+                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={bidClosingDate} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
+                                                                {/* <input
                                                             placeholder="Bit Closing"
                                                             type="datetime-local"
                                                             name="bidClosing"
@@ -329,9 +329,9 @@ function QuestionDetail({ questionData }) {
                                                         <tr>
                                                             <td>
                                                                 <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
-                                                            </td><td> 
-                                                            <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 3)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
-                                                                 {/* <input
+                                                            </td><td>
+                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 3)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
+                                                                {/* <input
                                                                 placeholder="Settlement Closing"
                                                                 type="datetime-local"
                                                                 name="settlementClosing"
