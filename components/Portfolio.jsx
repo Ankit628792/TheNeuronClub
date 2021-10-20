@@ -68,7 +68,7 @@ function Portfolio() {
     const [userQuestions, setUserQuestions] = useState()
 
     const getQuestion = async () => {
-        const res = await fetch(`/api/user/questions?userId=${session?.username}`);
+        const res = await fetch(`/api/user/questions?userId=${session?._id}`);
         console.log(res.status)
         const response = await res.json();
         setUserQuestions(response)
