@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 import { userSession } from '../../lib/user-session'
 import Modal from '../../components/Modal'
-import { FacebookIcon, LinkedinIcon, PinterestIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon } from "react-share";
+import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import Coin from '../../components/Coin'
 import { balance, updateBalance } from '../../slices/userBalance'
 import { useDispatch, useSelector } from 'react-redux'
