@@ -86,15 +86,13 @@ const filter = async (req, res) => {
 }
 
 const comment = async (req, res) => {
-    console.log(req.method)
-    console.log(req.query)
     if (req.method == 'POST') {
         const postComment = new QComment(req.body);
         const commentSaved = await postComment.save();
         commentSaved ? res.status(201).send(commentSaved) : res.status(400).send(null);
     }
     else if(req.method == 'DELETE'){
-        const delComments = await QComment.findByIdAndDelete({ _id: _id });
+        const delComments = await QComment.findByIdAndDelete({ _id: req.query._id });
         delComments ? res.status(200).send({msg: "comment deleted"}) : res.status(400).send({msg: 'unable to remove comment'});
     }
     else {
