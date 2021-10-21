@@ -1,4 +1,4 @@
-import QComment from '../db/models/comment';
+import QComment from '../db/models/qcomment';
 import Question from '../db/models/question'
 import Transaction from '../db/models/transaction';
 

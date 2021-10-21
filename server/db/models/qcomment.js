@@ -21,6 +21,6 @@ const queComment = new mongoose.Schema({
     },
 }, { timestamps: true })
 
-const QComment = mongoose.models.Comment || mongoose.model("Comment", queComment);
+const QComment = mongoose.models.QComment || mongoose.model("QComment", queComment);
 
 export default QComment;

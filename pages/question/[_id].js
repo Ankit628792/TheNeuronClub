@@ -415,7 +415,7 @@ function QuestionDetail({ questionData }) {
                                 }
 
                             </motion.div>
-                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 font-medium mt-2 sm:mt-4 p-5 relative bg-gray-50">
+                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 relative">
                                 <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url}  />
                             </div>
                         </>
