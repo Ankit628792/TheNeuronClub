@@ -17,6 +17,8 @@ import addDays from 'date-fns/addDays'
 import { motion } from 'framer-motion';
 import { modules, formats, pageSlide, pageTransition, pageZoom } from '../../util'
 import dynamic from 'next/dynamic'
+import CommentBox from '../../components/CommentBox';
+
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
@@ -56,11 +58,8 @@ function QuestionDetail({ questionData }) {
             setUserInfo(response)
         }
     }
-    console.log(userInfo)
-    console.log(questionData)
-    console.log(que)
     useEffect(() => {
-            getUserInfo();
+        getUserInfo();
     }, [])
 
     let { Volume, Favour, Against } = bidData
@@ -364,7 +363,7 @@ function QuestionDetail({ questionData }) {
                                                 }
                                                 <tr>
                                                     <td>Creator</td>
-                                                    <td>{userInfo?.name || questionData?.userId || 'unKnown'}</td>
+                                                    <td className="capitalize">{userInfo?.name || questionData?.userId || 'unKnown'}</td>
                                                 </tr>
                                                 {isQueEdit && <tr>
                                                     <td></td>
@@ -414,7 +413,11 @@ function QuestionDetail({ questionData }) {
                                     }
                                     </>
                                 }
+
                             </motion.div>
+                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 font-medium mt-2 sm:mt-4 p-5 relative bg-gray-50">
+                                <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url}  />
+                            </div>
                         </>
                         :
                         <Loader />

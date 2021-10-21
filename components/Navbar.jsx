@@ -53,7 +53,7 @@ function Navbar() {
         if (res.status === 200) {
             toast("You've won 100 Neuron coins for daily visit! 🥳", {
                 position: "top-center",
-                autoClose: 100000,
+                autoClose: 10000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

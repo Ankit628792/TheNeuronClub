@@ -1,23 +1,26 @@
 import mongoose from 'mongoose';
 
-const userComment = new mongoose.Schema({
-    userId: {
-        type: String
-    },
-    fullname : {
+const queComment = new mongoose.Schema({
+    queId: {
         type: String,
         required: true
     },
-    email : {
+    userId: {
         type: String,
-        required: true,
+        required: true
+    },
+    name : {
+        type: String,
+    },
+    image_url : {
+        type: String,
     },
     comment : {
         type: String,
         required: true
     },
-})
+}, { timestamps: true })
 
-const Comment = mongoose.models.Comment || mongoose.model("Comment", userComment);
+const QComment = mongoose.models.Comment || mongoose.model("Comment", queComment);
 
-export default Comment;
+export default QComment;

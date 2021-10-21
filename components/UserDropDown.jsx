@@ -29,7 +29,7 @@ function UserDropDown({ session }) {
     }, [isActive]);
 
     const getUser = async () => {
-        const res = await fetch(`/api/user/getUser?_id=${session?._id}`);
+        const res = await fetch(`/api/user/info?_id=${session?._id}`);
         console.log(res.status)
         if (res.status == 200) {
             const response = await res.json();
@@ -87,7 +87,6 @@ function UserDropDown({ session }) {
                         {session?.referral_code &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
                         }
-                        <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setcarousel(true)}><CashIcon className="w-6 h-6 mr-1 text-gray-700" /> OnBoard</li>
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>
                     <div className="bg-white absolute -top-2 left-1/2 transform -translate-x-1/2 w-10 h-5 clip-path-sm"></div>
