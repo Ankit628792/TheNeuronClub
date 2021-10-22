@@ -85,32 +85,14 @@ export const Detail = ({ que, onSelect, updateQue }) => {
 function verification({data}) {
     const session = userSession();
     const router = useRouter();
-    console.log(session)
-    console.log(router)
     if (!session) {
         router.push('/')
     }
-    if (session?.type === 'admin') {
+    if (session?.type !== 'admin') {
         router.push('/')
     }
     const [isQue, setIsQue] = useState();
     const [queList, setQueList] = useState( data ? [...data] : null);
-
-    // const getQuestions = async () => {
-    //     const res = await fetch(`/api/question/get_questions?filter=created`, {
-    //         method: 'GET', headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     if (res.status === 200) {
-    //         const response = await res.json();
-    //         setQueList([...response]);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getQuestions();
-    // }, [])
 
     const updateQue = async (id) => {
 
