@@ -378,7 +378,7 @@ function QuestionDetail({ questionData }) {
 
                                 </div>
 
-                                <motion.div initial="initial"
+                               {que?.desc && <motion.div initial="initial"
                                     animate="in"
                                     exit="out"
                                     variants={pageSlide}
@@ -395,7 +395,7 @@ function QuestionDetail({ questionData }) {
                                                 <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
                                             </>
                                     }
-                                </motion.div>
+                                </motion.div>}
                                 {que?.reference && <motion.div initial="initial"
                                     animate="in"
                                     exit="out"
