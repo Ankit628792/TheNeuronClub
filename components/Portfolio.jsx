@@ -14,10 +14,8 @@ function Portfolio() {
     const [isEdit, setIsEdit] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
     const [data, setData] = useState({
-        username: session?.username,
         email: session?.email,
         name: session?.name,
-        country: session?.country,
     })
 
     const handleChange = (e) => {
@@ -47,8 +45,8 @@ function Portfolio() {
         formData.append("email", data.email);
         formData.append("_id", session?._id);
         formData.append("name", data.name);
-        formData.append("username", data.username);
-        formData.append("country", data.country);
+        // formData.append("username", data.username);
+        // formData.append("country", data.country);
         const res = await fetch(`/api/user/update_user`, {
             method: 'POST',
             body: formData
@@ -122,18 +120,18 @@ function Portfolio() {
                     <h1>Email:&nbsp; </h1>
                     <h2 className="font-normal break-all">{session?.email}</h2>
                 </div>
-                <div className="flex items-center max-w-max space-x-4">
+                {/* <div className="flex items-center max-w-max space-x-4">
                     <h1>Username:&nbsp; </h1>
                     {isEdit ? <input type="text" name="username" onChange={handleChange} value={data.username} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal break-all">{session?.username}</h2>}
-                </div>
-                <div className="flex items-center max-w-max space-x-4">
+                </div> */}
+                {/* <div className="flex items-center max-w-max space-x-4">
                     <h1>Country:&nbsp; </h1>
                     {isEdit ? <select onChange={handleChange} className="outline-none text-lg h-10 cursor-pointer px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" type="country" name="country" value={data.country} required placeholder="Country ">
                         <option value="" disabled>Choose Your Country </option>
                         {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
                     </select>
                         : <h2 className="font-normal break-all">{session.country}</h2>}
-                </div>
+                </div> */}
                 <div className="flex items-center max-w-max space-x-4">
                     <h1>Balance:&nbsp; </h1>
                     <h2 className="inline-flex items-center font-normal"><Coin width="5" height="5" />{amount}</h2>

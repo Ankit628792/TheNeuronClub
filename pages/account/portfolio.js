@@ -100,7 +100,7 @@ function portfolio() {
                                 </div>
                                 <div className="text-lg">
                                     <h2>{session?.name}</h2>
-                                    <h1 className="text-gray-500 text-base">{session?.country}</h1>
+                                    {/* <h1 className="text-gray-500 text-base">{session?.country}</h1> */}
                                 </div>
                             </motion.div>
                         </div>

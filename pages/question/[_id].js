@@ -65,7 +65,6 @@ function QuestionDetail({ questionData }) {
     let { Volume, Favour, Against } = bidData
     const handleBet = async () => {
         if (session) {
-            const { username } = session;
             setIsActive(false)
             setIsSending(true)
             if (amount > 0 && amount >= bid) {
@@ -78,7 +77,7 @@ function QuestionDetail({ questionData }) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username, bid, _id, userId: session?._id, question, category, odd, settlementClosing })
+                    body: JSON.stringify({ bid, _id, userId: session?._id, question, category, odd, settlementClosing })
                 })
                 console.log(res.status)
                 const response = await res.json();

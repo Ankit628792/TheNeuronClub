@@ -26,16 +26,12 @@ function register({ referral_code }) {
     }, [session])
 
     const [isSending, setIsSending] = useState(false)
-    const [step, setStep] = useState('one')
     const [isForm, setIsForm] = useState(true);
     const [isEmail, setIsEmail] = useState(false)
-    const [isUsername, setIsUsername] = useState(false)
     const [data, setData] = useState({
-        username: '',
         email: '',
         password: '',
         name: '',
-        country: 'Sweden',
         referral_code: referral_code || null,
         image_url: session?.user?.image || null,
         isVerified: false
@@ -46,22 +42,17 @@ function register({ referral_code }) {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSending(true);
-        const res = await fetch(`/api/account/register`, {
+    const registerUser = async (userData, url) => {
+        const res = await fetch(`${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(userData)
         })
 
         if (res.status == 421) {
             setIsEmail(true);
-        }
-        else if (res.status == 422) {
-            setIsUsername(true);
         }
         else if (res.status == 201) {
             const response = await res.json();
@@ -76,8 +67,27 @@ function register({ referral_code }) {
         } else {
             console.log("Unable to register user")
         }
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (data.email && data.password) {
+            await registerUser(data, '/api/account/register');
+        }
         setIsSending(false)
     }
+    const socialSignin = async () => {
+        setIsSending(true);
+        if (session?.user) {
+            await registerUser(session?.user, '/api/account/login?type=social');
+        }
+        setIsSending(false)
+    }
+    useEffect(() => {
+        if (session) {
+            socialSignin()
+        }
+    }, [session])
+
     return (
         <>
             <div className="min-h-screen w-full">
@@ -107,58 +117,33 @@ function register({ referral_code }) {
                         {
                             isForm ?
                                 <form className="max-w-lg p-10 min-w-[380px] bg-white gradient-shadow" onSubmit={handleSubmit}>
-                                    {isUsername && <p className="text-sm text-red-400 text-center">Username already exist</p>}
                                     {isEmail && <p className="text-sm text-red-400 text-center">Email already exist</p>}
-                                    {step === 'one' && <>
-                                        <div className="flex border-b border-gray-700 py-2">
-                                            <UserIcon className="h-6" />
-                                            <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="name" minLength="5" value={data.name} required placeholder="Your Name " />
-                                        </div>
-                                        {/* {isUsername && <p className="text-xs text-red-400">Username already exist</p>} */}
-                                        <div className="flex border-b border-gray-700 py-2 mt-6">
-                                            <MailIcon className="h-6" />
-                                            <input onChange={handleChange} className="outline-none flex-grow px-2" type="email" name="email" value={data.email} required placeholder="Your Mail Id " />
-                                        </div>
-                                        {/* {isEmail && <p className="text-xs text-red-400">Email already exist</p>} */}
-                                        <div className="flex border-b border-gray-700 py-2 my-4">
-                                            <GlobeAltIcon className="h-6" />
-                                            <select onChange={handleChange} className="outline-none flex-grow px-2" type="country" name="country" value={data.country} required placeholder="Country ">
-                                                <option value="" disabled>Country </option>
-                                                {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
-                                            </select>
-                                        </div>
+                                    <div className="flex border-b border-gray-700 py-2">
+                                        <UserIcon className="h-6" />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="name" minLength="1" value={data.name} required placeholder="Your Name " />
+                                    </div>
+                                    <div className="flex border-b border-gray-700 py-2 mt-6">
+                                        <MailIcon className="h-6" />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="email" name="email" value={data.email} required placeholder="Your Mail Id " />
+                                    </div>
 
-                                        <div className="flex items-center justify-end cursor-pointer mb-2" onClick={() => setStep('two')}>
-                                            <button className="text-lg text-blue-500 font-semibold rounded-md my-4 bg-white active:scale-95 transition-sm flex items-center" onClick={() => setStep('one')}>Next<ArrowRightIcon className="h-4 ml-2" /></button>
-                                        </div>
-                                    </>}
-
-                                    {step === 'two' && <>
-                                        <div className="flex border-b border-gray-700 py-2">
-                                            <UserIcon className="h-6" />
-                                            <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="username" minLength="5" value={data.username} required placeholder="User Name " />
-                                        </div>
-                                        <div className="flex border-b border-gray-700 py-2 my-4">
-                                            <LockClosedIcon className="h-6" />
-                                            <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" minLength="6" value={data.password} required placeholder="Password " />
-                                        </div>
-                                        <div className="flex border-b border-gray-700 py-2 mb-6">
-                                            <UsersIcon className="h-6" />
-                                            <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="referral_code" minLength="6" maxLength="6" value={data.referral_code} placeholder="Referral Code (If Any) " />
-                                        </div>
-                                        <div className="flex items-center space-x-2">
-                                            <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
-                                            <h1>I accept terms & conditions</h1>
-                                        </div>
-                                        <div className="flex items-center space-x-2">
-                                            <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
-                                            <h1>I am 18+ or more</h1>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <button className="py-2 text-lg text-blue-500 font-semibold rounded-md my-4 bg-white active:scale-95 transition-sm flex items-center" onClick={() => setStep('one')}><ArrowLeftIcon className="h-4 mr-2" /> Previous</button>
-                                            <button type="submit" className="px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">{isSending ? 'Wait...' : 'Register'}</button>
-                                        </div>
-                                    </>}
+                                    <div className="flex border-b border-gray-700 py-2 my-4">
+                                        <LockClosedIcon className="h-6" />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="password" name="password" minLength="6" value={data.password} required placeholder="Password " />
+                                    </div>
+                                    <div className="flex border-b border-gray-700 py-2 mb-6">
+                                        <UsersIcon className="h-6" />
+                                        <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="referral_code" minLength="6" maxLength="6" value={data.referral_code} placeholder="Referral Code (If Any) " />
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
+                                        <h1>I accept terms & conditions</h1>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
+                                        <h1>I am 18+ or more</h1>
+                                    </div>
+                                    <button type="submit" className="px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">{isSending ? 'Wait...' : 'Register'}</button>
                                     <h1 className="text-center">Already have an account? &nbsp;<a href="/account/login" className="text-blue-500 font-medium">Login</a></h1>
                                 </form>
                                 :
