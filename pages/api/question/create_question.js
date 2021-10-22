@@ -4,6 +4,7 @@ import middleware from '../../../lib/uploadFile/middleware'
 import nextConnect from 'next-connect'
 import DatauriParser from 'datauri/parser'
 import { uploader, cloudinaryConfig } from '../../../lib/config/cloudinaryConfig'
+import sendEMail from '../../../lib/Mail/sendMail'
 
 const handler = nextConnect()
 handler.use(middleware)
