@@ -27,7 +27,7 @@ handler.post(async (req, res) => {
             }
             else {
                 const link = `${process.env.host}/question/${saveQuestion?._id}`;
-                const data = { subject: `New Question added to The Neuron Club`, text: link, email: `contact@theneuron.club`, html: `<p style="font-size:20px;font-weight: 500;font-family: 'Roboto'">${saveQuestion?.question} </p><p style="font-size:16px;font-weight: 400;font-family: 'Roboto'">Click to <a href="${link}" target="_blank">View Question Details</a></p>` };
+                const data = { subject: `New Question added to The Neuron Club`, text: link, email: `ankit628792@gmail.com`, html: `<p style="font-size:20px;font-weight: 500;font-family: 'Roboto'">${saveQuestion?.question} </p><p style="font-size:16px;font-weight: 400;font-family: 'Roboto'">Click to <a href="${link}" target="_blank">View Question Details</a></p>` };
                 const result = await sendEMail(data);
                 console.log(result)
                 res.status(201).send(questionCreated)
