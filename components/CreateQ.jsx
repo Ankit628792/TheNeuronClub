@@ -35,7 +35,7 @@ function CreateQ({ session }) {
         goLive: '',
         options: ['Yes', 'No'],
         settlementClosing: '',
-        qstatus: 'verified',
+        qstatus: 'created',
     })
     const [desc, setDesc] = useState('')
 

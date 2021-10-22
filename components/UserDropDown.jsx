@@ -88,7 +88,7 @@ function UserDropDown({ session }) {
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
                         }
                         {session?.type ==='admin' &&
-                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><ViewListIcon className="w-6 h-6 mr-1 text-gray-700" />Question Verification</li>
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><ViewListIcon className="w-6 h-6 mr-1 text-gray-700" />Que's Verification</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>

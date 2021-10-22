@@ -73,7 +73,7 @@ export const Detail = ({ que, onSelect, updateQue }) => {
                     <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
                 </div>}
 
-                {que?.reference && <div className="p-5">
+                {que?.reference && <div className="px-5 pb-5">
                     <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
                     <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
                 </div>}
