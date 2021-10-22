@@ -1,6 +1,6 @@
 import { TrashIcon } from "@heroicons/react/solid"
 import moment from "moment"
-import motion from 'framer-motion'
+import { motion } from 'framer-motion'
 import { pageTransition, pageZoom } from "../util"
 
 function Comment({ user, comment, onSelect }) {

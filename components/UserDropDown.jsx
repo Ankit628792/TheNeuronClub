@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { CashIcon, ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, ViewGridIcon, XIcon } from "@heroicons/react/solid"
+import {  ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useDispatch } from 'react-redux'
@@ -86,6 +86,9 @@ function UserDropDown({ session }) {
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
                         {session?.referral_code &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
+                        }
+                        {session?.type ==='admin' &&
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><ViewListIcon className="w-6 h-6 mr-1 text-gray-700" />Question Verification</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>

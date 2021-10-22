@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import { pageTransition, pageZoom } from '../../util';
 import { XIcon } from '@heroicons/react/solid';
 import { userSession } from '../../lib/user-session';
-import Router from 'next/router';
+import { useRouter } from 'next/router'
 import Loader from '../../components/Loader';
 
 export const Detail = ({ que, onSelect, updateQue }) => {
     const [isVerify, setIsVerify] = useState(false)
     const [isInValid, setIsInValid] = useState(false)
     const updateStatus = async ({ qstatus }) => {
-        setIsVerify(true)
+        qstatus == 'verified' ? setIsVerify(true) : setIsInValid(true)
         const res = await fetch(`/api/question/verifyQue`, {
             method: 'POST',
             headers: {
@@ -20,10 +20,11 @@ export const Detail = ({ que, onSelect, updateQue }) => {
             body: JSON.stringify({ _id: que?._id, qstatus: qstatus })
         })
         if (res.status === 200) {
-            setIsVerify(false)
+            qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
             updateQue(que?._id)
             onSelect(null);
         }
+        qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
         setIsVerify(false)
     }
     function DESC() {
@@ -83,11 +84,12 @@ export const Detail = ({ que, onSelect, updateQue }) => {
 
 function verification() {
     const session = userSession();
+    const router = useRouter();
     if (!session) {
-        Router.push('/')
+        router.push('/')
     }
     if (session?.type === 'admin') {
-        Router.push('/')
+        router.push('/')
     }
     const [isQue, setIsQue] = useState()
     const [queList, setQueList] = useState([])
