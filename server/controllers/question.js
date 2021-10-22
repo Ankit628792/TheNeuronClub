@@ -96,7 +96,7 @@ const comment = async (req, res) => {
         delComments ? res.status(200).send({msg: "comment deleted"}) : res.status(400).send({msg: 'unable to remove comment'});
     }
     else {
-        const getComments = await QComment.find({ queId: req.query.queId }).sort({ _id: -1 });
+        const getComments = await QComment.find({ queId: req.query.queId });
         getComments ? res.status(200).send(getComments) : res.status(400).send(null);
     }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {  ChevronDownIcon, ChevronUpIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
+import {  ChevronDownIcon, ChevronUpIcon, CubeIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useDispatch } from 'react-redux'
@@ -42,7 +42,6 @@ function UserDropDown({ session }) {
 
     const userSignOut = () => signOut()
     const logout = async () => {
-        userSignOut();
         setIsLoader(true)
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
@@ -53,7 +52,7 @@ function UserDropDown({ session }) {
             body: JSON.stringify({ _id: session?._id })
         });
         if (res.status === 200) {
-            location.reload();
+            userSignOut();
         }
         setIsLoader(false)
     }
@@ -88,7 +87,7 @@ function UserDropDown({ session }) {
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
                         }
                         {session?.type ==='admin' &&
-                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><ViewListIcon className="w-6 h-6 mr-1 text-gray-700" />Que's Verification</li>
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><CubeIcon className="w-6 h-6 mr-1 text-gray-700" />Que's Verification</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>

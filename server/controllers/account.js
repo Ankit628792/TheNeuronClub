@@ -39,7 +39,7 @@ const register = async (req, res) => {
                         const result = await sendEMail(data);
                         console.log(result);
                     }
-                    res.status(201).send({ token: token });
+                    res.status(200).send({ token: token });
                 }
             } catch (error) {
                 res.status(400).json({ error: 'Failed to register' })
@@ -136,10 +136,10 @@ const login = async (req, res) => {
             await loginSuccess(req, res, userLogin)
         }
         else {
-            if (type === 'social') {
+            if (!userLogin && type === 'social') {
                 try {
                     const { referral_code, name, email } = req.body;
-                    const user = new User({ name, email, image_url: req.body.image, isVerified: true, referral_code: Math.random().toString(36).slice(-6).toUpperCase() });
+                    const user = new User({ name: name, email: email, image_url: req.body.image, isVerified: true, referral_code: Math.random().toString(36).slice(-6).toUpperCase() });
                     const userRegistered = await user.save();
                     if (userRegistered && referral_code) {
                         try {

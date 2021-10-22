@@ -87,7 +87,7 @@ function Portfolio() {
                                 :
                                 <img className="w-40 lg:w-48 h-40 lg:h-48 object-cover overflow-hidden rounded-full" src="/images/user.png" alt="profile_pic" onClick={() => (fileInputRef.current.click())} />
                         }
-                        {isEdit && <div className={`cursor-pointer border-8 border-white absolute w-40 lg:w-48 h-40 lg:h-48 rounded-full top-0 bg-gray-700 bg-opacity-40 font-semibold text-3xl grid place-items-center text-center text-white ${image && 'hidden'}`} onClick={() => (fileInputRef.current.click())}> Upload <br />Image </div>}
+                        {isEdit && <div className={`cursor-pointer border-8 border-white absolute w-40 lg:w-48 h-40 lg:h-48 rounded-full top-2 bg-gray-700 bg-opacity-40 font-semibold text-3xl grid place-items-center text-center text-white ${image && 'hidden'}`} onClick={() => (fileInputRef.current.click())}> Upload <br />Image </div>}
                         <input type="file" disabled={!isEdit} name="image" className="hidden" ref={fileInputRef} accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
                             if (file && file.type.substring(0, 5) === 'image') {
@@ -111,14 +111,14 @@ function Portfolio() {
                     }
                 </div>
             </div>
-            <div className="flex flex-col justify-start w-full max-w-md gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
+            <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
                 <div className="flex items-center max-w-max space-x-4">
                     <h1>Name:&nbsp; </h1>
-                    {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal break-all">{session?.name}</h2>}
+                    {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg break-all">{session?.name}</h2>}
                 </div>
                 <div className="flex items-center max-w-max space-x-4">
                     <h1>Email:&nbsp; </h1>
-                    <h2 className="font-normal break-all">{session?.email}</h2>
+                    <h2 className="font-normal break-all text-lg">{session?.email}</h2>
                 </div>
                 {/* <div className="flex items-center max-w-max space-x-4">
                     <h1>Username:&nbsp; </h1>
@@ -134,7 +134,7 @@ function Portfolio() {
                 </div> */}
                 <div className="flex items-center max-w-max space-x-4">
                     <h1>Balance:&nbsp; </h1>
-                    <h2 className="inline-flex items-center font-normal"><Coin width="5" height="5" />{amount}</h2>
+                    <h2 className="inline-flex items-center text-lg font-normal"><Coin width="5" height="5" />{amount}</h2>
                 </div>
                 {/* <div className="flex items-center max-w-max space-x-4">
                     <h1>Referred user:&nbsp; </h1>

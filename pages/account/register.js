@@ -19,11 +19,6 @@ function register({ referral_code }) {
             router.push('/')
         }
     }, [user])
-    useEffect(() => {
-        if (session) {
-            setData({ email: session?.user?.email, name: session?.user?.name, image_url: session?.user?.image, isVerified: true })
-        }
-    }, [session])
 
     const [isSending, setIsSending] = useState(false)
     const [isForm, setIsForm] = useState(true);
@@ -50,15 +45,14 @@ function register({ referral_code }) {
             },
             body: JSON.stringify(userData)
         })
-
         if (res.status == 421) {
             setIsEmail(true);
         }
-        else if (res.status == 201) {
+        else if (res.status == 200) {
             const response = await res.json();
-            if (data.image_url) {
+            if (userData.image) {
                 window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
-                window.localStorage.setItem('neuron-newUser', true)
+                window.localStorage.setItem('neuron-newUser', response.newUser)
                 router.push('/')
             }
             else {
@@ -75,6 +69,7 @@ function register({ referral_code }) {
         }
         setIsSending(false)
     }
+
     const socialSignin = async () => {
         setIsSending(true);
         if (session?.user) {
@@ -143,13 +138,13 @@ function register({ referral_code }) {
                                         <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
                                         <h1>I am 18+ or more</h1>
                                     </div>
-                                    <button type="submit" className="px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">{isSending ? 'Wait...' : 'Register'}</button>
+                                    <button type="submit" className="w-full px-6 py-2 text-lg text-white font-semibold rounded-md my-4 gradient-bg active:scale-95 transition-sm">{isSending ? 'Wait...' : 'Register'}</button>
                                     <h1 className="text-center">Already have an account? &nbsp;<a href="/account/login" className="text-blue-500 font-medium">Login</a></h1>
                                 </form>
                                 :
                                 <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-blue-500 bg-white py-10 gradient-shadow">You've successfully registered to TheNeuron.Club. To continue, please verify your Email Adress</h1>
                         }
-                        <h1 className="text-xl font-medium mt-6 tracking-wide text-gray-700"> Or Register Using </h1>
+                        <h1 className="text-xl font-medium mt-6 tracking-wide text-gray-700"> Or Login With </h1>
                         <div className="flex items-center">
                             <button className="signup__btn border-gray-500 hover:bg-gray-800" onClick={() => signIn("google")}>
                                 <img src="/images/google.svg" alt="" className="w-10 h-10" />
