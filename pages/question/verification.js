@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { pageTransition, pageZoom } from '../../util';
 import { XIcon } from '@heroicons/react/solid';
 import { userSession } from '../../lib/user-session';
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Loader from '../../components/Loader';
 
 export const Detail = ({ que, onSelect, updateQue }) => {
@@ -84,11 +84,12 @@ export const Detail = ({ que, onSelect, updateQue }) => {
 
 function verification() {
     const session = userSession();
+    const router = useRouter();
     if (!session) {
-        Router.push('/')
+        router.push('/')
     }
     if (session?.type === 'admin') {
-        Router.push('/')
+        router.push('/')
     }
     const [isQue, setIsQue] = useState()
     const [queList, setQueList] = useState([])
