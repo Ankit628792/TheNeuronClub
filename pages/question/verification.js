@@ -7,7 +7,7 @@ import { userSession } from '../../lib/user-session';
 import Router from 'next/router';
 import Loader from '../../components/Loader';
 
-const Detail = ({ que, onSelect, updateQue }) => {
+export const Detail = ({ que, onSelect, updateQue }) => {
     const [isVerify, setIsVerify] = useState(false)
     const [isInValid, setIsInValid] = useState(false)
     const updateStatus = async ({ qstatus }) => {
