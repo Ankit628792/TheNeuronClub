@@ -108,9 +108,9 @@ function verification({data}) {
     //     }
     // }
 
-    useEffect(() => {
-        getQuestions();
-    }, [])
+    // useEffect(() => {
+    //     getQuestions();
+    // }, [])
 
     const updateQue = async (id) => {
 
