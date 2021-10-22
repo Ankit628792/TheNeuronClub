@@ -17,7 +17,7 @@
     display: none;
     background: #f1faff;
 }
-@media(prefers-color-scheme: light){
+/* @media(prefers-color-scheme: light){ */
 body {
     /* background: #e7fdfd; */
     /* background: #e6faff; */
@@ -489,8 +489,7 @@ input[type=number]::-webkit-outer-spin-button {
 .indicators>button {
     margin: 50px;
 }
-}
-/* //mode end  */
+
 
 @media(max-width: 640px) {
     .custom-shape-divider-bottom-1630315778 svg {
