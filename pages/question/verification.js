@@ -85,6 +85,8 @@ export const Detail = ({ que, onSelect, updateQue }) => {
 function verification({data}) {
     const session = userSession();
     const router = useRouter();
+    console.log(session)
+    console.log(router)
     if (!session) {
         router.push('/')
     }
