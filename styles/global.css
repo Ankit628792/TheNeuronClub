@@ -17,7 +17,7 @@
     display: none;
     background: #f1faff;
 }
-
+@media(prefers-color-scheme: light){
 body {
     /* background: #e7fdfd; */
     /* background: #e6faff; */
@@ -522,6 +522,7 @@ input[type=number]::-webkit-outer-spin-button {
     .carousel-item {
         height: 44rem;
     }
+}
 }
 }
 

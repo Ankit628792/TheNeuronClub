@@ -7,7 +7,6 @@ function CommentBox({ queId, userId, image_url, name }) {
     const [comment, setComment] = useState('');
 
     const getComments = async () => {
-        console.log("inside useeffect : ", queId)
         const res = await fetch(`/api/question/comment?queId=${queId}`, {
             method: 'GET', headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +32,7 @@ function CommentBox({ queId, userId, image_url, name }) {
             if (index >= 0) {
                 userComments.splice(index, 1)
             } else {
-                console.warn(`Can't remove Book`)
+                console.warn(`Can't remove comment`)
             }
             setUserComments([...userComments]);
         }

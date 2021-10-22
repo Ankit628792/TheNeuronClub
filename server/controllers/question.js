@@ -3,9 +3,9 @@ import Question from '../db/models/question'
 import Transaction from '../db/models/transaction';
 
 const verifyQuestion = async (req, res) => {
-    const { _id, qstatus, goLive } = req.body;
+    const { _id, qstatus } = req.body;
     try {
-        const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus, goLive }, { new: true });
+        const data = await Question.findByIdAndUpdate({ _id: _id }, { qstatus }, { new: true });
         if (data) {
             res.status(200).send({ msg: 'question verified' })
         }
@@ -20,7 +20,7 @@ const verifyQuestion = async (req, res) => {
 
 const getQuestions = async (req, res) => {
     try {
-        const filter = { goLive: { $lte: new Date(new Date().toISOString()) } }
+        const filter = req.query.filter ? {qstatus: 'created'} : { goLive: { $lte: new Date(new Date().toISOString()) } }
         const getQuestions = await Question.find(filter).sort({ _id: -1 });
         res.status(200).send(getQuestions)
     } catch (error) {
