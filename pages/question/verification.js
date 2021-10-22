@@ -82,7 +82,7 @@ export const Detail = ({ que, onSelect, updateQue }) => {
     )
 }
 
-function verification() {
+function verification({data}) {
     const session = userSession();
     const router = useRouter();
     if (!session) {
@@ -91,20 +91,20 @@ function verification() {
     if (session?.type === 'admin') {
         router.push('/')
     }
-    const [isQue, setIsQue] = useState()
-    const [queList, setQueList] = useState([])
+    const [isQue, setIsQue] = useState();
+    const [queList, setQueList] = useState( data ? [...data] : null);
 
-    const getQuestions = async () => {
-        const res = await fetch(`/api/question/get_questions?filter=created`, {
-            method: 'GET', headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        if (res.status === 200) {
-            const response = await res.json();
-            setQueList([...response]);
-        }
-    }
+    // const getQuestions = async () => {
+    //     const res = await fetch(`/api/question/get_questions?filter=created`, {
+    //         method: 'GET', headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     if (res.status === 200) {
+    //         const response = await res.json();
+    //         setQueList([...response]);
+    //     }
+    // }
 
     useEffect(() => {
         getQuestions();
@@ -151,3 +151,13 @@ function verification() {
 }
 
 export default verification
+
+
+export async function getServerSideProps() {
+    const data = await fetch(`${process.env.HOST}/api/question/get_questions?filter=created`).then(res => res.json())
+    return {
+        props: {
+            data
+        }
+    }
+}
