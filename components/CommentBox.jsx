@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import Comment from './Comment'
 
-function CommentBox({ queId, userId, image_url, name, comments}) {
-    const [userComments, setUserComments] = useState(comments);
+function CommentBox({ queId, userId, image_url, name}) {
+    const [userComments, setUserComments] = useState(null);
     const [isSending, setIsSending] = useState(false)
     const [comment, setComment] = useState('');
 
-    // const getComments = async () => {
-    //     const res = await fetch(`/api/question/comment?queId=${queId}`, {
-    //         method: 'GET', headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     if (res.status === 200) {
-    //         const response = await res.json();
-    //         setUserComments([...response]);
-    //     }
-    // }
-    // useEffect(() => {
-    //     getComments()
-    // }, [])
+    const getComments = async () => {
+        const res = await fetch(`/api/question/comment?queId=${queId}`, {
+            method: 'GET', headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (res.status === 200) {
+            const response = await res.json();
+            setUserComments([...response]);
+        }
+    }
+    useEffect(() => {
+        getComments()
+    }, [])
 
     const delComment = async (id) => {
         const res = await fetch(`/api/question/comment?_id=${id}`, {
@@ -87,9 +87,9 @@ function CommentBox({ queId, userId, image_url, name, comments}) {
                 </>
                 :
                 <>
-                    <div className="text-center max-w-xs flex flex-col items-center justify-start">
+                    <div className="text-center max-w-xs items-center justify-start">
                         <h1 className="text-xl md:text-2xl 2xl:text-3xl font-semibold inline-block leading-relaxed text-gray-700 mt-3">No comments yet </h1>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-40 w-40 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-40 w-40 text-gray-600 mx-auto" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
                             <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
                         </svg>
