@@ -59,7 +59,7 @@ function CommentBox({ queId, userId, image_url, name }) {
 
     return (
         <>
-            {userId && <div className="flex space-x-2 sm:space-x-3 items-center justify-start">
+            {userId && <div className="flex space-x-2 sm:space-x-3 items-center justify-start max-w-max">
                 {image_url ?
                     <img src={image_url} alt="" className="w-10 sm:w-12 h-10 sm:h-12 border-4 border-gray-100 rounded-full" />
                     :
