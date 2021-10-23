@@ -102,13 +102,3 @@ function CommentBox({ queId, userId, image_url, name, comments}) {
 }
 
 export default CommentBox
-
-export async function getServerSideProps({ params }) {
-    const comments = await fetch(`${process.env.HOST}/api/question/comment?queId=${params._id}`).then(res => res.json())
-  
-    return {
-        props: {
-            comments
-        }
-    }
-}

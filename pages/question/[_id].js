@@ -24,7 +24,7 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     loading: () => <p>Loading ...</p>,
 })
 
-function QuestionDetail({ questionData }) {
+function QuestionDetail({ questionData, comments }) {
     const session = userSession();
     const amount = useSelector(balance)
     const dispatch = useDispatch();
@@ -415,7 +415,7 @@ function QuestionDetail({ questionData }) {
 
                             </motion.div>
                             <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 relative">
-                                <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url}  />
+                                <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} comments={comments}  />
                             </div>
                         </>
                         :
@@ -458,9 +458,12 @@ export async function getServerSideProps({ params }) {
             }
         }
     }
+    const comments = await fetch(`${process.env.HOST}/api/question/comment?queId=${params._id}`).then(res => res.json())
+
     return {
         props: {
-            questionData
+            questionData,
+            comments
         }
     }
 }
