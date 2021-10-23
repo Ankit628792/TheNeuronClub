@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import Comment from './Comment'
 
-function CommentBox({ queId, userId, image_url, name }) {
-    const [userComments, setUserComments] = useState();
+function CommentBox({ queId, userId, image_url, name, comments}) {
+    const [userComments, setUserComments] = useState(comments);
     const [isSending, setIsSending] = useState(false)
     const [comment, setComment] = useState('');
 
-    const getComments = async () => {
-        const res = await fetch(`/api/question/comment?queId=${queId}`, {
-            method: 'GET', headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        if (res.status === 200) {
-            const response = await res.json();
-            setUserComments([...response]);
-        }
-    }
-    useEffect(() => {
-        getComments()
-    }, [])
+    // const getComments = async () => {
+    //     const res = await fetch(`/api/question/comment?queId=${queId}`, {
+    //         method: 'GET', headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     if (res.status === 200) {
+    //         const response = await res.json();
+    //         setUserComments([...response]);
+    //     }
+    // }
+    // useEffect(() => {
+    //     getComments()
+    // }, [])
 
     const delComment = async (id) => {
         const res = await fetch(`/api/question/comment?_id=${id}`, {
@@ -102,3 +102,13 @@ function CommentBox({ queId, userId, image_url, name }) {
 }
 
 export default CommentBox
+
+export async function getServerSideProps({ params }) {
+    const comments = await fetch(`${process.env.HOST}/api/question/comment?queId=${params._id}`).then(res => res.json())
+  
+    return {
+        props: {
+            comments
+        }
+    }
+}
