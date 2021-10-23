@@ -2,10 +2,17 @@ import { DotsVerticalIcon } from "@heroicons/react/solid"
 import moment from "moment"
 import { motion } from 'framer-motion'
 import { pageTransition, pageZoom } from "../util"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Comment({ user, comment, onSelect }) {
     const [isMenu, setIsMenu] = useState(false)
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsMenu(false)
+        }, 2500);
+        return () => clearTimeout(timer);
+    }, [isMenu]);
+
     return (
         <>
             <motion.div initial="initial"
