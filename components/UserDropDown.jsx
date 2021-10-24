@@ -20,7 +20,7 @@ function UserDropDown({ session }) {
     const dispatch = useDispatch();
     const amount = useSelector(balance)
     const urlSrc = `https://neuron-club.vercel.app/account/register?referral_code=${session?.referral_code}`
-
+ 
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsActive(false)
