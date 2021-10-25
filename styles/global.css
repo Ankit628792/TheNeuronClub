@@ -90,7 +90,13 @@ body {
 }
 
 .gradient-bg {
-    background: linear-gradient(45deg, #1380F9 40%, #1EA5FC);
+    background: linear-gradient(to bottom right ,#5b9dff 0% , #1380F9 40%, #1EA5FC 100%);
+    background-size: 200% 200%;
+    animation: movingGradient 10s linear infinite alternate;
+}
+@keyframes movingGradient{
+    from { background-position: 0 0; }
+    to { background-position: 100% 100%; }
 }
 
 .gradient-shadow {

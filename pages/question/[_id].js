@@ -18,6 +18,7 @@ import { motion } from 'framer-motion';
 import { modules, formats, pageSlide, pageTransition, pageZoom } from '../../util'
 import dynamic from 'next/dynamic'
 import CommentBox from '../../components/CommentBox';
+import Settlement from '../../components/Settlement';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -46,6 +47,7 @@ function QuestionDetail({ questionData }) {
     const [que, setQue] = useState(questionData);
     const [updateQue, setUpdateQue] = useState(questionData);
     const [isQueEdit, setIsQueEdit] = useState(false)
+    const [isSettle, setIsSettle] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
     const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
     // const urlSrc = `https://www.theneuron.club/question/${que?._id}`
@@ -114,12 +116,14 @@ function QuestionDetail({ questionData }) {
     }
 
     const validate = () => {
-        if (bid > 0 && bid <= 1000) {
-            if (que.qstatus == 'verified') {
-                (session) ? setIsActive(true) : setIsLoggedIn(true)
+        if (que.qstatus === 'verified' && que.bidClosing > new Date().toISOString()) {
+            if (bid > 0 && bid <= 1000) {
+                if (que.qstatus == 'verified') {
+                    (session) ? setIsActive(true) : setIsLoggedIn(true)
+                }
+            } else {
+                setBidLimit(true)
             }
-        } else {
-            setBidLimit(true)
         }
     }
 
@@ -164,6 +168,7 @@ function QuestionDetail({ questionData }) {
     function DESC() {
         return { __html: que?.desc };
     }
+
     return (
         <>
             <Head>
@@ -282,7 +287,7 @@ function QuestionDetail({ questionData }) {
                                             </div>
                                         </div>
                                         {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
-                                            : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' ? 'gradient-bg' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified'}>{'Apply Bid'}</button>
+                                            : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' && que.bidClosing > new Date().toISOString() ? 'gradient-bg' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified' && que.bidClosing < new Date().toISOString()}>{que?.qstatus === 'closed' ? 'Bidding Closed' : 'Apply Bid'}</button>
                                         }
                                         {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
@@ -377,7 +382,7 @@ function QuestionDetail({ questionData }) {
 
                                 </div>
 
-                               {que?.desc && <motion.div initial="initial"
+                                {que?.desc && <motion.div initial="initial"
                                     animate="in"
                                     exit="out"
                                     variants={pageSlide}
@@ -400,22 +405,38 @@ function QuestionDetail({ questionData }) {
                                     exit="out"
                                     variants={pageSlide}
                                     transition={pageTransition} className="p-5 pt-0">
-                                    <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
-                                    <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                    {
+                                        isQueEdit ?
+                                            <input
+                                                placeholder="Settlement Link"
+                                                type="text"
+                                                name="reference"
+                                                required
+                                                value={updateQue?.reference}
+                                                onChange={handleChange}
+                                                className="w-full flex-1 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                            />
+                                            :
+                                            <>
+                                                <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
+                                                <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                            </>
+                                    }
                                 </motion.div>}
                                 {session?.type === 'admin' &&
-                                    <> {(isQueEdit) ? <div className="px-5 pb-10">
-                                        <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
-                                        <button className={`px-4 py-2 leading-loose text-gray-800 hover:text-white hover:bg-gray-800 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => setIsQueEdit(false)}>Cancel</button>
+                                    <> {(isQueEdit) ? <div className="pb-10">
+                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
+                                        <button className={`px-4 py-1.5 leading-loose text-gray-800 border border-gray-900 hover:text-white hover:bg-gray-800 shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => setIsQueEdit(false)}>Cancel</button>
                                     </div> :
-                                        <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
+                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
                                     }
                                     </>
                                 }
+                                {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                                {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
 
                             </motion.div>
                             <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 relative">
-                                <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url}  />
+                                <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} />
                             </div>
                         </>
                         :
