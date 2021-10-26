@@ -64,6 +64,7 @@ function register({ referral_code }) {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSending(true)
         if (data.email && data.password) {
             await registerUser(data, '/api/account/register');
         }

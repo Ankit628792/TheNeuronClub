@@ -47,7 +47,7 @@ const settleQue = async (req, res) => {
         const winAmount = result == 'Favour' ? Volume / Favour : Volume / Against;
         await Promise.all(transList.map(async (element) => {
             (element.odd === result) ?
-                await User.updateOne({ _id: element.userId }, { $inc: { balance: element.amount * winAmount }, $push: { notification: `Congratulations, You've won ${element.amount * winAmount} coins on ${moment(element?.createdAt).format('ll')} by bidding question` } }, { new: true })
+                await User.updateOne({ _id: element.userId }, { $inc: { balance: element.amount * winAmount, earning: element.amount * winAmount }, $push: { notification: `Congratulations, You've won ${element.amount * winAmount} coins on ${moment(element?.createdAt).format('ll')} by bidding question` } }, { new: true })
                 :
                 await User.updateOne({ _id: element.userId }, { $push: { notification: `You've lose ${element.amount} coins on ${moment(element?.createdAt).format('ll')} by bidding question. Better luck next time` } }, { new: true })
         }))
