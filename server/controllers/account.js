@@ -42,6 +42,7 @@ const register = async (req, res) => {
                     res.status(200).send({ token: token });
                 }
             } catch (error) {
+                console.log(error)
                 res.status(400).json({ error: 'Failed to register' })
             }
         }
