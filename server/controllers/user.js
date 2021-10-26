@@ -21,7 +21,7 @@ const dailyVisit = async (req, res) => {
     const userFound = await User.findById({ _id: _id });
     if (userFound) {
         if (userFound.lastVisit !== currentDate) {
-            const updatedUser = await User.findByIdAndUpdate({ _id: _id }, { $inc: { balance: 100 }, lastVisit: currentDate, $push: { notification: `You've won, 100 coins on ${moment(currentDate).format('ll')} for daily visit 😀` } }, { new: true });
+            const updatedUser = await User.findByIdAndUpdate({ _id: _id }, { $inc: { balance: 100 }, lastVisit: currentDate, $push: { notification: `You've earned, 100 coins on ${moment(currentDate).format('ll')} for daily visit 😀` } }, { new: true });
             res.status(200).send({ balance: userFound.balance, msg: "new day visit" });
         }
         else {

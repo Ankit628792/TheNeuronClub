@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { MinusIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
+import { InformationCircleIcon } from '@heroicons/react/outline'
 import Loader from '../../components/Loader'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -335,7 +336,7 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Open Date &amp; Time</td>
-                                                    <td>{que?.goLive ? moment(que?.goLive).format('lll') : moment(que?.createdAt).format('lll')}</td>
+                                                    <td className="relative flex items-center">{moment(que?.goLive).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide break-all rounded-lg py-0.5 px-2 bg-gray-800 text-white inner transition-sm">{moment(que?.goLive).format()}</div> </td>
                                                 </tr>
                                                 {isQueEdit ?
                                                     <>
@@ -357,11 +358,11 @@ function QuestionDetail({ questionData }) {
                                                     <>
                                                         <tr>
                                                             <td>Last Date &amp; Time</td>
-                                                            <td>{moment(que?.bidClosing).format('lll')}</td>
+                                                            <td className="relative flex items-center">{moment(que?.bidClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide break-all rounded-lg py-0.5 px-2 bg-gray-800 text-white inner transition-sm">{moment(que?.bidClosing).format()}</div> </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Settlement Date &amp; Time</td>
-                                                            <td>{moment(que?.settlementClosing).format('lll')}</td>
+                                                            <td className="relative flex items-center">{moment(que?.settlementClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide break-all rounded-lg py-0.5 px-2 bg-gray-800 text-white inner transition-sm">{moment(que?.settlementClosing).format()}</div> </td>
                                                         </tr>
                                                     </>
                                                 }

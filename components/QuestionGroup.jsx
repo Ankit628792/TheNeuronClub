@@ -54,6 +54,9 @@ function QuestionGroup({ questions, category, user }) {
                                     <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
                                         Status
                                     </th>
+                                    <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                        Result
+                                    </th>
 
                                 </tr>
                             </thead>

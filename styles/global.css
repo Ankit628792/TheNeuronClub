@@ -115,6 +115,29 @@ body {
     background: radial-gradient(#fff, #e6e6fa);
     box-shadow: 0 0 25px rgb(141 30 255 / 10%);
 }
+.info__circle{
+    min-width: 15px;
+    min-height: 15px;
+}
+.inner{
+    display: none;
+    opacity: 0;
+}
+.inner::before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 8px;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    clip-path: polygon(100% 0, 0 0, 50% 100%);
+}
+.info__circle:hover ~ .inner{
+    display: inline-block;
+    opacity: 1;
+}
 
 .bet .bet__container {
     @apply p-5 py-10 md:py-5 mb-5 text-center min-w-[350px] grid place-items-center rounded-xl shadow-md relative
@@ -136,6 +159,7 @@ body {
 .bet table td {
     @apply px-4 text-left
 }
+
 
 .custom-shape-divider-bottom-1630315778 {
     position: absolute;
