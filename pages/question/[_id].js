@@ -20,6 +20,7 @@ import { modules, formats, pageSlide, pageTransition, pageZoom } from '../../uti
 import dynamic from 'next/dynamic'
 import CommentBox from '../../components/CommentBox';
 import Settlement from '../../components/Settlement';
+import UserTransaction from '../../components/UserTransaction'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -436,8 +437,9 @@ function QuestionDetail({ questionData }) {
                                 {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                                {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
 
                             </motion.div>
-                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 relative">
+                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 relative flex">
                                 <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} />
+                              {session && <UserTransaction queId={que?._id} userId={session?._id} />}
                             </div>
                         </>
                         :
