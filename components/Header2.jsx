@@ -16,7 +16,7 @@ export const CarouselItem = ({ children, activeIndex, setActiveIndex }) => (
             <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-3">{children.desc}</p>
         </div>
         <div className="z-20 w-full h-72 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>
-        <div className="z-20 w-full h-20 bg-gradient-to-b from-gray-700 to-transparent absolute top-0"> </div>
+        <div className="z-20 w-full h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0"> </div>
         <div className="absolute w-full h-12 bottom-0 z-40 flex justify-center items-center p-2">
             {data.map((_, i) => (
                 <span key={i} className={`w-3.5 h-3.5 bg-white border-2 rounded-full mx-2 cursor-pointer ${activeIndex == i && 'bg-gray-700 border-8 border-white'}`} onClick={() =>setActiveIndex(i)}></span>
