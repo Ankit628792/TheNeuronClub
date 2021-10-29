@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect } from 'react'
 
 const data = [
@@ -8,7 +9,7 @@ const data = [
     { id: 4, heading: 'Heading of content 5', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?sports', },
 ]
 
-export const CarouselItem = ({ children, activeIndex, setActiveIndex }) => (
+export const CarouselItem = ({ children }) => (
     <div className="inline-flex items-start justify-start w-full h-full relative">
         {/* <picture>
             <source media="(max-width: 640px)" srcSet={imgSrc} />
@@ -16,17 +17,12 @@ export const CarouselItem = ({ children, activeIndex, setActiveIndex }) => (
             <img src={children.imgSrc} layout="fill" className="w-full h-[600px] lg:h-[650px] object-cover" />
         </picture> */}
         <img src={children.imgSrc} className="w-full h-[600px] lg:h-[650px] object-cover" alt="" />
-        <div className="absolute max-w-2xl bottom-5 left-4 p-5 md:p-10 lg:max-w-3xl lg:p-16 z-30">
+        <div className="absolute max-w-2xl bottom-5 left-4 px-5 py-10 md:p-10 lg:max-w-3xl lg:p-16 z-30">
             <h1 className="text-4xl md:text-5xl 2xl:text-6xl pb-2 font-semibold whitespace-normal text-white line-clamp-2">{children.heading}</h1>
             <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-3">{children.desc}</p>
         </div>
         <div className="z-20 w-full h-72 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>
         <div className="z-20 w-full h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0"> </div>
-        <div className="absolute w-full h-12 bottom-0 z-40 flex justify-center items-center p-2">
-            {data.map((_, i) => (
-                <span key={i} className={`w-3.5 h-3.5 bg-white border-2 rounded-full mx-2 cursor-pointer ${activeIndex == i && 'bg-gray-700 border-8 border-white'}`} onClick={() => setActiveIndex(i)}></span>
-            ))}
-        </div>
     </div>
 )
 
@@ -40,13 +36,20 @@ function Header2() {
     }, [activeIndex]);
     return (
         <>
-            {data?.[activeIndex] && <div className="h-[600px] lg:h-[650px] carousel w-full max_w_3xl relative ">
+            {data?.[activeIndex] && <div className="h-[600px] lg:h-[650px] carousel w-full max_w_3xl relative">
+            {<button className="absolute h-1/2 top-1/2 -translate-y-1/2 left-0 z-40" onClick={() => activeIndex==0 ? setActiveIndex(data?.length -1) : setActiveIndex(activeIndex - 1)}><ArrowLeftIcon className="w-10 h-10 p-1 opacity-20 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>}
                 <div className="inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
                     {
                         data.map((item, index) => (
                             <CarouselItem children={item} key={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
                         ))
                     }
+                </div>
+                <button className="absolute h-1/2 top-1/2 -translate-y-1/2 right-0 z-40" onClick={() => activeIndex === data?.length - 1 ? setActiveIndex(0) : setActiveIndex(activeIndex + 1)} ><ArrowRightIcon className="w-10 h-10 p-1 opacity-20 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>
+                <div className="absolute w-full h-12 bottom-0 z-40 flex justify-center items-center p-2">
+                    {data.map((_, i) => (
+                        <span key={i} className={`w-3.5 h-3.5 bg-white border-2 rounded-full mx-2 cursor-pointer ${activeIndex == i && 'bg-gray-700 border-8 border-white'}`} onClick={() => setActiveIndex(i)}></span>
+                    ))}
                 </div>
             </div>}
         </>
