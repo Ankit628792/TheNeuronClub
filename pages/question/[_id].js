@@ -358,7 +358,7 @@ function QuestionDetail({ questionData }) {
                                                     :
                                                     <>
                                                         <tr>
-                                                            <td>Last Date &amp; Time</td>
+                                                            <td>Bid Closing Date &amp; Time</td>
                                                             <td className="relative flex items-center">{moment(que?.bidClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide break-all rounded-lg py-0.5 px-2 bg-gray-800 text-white info__inner transition-sm">{moment(que?.bidClosing).format()}</div> </td>
                                                         </tr>
                                                         <tr>
@@ -384,7 +384,7 @@ function QuestionDetail({ questionData }) {
 
                                 </div>
 
-                                {que?.desc && <motion.div initial="initial"
+                                <motion.div initial="initial"
                                     animate="in"
                                     exit="out"
                                     variants={pageSlide}
@@ -396,13 +396,13 @@ function QuestionDetail({ questionData }) {
                                                 <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
                                             </>
                                             :
-                                            <>
+                                            que?.desc && <>
                                                 <h1 className="text-2xl font-semibold my-2">About the question</h1>
                                                 <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
                                             </>
                                     }
-                                </motion.div>}
-                                {que?.reference && <motion.div initial="initial"
+                                </motion.div>
+                                <motion.div initial="initial"
                                     animate="in"
                                     exit="out"
                                     variants={pageSlide}
@@ -420,11 +420,11 @@ function QuestionDetail({ questionData }) {
                                             />
                                             :
                                             <>
-                                                <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
-                                                <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                                {que?.reference && <> <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
+                                                    <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a> </>}
                                             </>
                                     }
-                                </motion.div>}
+                                </motion.div>
                                 {session?.type === 'admin' &&
                                     <> {(isQueEdit) ? <div className="pb-10">
                                         <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
@@ -439,7 +439,7 @@ function QuestionDetail({ questionData }) {
                             </motion.div>
                             <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 py-10 relative flex flex-col-reverse lg:flex-row">
                                 <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} />
-                              {session && <UserTransaction queId={que?._id} userId={session?._id} />}
+                                {session && <UserTransaction queId={que?._id} userId={session?._id} />}
                             </div>
                         </>
                         :

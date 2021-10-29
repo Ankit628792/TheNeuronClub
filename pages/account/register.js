@@ -8,6 +8,7 @@ import { countries, pageTransition, pageZoom } from '../../util'
 import { userSession } from '../../lib/user-session'
 import { useRouter } from 'next/router'
 import { useSession, signIn } from "next-auth/client"
+import Modal from '../../components/Modal'
 
 function register({ referral_code }) {
     const user = userSession();
@@ -113,7 +114,8 @@ function register({ referral_code }) {
                         {
                             isForm ?
                                 <form className="max-w-lg p-10 min-w-[380px] bg-white gradient-shadow" onSubmit={handleSubmit}>
-                                    {isEmail && <p className="text-sm text-red-400 text-center">Email already exist</p>}
+                                    {/* {isEmail && <p className="text-sm text-red-400 text-center">Email already exist</p>} */}
+                                    {isEmail && <div onClick={() => setIsEmail(false)}><Modal state={isEmail} text="The account already exists, please sign-in instead" link={'/account/login'} /> </div>}
                                     <div className="flex border-b border-gray-700 py-2">
                                         <UserIcon className="h-6" />
                                         <input onChange={handleChange} className="outline-none flex-grow px-2" type="text" name="name" minLength="1" value={data.name} required placeholder="Your Name " />
