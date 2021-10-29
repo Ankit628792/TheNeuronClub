@@ -1,6 +1,6 @@
 function tnc() {
     return (
-        <div className="tnc max-w-4xl bg-white mx-auto p-10 mb-10 pt-28">
+        <div className="policy max-w-4xl bg-white mx-auto p-10 mb-10 pt-28">
                 <h4 className="text-3xl font-semibold text-gray-800 text-center mb-2 mt-12"> Terms & Conditions </h4>
             <h1>
                 1. Usage of The Neuron Club

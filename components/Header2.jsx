@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 const data = [
     { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/1600x700/?science', category: 'science' },
-    { id: 1, heading: 'Politics', desc: "latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/1600x700/?politics', category: 'politics' },
+    { id: 1, heading: 'Politics', desc: "Latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/1600x700/?politics', category: 'politics' },
     { id: 2, heading: 'Entertainment', desc: 'Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film and music industries.', imgSrc: 'https://source.unsplash.com/1600x700/?entertaiment', category: 'entertaiment' },
     { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cypto currencies', imgSrc: 'https://source.unsplash.com/1600x700/?crypto', category: 'crypto' },
     { id: 4, heading: 'Coronoavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/1600x700/?coronavirus', category: 'coronavirus' },
@@ -18,12 +18,12 @@ export const CarouselItem = ({ children }) => (
             <img src={children.imgSrc} layout="fill" className="w-full h-[600px] lg:h-[650px] object-cover" />
         </picture> */}
         <img src={children.imgSrc} className="w-full h-[600px] lg:h-[650px] object-cover" alt="" />
-        <div className="absolute max-w-2xl bottom-5 left-4 px-5 py-10 md:p-10 lg:max-w-3xl lg:p-16 z-30">
+        <div className="absolute max-w-xl bottom-5 left-4 px-5 py-10 md:p-10 lg:max-w-3xl lg:p-16 z-30">
             <h1 className="text-4xl md:text-5xl 2xl:text-6xl pb-2 font-semibold whitespace-normal text-white line-clamp-1">{children.heading}</h1>
-            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-2">{children.desc}</p>
-            <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm" onClick={() => Router.push(`/question?category=${children.category}`)}>Explore</button>
+            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-2 pb-3">{children.desc}</p>
+            <button className="inline-block cursor-pointer bg-white text-blue-600 py-3 text-xl px-5 rounded-2xl font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none" onClick={() => Router.push(`/question?category=${children.category}`)}>Explore</button>
         </div>
-        <div className="z-20 w-full h-72 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>
+        <div className="z-20 w-full h-80 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>
         <div className="z-20 w-full h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0"> </div>
     </div>
 )
