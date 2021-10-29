@@ -135,7 +135,7 @@ function register({ referral_code }) {
                                     </div>
                                     <div className="flex items-center space-x-2">
                                         <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
-                                        <h1>I accept terms & conditions</h1>
+                                        <h1>I accept&nbsp;<a href="/tnc" className="text-blue-500 cursor-pointer">terms & conditions</a></h1>
                                     </div>
                                     <div className="flex items-center space-x-2">
                                         <input required className="w-4 h-4 cursor-pointer" type="checkbox" />
