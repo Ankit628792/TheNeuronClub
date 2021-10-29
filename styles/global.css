@@ -200,15 +200,15 @@ body {
 }
 
 .policy h1 {
-    @apply text-2xl mt-10 font-semibold text-gray-700 my-2
+    @apply text-2xl mt-10 font-semibold text-gray-800 my-2
 }
 
 .policy h2 {
-    @apply text-lg font-semibold text-gray-600 my-2
+    @apply text-lg font-semibold text-gray-700 my-2
 }
 
 .policy p {
-    @apply text-base text-gray-500 my-2
+    @apply text-base text-gray-600 my-2
 }
 
 .policy ul li {
@@ -216,7 +216,7 @@ body {
     margin-left: 2rem;
 }
 
-.policy ul li ul li{
+.policy ul ul li{
     list-style: sqaure;
     margin-left: 4rem;
 }
@@ -435,7 +435,7 @@ body {
     border: 3px solid transparent;
     border-radius: 50%;
     /* box-shadow: 0 0 20px rgb(255 167 0 / 10%); */
-    border-top-color: #ffa700;
+    border-top-color: #ffa8;
     -webkit-animation: spinLoader 1.5s linear infinite;
     animation: spinLoader 1.5s linear infinite;
 }
