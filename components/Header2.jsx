@@ -11,7 +11,7 @@ const data = [
 ]
 
 export const CarouselItem = ({ children }) => (
-    <div className="inline-flex items-start justify-start w-full h-full relative">
+    <div className="inline-flex items-start justify-start w-full h-full relative bg-black">
         {/* <picture>
             <source media="(max-width: 640px)" srcSet={imgSrc} />
             <source media="(min-width: 640px)" srcSet={imgSrc} />
