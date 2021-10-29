@@ -23,7 +23,7 @@ function UserTransaction({ queId, userId }) {
             {transaction && <motion.div initial="hidden"
                 animate="visible"
                 variants={container}
-                transition={pageTransition} className="mx-auto lg:mx-1 lg:max-w-max p-5 rounded-lg gradient-shadow">
+                transition={pageTransition} className="mx-auto lg:mx-1 lg:max-w-max p-5 rounded-lg gradient-shadow max-h-[600px] overflow-y-auto">
                 <h1 className="text-xl md:text-2xl font-semibold inline-block leading-relaxed text-gray-700 mt-3 mb-2">My Transactions </h1>
                 {
                     transaction?.map(data => (

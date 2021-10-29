@@ -10,7 +10,7 @@ function Header3() {
                     animate="in"
                     exit="out"
                     variants={pageSlide}
-                    transition={pageTransition} className="mx-3 my-14 md:my-20 py-10 md:py-14 px-5 text-center max-w-xl md:max-w-2xl sm:mx-auto gradient-shadow rounded-xl">
+                    transition={pageTransition} className="mx-3 my-14 md:my-20 py-10 md:py-14 px-5 text-center max-w-xl md:max-w-4xl sm:mx-auto gradient-shadow rounded-xl">
                     <h1 className='text-4xl font-bold mb-1 md:text-5xl text-gray-800'>Predict future and win rewards!</h1>
                     <p className="py-2 text-lg md:text-xl text-gray-600">The Neuron Club (TNC) is an online gaming platform that allows users to predict global events across categories and win rewards</p>
                     {session ?
