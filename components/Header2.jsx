@@ -20,7 +20,7 @@ export const CarouselItem = ({ children }) => (
         <img src={children.imgSrc} className="w-full h-[600px] lg:h-[650px] object-cover" alt="" />
         <div className="absolute max-w-xl bottom-5 left-4 px-5 py-10 md:p-10 lg:max-w-3xl lg:p-16 z-30">
             <h1 className="text-4xl md:text-5xl 2xl:text-6xl pb-2 font-semibold whitespace-normal text-white line-clamp-1">{children.heading}</h1>
-            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-2 pb-3">{children.desc}</p>
+            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-2 mb-3">{children.desc}</p>
             <button className="inline-block cursor-pointer bg-white text-blue-600 py-3 text-xl px-5 rounded-2xl font-semibold active:scale-95 transition duration-100 ease-in-out focus:outline-none focus:border-none" onClick={() => Router.push(`/question?category=${children.category}`)}>Explore</button>
         </div>
         <div className="z-20 w-full h-80 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>

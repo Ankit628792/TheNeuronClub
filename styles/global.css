@@ -200,15 +200,15 @@ body {
 }
 
 .policy h1 {
-    @apply text-2xl mt-10 font-semibold text-gray-800 my-2
+    @apply text-2xl mt-10 font-semibold text-gray-800 my-2 2xl:text-3xl
 }
 
 .policy h2 {
-    @apply text-lg font-semibold text-gray-700 my-2
+    @apply text-lg font-semibold text-gray-700 my-2 2xl:text-xl
 }
 
 .policy p {
-    @apply text-base text-gray-600 my-2
+    @apply text-base text-gray-600 my-2 2xl:text-lg
 }
 
 .policy ul li {
