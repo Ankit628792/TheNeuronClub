@@ -212,8 +212,13 @@ body {
 }
 
 .policy ul li {
-    list-style: square;
+    list-style: disc;
     margin-left: 2rem;
+}
+
+.policy ul li ul li{
+    list-style: sqaure;
+    margin-left: 4rem;
 }
 
 .filter {

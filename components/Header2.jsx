@@ -1,12 +1,13 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid';
+import Router from 'next/router';
 import React, { useState, useEffect } from 'react'
 
 const data = [
-    { id: 0, heading: 'Heading of content 1', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?science', },
-    { id: 1, heading: 'Heading of content 2', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?politics', },
-    { id: 2, heading: 'Heading of content 3', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?entertaiment', },
-    { id: 3, heading: 'Heading of content 4', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?crypto', },
-    { id: 4, heading: 'Heading of content 5', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imgSrc: 'https://source.unsplash.com/1600x700/?sports', },
+    { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/1600x700/?science', category: 'science' },
+    { id: 1, heading: 'Politics', desc: "latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/1600x700/?politics', category: 'politics' },
+    { id: 2, heading: 'Entertainment', desc: 'Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film and music industries.', imgSrc: 'https://source.unsplash.com/1600x700/?entertaiment', category: 'entertaiment' },
+    { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cypto currencies', imgSrc: 'https://source.unsplash.com/1600x700/?crypto', category: 'crypto' },
+    { id: 4, heading: 'Coronoavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/1600x700/?coronavirus', category: 'coronavirus' },
 ]
 
 export const CarouselItem = ({ children }) => (
@@ -18,8 +19,9 @@ export const CarouselItem = ({ children }) => (
         </picture> */}
         <img src={children.imgSrc} className="w-full h-[600px] lg:h-[650px] object-cover" alt="" />
         <div className="absolute max-w-2xl bottom-5 left-4 px-5 py-10 md:p-10 lg:max-w-3xl lg:p-16 z-30">
-            <h1 className="text-4xl md:text-5xl 2xl:text-6xl pb-2 font-semibold whitespace-normal text-white line-clamp-2">{children.heading}</h1>
-            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-3">{children.desc}</p>
+            <h1 className="text-4xl md:text-5xl 2xl:text-6xl pb-2 font-semibold whitespace-normal text-white line-clamp-1">{children.heading}</h1>
+            <p className="text-white text-xl 2xl:text-2xl font-medium lg:leading-relaxed whitespace-normal line-clamp-2">{children.desc}</p>
+            <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm" onClick={() => Router.push(`/question?category=${children.category}`)}>Explore</button>
         </div>
         <div className="z-20 w-full h-72 bg-gradient-to-t from-black to-transparent absolute bottom-0"> </div>
         <div className="z-20 w-full h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0"> </div>
