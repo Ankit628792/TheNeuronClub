@@ -5,11 +5,11 @@ import Header2 from '../components/Header2'
 import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Carousel from '../components/Carousel'
+import OnBoard from '../components/OnBoard'
 import Header3 from '../components/Header3'
 
 export default function Home({ questions }) {
-  const [carousel, setCarousel] = useState(false)
+  const [onBoard, setOnBoard] = useState(false)
 
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
@@ -23,31 +23,31 @@ export default function Home({ questions }) {
         draggable: true,
         progress: undefined,
       });
-      setCarousel(true);
+      setOnBoard(true);
     }
     window.localStorage.setItem('neuron-newUser', false)
   }, [])
 
 
-    const closeOnboard = () => {
-        setCarousel(false);
-    }
+  const closeOnboard = () => {
+    setOnBoard(false);
+  }
 
-    return (
+  return (
     <>
-      {carousel && <Carousel onSelect={closeOnboard} />}
+      {onBoard && <OnBoard onSelect={closeOnboard} />}
       <div className="w-full flex flex-col pb-10">
         <Head>
           <title>The Neuron</title>
           <link rel="icon" href="/favicon.png" />
         </Head>
-        {/* <Header /> */}
-        <Header2 />
-        <Header3 />
+        <Header />
+        {/* <Header2 />
+        <Header3 /> */}
         <QuestionGroup questions={questions?.trending} category={"Trending Topics"} />
         <QuestionGroup questions={questions?.newest} category={"New Topics"} />
       </div>
-      <ToastContainer style={{ textAlign: 'center', zIndex: '49', opacity: '0' }} />
+      <ToastContainer style={{ textAlign: 'center', zIndex: '49' }} />
     </>
   )
 }

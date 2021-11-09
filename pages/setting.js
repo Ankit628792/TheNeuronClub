@@ -40,15 +40,15 @@ const CarouselItem = ({ item, onSelect }) => {
         <>
             {
                 !isActive ?
-                    <div className="max-w-md m-4 my-6 p-3 relative">
-                        <PencilIcon className="absolute -top-2 right-10 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-blue-600" onClick={() => setIsActive(true)} />
-                        <TrashIcon className="absolute -top-2 -right-2 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-red-600" onClick={() => onSelect(item?._id)} />
-                        <img className="max-w-md h-[225px] object-cover" src={newData.imgSrc} alt="" />
-                        <h1 className="text-xl mt-2 font-semibold text-gray-800">{newData.heading}</h1>
-                        <p className="text-base font-medium text-gray-600">{newData.desc}</p>
+                    <div className="max-w-md m-4 my-6 p-3 blur-white relative">
+                        <PencilIcon className="absolute -top-4 right-10 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-blue-600" onClick={() => setIsActive(true)} />
+                        <TrashIcon className="absolute -top-4 -right-2 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-red-600" onClick={() => onSelect(item?._id)} />
+                        <img className="w-full object-cover rounded-md" src={newData.imgSrc} alt="" />
+                        <h1 className="text-xl mt-2 font-semibold text-gray-50">{newData.heading}</h1>
+                        <p className="text-base font-medium text-gray-50">{newData.desc}</p>
                     </div>
                     :
-                    <form className="max-w-md m-4 my-6 p-5" onSubmit={updateCarousel}>
+                    <form className="max-w-md m-4 my-6 p-5 bg-white" onSubmit={updateCarousel}>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="attachment" className="inline-block mb-1 font-medium">Carousel Image<span className="mx-1 text-red-500">*</span></label>
                             <input type="file" required name="attachment" accept="image/*"
@@ -82,8 +82,8 @@ const CarouselItem = ({ item, onSelect }) => {
                                 className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                             />
                         </div>
-                        <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Saving...` : `Save`}</button>
-                        <button className="px-5 py-2 bg-gray-800 ml-4 text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm" onClick={() => {
+                        <button type="submit" className="px-5 py-2 text-lg btn-blue rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Saving...` : `Save`}</button>
+                        <button className="px-5 py-2  ml-4  text-lg btn-black rounded-xl font-semibold active:scale-95 transition-sm" onClick={() => {
                             setIsActive(false); setNewData({
                                 heading: item.heading, desc: item.desc, imgSrc: item.imgSrc
                             })
@@ -158,20 +158,20 @@ function setting({ carouselList }) {
 
     return (
         <>
-            <div className="w-full min-h-screen p-10 pt-28 relative">
-                <h1 className="text-3xl font-semibold py-2 px-5">Carousel Setting </h1>
+            <div className="w-full min-h-screen p-10 relative">
+                <h1 className="text-3xl font-semibold py-2 px-5 text-white">Carousel Setting </h1>
                 <div className="flex items-center justify-around">
                     {carouselData?.length > 0 && carouselData?.map(item => (
                         <CarouselItem key={item._id} item={item} onSelect={delCarousel} />
                     ))}
                     {
                         !isForm ?
-                            <div className="w-96 grid place-items-center text-lg text-gray-500 font-medium p-5 cursor-pointer" onClick={() => setIsForm(true)}>
-                                <PlusCircleIcon className="w-32 h-32 text-gray-500" />
+                            <div className="w-96 grid place-items-center text-lg text-gray-100 font-medium p-5 cursor-pointer" onClick={() => setIsForm(true)}>
+                                <PlusCircleIcon className="w-32 h-32 text-gray-50" />
                                 Add Carousel Item
                             </div>
                             :
-                            <form className="max-w-md m-4 my-6 p-5" onSubmit={handleSubmit}>
+                            <form className="max-w-md m-4 my-6 p-5 bg-white" onSubmit={handleSubmit}>
                                 <div className="mb-1 sm:mb-2">
                                     <label htmlFor="attachment" className="inline-block mb-1 font-medium">Carousel Image<span className="mx-1 text-red-500">*</span></label>
                                     <input type="file" required name="attachment" accept="image/*"
@@ -205,8 +205,8 @@ function setting({ carouselList }) {
                                         className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                                     />
                                 </div>
-                                <button type="submit" className="px-5 py-2 gradient-bg text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding...` : `Add`}</button>
-                                <button className="px-5 py-2 bg-gray-800 ml-2 text-lg text-white rounded-xl font-semibold active:scale-95 transition-sm" onClick={() => setIsForm(false)}>Cancel</button>
+                                <button type="submit" className="px-5 py-2 btn-blue text-lg rounded-xl font-semibold active:scale-95 transition-sm">{isSending ? `Adding...` : `Add`}</button>
+                                <button className="px-5 py-2 btn-black ml-2 text-lg rounded-xl font-semibold active:scale-95 transition-sm" onClick={() => setIsForm(false)}>Cancel</button>
                             </form>
                     }
                 </div>

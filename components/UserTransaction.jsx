@@ -13,7 +13,6 @@ function UserTransaction({ queId, userId }) {
             setTransaction(response?.questions)
         }
     }
-    console.log(transaction)
     useEffect(() => {
         getUser();
     }, []);
@@ -24,16 +23,15 @@ function UserTransaction({ queId, userId }) {
                 animate="visible"
                 variants={container}
                 transition={pageTransition} className="mx-auto lg:mx-1 lg:max-w-max p-5 rounded-lg gradient-shadow max-h-[500px] overflow-y-auto">
-                <h1 className="text-xl md:text-2xl font-semibold inline-block leading-relaxed text-gray-700 mt-3 mb-2">My Transactions </h1>
+                <h1 className="text-xl md:text-2xl font-semibold inline-block leading-relaxed text-white mt-3 mb-2">My Transactions </h1>
                 {
                     transaction?.map(data => (
-                        <motion.div variants={item} key={data._id} className="flex items-center p-2 my-1">
+                        <motion.div variants={item} key={data._id} className="flex items-center text-gray-100 p-2 my-1">
                             <div className="flex items-center mr-1">
                                 <Coin width="4" height="4" />{data.amount}
                             </div>
                             &nbsp;bid in {data.odd} on {moment(data.createdAt).format('lll')}
                         </motion.div>
-
                     ))
                 }
             </motion.div>}

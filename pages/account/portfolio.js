@@ -47,7 +47,7 @@ function portfolio() {
     }, [userData]);
 
     return (
-        <div className="pt-28 pb-10 xl:px-10 w-full min-h-screen">
+        <div className="py-10 xl:px-10 w-full min-h-screen">
             <Head> <title>The Neuron | Portfolio</title> </Head>
             {userData ?
                 <>
@@ -56,22 +56,22 @@ function portfolio() {
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="max-w-xs gradient-shadow rounded-xl p-6 m-2 space-y-2 border-b-4 invest__border">
-                            <h1 className="font-semibold text-2xl text-gray-700">Investment</h1>
-                            <h2 className="text-xl text-gray-600 inline-flex items-center"><Coin width="5" height="5" />{investment?.total}</h2>
+                            transition={pageTransition} className="max-w-xs gradient-shadow bg-gray-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 m-2 space-y-2 border-b-4 invest__border">
+                            <h1 className="font-semibold text-2xl text-white">Investment</h1>
+                            <h2 className="text-xl text-gray-200 inline-flex items-center"><Coin width="5" height="5" />{investment?.total}</h2>
                         </motion.div>
                         <motion.div initial="initial"
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="max-w-xs gradient-shadow rounded-xl p-6 m-2 space-y-2 border-b-4 win__border">
-                            <h1 className="font-semibold text-2xl text-gray-700">Net Returns</h1>
-                            <h2 className="text-xl text-gray-600 inline-flex items-center"><Coin width="5" height="5" />{userData?.earning || '0'}</h2>
+                            transition={pageTransition} className="max-w-xs gradient-shadow bg-green-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 m-2 space-y-2 border-b-4 win__border">
+                            <h1 className="font-semibold text-2xl text-white">Net Returns</h1>
+                            <h2 className="text-xl text-gray-200 inline-flex items-center"><Coin width="5" height="5" />{userData?.earning || '0'}</h2>
                         </motion.div>
                         {/* <motion.div initial="hidden"
                             animate="visible"
                              variants={pageZoom}
-                            transition={pageTransition} className="max-w-xs gradient-shadow rounded-xl p-6 m-2 space-y-2 border-b-4 lose__border">
+                            transition={pageTransition} className="max-w-xs gradient-shadow bg-green-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 m-2 space-y-2 border-b-4 lose__border">
                             <h1 className="font-semibold text-2xl text-gray-700">Loses</h1>
                             <h2 className="text-xl text-gray-600 inline-flex items-center"><Coin width="5" height="5" />{investment?.lose}</h2>
                         </motion.div> */}
@@ -79,23 +79,23 @@ function portfolio() {
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="max-w-xs gradient-shadow rounded-xl p-6 m-2 space-y-2 border-b-4 balance__border">
-                            <h1 className="font-semibold text-2xl text-gray-700">Balance</h1>
-                            <h2 className="text-xl text-gray-600 inline-flex items-center"><Coin width="5" height="5" />{userData?.balance}</h2>
+                            transition={pageTransition} className="max-w-xs gradient-shadow bg-blue-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 m-2 space-y-2 border-b-4 balance__border">
+                            <h1 className="font-semibold text-2xl text-white">Balance</h1>
+                            <h2 className="text-xl text-gray-200 inline-flex items-center"><Coin width="5" height="5" />{userData?.balance}</h2>
                         </motion.div>
                         <div className="hidden xl:inline-block col-span-2 md:col-span-1 m-2">
                             <motion.div initial="initial"
                                 animate="in"
                                 exit="out"
                                 variants={pageZoom}
-                                transition={pageTransition} className="max-w-[300px] mx-auto gradient-shadow rounded-xl p-6 space-x-4 flex items-center border-b-4 info__border">
+                                transition={pageTransition} className="max-w-[300px] mx-auto gradient-shadow bg-gray-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 space-x-4 flex items-center border-b-4 info__border">
 
                                 <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-4xl grid place-items-center text-white">
                                     {session?.image_url ?
                                         <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                                         : session?.name?.[0]}
                                 </div>
-                                <div className="text-lg">
+                                <div className="text-xl font-medium text-white">
                                     <h2>{session?.name}</h2>
                                     {/* <h1 className="text-gray-500 text-base">{session?.country}</h1> */}
                                 </div>
@@ -106,28 +106,28 @@ function portfolio() {
                         <>
                         <div className={`p-5 py-10 sm:p-10 xl:px-20 min-w-full mx-auto`}>
                             <div className="flex justify-start border-b-2 mb-4 pb-2 border-gray-200">
-                                <h1 className="text-2xl sm:text-3xl font-semibold  text-gray-700">Question Transactions</h1>
+                                <h1 className="text-2xl sm:text-3xl font-semibold  text-white">Question Transactions</h1>
                             </div>
                             <div className="flex flex-col w-full overflow-x-scroll max-w-[90vw]">
                                 <table className="divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
+                                    <thead className="blur-blue text-white">
                                         <tr>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Category
                                             </th>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Question
                                             </th>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Bid-Date
                                             </th>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Investment
                                             </th>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Status
                                             </th>
-                                            <th scope="col" className="p-4 text-sm sm:text-base text-gray-700 font-semibold uppercase tracking-wider text-center">
+                                            <th scope="col" className="p-4 text-sm sm:text-base font-semibold uppercase tracking-wider text-center">
                                                 Result
                                             </th>
 
@@ -137,7 +137,7 @@ function portfolio() {
                                         initial="hidden"
                                         animate="visible"
                                         variants={container}
-                                        transition={pageTransition} className="bg-white divide-y divide-gray-200 overflow-auto">
+                                        transition={pageTransition} className="divide-y text-gray-50 overflow-auto">
                                         {
                                             (userData?.questions && userData?.questions?.length > 0) ?
                                                 <>
@@ -161,8 +161,8 @@ function portfolio() {
                         </>
                         :
                         <div className="text-center p-5">
-                            <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold text-gray-700 my-6">You've not placed any bid yet.</h1>
-                            <button onClick={() => Router.push('/question/')} className="px-5 py-3 gradient-bg text-lg lg:text-xl text-white rounded-xl font-semibold active:scale-95 transition-sm">Place a Bid</button>
+                            <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-semibold text-white my-6">You've not placed any bid yet.</h1>
+                            <button onClick={() => Router.push('/question/')} className="px-5 py-3 btn-blue text-lg lg:text-xl text-white rounded-xl font-semibold active:scale-95 transition-sm">Place a Bid</button>
                         </div>
                     }
                     <Notification notifications={userData?.notification} />

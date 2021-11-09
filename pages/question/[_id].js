@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { MinusIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import Loader from '../../components/Loader'
@@ -51,8 +51,12 @@ function QuestionDetail({ questionData }) {
     const [isQueEdit, setIsQueEdit] = useState(false)
     const [isSettle, setIsSettle] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
-    const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
-    // const urlSrc = `https://www.theneuron.club/question/${que?._id}`
+
+    const yesRef = useRef()
+    const noRef = useRef()
+
+    // const urlSrc = `https://neuron-club.vercel.app/question/${que?._id}`
+    const urlSrc = `https://www.theneuron.club/question/${que?._id}`
 
 
     const getUserInfo = async () => {
@@ -177,7 +181,7 @@ function QuestionDetail({ questionData }) {
                 <title>Question: {que?.question}</title>
             </Head>
             <ToastContainer />
-            <div className="pt-28 pb-10">
+            <div className="py-10">
                 {
                     que && que?.category ?
                         <>
@@ -185,8 +189,8 @@ function QuestionDetail({ questionData }) {
                                 animate="in"
                                 exit="out"
                                 variants={pageSlide}
-                                transition={pageTransition} className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 text-xl md:text-2xl font-medium mb-2 sm:mb-4 p-5 px-10 sm:flex sm:space-x-4 items-center text-gray-700 relative">
-                                <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg hover:scale-105 transition-md object-cover rounded-full" />
+                                transition={pageTransition} className="w-full max-w-5xl blur-black gradient-shadow mx-auto rounded-lg lg:p-10 text-xl md:text-2xl font-medium mb-2 sm:mb-4 p-5 px-10 sm:flex sm:space-x-4 items-center text-gray-50 relative z-10">
+                                <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 xl:w-16 xl:h-16 shadow-lg hover:scale-105 transition-md object-cover border-2 border-white rounded-full" />
                                 {isQueEdit ? <input
                                     placeholder="Question"
                                     type="text"
@@ -194,17 +198,17 @@ function QuestionDetail({ questionData }) {
                                     required
                                     value={updateQue?.question}
                                     onChange={handleChange}
-                                    className="w-full flex-1 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                    className="w-full flex-1 h-12 px-4 mb-2 transition duration-200 text-gray-900 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                 /> : <h1 className="my-3 sm:my-0 flex-1"> {que?.question} </h1>}
                                 <div className="w-12 h-12 absolute top-5 right-6 sm:top-0 sm:right-0 sm:relative pt-1 grid place-items-center">
                                     {!isShare ?
-                                        <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 cursor-pointer" onClick={() => setIsShare(true)} />
+                                        <ShareIcon title="Share this Question" className="w-8 h-8 sm:w-10 sm:h-10 text-white cursor-pointer" onClick={() => setIsShare(true)} />
                                         : <motion.div initial="initial"
                                             animate="in"
                                             exit="out"
                                             variants={pageSlide}
                                             transition={pageTransition} className="w-12 h-auto flex flex-col items-center justify-center space-y-2 z-20">
-                                            <XIcon className="w-10 h-10 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setIsShare(false)} />
+                                            <XIcon className="w-10 h-10 p-1 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setIsShare(false)} />
                                             <>
                                                 {window.innerWidth > 769 ?
                                                     <>
@@ -241,7 +245,7 @@ function QuestionDetail({ questionData }) {
                                                         <WhatsappShareButton url={urlSrc} separator=" " >
                                                             <WhatsappIcon size={40} round={true} />
                                                         </WhatsappShareButton>
-                                                        <PinterestShareButton url={urlSrc} description={que?.question} media={que?.image_url || `https://neuron-club.vercel.app/images/que/${que?.category?.toLowerCase()}.jfif`} >
+                                                        <PinterestShareButton url={urlSrc} description={que?.question} media={que?.image_url || `https://www.theneuron.club/images/que/${que?.category?.toLowerCase()}.jfif`} >
                                                             <PinterestIcon size={40} round={true} />
                                                         </PinterestShareButton>
                                                         <TelegramShareButton url={urlSrc} title={que?.question} >
@@ -264,32 +268,32 @@ function QuestionDetail({ questionData }) {
                                 animate="in"
                                 exit="out"
                                 variants={pageSlide}
-                                transition={pageTransition} className="max-w-5xl gradient-shadow mx-auto rounded-lg p-5 lg:p-10 z-10">
+                                transition={pageTransition} className="max-w-5xl text-white blur-black gradient-shadow mx-auto rounded-lg p-5 lg:p-10">
                                 <div className="flex flex-col-reverse md:flex-row w-full bet text-lg justify-around">
                                     <motion.div initial="initial"
                                         animate="in"
                                         exit="out"
                                         variants={pageZoom}
-                                        transition={pageTransition} className="bet__container">
+                                        transition={pageTransition} className="bet__container blur-white">
                                         <div>
                                             <input type="radio" value="Favour" id="Favour" className="hidden"
-                                                onChange={(e) => setOdd(e.target.value)} name="odd" />
-                                            <label htmlFor="Favour" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'gradient-bg text-white'} cursor-pointer`}>Yes</label>
+                                                onChange={(e) => setOdd(e.target.value)} ref={yesRef} name="odd" />
+                                            <div onClick={() => yesRef.current.click()} className={`px-6 py-1 inline-block leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'btn-blue text-white'} cursor-pointer`}>Yes</div>
 
                                             <input type="radio" value="Against" id="Against" className="hidden"
-                                                onChange={(e) => setOdd(e.target.value)} name="odd" />
-                                            <label htmlFor="Against" className={`px-6 py-3 leading-loose text-gray-800 hover:text-white hover:gradient-bg hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'gradient-bg text-white'} cursor-pointer`}>No</label>
+                                                onChange={(e) => setOdd(e.target.value)} ref={noRef} name="odd" />
+                                            <div onClick={() => noRef.current.click()} className={`px-6 py-1 inline-block leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'btn-blue text-white'} cursor-pointer`}>No</div>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            <h1 className="font-medium">Amount to Bid : <span className="text-blue-600 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                                            <h1 className="font-medium">Amount to Bid : <span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
-                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
-                                                <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-600 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-white rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                                                <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
+                                                <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                                <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
                                             </div>
                                         </div>
-                                        {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
-                                            : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' && que.bidClosing > new Date().toISOString() ? 'gradient-bg' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified' && que.bidClosing < new Date().toISOString()}>{que?.qstatus === 'closed' ? 'Bidding Closed' : 'Apply Bid'}</button>
+                                        {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
+                                            : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' && que.bidClosing > new Date().toISOString() ? 'btn-blue' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified' && que.bidClosing < new Date().toISOString()}>{que?.qstatus === 'closed' ? 'Bidding Closed' : 'Apply Bid'}</button>
                                         }
                                         {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
                                         {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
@@ -324,7 +328,7 @@ function QuestionDetail({ questionData }) {
                                         animate="in"
                                         exit="out"
                                         variants={pageZoom}
-                                        transition={pageTransition} className="bet__container">
+                                        transition={pageTransition} className="bet__container blur-white">
                                         <table className="min-h-[250px]">
                                             <tbody>
                                                 <tr>
@@ -337,21 +341,23 @@ function QuestionDetail({ questionData }) {
                                                 </tr>
                                                 <tr>
                                                     <td>Open Date &amp; Time</td>
-                                                    <td className="relative flex items-center">{moment(que?.goLive).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 bg-gray-800 text-white min-w-max info__inner transition-sm">{moment(que?.goLive).format()}</div> </td>
+
+                                                    <td className="relative flex items-center md:mt-3">{moment(que?.goLive).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-50 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 text-gray-800 bg-white min-w-max info__inner transition-sm">{moment(que?.goLive).format()}</div> </td>
+
                                                 </tr>
                                                 {isQueEdit ?
                                                     <>
                                                         <tr><td>
                                                             <label htmlFor="bidClosing" className="inline-block mb-1 font-medium">Bid Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
                                                         </td><td>
-                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={new Date()} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
+                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 text-gray-900 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={new Date()} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <label htmlFor="settlementClosing" className="inline-block mb-1 font-medium">Settlement Closing Date &amp; Time<span className="mx-1 text-red-500">*</span></label>
                                                             </td><td>
-                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 1)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
+                                                                <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 text-gray-900 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 1)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
                                                             </td>
                                                         </tr>
                                                     </>
@@ -359,11 +365,11 @@ function QuestionDetail({ questionData }) {
                                                     <>
                                                         <tr>
                                                             <td>Bid Closing Date &amp; Time</td>
-                                                            <td className="relative flex items-center">{moment(que?.bidClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 bg-gray-800 text-white min-w-max info__inner transition-sm">{moment(que?.bidClosing).format()}</div> </td>
+                                                            <td className="relative flex items-center md:mt-3">{moment(que?.bidClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-50 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 bg-white text-gray-800 info__inner min-w-max transition-sm">{moment(que?.bidClosing).format()}</div> </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Settlement Date &amp; Time</td>
-                                                            <td className="relative flex items-center">{moment(que?.settlementClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-800 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 bg-gray-800 text-white min-w-max info__inner transition-sm">{moment(que?.settlementClosing).format()}</div> </td>
+                                                            <td className="relative flex items-center md:mt-3">{moment(que?.settlementClosing).format('lll')} <InformationCircleIcon className="w-4 h-4 mx-0.5 text-gray-50 hidden sm:inline-block cursor-pointer info__circle" /> <div className="absolute -top-8 leading-loose left-0 tracking-wide rounded-lg py-0.5 px-2 bg-white text-gray-800 info__inner min-w-max transition-sm">{moment(que?.settlementClosing).format()}</div> </td>
                                                         </tr>
                                                     </>
                                                 }
@@ -374,7 +380,7 @@ function QuestionDetail({ questionData }) {
                                                 {isQueEdit && <tr>
                                                     <td></td>
                                                     <td>
-                                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={setQuestionStatus}>{updateQue.qstatus === 'closed' ? 'Active' : 'Close'}&nbsp;this Question</button>
+                                                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={setQuestionStatus}>{updateQue.qstatus === 'closed' ? 'Active' : 'Close'}&nbsp;this Question</button>
                                                     </td>
                                                 </tr>
                                                 }
@@ -393,7 +399,7 @@ function QuestionDetail({ questionData }) {
                                         isQueEdit ?
                                             <>
                                                 <h1 className="text-2xl font-semibold my-2">Question Description </h1>
-                                                <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
+                                                <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} className="bg-white text-gray-900" theme="snow" />
                                             </>
                                             :
                                             que?.desc && <>
@@ -416,7 +422,7 @@ function QuestionDetail({ questionData }) {
                                                 required
                                                 value={updateQue?.reference}
                                                 onChange={handleChange}
-                                                className="w-full flex-1 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                                className="w-full flex-1 h-12 px-4 text-gray-900 font-medium transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                             />
                                             :
                                             <>
@@ -427,17 +433,17 @@ function QuestionDetail({ questionData }) {
                                 </motion.div>
                                 {session?.type === 'admin' &&
                                     <> {(isQueEdit) ? <div className="pb-10">
-                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
-                                        <button className={`px-4 py-1.5 leading-loose text-gray-800 border border-gray-900 hover:text-white hover:bg-gray-800 shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => setIsQueEdit(false)}>Cancel</button>
+                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={updateQuestion}>Update</button>
+                                        <button className={`px-4 py-1.5 leading-loose border border-white bg-white text-gray-800 hover:text-gray-50 hover:bg-gray-800 shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => setIsQueEdit(false)}>Cancel</button>
                                     </div> :
-                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
+                                        <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
                                     }
                                     </>
                                 }
-                                {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 gradient-bg text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                                {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
+                                {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                                {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
 
                             </motion.div>
-                            <div className="w-full max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 py-10 relative flex flex-col-reverse lg:flex-row">
+                            <div className="w-full blur-black max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 py-10 relative flex flex-col-reverse lg:flex-row">
                                 <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} />
                                 {session && <UserTransaction queId={que?._id} userId={session?._id} />}
                             </div>
@@ -450,7 +456,7 @@ function QuestionDetail({ questionData }) {
                 animate="in"
                 exit="out"
                 variants={pageZoom}
-                transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full grid place-items-center z-50" >
+                transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full blur-blue grid place-items-center z-50" >
                 <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 bg-white rounded-xl shadow-2xl m-4">
                     <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-gray-800 z-50 leading-tight">
                         Please confirm that you want to place a bid of <div className="flex items-center justify-center">
@@ -459,7 +465,7 @@ function QuestionDetail({ questionData }) {
                     </h1>
                     <div className="flex items-center justify-around mt-6">
                         <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(false)}>{'Cancel'}</button>
-                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose gradient-bg text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Place Bid'}</button>
+                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Place Bid'}</button>
                     </div>
                 </div>
             </motion.div>}

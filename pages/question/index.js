@@ -76,7 +76,7 @@ function index({ data }) {
                 animate="in"
                 exit="out"
                 variants={pageSlide}
-                transition={pageTransition} className="px-5 sm:px-10 pt-28 pb-20 w-full">
+                transition={pageTransition} className="px-5 sm:px-10 py-20 2xl:px-20 w-full">
                 <div className="filter max-w-2xl sm:ml-auto">
                     <div className="flex items-center">
                         <div className="filter__item">
@@ -128,7 +128,7 @@ function index({ data }) {
                                 name="search"
                                 value={filter.search}
                                 onChange={handleChange}
-                                className="h-10 w-full px-4 appearance-none focus:outline-none focus:shadow-outline"
+                                className="h-10 w-full px-4 bg-white focus:bg-white appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <button className="btn-invert" onClick={searchFilter}>Apply Filter</button>
@@ -136,7 +136,7 @@ function index({ data }) {
 
                 </div>
                 {isLoader ? <Loader /> :
-                    <div className="question__group grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div className="question__group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center">
                         {questions && questions?.length > 0 &&
                             questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                         }
