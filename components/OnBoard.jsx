@@ -18,7 +18,7 @@ function OnBoard(props) {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
         <>
-            {data?.[activeIndex] && <div className="h-screen top-0 left-0 absolute w-full bg-black bg-opacity-80 z-50">
+            {data?.[activeIndex] && <div className="h-screen top-0 left-0 absolute w-full blur-black z-50">
                 <div className="max_w_3xl carousel fixed top-1/2 transform -translate-y-1/2">
                     {activeIndex > 0 && <button className="absolute h-1/2 top-1/2 -translate-y-1/2 left-0" onClick={() => setActiveIndex(activeIndex - 1)}><ArrowLeftIcon className="w-10 h-10 p-1 opacity-50 text-gray-800 mx-2 bg-white rounded-full shadow-lg" /> </button>}
                     <div className="inner relative" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
