@@ -47,6 +47,7 @@ function Question({ question }) {
                 const response = await res.json();
                 if (res.status == 201 || res.status == 203) {
                     dispatch(updateBalance(amount - response?.reductionAmount))
+                    setBidModal({ state: false, odd: null })
                     setIsBidPlaced(true)
                     if (res.status === 203) {
                         toast("You've won 200 Neuron coins for this transaction! 🥳", {
@@ -59,7 +60,6 @@ function Question({ question }) {
                             progress: undefined,
                         });
                     }
-                    setBidModal({ state: false, odd: null })
                 }
             }
             else {

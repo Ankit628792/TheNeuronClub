@@ -13,7 +13,7 @@ function index() {
     }, [session])
 
     return (
-        <div className="py-10">
+        <div className="pb-10">
             <Head> <title>The Neuron | Portfolio</title> </Head>
             {session &&
                 <>

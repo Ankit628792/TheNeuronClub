@@ -66,7 +66,7 @@ function Portfolio() {
     const [userQuestions, setUserQuestions] = useState()
 
     const getQuestion = async () => {
-        const res = await fetch(`/api/user/questions?userId=${session?._id}`);
+        const res = await fetch(`/api/question/ques?type=expiring`);
         console.log(res.status)
         const response = await res.json();
         setUserQuestions(response)
@@ -78,7 +78,7 @@ function Portfolio() {
 
     return (
         <>
-            <div className="min-h-[150px] w-full max_w_3xl relative blur-blue">
+            <div className="min-h-[220px] w-full max_w_3xl relative blur-blue">
                 <div className="w-full h-48 rounded-full absolute -bottom-20 transform left-1/2 -translate-x-1/2 flex flex-col justify-center items-center">
                     <div className="relative p-2 rounded-full bg-white">
                         {
@@ -111,10 +111,10 @@ function Portfolio() {
                     }
                 </div>
             </div>
-            <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
+            <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium px-10 pt-32 lg:pt-36 pb-5">
                 <div className="flex items-center max-w-max space-x-4">
                     <h1 className="text-white">Name:&nbsp; </h1>
-                    {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg break-all">{session?.name}</h2>}
+                    {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg text-gray-50 break-all">{session?.name}</h2>}
                 </div>
                 <div className="flex items-center max-w-max space-x-4">
                     <h1 className="text-white">Email:&nbsp; </h1>
