@@ -449,7 +449,9 @@ function QuestionDetail({ questionData }) {
                             </div>
                         </>
                         :
-                        <Loader />
+                        <div className="fixed inset-0 w-full h-screen z-50 blur-black flex items-center justify-center max_w_3xl">
+                            <Loader />
+                        </div>
                 }
             </div>
             {isActive && <motion.div initial="initial"
