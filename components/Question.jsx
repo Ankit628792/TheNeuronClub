@@ -82,7 +82,6 @@ function Question({ question }) {
     }
     return (
         <>
-            <ToastContainer />
             <motion.div
                 initial="initial"
                 animate="in"
@@ -104,6 +103,7 @@ function Question({ question }) {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </motion.div>
 
 

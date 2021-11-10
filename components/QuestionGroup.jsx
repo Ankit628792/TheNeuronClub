@@ -23,7 +23,7 @@ function QuestionGroup({ questions, category }) {
                                 ))}
                             </>
                             :
-                            <div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
+                            <div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-w-[380px] min-h-[500px]">
                                 <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
                             </div>
                     }
