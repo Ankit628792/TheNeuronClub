@@ -9,8 +9,6 @@ import { userSession } from './../lib/user-session';
 import { useState } from 'react';
 import Modal from './Modal'
 import Coin from './Coin';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Question({ question }) {
     const handleClick = () => {
@@ -51,17 +49,6 @@ function Question({ question }) {
                     dispatch(updateBalance(amount - response?.reductionAmount))
                     setBidModal({ state: false, odd: null })
                     setIsBidPlaced(true)
-                    if (res.status === 203) {
-                        toast("You've won 200 Neuron coins for this transaction! 🥳", {
-                            position: "top-center",
-                            autoClose: 20000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                    }
                 }
             }
             else {
@@ -103,7 +90,6 @@ function Question({ question }) {
                         </div>
                     </div>
                 </div>
-                <ToastContainer />
             </motion.div>
 
 
@@ -114,14 +100,15 @@ function Question({ question }) {
                 transition={pageTransition} className="fixed inset-0 w-full h-full grid place-items-center z-50 blur-black max_w_3xl" >
                 <div className="relative max-w-sm md:max-w-md py-10 lg:py-14 px-5 md:px-10 bg-white rounded-xl shadow-2xl m-4">
                     <div className="my-4 flex flex-col items-center">
-                        {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
-                        {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-1000 </p>}
-                        <div className="relative flex items-center space-x-4 mb-4">
+                        <h1 className="font-medium text-gray-800 text-2xl lg:text-3xl flex items-center flex-wrap">{que?.question} </h1>
+                        {lowBalance && <p className="text-red-500 text-base"> Not enough balance to bet </p>}
+                        {bidLimit && <p className="text-red-500 text-base"> Bid amount should in range of 1-1000 </p>}
+                        <div className="relative flex items-center space-x-4 my-4">
                             <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
                             <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center text-xl lg:text-2xl rounded focus:outline-none" />
                             <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
                         </div>
-                        <h1 className="font-medium text-gray-800 text-xl md:text-2xl xl:text-3xl flex items-center flex-wrap">You're placing a bid of &nbsp;<span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                        <h1 className="font-medium text-gray-800 text-xl lg:text-2xl flex items-center flex-wrap">You're placing a bid of &nbsp;<span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span>&nbsp;in {bidModal?.odd} </h1>
                     </div>
                     <div className="flex items-center justify-around mt-6">
                         <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" disabled={isSending} onClick={() => setBidModal({ state: false, odd: null })}>{'Cancel'}</button>
