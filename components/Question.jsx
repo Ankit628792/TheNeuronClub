@@ -9,6 +9,8 @@ import { userSession } from './../lib/user-session';
 import { useState } from 'react';
 import Modal from './Modal'
 import Coin from './Coin';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Question({ question }) {
     const handleClick = () => {
@@ -80,6 +82,7 @@ function Question({ question }) {
     }
     return (
         <>
+            <ToastContainer />
             <motion.div
                 initial="initial"
                 animate="in"
@@ -121,7 +124,7 @@ function Question({ question }) {
                         <h1 className="font-medium text-gray-800 text-xl md:text-2xl xl:text-3xl flex items-center flex-wrap">You're placing a bid of &nbsp;<span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                     </div>
                     <div className="flex items-center justify-around mt-6">
-                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setBidModal({ state: false, odd: null })}>{'Cancel'}</button>
+                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" disabled={isSending} onClick={() => setBidModal({ state: false, odd: null })}>{'Cancel'}</button>
                         <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet} disabled={isSending}>{isSending ? 'Wait..' : 'Place Bid'}</button>
                     </div>
                 </div>
