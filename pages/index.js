@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import Header2 from '../components/Header2'
 import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OnBoard from '../components/OnBoard'
-import Header3 from '../components/Header3'
 
 export default function Home({ questions }) {
   const [onBoard, setOnBoard] = useState(false)

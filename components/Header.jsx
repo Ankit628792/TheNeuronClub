@@ -3,7 +3,15 @@ import Link from 'next/link'
 import { userSession } from '../lib/user-session'
 import { motion } from 'framer-motion'
 import { pageSlide, pageTransition } from '../util'
-import Carousel from './Carousel'
+// import Carousel from './Carousel'
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(
+  () => {
+    return import("./Carousel");
+  },
+  { ssr: false }
+);
 
 function Header() {
     const session = userSession()
