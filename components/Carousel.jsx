@@ -12,14 +12,13 @@ const data = [
 function Carousel() {
     const [active, setActive] = useState(0)
     const [item, setItem] = useState(data[0])
-    const [Size, setSize] = useState(null)
+    const [Size, setSize] = useState(window?.innerWidth < 1024 ? 'sm': 'lg')
 
     useEffect(() => {
         function handleResize() {
             window.innerWidth < 1024 ? setSize('sm') : setSize('lg')
         }
         window.addEventListener("resize", handleResize);
-        handleResize()
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
@@ -47,10 +46,10 @@ function Carousel() {
                 <div className="p-5 h-full flex flex-row lg:flex-col items-center justify-between space-x-10 lg:space-x-0 lg:space-y-10">
                     <button onClick={prev} className="p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base grid place-items-center hover:bg-white hover:text-gray-800 font-medium scale-110 ease-out">
                         {Size == 'lg' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            <path fillRule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                         </svg>
                             :
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>}
                     </button>
@@ -61,10 +60,10 @@ function Carousel() {
                     ))} */}
                     <button onClick={next} className="p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base grid place-items-center hover:bg-white hover:text-gray-800 font-medium scale-110 ease-out">
                         {Size == 'lg' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            <path fillRule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                             :
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>}
                     </button>

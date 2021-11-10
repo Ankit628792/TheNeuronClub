@@ -2,8 +2,6 @@ import { userSession } from "../../lib/user-session"
 import { useEffect } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
-import { motion } from "framer-motion";
-import { pageTransition, pageZoom } from "../../util";
 import Portfolio from "../../components/Portfolio";
 
 function index() {

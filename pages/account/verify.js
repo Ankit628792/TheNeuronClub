@@ -23,7 +23,7 @@ function verify({ verified }) {
                     animate="in"
                     exit="out"
                     variants={pageZoom}
-                    transition={pageTransition} className="max-w-lg blur-white py-10 px-5 mx-auto text-center gradient-shadow-md">
+                    transition={pageTransition} className="max-w-lg blur-black py-10 px-5 mx-auto text-center gradient-shadow-md">
                     {verified ?
                         <>
                             <h1 className="text-3xl font-bold text-gray-100">Your account is Verified</h1>

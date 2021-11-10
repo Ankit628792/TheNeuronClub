@@ -47,7 +47,7 @@ function forget_password() {
                     animate="in"
                     exit="out"
                     variants={pageZoom}
-                    transition={pageTransition} className="p-5 sm:px-10 sm:py-10 max-w-3xl blur-white text-center mx-auto gradient-shadow-md">
+                    transition={pageTransition} className="p-5 sm:px-10 sm:py-10 max-w-3xl blur-black text-center mx-auto gradient-shadow-md">
 
                     {verify ? <h1 className="text-2xl md:text-3xl text-white font-semibold">Reset Password link is sent to your email </h1> :
                         <>

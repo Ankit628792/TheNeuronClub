@@ -78,7 +78,7 @@ function Portfolio() {
 
     return (
         <>
-            <div className="min-h-[225px] w-full max_w_3xl relative gradient-bg">
+            <div className="min-h-[150px] w-full max_w_3xl relative blur-blue">
                 <div className="w-full h-48 rounded-full absolute -bottom-20 transform left-1/2 -translate-x-1/2 flex flex-col justify-center items-center">
                     <div className="relative p-2 rounded-full bg-white">
                         {
@@ -102,30 +102,30 @@ function Portfolio() {
                     {isEdit ?
                         <>
                             <div className="flex">
-                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-800 rounded-xl font-semibold hover:text-green-500 transition-sm items-center inline-flex" onClick={updateUser}>{isUpdating ? 'Updating...' : <><CheckIcon className="w-6 mr-1" />Update </>}</button>
-                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-800 rounded-xl font-semibold hover:text-red-500 transition-sm items-center inline-flex" onClick={() => setIsEdit(false)}> <XIcon className="w-6 mr-1" />Cancel</button>
+                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-green-500 transition-sm items-center inline-flex" onClick={updateUser}>{isUpdating ? 'Updating...' : <><CheckIcon className="w-6 mr-1" />Update </>}</button>
+                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-red-500 transition-sm items-center inline-flex" onClick={() => setIsEdit(false)}> <XIcon className="w-6 mr-1" />Cancel</button>
                             </div>
                         </>
                         :
-                        <button className="px-5 py-3 text-lg lg:text-xl text-gray-800 rounded-xl font-semibold hover:text-blue-500 transition-sm flex items-center" onClick={() => setIsEdit(true)}> <PencilIcon className="w-6 mr-1" />Edit Profile</button>
+                        <button className="px-5 py-3 text-lg lg:text-xl text-white rounded-xl font-semibold hover:text-yellow-300 transition-sm flex items-center" onClick={() => setIsEdit(true)}> <PencilIcon className="w-6 mr-1" />Edit Profile</button>
                     }
                 </div>
             </div>
             <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium text-gray-700 px-10 pt-32 lg:pt-36 pb-5">
                 <div className="flex items-center max-w-max space-x-4">
-                    <h1>Name:&nbsp; </h1>
+                    <h1 className="text-white">Name:&nbsp; </h1>
                     {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg break-all">{session?.name}</h2>}
                 </div>
                 <div className="flex items-center max-w-max space-x-4">
-                    <h1>Email:&nbsp; </h1>
-                    <h2 className="font-normal break-all text-lg">{session?.email}</h2>
+                    <h1 className="text-white">Email:&nbsp; </h1>
+                    <h2 className="font-normal break-all text-lg text-gray-100">{session?.email}</h2>
                 </div>
                 {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1>Username:&nbsp; </h1>
+                    <h1 className="text-white">Username:&nbsp; </h1>
                     {isEdit ? <input type="text" name="username" onChange={handleChange} value={data.username} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal break-all">{session?.username}</h2>}
                 </div> */}
                 {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1>Country:&nbsp; </h1>
+                    <h1 className="text-white">Country:&nbsp; </h1>
                     {isEdit ? <select onChange={handleChange} className="outline-none text-lg h-10 cursor-pointer px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" type="country" name="country" value={data.country} required placeholder="Country ">
                         <option value="" disabled>Choose Your Country </option>
                         {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
@@ -133,11 +133,11 @@ function Portfolio() {
                         : <h2 className="font-normal break-all">{session.country}</h2>}
                 </div> */}
                 <div className="flex items-center max-w-max space-x-4">
-                    <h1>Balance:&nbsp; </h1>
-                    <h2 className="inline-flex items-center text-lg font-normal"><Coin width="5" height="5" />{amount}</h2>
+                    <h1 className="text-white">Balance:&nbsp; </h1>
+                    <h2 className="inline-flex items-center text-lg font-normal text-white"><Coin width="5" height="5" />{amount}</h2>
                 </div>
                 {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1>Referred user:&nbsp; </h1>
+                    <h1 className="text-white">Referred user:&nbsp; </h1>
                     <h2 className="font-normal text-lg">{0} </h2>
                 </div> */}
             </div>
@@ -145,10 +145,10 @@ function Portfolio() {
                 <>
                     <hr className=" border-t-2 rounded-lg w-4/5 mx-auto" />
                     <div className={`p-5 py-10 sm:p-10 xl:px-20 min-w-full mx-auto`}>
-                        {userQuestions?.length <= 0 && <h1 className="text-3xl lg:text-4xl 2xl:text-5xl my-6 font-semibold text-gray-700 text-center">You've not contributed any question yet.</h1>}
+                        {userQuestions?.length <= 0 && <h1 className="text-3xl lg:text-4xl 2xl:text-5xl my-6 font-semibold text-white text-center">You've not contributed any question yet.</h1>}
                         {userQuestions?.length > 0 &&
                             <>
-                                <h1 className="text-2xl sm:text-3xl font-semibold  text-gray-700 my-6 sm:px-5">My Questions</h1>
+                                <h1 className="text-2xl sm:text-3xl font-semibold  text-white my-6 sm:px-5">My Questions</h1>
                                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 question__group">
                                     {userQuestions?.map(item => (
                                         <Question key={item?._id} question={item} />

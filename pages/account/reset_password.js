@@ -65,7 +65,7 @@ function reset_password({ _id, code }) {
                     animate="in"
                     exit="out"
                     variants={pageZoom}
-                    transition={pageTransition} className="p-5 sm:px-10 sm:py-10 max-w-xl text-center blur-white mx-auto gradient-shadow">
+                    transition={pageTransition} className="p-5 sm:px-10 sm:py-10 max-w-xl text-center blur-black mx-auto gradient-shadow">
 
                     {verify ?
                         <>

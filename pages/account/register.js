@@ -115,7 +115,7 @@ function register({ referral_code }) {
                         {
                             isForm ?
                             <>
-                                <form className="max-w-lg p-10 min-w-[380px] blur-white gradient-shadow" onSubmit={handleSubmit}>
+                                <form className="max-w-lg p-10 min-w-[380px] blur-black gradient-shadow" onSubmit={handleSubmit}>
                                     {/* {isEmail && <p className="text-sm text-red-400 text-center">Email already exist</p>} */}
                                     <div className="flex border-b border-gray-100 py-2">
                                         <UserIcon className="h-6 text-white" />
