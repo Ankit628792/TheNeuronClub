@@ -140,9 +140,9 @@ function index({ data }) {
                         {questions && questions?.length > 0 &&
                             questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                         }
-                        {/* {!isData && <div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
+                        {!isData && <div className="p-5 relative row-start-1 col-start-1 col-end-6 col-span-2 min-h-[500px]">
                             <Image src="/images/no-data.svg" layout="fill" objectFit="contain" className="w-full h-full drop-shadow" />
-                        </div>} */}
+                        </div>}
                     </div>
                 }
             </motion.div>
