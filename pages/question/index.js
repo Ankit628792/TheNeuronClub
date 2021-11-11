@@ -76,7 +76,7 @@ function index({ data }) {
                 animate="in"
                 exit="out"
                 variants={pageSlide}
-                transition={pageTransition} className="px-5 sm:px-10 py-20 2xl:px-20 w-full">
+                transition={pageTransition} className="px-5 sm:px-10 pt-10 pb-20 2xl:px-20 w-full">
                 <div className="filter max-w-2xl sm:ml-auto">
                     <div className="flex items-center">
                         <div className="filter__item">
@@ -136,7 +136,7 @@ function index({ data }) {
 
                 </div>
                 {isLoader ? <Loader /> :
-                    <div className="question__group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center">
+                    <div className="question__group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center items-stretch">
                         {questions && questions?.length > 0 &&
                             questions.map((item, i) => item.question.toLowerCase().includes(filter.search.toLowerCase()) && <Question key={i} question={item} />)
                         }

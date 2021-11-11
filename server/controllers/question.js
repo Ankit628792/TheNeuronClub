@@ -31,7 +31,7 @@ const getQuestions = async (req, res) => {
 const ques = async (req, res) => {
     try {
         if (req.query.type == 'expiring') {
-            const expiring = await Question.find({ bidClosing: { $lte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ settlementClosing: 1 });
+            const expiring = await Question.find({ bidClosing: { $lte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ settlementClosing: -1 });
             res.status(200).send(expiring)
         }
         else {

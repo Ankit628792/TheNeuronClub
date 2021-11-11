@@ -14,7 +14,7 @@ function QuestionGroup({ questions, category }) {
                         <h1 className="flex items-center text-base sm:text-lg cursor-pointer hover:text-yellow-400 sm:pr-4">View All <ArrowRightIcon className="h-7 mx-2" /></h1>
                     </Link>
                 </div>
-                <div className="grid grid-cols-1 mt-10 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center question__group">
+                <div className="grid grid-cols-1 mt-10 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center items-stretch question__group">
                     {
                         questions && questions?.length > 0 ?
                             <>

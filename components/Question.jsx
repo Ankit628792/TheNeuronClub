@@ -11,6 +11,7 @@ import Modal from './Modal'
 import Coin from './Coin';
 
 function Question({ question }) {
+    const closingTime = moment(question?.bidClosing).fromNow()
     const handleClick = () => {
         Router.push({
             pathname: `/question/${question._id}`
@@ -75,18 +76,18 @@ function Question({ question }) {
                 exit="out"
                 variants={pageZoom}
                 transition={pageTransition} className="text-white max-w-xs p-5 shadow-lg relative blur-black rounded-lg">
-                <h1 className="absolute top-0 right-0 py-1 px-2 blur-blue rounded-tr-lg rounded-bl-lg">Closing in {moment(question?.bidClosing).fromNow(true)}</h1>
+                <h1 className="absolute top-0 right-0 py-1 px-2 blur-blue rounded-tr-lg rounded-bl-lg">{closingTime?.includes('ago') ? `closed ${closingTime}` : `closing ${closingTime}`}</h1>
                 <img className="w-full h-48 object-cover rounded-lg cursor-pointer" onClick={handleClick} src={question?.image_url || `images/que/${question.category}.jfif`} alt="" />
                 <div className="py-5 font-medium h-full">
                     <h1 className="text-lg text-center mb-4 cursor-pointer line-clamp-3" onClick={handleClick}>{question.question}</h1>
                     <div className="flex justify-around items-center text-lg">
                         <div className="flex flex-col items-center justify-center">
                             <button className="font-semibold btn-blue rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Favour' }) : setIsLoggedIn(true)}>Yes</button>
-                            <h1 className="font-normal text-center leading-none">{question?.Favour > 0 ? (question?.Favour * 100 / question.Volume).toFixed(2) : 0}%<br />says yes</h1>
+                            <h1 className="font-normal text-center leading-none">{question?.Favour > 0 ? Math.round((question?.Favour * 100 / question.Volume)) : 0}%<br />says yes</h1>
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <button className="font-semibold btn-orange rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Against' }) : setIsLoggedIn(true)}>No</button>
-                            <h1 className="font-normal text-center leading-none">{question?.Against > 0 ? (question?.Against * 100 / question.Volume).toFixed(2) : 0}%<br />says no</h1>
+                            <h1 className="font-normal text-center leading-none">{question?.Against > 0 ? Math.round((question?.Against * 100 / question.Volume)) : 0}%<br />says no</h1>
                         </div>
                     </div>
                 </div>
@@ -101,12 +102,12 @@ function Question({ question }) {
                 <div className="relative max-w-sm md:max-w-md p-5 lg:py-10 md:px-10 bg-white rounded-xl shadow-2xl m-4">
                     <div className="my-4 flex flex-col items-center">
                         <h1 className="font-medium text-gray-800 text-2xl lg:text-3xl text-center">{que?.question} </h1>
-                        {lowBalance && <p className="text-red-500 text-base"> Not enough balance to bet </p>}
-                        {bidLimit && <p className="text-red-500 text-base"> Bid amount should in range of 1-1000 </p>}
+                        {lowBalance && <p className="text-red-500 text-base mt-2"> Not enough balance to bet </p>}
+                        {bidLimit && <p className="text-red-500 text-base mt-2"> Bid amount should in range of 1-1000 </p>}
                         <div className="relative flex items-center space-x-4 my-4">
-                            <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
+                            <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false); setBidLimit(false) }} />
                             <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center text-xl lg:text-2xl rounded focus:outline-none" />
-                            <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                            <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-800 text-gray-100 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false); setBidLimit(false) }} />
                         </div>
                         <h1 className="font-medium text-gray-800 text-xl lg:text-2xl flex items-center justify-center flex-wrap">You're placing a bid of &nbsp;<span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span>&nbsp;in <span className="text-blue-400 capitalize">{bidModal?.odd}</span> </h1>
                     </div>
