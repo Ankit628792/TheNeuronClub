@@ -6,19 +6,18 @@ import { XIcon } from '@heroicons/react/solid';
 import { userSession } from '../../lib/user-session';
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { EditQue } from '../../components/EditQue';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
 })
 
-export const Detail = ({ queData, onSelect, updateQue }) => {
+export const EditQue = (props) => {
     const [isVerify, setIsVerify] = useState(false)
     const [isInValid, setIsInValid] = useState(false)
     const [userInfo, setUserInfo] = useState()
-    const [que, setQue] = useState(queData);
-    const [updatedQue, setUpdatedQue] = useState(queData);
+    const [que, setQue] = useState(props.queData);
+    const [updatedQue, setUpdatedQue] = useState(props.queData);
     const [desc, setDesc] = useState(que?.desc)
     const [isQueEdit, setIsQueEdit] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
@@ -46,8 +45,8 @@ export const Detail = ({ queData, onSelect, updateQue }) => {
         })
         if (res.status === 200) {
             qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
-            updateQue(que?._id)
-            onSelect(null);
+            props.updateQue(que)
+            props.setIsQue(null);
         }
         qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
         setIsVerify(false)
@@ -60,7 +59,6 @@ export const Detail = ({ queData, onSelect, updateQue }) => {
     const updateQuestion = async () => {
         setIsUpdating(true)
         const { _id, question } = updatedQue;
-        console.log(updatedQue)
         const res = await fetch(`/api/question/update_que`, {
             method: 'POST',
             headers: {
@@ -82,7 +80,7 @@ export const Detail = ({ queData, onSelect, updateQue }) => {
     }
     return (
         <div className="fixed top-0 left-0 grid place-items-center blur-black w-full min-h-screen p-1 z-50">
-            <XIcon className="bg-white text-gray-700 w-12 h-12 cursor-pointer rounded-full p-1 absolute top-5 right-6 z-[55] gradient-shadow" onClick={() => onSelect(null)} />
+            <XIcon className="bg-white text-gray-700 w-12 h-12 cursor-pointer rounded-full p-1 absolute top-5 right-6 z-[55] gradient-shadow" onClick={() => props.setIsQue(null)} />
             <motion.div initial="initial"
                 animate="in"
                 exit="out"
@@ -175,72 +173,4 @@ export const Detail = ({ queData, onSelect, updateQue }) => {
             </motion.div>
         </div>
     )
-}
-
-function verification({ data }) {
-    const session = userSession();
-    const router = useRouter();
-    useEffect(() => {
-        if (!session) {
-            router.push('/')
-        }
-        if (session?.type !== 'admin') {
-            router.push('/')
-        }
-    }, [])
-    const [isQue, setIsQue] = useState(null);
-    const [queList, setQueList] = useState(data ? [...data] : null);
-
-    const updateQue = async ({ _id }) => {
-
-        const index = queList.findIndex((q) => q._id == _id)
-        if (index >= 0) {
-            queList.splice(index, 1)
-        } else {
-            console.warn(`Can't verify question`)
-        }
-        setQueList([...queList]);
-    }
-
-
-    return (
-        <>
-            {session &&
-                <div className="py-10">
-                    {/* {isQue && <Detail queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />} */}
-                    {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />}
-                    <h1 className="text-xl sm:text-2xl 2xl:text-3xl text-white font-semibold max-w-5xl mx-auto p-5">Question List For Verification</h1>
-                    {queList?.length > 0 ?
-                        <>
-                            {queList.map(que => (
-                                <div key={que?._id} className="w-full blur-blue text-white max-w-5xl mx-auto text-lg sm:text-xl font-medium p-5 px-10 flex space-x-2 sm:space-x-4 items-center relative rounded-lg gradient-shadow my-2">
-                                    <img src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} alt="" className="w-12 h-12 shadow-lg border border-white hover:scale-105 transition-md object-cover rounded-full" />
-                                    <div className="my-3 sm:my-0 flex-1">
-                                        <h1 className="flex-1 line-clamp-1"> {que?.question} </h1>
-                                        <h2 className="flex-1 text-sm text-gray-100 capitalize"> {que?.category} </h2>
-                                    </div>
-                                    <button className="px-4 py-1 mx-auto leading-loose btn-orange text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>View</button>
-                                </div>
-                            ))}
-                        </>
-                        :
-                        <h1 className="text-lg sm:text-xl 2xl:text-2xl text-gray-700 font-medium max-w-5xl mx-auto p-5 rounded-lg gradient-shadow">No Questions Available</h1>
-
-                    }
-                </div>
-            }
-        </>
-    )
-}
-
-export default verification
-
-
-export async function getServerSideProps() {
-    const data = await fetch(`${process.env.HOST}/api/question/get_questions?filter=created`).then(res => res.json())
-    return {
-        props: {
-            data
-        }
-    }
 }

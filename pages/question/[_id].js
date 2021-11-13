@@ -22,6 +22,7 @@ import dynamic from 'next/dynamic'
 import CommentBox from '../../components/CommentBox';
 import Settlement from '../../components/Settlement';
 import UserTransaction from '../../components/UserTransaction'
+import { EditQue } from '../../components/EditQue'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -50,6 +51,7 @@ function QuestionDetail({ questionData }) {
     const [que, setQue] = useState(questionData);
     const [updateQue, setUpdateQue] = useState(questionData);
     const [isQueEdit, setIsQueEdit] = useState(false)
+    const [isQue, setIsQue] = useState(null);
     const [isSettle, setIsSettle] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
     const [bidPlaceModal, setBidPlaceModal] = useState(false)
@@ -172,6 +174,10 @@ function QuestionDetail({ questionData }) {
         }
     }
 
+    const updateQue = async (updatedQuestion) => {
+        setQue(updatedQuestion)
+    }
+
     function DESC() {
         return { __html: que?.desc };
     }
@@ -183,6 +189,7 @@ function QuestionDetail({ questionData }) {
             </Head>
             <ToastContainer />
             <div className="py-10 relative">
+                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />}
                 {
                     que && que?.category ?
                         <>
@@ -209,8 +216,10 @@ function QuestionDetail({ questionData }) {
                                             <p className="pr-5 text-yellow-300">{Volume > 0 ? (Against * 100 / Volume).toFixed(2) : 0}% say no</p>
                                             <p className="pl-5 text-green-300">{Volume > 0 ? (Favour * 100 / Volume).toFixed(2) : 0}% say yes</p>
                                         </h2>
-                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-2" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-3" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
                                         <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl hover:text-yellow-300" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-8 h-8 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                        {session?.type ==='admin' && <button className="px-4 py-1 mx-auto block leading-loose btn-orange text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
+                                        }
                                     </div>
 
                                 </div>
@@ -376,7 +385,7 @@ function QuestionDetail({ questionData }) {
                     </div>
 
                 }
-                { isShare &&
+                {isShare &&
                     <div className="fixed inset-0 w-full h-screen grid place-items-center z-50 blur-black" onClick={() => setIsShare(false)} >
                         <motion.div initial="initial"
                             animate="in"
