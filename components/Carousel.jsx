@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from 'next/image' ;
+import {useRouter} from 'next/router' ;
 
 const data = [
     { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/800x800/?science', category: 'science' },
@@ -10,6 +11,7 @@ const data = [
     { id: 4, heading: 'Coronavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/800x800/?coronavirus', category: 'coronavirus' },
 ]
 function Carousel() {
+    const router= useRouter();
     const [active, setActive] = useState(0)
     const [item, setItem] = useState(data[0])
     const [Size, setSize] = useState(window?.innerWidth < 1024 ? 'sm': 'lg')
@@ -79,7 +81,7 @@ function Carousel() {
                                 stiffness: 260,
                                 damping: 50,
                             }}
-                            className={`relative shadow-xl w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] cursor-pointer`} key={item.id}>
+                            className={`relative shadow-xl w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] cursor-pointer`} key={item.id} onClick={() => router.push(`/question?category=${item.category}`)}>
                                 <Image src={item?.imgSrc} layout="fill" className="w-full h-full rounded-md"  objectFit="contain" />
                             {/* <img src={item.imgSrc} className="w-full h-full rounded-md object-cover" alt="" /> */}
                             <div className="absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10">
