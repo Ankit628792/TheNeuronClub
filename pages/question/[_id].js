@@ -230,10 +230,10 @@ function QuestionDetail({ questionData }) {
                                             <p className="pr-5 text-yellow-300">{Volume > 0 ? (Against * 100 / Volume).toFixed(2) : 0}% say no</p>
                                             <p className="pl-5 text-green-300">{Volume > 0 ? (Favour * 100 / Volume).toFixed(2) : 0}% say yes</p>
                                         </h2>
-                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-3" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
-                                        <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl hover:text-yellow-300" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-8 h-8 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
-                                        {session?.type === 'admin' && <button className="px-4 py-1 mx-auto block leading-loose btn-orange text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
+                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                        {session?.type === 'admin' && <button className="px-4 py-1 mx-auto inline-block max-w-max leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
                                         }
+                                        <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-7 h-7 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
                                     </motion.div>
 
                                 </div>

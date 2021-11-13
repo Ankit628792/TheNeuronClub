@@ -127,24 +127,25 @@ export const EditQue = (props) => {
                     </div>
                 </div>
 
-                {que?.desc && <div className="p-5">
-                    {
-                        isQueEdit ?
-                            <>
-                                <h1 className="text-2xl font-semibold my-2">Question Description </h1>
-                                <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
-                            </>
-                            :
-                            <>
+                {
+                    isQueEdit ?
+                        (que?.desc && <div className="p-5">
+                            <h1 className="text-2xl font-semibold my-2">Question Description </h1>
+                            <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} theme="snow" />
+                        </div>
+                        )
+                        :
+                        <>
+                            <div className="p-5">
                                 <h1 className="text-2xl font-semibold my-2">About the question</h1>
                                 <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
-                            </>
-                    }
-                </div>}
+                            </div>
+                        </>
+                }
 
-                {que?.reference && <div className="px-5 pb-5">
-                    {
-                        isQueEdit ?
+                {
+                    isQueEdit ?
+                        <> {que?.reference && <div className="px-5 pb-5">
                             <input
                                 placeholder="Settlement Link"
                                 type="text"
@@ -154,13 +155,17 @@ export const EditQue = (props) => {
                                 onChange={handleChange}
                                 className="w-full flex-1 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
-                            :
-                            <>
+                        </div>
+                        }
+                        </>
+                        :
+                        <>
+                            <div className="px-5 pb-5">
                                 <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
                                 <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
-                            </>
-                    }
-                </div>}
+                            </div>
+                        </>
+                }
 
                 <> {isQueEdit ? <div className="px-5 pb-10">
                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={updateQuesstion}>{isUpdating ? 'Wait...' : 'Update'}</button>
@@ -169,7 +174,7 @@ export const EditQue = (props) => {
                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
                 }
                 </>
-            </motion.div>
-        </div>
+            </motion.div >
+        </div >
     )
 }
