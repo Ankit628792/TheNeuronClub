@@ -13,7 +13,7 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     loading: () => <p>Loading ...</p>,
 })
 
-export const Detail = ({ queData, onSelect, updateQue }) => {
+export const Detail = ({ queData, onSelect, updateQues }) => {
     const [isVerify, setIsVerify] = useState(false)
     const [isInValid, setIsInValid] = useState(false)
     const [userInfo, setUserInfo] = useState()
@@ -46,7 +46,7 @@ export const Detail = ({ queData, onSelect, updateQue }) => {
         })
         if (res.status === 200) {
             qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
-            updateQue(que?._id)
+            updateQues(que?._id)
             onSelect(null);
         }
         qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
@@ -191,7 +191,7 @@ function verification({ data }) {
     const [isQue, setIsQue] = useState(null);
     const [queList, setQueList] = useState(data ? [...data] : null);
 
-    const updateQue = async ({ _id }) => {
+    const updateQues = async ({ _id }) => {
 
         const index = queList.findIndex((q) => q._id == _id)
         if (index >= 0) {
@@ -208,7 +208,7 @@ function verification({ data }) {
             {session &&
                 <div className="py-10">
                     {/* {isQue && <Detail queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />} */}
-                    {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />}
+                    {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} />}
                     <h1 className="text-xl sm:text-2xl 2xl:text-3xl text-white font-semibold max-w-5xl mx-auto p-5">Question List For Verification</h1>
                     {queList?.length > 0 ?
                         <>

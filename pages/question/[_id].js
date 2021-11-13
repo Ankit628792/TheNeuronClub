@@ -174,7 +174,7 @@ function QuestionDetail({ questionData }) {
         }
     }
 
-    const updateQue = async (updatedQuestion) => {
+    const updateQues = async (updatedQuestion) => {
         setQue(updatedQuestion)
     }
 
@@ -189,7 +189,7 @@ function QuestionDetail({ questionData }) {
             </Head>
             <ToastContainer />
             <div className="py-10 relative">
-                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />}
+                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} />}
                 {
                     que && que?.category ?
                         <>
