@@ -44,7 +44,7 @@ export const EditQue = (props) => {
         })
         if (res.status === 200) {
             qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
-            props.updateQue(que)
+            props.updateQues(que)
             props.setIsQue(null);
         }
         qstatus == 'verified' ? setIsVerify(false) : setIsInValid(false)
@@ -55,7 +55,7 @@ export const EditQue = (props) => {
         setUpdatedQue({ ...updatedQue, [e.target.name]: e.target.value });
     }
 
-    const updateQuestion = async () => {
+    const updateQuesstion = async () => {
         setIsUpdating(true)
         const { _id, question } = updatedQue;
         const res = await fetch(`/api/question/update_que`, {
@@ -163,7 +163,7 @@ export const EditQue = (props) => {
                 </div>}
 
                 <> {isQueEdit ? <div className="px-5 pb-10">
-                    <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={updateQuestion}>{isUpdating ? 'Wait...' : 'Update'}</button>
+                    <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={updateQuesstion}>{isUpdating ? 'Wait...' : 'Update'}</button>
                     <button className={`px-4 py-2 leading-loose text-gray-800 hover:text-white hover:bg-gray-800 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => setIsQueEdit(false)}>Cancel</button>
                 </div> :
                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
