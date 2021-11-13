@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { MinusIcon, PlusIcon, ShareIcon, XIcon } from '@heroicons/react/solid'
 import { InformationCircleIcon } from '@heroicons/react/outline'
@@ -51,7 +52,7 @@ function QuestionDetail({ questionData }) {
     const [isQueEdit, setIsQueEdit] = useState(false)
     const [isSettle, setIsSettle] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
-
+    const [bidPlaceModal, setBidPlaceModal] = useState(false)
     const yesRef = useRef()
     const noRef = useRef()
 
@@ -181,7 +182,264 @@ function QuestionDetail({ questionData }) {
                 <title>Question: {que?.question}</title>
             </Head>
             <ToastContainer />
-            <div className="py-10">
+            <div className="py-10 relative">
+                {
+                    que && que?.category ?
+                        <>
+                            <div className="max-w-7xl mx-auto">
+
+                                <div className="md:min-h-[500px] w-full flex items-center flex-col lg:flex-row p-10 lg:pb-20 justify-between">
+
+                                    <div className="relative h-72 w-72 sm:h-96 sm:w-96 xl:h-[450px] xl:w-[450px] max-w-md">
+                                        <Image src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} className="" objectFit="cover" layout="fill" />
+                                        <div className="text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-sm text-xl absolute bottom-0 left-0 w-full p-5 font-medium h-28 hover:h-52 transition-all duration-500 ease-in-out overflow-hidden">
+                                            <div className="w-full h-full overflow-hidden leading-relaxed bg-transparent">
+                                                <p>Volume: {Volume}</p>
+                                                <p>Bid Open at {moment(que?.goLive).format('lll')}</p>
+                                                <p>Bid Closing at {moment(que?.bidClosing).format('lll')}</p>
+                                                <p>Settlement till {moment(que?.settlementClosing).format('lll')}</p>
+                                                <p>Creator: {userInfo?.name || questionData?.userId || 'unKnown'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="text-white max-w-xl sm:p-5 xl:p-0 mt-5 lg:mt-0 text-center lg:text-left">
+                                        <h2 className="text-lg md:text-xl text-yellow-300 capitalize">{que?.category}</h2>
+                                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium my-2">{que.question}</h1>
+                                        <h2 className="flex justify-center lg:justify-start items-center divide-x-2 text-lg md:text-xl my-4">
+                                            <p className="pr-5 text-yellow-300">{Volume > 0 ? (Against * 100 / Volume).toFixed(2) : 0}% say no</p>
+                                            <p className="pl-5 text-green-300">{Volume > 0 ? (Favour * 100 / Volume).toFixed(2) : 0}% say yes</p>
+                                        </h2>
+                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-2" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                        <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl hover:text-yellow-300" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-8 h-8 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                    </div>
+
+                                </div>
+
+                                <div className="flex items-start w-full text-white px-5 md:px-10 pb-10 lg:space-x-10">
+                                    <div className="flex-1">
+                                        {/* <div className="h-96 w-full overflow-x-hidden max-w-4xl blur-black rounded-md p-5" id="chartContainer">
+                                        </div> */}
+                                        {/* <div className="h-96 w-full max-w-4xl">
+                            <img src="https://miro.medium.com/max/1400/1*rom2Ml3yRkKmqvXOns2gcQ.png" className="w-full h-full max-w-4xl object-contain" alt="" />
+                        </div> */}
+                                        {que?.desc && <>
+                                            <motion.div initial="initial"
+                                                animate="in"
+                                                exit="out"
+                                                variants={pageSlide}
+                                                transition={pageTransition} className="mb-5 blur-black rounded-md p-5 w-full">
+                                                <h1 className="text-2xl font-semibold my-2">About the question</h1>
+                                                <div className="sm:text-lg que__desc" dangerouslySetInnerHTML={DESC()}></div>
+                                            </motion.div>
+                                        </>}
+                                        {que?.reference && <>
+                                            <motion.div initial="initial"
+                                                animate="in"
+                                                exit="out"
+                                                variants={pageSlide}
+                                                transition={pageTransition} className="mb-5 blur-black rounded-md p-5 pt-0 w-full">
+                                                <>
+                                                    <h1 className="text-2xl font-semibold my-2">Source of Settlement</h1>
+                                                    <a href={que?.reference} className="my-2 text-blue-500 block text-lg" target="_blank" noreferer="true">{que?.reference}</a>
+                                                </>
+                                            </motion.div>
+                                        </>}
+
+                                        <CommentBox queId={que?._id} userId={session?._id} name={session?.name} image_url={session?.image_url} />
+
+                                    </div>
+
+                                    <div className="min-w-[300px] max-w-3xl hidden lg:inline-block">
+                                        <motion.div initial="initial"
+                                            animate="in"
+                                            exit="out"
+                                            variants={pageZoom}
+                                            transition={pageTransition} className="bet__container flex flex-col items-center justify-center p-5 blur-black rounded-md">
+                                            <div className="flex w-full items-center justify-around">
+                                                <input type="radio" value="Favour" id="Favour" className="hidden"
+                                                    onChange={(e) => setOdd(e.target.value)} ref={yesRef} name="odd" />
+                                                <div onClick={() => yesRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'btn-blue text-white'} cursor-pointer`}>Yes</div>
+
+                                                <input type="radio" value="Against" id="Against" className="hidden"
+                                                    onChange={(e) => setOdd(e.target.value)} ref={noRef} name="odd" />
+                                                <div onClick={() => noRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'btn-blue text-white'} cursor-pointer`}>No</div>
+                                            </div>
+                                            <div className="my-4 flex flex-col items-center">
+                                                <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                                                <div className="relative flex items-center space-x-4 mt-4">
+                                                    <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
+                                                    <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                                                </div>
+                                            </div>
+                                            {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
+                                                : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' && que.bidClosing > new Date().toISOString() ? 'btn-blue' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified' && que.bidClosing < new Date().toISOString()}>{que?.qstatus === 'closed' ? 'Bidding Closed' : 'Apply Bid'}</button>
+                                            }
+                                            {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
+                                            {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
+                                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-1000 </p>}
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>% Bet {`in ${odd}`}</td>
+                                                        <td>{Volume > 0 ? (odd == 'Favour') ? (Favour * 100 / Volume).toFixed(2) : (Against * 100 / Volume).toFixed(2) : 0}%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Amount {`in ${odd}`}</td>
+                                                        <td className="inline-flex items-center">
+                                                            <div className="flex items-center">
+                                                                <Coin width="4" height="4" />{odd == 'Favour' ? Favour : Against}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Likely earnings</td>
+                                                        <td className="inline-flex items-center">
+                                                            <div className="flex items-center">
+                                                                <Coin width="4" height="4" />{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </motion.div>
+                                        {session && <UserTransaction queId={que?._id} userId={session?._id} />}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </>
+                        :
+                        <div className="fixed inset-0 w-full h-screen z-50 blur-black flex items-center justify-center max_w_3xl">
+                            <Loader />
+                        </div>
+                }
+                {
+                    bidPlaceModal &&
+                    <div className="fixed inset-0 text-white w-full h-full blur-black z-40">
+
+                        <motion.div initial="initial"
+                            animate="in"
+                            exit="out"
+                            variants={pageZoom}
+                            transition={pageTransition} className="flex flex-col items-center justify-center p-5 py-7 sm:p-7 md:p-10 blur-blue rounded-md absolute top-1/2 left-1/2 !transform !-translate-x-1/2 !-translate-y-1/2 !z-50">
+                            <XIcon className="w-10 h-10 p-1 absolute -top-4 -right-4 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setBidPlaceModal(false)} />
+                            <div className="flex w-full items-center justify-around">
+                                <input type="radio" value="Favour" id="Favour" className="hidden"
+                                    onChange={(e) => setOdd(e.target.value)} ref={yesRef} name="odd" />
+                                <div onClick={() => yesRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'btn-blue text-white'} cursor-pointer`}>Yes</div>
+
+                                <input type="radio" value="Against" id="Against" className="hidden"
+                                    onChange={(e) => setOdd(e.target.value)} ref={noRef} name="odd" />
+                                <div onClick={() => noRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'btn-blue text-white'} cursor-pointer`}>No</div>
+                            </div>
+                            <div className="my-4 flex flex-col items-center">
+                                <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                                <div className="relative flex items-center space-x-4 mt-4">
+                                    <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
+                                    <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                                </div>
+                            </div>
+                            {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
+                                : <button className={`px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] disabled:text-gray-800 disabled:cursor-not-allowed ${que.qstatus === 'verified' && que.bidClosing > new Date().toISOString() ? 'btn-blue' : 'bg-gray-200'}`} onClick={validate} disabled={que.qstatus !== 'verified' && que.bidClosing < new Date().toISOString()}>{que?.qstatus === 'closed' ? 'Bidding Closed' : 'Apply Bid'}</button>
+                            }
+                            {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
+                            {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
+                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-1000 </p>}
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>% Bet {`in ${odd}`}</td>
+                                        <td>{Volume > 0 ? (odd == 'Favour') ? (Favour * 100 / Volume).toFixed(2) : (Against * 100 / Volume).toFixed(2) : 0}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount {`in ${odd}`}</td>
+                                        <td className="inline-flex items-center">
+                                            <div className="flex items-center">
+                                                <Coin width="4" height="4" />{odd == 'Favour' ? Favour : Against}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Likely earnings</td>
+                                        <td className="inline-flex items-center">
+                                            <div className="flex items-center">
+                                                <Coin width="4" height="4" />{Volume > 0 ? (odd == 'Favour') ? ((bid) * Volume / (Favour + bid)).toFixed(2) : ((bid) * Volume / (Against + bid)).toFixed(2) : bid}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </motion.div>
+
+                    </div>
+
+                }
+                { isShare &&
+                    <div className="fixed inset-0 w-full h-screen grid place-items-center z-50 blur-black" onClick={() => setIsShare(false)} >
+                        <motion.div initial="initial"
+                            animate="in"
+                            exit="out"
+                            variants={pageZoom}
+                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 bg-white rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
+                            <XIcon className="h-8 w-8 md:w-10 md:h-10 absolute top-4 right-4 cursor-pointer active:scale-95 transition-sm text-gray-800" onClick={() => setIsShare(false)} />
+                            <h1 className="text-gray-800 block w-full text-xl font-semibold">Share this Question </h1>
+                            <>
+                                {window.innerWidth > 769 ?
+                                    <>
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <FacebookIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://twitter.com/share?text=${que?.question}&url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <TelegramIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://web.whatsapp.com/send?text=${que?.question}%20${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <WhatsappIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://www.pinterest.com/pin/create/button/?url=${urlSrc}&description=${que?.question}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <PinterestIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://telegram.me/share/url?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <TelegramIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://www.reddit.com/submit?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <RedditIcon size={40} round={true} />
+                                        </a>
+                                        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${urlSrc}`} target="_blank" noreferer="true" className="w-10 h-10 shadow-md rounded-full">
+                                            <LinkedinIcon size={40} round={true} />
+                                        </a>
+                                    </>
+                                    :
+                                    <>
+                                        <FacebookShareButton url={urlSrc} quote={que?.question}>
+                                            <FacebookIcon size={40} round={true} />
+                                        </FacebookShareButton>
+                                        <TwitterShareButton url={urlSrc} title={que?.question} >
+                                            <TwitterIcon size={40} round={true} />
+                                        </TwitterShareButton>
+                                        <WhatsappShareButton url={urlSrc} separator=" " >
+                                            <WhatsappIcon size={40} round={true} />
+                                        </WhatsappShareButton>
+                                        <PinterestShareButton url={urlSrc} description={que?.question} media={que?.image_url || `https://www.theneuron.club/images/que/${que?.category?.toLowerCase()}.jfif`} >
+                                            <PinterestIcon size={40} round={true} />
+                                        </PinterestShareButton>
+                                        <TelegramShareButton url={urlSrc} title={que?.question} >
+                                            <TelegramIcon size={40} round={true} />
+                                        </TelegramShareButton>
+                                        <RedditShareButton url={urlSrc} title={que?.question} >
+                                            <RedditIcon size={40} round={true} />
+                                        </RedditShareButton>
+                                        <LinkedinShareButton url={urlSrc} title={que?.question} source={urlSrc} >
+                                            <LinkedinIcon size={40} round={true} />
+                                        </LinkedinShareButton>
+                                    </>
+                                }
+                            </>
+                        </motion.div>
+                    </div>
+                }
+                {/* 
                 {
                     que && que?.category ?
                         <>
@@ -285,7 +543,7 @@ function QuestionDetail({ questionData }) {
                                             <div onClick={() => noRef.current.click()} className={`px-6 py-1 inline-block leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'btn-blue text-white'} cursor-pointer`}>No</div>
                                         </div>
                                         <div className="my-4 flex flex-col items-center">
-                                            <h1 className="font-medium">Amount to Bid : <span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
+                                            <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                             <div className="relative flex items-center space-x-4 mt-4">
                                                 <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
                                                 <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
@@ -452,7 +710,7 @@ function QuestionDetail({ questionData }) {
                         <div className="fixed inset-0 w-full h-screen z-50 blur-black flex items-center justify-center max_w_3xl">
                             <Loader />
                         </div>
-                }
+                } */}
             </div>
             {isActive && <motion.div initial="initial"
                 animate="in"

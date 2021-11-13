@@ -22,11 +22,11 @@ function UserTransaction({ queId, userId }) {
             {transaction && <motion.div initial="hidden"
                 animate="visible"
                 variants={container}
-                transition={pageTransition} className="mx-auto lg:mx-1 lg:max-w-max p-5 rounded-lg gradient-shadow max-h-[500px] overflow-y-auto">
+                transition={pageTransition} className="mx-auto hidden lg:inline-block max-w-max mt-10 p-5 gradient-shadow blur-black rounded-md max-h-screen overflow-y-auto">
                 <h1 className="text-xl md:text-2xl font-semibold inline-block leading-relaxed text-white mt-3 mb-2">My Transactions </h1>
                 {
                     transaction?.map(data => (
-                        <motion.div variants={item} key={data._id} className="flex items-center text-gray-100 p-2 my-1">
+                        <motion.div variants={item} key={data._id} className="flex items-start blur-white rounded-md text-gray-100 p-2 my-1">
                             <div className="flex items-center mr-1">
                                 <Coin width="4" height="4" />{data.amount}
                             </div>
