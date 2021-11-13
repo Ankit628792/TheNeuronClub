@@ -95,7 +95,7 @@ function report_bug() {
                                     onChange={(e) => setBugImage(e.target.files[0])}
                                     className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                                 />
-                                {(bugImage?.size > 1000000) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p>}
+                                {(bugImage?.size > 1000000) && <p className="text-red-400 text-sm">Maximum image upload size is 1MB </p>}
                             </div>
 
                             <div className="mb-1 sm:mb-2">

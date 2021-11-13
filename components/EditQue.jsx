@@ -3,6 +3,9 @@ import moment from 'moment'
 import { motion } from 'framer-motion';
 import { modules, formats, pageTransition, pageZoom } from '../util'
 import { XIcon } from '@heroicons/react/solid';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import addDays from 'date-fns/addDays'
 
 import dynamic from 'next/dynamic'
 
@@ -20,7 +23,8 @@ export const EditQue = (props) => {
     const [desc, setDesc] = useState(que?.desc)
     const [isQueEdit, setIsQueEdit] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
-
+    const [bidClosingDate, setBidClosingDate] = useState(new Date(que?.bidClosing))
+    const [settlementClosingDate, setSettlementClosingDate] = useState(new Date(que?.settlementClosing))
 
     const getUser = async () => {
         const res = await fetch(`/api/user/info?_id=${que?.userId}`);
@@ -63,7 +67,7 @@ export const EditQue = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ _id, desc, question })
+            body: JSON.stringify({ _id, desc, question, bidClosing: bidClosingDate, settlementClosing: settlementClosingDate })
         })
         console.log(res.status)
         const response = await res.json();
@@ -111,19 +115,20 @@ export const EditQue = (props) => {
                     <div>
                         <h1>Creation Date &amp; Time</h1>
                         <h2 className="font-normal">{que?.createdAt && moment(que?.createdAt).format('lll')}</h2>
-
                     </div>
                     <div>
                         <h1>Open Date &amp; Time</h1>
                         <h2 className="font-normal">{que?.goLive && moment(que?.goLive).format('lll')}</h2>
                     </div>
                     <div>
-                        <h1>Last Date &amp; Time</h1>
-                        <h2 className="font-normal">{moment(que?.bidClosing).format('lll')}</h2>
+                        <h1>Closing Date &amp; Time</h1>
+                        {isQueEdit ? <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 text-gray-900 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={bidClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={new Date()} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setBidClosingDate(date)} placeholderText="Bit closing date and time" />
+                            : <h2 className="font-normal">{moment(que?.bidClosing).format('lll')}</h2>}
                     </div>
                     <div>
                         <h1>Settlement Date &amp; Time</h1>
-                        <h2 className="font-normal">{moment(que?.settlementClosing).format('lll')}</h2>
+                        {isQueEdit ? <DatePicker className="inline-block w-52 h-12 px-4 mb-2 transition duration-200 text-gray-900 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" selected={settlementClosingDate} dateFormat="MM/dd/yyyy hh:mm" minDate={addDays(bidClosingDate, 1)} showTimeSelect timeFormat="HH:mm" withPortal onChange={(date) => setSettlementClosingDate(date)} placeholderText="Settlement closing date and time" />
+                            : <h2 className="font-normal">{moment(que?.settlementClosing).format('lll')}</h2>}
                     </div>
                 </div>
 

@@ -227,13 +227,16 @@ function QuestionDetail({ questionData }) {
                                         <h2 className="text-lg md:text-xl text-yellow-300 capitalize">{que?.category}</h2>
                                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium my-2">{que.question}</h1>
                                         <h2 className="flex justify-center lg:justify-start items-center divide-x-2 text-lg md:text-xl my-4">
-                                            <p className="pr-5 text-yellow-300">{Volume > 0 ? (Against * 100 / Volume).toFixed(2) : 0}% say no</p>
-                                            <p className="pl-5 text-green-300">{Volume > 0 ? (Favour * 100 / Volume).toFixed(2) : 0}% say yes</p>
+                                            <p className="pr-5 text-yellow-300">{Volume > 0 ? Math.round((Against * 100 / Volume)) : 0}% say no</p>
+                                            <p className="pl-5 text-green-300">{Volume > 0 ? Math.round((Favour * 100 / Volume)) : 0}% say yes</p>
                                         </h2>
-                                        <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
-                                        {session?.type === 'admin' && <button className="px-4 py-1 mx-auto inline-block max-w-max leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
-                                        }
-                                        <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-7 h-7 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                        <div className="flex space-x-3 items-center justify-center lg:justify-start">
+
+                                            <button className="btn-blue px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                            {session?.type === 'admin' && <button className="px-4 py-1 mx-auto leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
+                                            }
+                                            <button className="inline-flex flex-1 items-center px-5 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                        </div>
                                     </motion.div>
 
                                 </div>
@@ -245,6 +248,21 @@ function QuestionDetail({ questionData }) {
                                         {/* <div className="h-96 w-full max-w-4xl">
                             <img src="https://miro.medium.com/max/1400/1*rom2Ml3yRkKmqvXOns2gcQ.png" className="w-full h-full max-w-4xl object-contain" alt="" />
                         </div> */}
+
+                                        <div className="mb-5 p-5 w-full flex flex-wrap items-center justify-around gap-x-4 gap-y-8 md:gap-x-8">
+                                            <div className="p-5 blur-black rounded-xl text-left max-w-max">
+                                                <h1 className="text-white text-lg">Bid Open Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl">{moment(que?.goLive).format('lll')}</h2>
+                                            </div>
+                                            <div className="p-5 blur-black rounded-xl text-left max-w-max">
+                                                <h1 className="text-white text-lg">Bid Closing Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl">{moment(que?.bidClosing).format('lll')}</h2>
+                                            </div>
+                                            <div className="p-5 blur-black rounded-xl text-left max-w-max">
+                                                <h1 className="text-white text-lg">Settlement Closing Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl">{moment(que?.settlementClosing).format('lll')}</h2>
+                                            </div>
+                                        </div>
                                         {que?.desc && <>
                                             <motion.div initial="initial"
                                                 animate="in"
@@ -305,7 +323,7 @@ function QuestionDetail({ questionData }) {
                                                 <tbody>
                                                     <tr>
                                                         <td>% Bet {`in ${odd}`}</td>
-                                                        <td>{Volume > 0 ? (odd == 'Favour') ? (Favour * 100 / Volume).toFixed(2) : (Against * 100 / Volume).toFixed(2) : 0}%</td>
+                                                        <td>{Volume > 0 ? (odd == 'Favour') ? Math.round((Favour * 100 / Volume)) : Math.round((Against * 100 / Volume)) : 0}%</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Amount {`in ${odd}`}</td>
@@ -374,7 +392,7 @@ function QuestionDetail({ questionData }) {
                                 <tbody>
                                     <tr>
                                         <td>% Bet {`in ${odd}`}</td>
-                                        <td>{Volume > 0 ? (odd == 'Favour') ? (Favour * 100 / Volume).toFixed(2) : (Against * 100 / Volume).toFixed(2) : 0}%</td>
+                                        <td>{Volume > 0 ? (odd == 'Favour') ? Math.round((Favour * 100 / Volume)) : Math.round((Against * 100 / Volume)) : 0}%</td>
                                     </tr>
                                     <tr>
                                         <td>Amount {`in ${odd}`}</td>
@@ -583,7 +601,7 @@ function QuestionDetail({ questionData }) {
                                             <tbody>
                                                 <tr>
                                                     <td>% Bet {`in ${odd}`}</td>
-                                                    <td>{Volume > 0 ? (odd == 'Favour') ? (Favour * 100 / Volume).toFixed(2) : (Against * 100 / Volume).toFixed(2) : 0}%</td>
+                                                    <td>{Volume > 0 ? (odd == 'Favour') ? Math.round((Favour * 100 / Volume)) : Math.round((Against * 100 / Volume)) : 0}%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Amount {`in ${odd}`}</td>

@@ -13,10 +13,41 @@
     margin: auto;
 }
 
-*::-webkit-scrollbar {
-    display: none;
-    background: #f1faff;
-}
+/* just for custom scrollbar*/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2d3748;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #333;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(143, 143, 143, 0.3);
+    border: 0px none #333;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: rgba(143, 143, 143, 0.3);
+  }
+  ::-webkit-scrollbar-track:active {
+    background: rgba(143, 143, 143, 0.3);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
 /* @media(prefers-color-scheme: light){ */
 body {
     /* background: #e7fdfd; */
@@ -96,53 +127,53 @@ body {
 }
 
 .blur-white{
-    background: rgba( 255, 255, 255, 0.2 );
+    background: rgba( 255, 255, 255, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 
 .blur-gd-black{
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.2), rgba( 0, 0, 0, 0.2 ) );
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba( 0, 0, 0, 0.3 ) );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 .blur-black{
-    background: rgba( 0, 0, 0, 0.2 );
+    background: rgba( 0, 0, 0, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 .blur-yellow{
-    background: rgba( 250, 255, 0, 0.25 );
+    background: rgba( 250, 255, 0, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .blur-orange{
-    background: rgba( 245, 166, 35, 0.25 );
+    background: rgba( 245, 166, 35, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .blur-blue{
-    background: rgba( 139, 193, 255, 0.25 );
+    background: rgba( 139, 193, 255, 0.3 );
     box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-    backdrop-filter: blur( 3px );
-    -webkit-backdrop-filter: blur( 3px );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .blur-gray{
-    background: rgba( 155, 155, 155, 0.25 );
+    background: rgba( 155, 155, 155, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
@@ -469,7 +500,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
 
 .comment__box{
-    @apply shadow-md max-w-lg bg-white rounded-xl m-2 relative;
+    @apply shadow-md max-w-lg blur-black rounded-xl m-2 relative;
     box-shadow: -10px 0px 20px rgba(0, 184, 255, 0.05),
     5px 0px 15px rgba(0, 137, 255, 0.05);
 }
@@ -481,7 +512,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     left: -12px;
     width:16px;
     height: 16px;
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.3);
     transform: translateY(-50%);
     clip-path: polygon(77% 0, 100% 50%, 76% 100%, 0% 50%);
 }

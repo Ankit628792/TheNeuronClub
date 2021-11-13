@@ -99,6 +99,7 @@ function Portfolio() {
                             }
                         }} />
                     </div>
+                    {(image?.size > 5000000) && <p className="text-red-400 text-sm my-2 text-lg">Maximum image upload size must be 5MB </p>}
                     {isEdit ?
                         <>
                             <div className="flex">
