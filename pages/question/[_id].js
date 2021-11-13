@@ -197,7 +197,14 @@ function QuestionDetail({ questionData }) {
 
                                 <div className="md:min-h-[500px] w-full flex items-center flex-col lg:flex-row p-10 lg:pb-20 justify-between">
 
-                                    <div className="relative h-72 w-72 sm:h-96 sm:w-96 xl:h-[450px] xl:w-[450px] max-w-md">
+                                    <motion.div
+                                        initial={{ opacity: 0, translateX: '-400px' }}
+                                        animate={{ opacity: 1, translateX: '0px' }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 260,
+                                            damping: 40,
+                                        }} className="relative h-72 w-72 sm:h-96 sm:w-96 xl:h-[450px] xl:w-[450px] max-w-md">
                                         <Image src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} className="" objectFit="cover" layout="fill" />
                                         <div className="text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-sm text-xl absolute bottom-0 left-0 w-full p-5 font-medium h-28 hover:h-52 transition-all duration-500 ease-in-out overflow-hidden">
                                             <div className="w-full h-full overflow-hidden leading-relaxed bg-transparent">
@@ -208,8 +215,15 @@ function QuestionDetail({ questionData }) {
                                                 <p>Creator: {userInfo?.name || questionData?.userId || 'unKnown'}</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="text-white max-w-xl sm:p-5 xl:p-0 mt-5 lg:mt-0 text-center lg:text-left">
+                                    </motion.div>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateX: '400px' }}
+                                        animate={{ opacity: 1, translateX: '0px' }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 260,
+                                            damping: 50,
+                                        }} className="text-white max-w-xl sm:p-5 xl:p-0 mt-5 lg:mt-0 text-center lg:text-left">
                                         <h2 className="text-lg md:text-xl text-yellow-300 capitalize">{que?.category}</h2>
                                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium my-2">{que.question}</h1>
                                         <h2 className="flex justify-center lg:justify-start items-center divide-x-2 text-lg md:text-xl my-4">
@@ -218,9 +232,9 @@ function QuestionDetail({ questionData }) {
                                         </h2>
                                         <button className="btn-blue inline-block px-5 py-2 text-lg font-medium rounded-3xl mr-3" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
                                         <button className="inline-flex items-center px-5 py-2 text-lg font-medium rounded-3xl hover:text-yellow-300" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-8 h-8 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
-                                        {session?.type ==='admin' && <button className="px-4 py-1 mx-auto block leading-loose btn-orange text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
+                                        {session?.type === 'admin' && <button className="px-4 py-1 mx-auto block leading-loose btn-orange text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
                                         }
-                                    </div>
+                                    </motion.div>
 
                                 </div>
 
