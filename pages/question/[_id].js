@@ -233,10 +233,10 @@ function QuestionDetail({ questionData }) {
                                             <p className="pl-5 text-green-300">{Volume > 0 ? Math.round((Favour * 100 / Volume)) : 0}% say yes</p>
                                         </h2>
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
-                                            {(que?.qstatus === 'verified' && que?.bidClosing < new Date().toISOString())
+                                            {/* {(que?.qstatus === 'verified' && que?.bidClosing < new Date().toISOString())
                                                 ? <>{session?.type === 'admin' ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button> : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>} </>
                                                 : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
-                                            }
+                                            } */}
 
                                             {que?.qstatus === 'verified' ?
                                             <>
