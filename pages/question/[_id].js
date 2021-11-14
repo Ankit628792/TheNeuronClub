@@ -235,7 +235,7 @@ function QuestionDetail({ questionData }) {
                                             <button className="btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
                                             {session?.type === 'admin' && <button className="px-4 py-1 mx-auto min-w-[100px] leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none" onClick={() => setIsQue(que)}>Edit</button>
                                             }
-                                            <button className="inline-flex min-w-[100px] lg:flex-1 items-center lg:justify-end px-5 lg:mr-8 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-7 sm:h-7 text-white cursor-pointer" /></button>
+                                            <button className="inline-flex min-w-[100px] flex-1 items-center lg:justify-end px-5 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-7 sm:h-7 text-white cursor-pointer" /></button>
                                         </div>
                                     </motion.div>
 
