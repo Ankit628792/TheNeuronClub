@@ -23,6 +23,7 @@ import CommentBox from '../../components/CommentBox';
 import Settlement from '../../components/Settlement';
 import UserTransaction from '../../components/UserTransaction'
 import { EditQue } from '../../components/EditQue'
+import { UndoSettle } from '../../components/UndoSettle'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -55,6 +56,7 @@ function QuestionDetail({ questionData }) {
     const [isSettle, setIsSettle] = useState(false)
     const [desc, setDesc] = useState(que?.desc)
     const [bidPlaceModal, setBidPlaceModal] = useState(false)
+    const [isUndoSettle, setIsUndoSettle] = useState(false)
     const yesRef = useRef()
     const noRef = useRef()
 
@@ -233,7 +235,23 @@ function QuestionDetail({ questionData }) {
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
                                             {(que?.qstatus === 'verified' && que?.bidClosing < new Date().toISOString())
                                                 ? <>{session?.type === 'admin' ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button> : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>} </>
-                                                : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>}
+                                                : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                            }
+
+                                            {que?.qstatus === 'verified' ?
+                                            <>
+                                             {   que?.bidClosing < new Date().toISOString()
+                                                    ?
+                                                    session?.type === 'admin'
+                                                        ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>
+                                                        : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>
+                                                    : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                            }
+                                              </>
+                                                : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setIsUndoSettle(true)}>Undo Settlement</button>
+                                                
+                                            }
+
                                             {
                                                 session?.type === 'admin' && <button className="select-none px-4 py-1 mx-auto min-w-[100px] leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none" onClick={() => setIsQue(que)}>Edit</button>
                                             }
@@ -756,6 +774,7 @@ function QuestionDetail({ questionData }) {
                         </div>
                 } */}
             </div>
+            {isUndoSettle && <UndoSettle setIsUndoSettle={setIsUndoSettle} finalResult={que?.result} queId={que?._id} setQue={setQue} />}
             {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
             {isActive && <motion.div initial="initial"
                 animate="in"

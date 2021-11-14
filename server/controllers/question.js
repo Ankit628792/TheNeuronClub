@@ -20,7 +20,7 @@ const verifyQuestion = async (req, res) => {
 
 const getQuestions = async (req, res) => {
     try {
-        const filter = req.query.filter ? { qstatus: 'created' } : { goLive: { $lte: new Date(new Date().toISOString()) }, bidClosing: { $gte: new Date(new Date().toISOString()) } }
+        const filter = req.query.filter ? { qstatus: req.query.filter } : { goLive: { $lte: new Date(new Date().toISOString()) }, bidClosing: { $gte: new Date(new Date().toISOString()) } }
         const getQuestions = await Question.find(filter).sort({ _id: -1 });
         res.status(200).send(getQuestions)
     } catch (error) {
