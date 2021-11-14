@@ -232,7 +232,7 @@ function QuestionDetail({ questionData }) {
                                         </h2>
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
                                             {(que?.qstatus === 'verified' && que?.bidClosing < new Date().toISOString())
-                                                ? <>{session?.type === 'admin' ? <button className={select - none`btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button> : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>} </>
+                                                ? <>{session?.type === 'admin' ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button> : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>} </>
                                                 : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>}
                                             {
                                                 session?.type === 'admin' && <button className="select-none px-4 py-1 mx-auto min-w-[100px] leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none" onClick={() => setIsQue(que)}>Edit</button>
@@ -253,15 +253,15 @@ function QuestionDetail({ questionData }) {
 
                                         <div className="mb-5 w-full flex flex-wrap items-center justify-evenly gap-x-4 gap-y-8 md:gap-x-8">
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-gray-400 text-base font-semibold">Bid Open Date & Time </h1>
+                                                <h1 className="text-gray-300 text-base font-semibold">Bid Open Date & Time </h1>
                                                 <h2 className="text-gray-50 text-lg font-medium">{moment(que?.goLive).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-gray-400 text-base font-semibold">Bid Closing Date & Time </h1>
+                                                <h1 className="text-gray-300 text-base font-semibold">Bid Closing Date & Time </h1>
                                                 <h2 className="text-gray-50 text-lg font-medium">{moment(que?.bidClosing).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-gray-400 text-base font-semibold">Settlement Closing Date & Time </h1>
+                                                <h1 className="text-gray-300 text-base font-semibold">Settlement Closing Date & Time </h1>
                                                 <h2 className="text-gray-50 text-lg font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
                                             </div>
                                         </div>
@@ -741,7 +741,8 @@ function QuestionDetail({ questionData }) {
                                     }
                                     </>
                                 }
-                                {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                                {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
+                                {que.qstatus === 'verified' && que.bidClosing < new Date().toISOString() && <button className={`px-4 py-1.5 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>}                               
+                                 {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
 
                             </motion.div>
                             <div className="w-full blur-black max-w-5xl gradient-shadow mx-auto rounded-lg lg:p-10 mt-2 sm:mt-4 p-5 py-10 relative flex flex-col-reverse lg:flex-row">
@@ -755,6 +756,7 @@ function QuestionDetail({ questionData }) {
                         </div>
                 } */}
             </div>
+            {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
             {isActive && <motion.div initial="initial"
                 animate="in"
                 exit="out"
