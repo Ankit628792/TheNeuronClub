@@ -757,8 +757,8 @@ function QuestionDetail({ questionData }) {
                 animate="in"
                 exit="out"
                 variants={pageZoom}
-                transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full blur-gray grid place-items-center z-50" >
-                <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 blur-white rounded-xl shadow-2xl m-4">
+                transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full blur-black grid place-items-center z-50" >
+                <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 blur-gray rounded-xl shadow-2xl m-4">
                     <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-white z-50 leading-tight">
                         Please confirm that you want to place a bid of <div className="flex items-center justify-center">
                             <Coin width="4" height="4" />{bid}
