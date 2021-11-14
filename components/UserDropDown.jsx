@@ -106,8 +106,8 @@ function UserDropDown({ session }) {
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 bg-white rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
-                            <XIcon className="h-8 w-8 md:w-10 md:h-10 absolute top-4 right-4 cursor-pointer active:scale-95 transition-sm text-gray-800" onClick={() => setIsShare(false)} />
+                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 blur-gray rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
+                            <XIcon className="h-8 w-8 md:w-10 md:h-10 absolute top-4 right-4 cursor-pointer active:scale-95 transition-sm text-gray-50" onClick={() => setIsShare(false)} />
                             <h1 className="text-gray-800 block w-full text-xl font-semibold">Invite a Friend &amp; Earn 500 Coins </h1>
                             <>
                                 {window.innerWidth > 769 ?
