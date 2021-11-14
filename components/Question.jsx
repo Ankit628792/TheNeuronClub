@@ -79,7 +79,7 @@ function Question({ question }) {
                 <h1 className="absolute top-0 right-0 py-1 px-2 blur-blue rounded-tr-lg rounded-bl-lg">{closingTime?.includes('ago') ? `closed ${closingTime}` : `closing ${closingTime}`}</h1>
                 <img className="w-full h-48 object-cover rounded-lg cursor-pointer" onClick={handleClick} src={question?.image_url || `images/que/${question.category}.jfif`} alt="" />
                 <div className="py-5 font-medium h-full">
-                    <h1 className="text-lg text-center mb-4 cursor-pointer line-clamp-3" onClick={handleClick}>{question.question}</h1>
+                    <h1 className="text-lg text-center mb-4 cursor-pointer line-clamp-3 h-[88px]" onClick={handleClick}>{question.question}</h1>
                     <div className="flex justify-around items-center text-lg">
                         <div className="flex flex-col items-center justify-center">
                             <button className="font-semibold btn-blue rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Favour' }) : setIsLoggedIn(true)}>Yes</button>

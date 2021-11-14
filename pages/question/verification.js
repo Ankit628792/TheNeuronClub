@@ -208,7 +208,7 @@ function verification({ data }) {
             {session &&
                 <div className="py-10">
                     {/* {isQue && <Detail queData={isQue} setIsQue={setIsQue} updateQue={updateQue} />} */}
-                    {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} />}
+                    {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} from="queVerification" />}
                     <h1 className="text-xl sm:text-2xl 2xl:text-3xl text-white font-semibold max-w-5xl mx-auto p-5">Question List For Verification</h1>
                     {queList?.length > 0 ?
                         <>

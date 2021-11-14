@@ -34,7 +34,7 @@ function Comment({ user, comment, onSelect }) {
                     <div className="leading-normal text-gray-50 my-1 text-base break-words break-all">{comment?.comment}</div>
                 </div>
                 {user == comment?.userId && <DotsVerticalIcon className="absolute top-5 right-2 cursor-pointer text-gray-50 w-4 h-4 z-20" onClick={() => setIsMenu(true)} />}
-                {isMenu && <div className="absolute bg-white bg-opacity-50 top-1 -right-5 rounded-md cursor-pointer text-red-400 shadow-lg py-1 px-2 z-30" onClick={() => onSelect(comment?._id)}>Remove </div>}
+                {isMenu && <div className="absolute bg-white top-1 -right-5 rounded-md cursor-pointer text-red-500 shadow-lg py-1 px-2 z-30" onClick={() => onSelect(comment?._id)}>Remove </div>}
             </motion.div>
         </>
     )

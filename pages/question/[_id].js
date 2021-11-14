@@ -189,7 +189,7 @@ function QuestionDetail({ questionData }) {
             </Head>
             <ToastContainer />
             <div className="py-10 relative">
-                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} />}
+                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} from="queDetail" />}
                 {
                     que && que?.category ?
                         <>
@@ -232,10 +232,10 @@ function QuestionDetail({ questionData }) {
                                         </h2>
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
 
-                                            <button className="btn-blue px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
-                                            {session?.type === 'admin' && <button className="px-4 py-1 mx-auto leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsQue(que)}>Edit</button>
+                                            <button className="btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                            {session?.type === 'admin' && <button className="px-4 py-1 mx-auto min-w-max leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none" onClick={() => setIsQue(que)}>Edit</button>
                                             }
-                                            <button className="inline-flex flex-1 items-center px-5 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                            <button className="inline-flex min-w-max flex-1 items-center justify-end px-5 lg:mr-8 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
                                         </div>
                                     </motion.div>
 
@@ -249,18 +249,18 @@ function QuestionDetail({ questionData }) {
                             <img src="https://miro.medium.com/max/1400/1*rom2Ml3yRkKmqvXOns2gcQ.png" className="w-full h-full max-w-4xl object-contain" alt="" />
                         </div> */}
 
-                                        <div className="mb-5 p-5 w-full flex flex-wrap items-center justify-around gap-x-4 gap-y-8 md:gap-x-8">
+                                        <div className="mb-5 p-5 w-full flex flex-wrap items-center justify-evenly gap-x-4 gap-y-8 md:gap-x-8">
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-lg">Bid Open Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl">{moment(que?.goLive).format('lll')}</h2>
+                                                <h1 className="text-white text-base font-semibold">Bid Open Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.goLive).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-lg">Bid Closing Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl">{moment(que?.bidClosing).format('lll')}</h2>
+                                                <h1 className="text-white text-base font-semibold">Bid Closing Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.bidClosing).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-lg">Settlement Closing Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl">{moment(que?.settlementClosing).format('lll')}</h2>
+                                                <h1 className="text-white text-base font-semibold">Settlement Closing Date & Time </h1>
+                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
                                             </div>
                                         </div>
                                         {que?.desc && <>
@@ -423,9 +423,9 @@ function QuestionDetail({ questionData }) {
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 bg-white rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
+                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 blur-white rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
                             <XIcon className="h-8 w-8 md:w-10 md:h-10 absolute top-4 right-4 cursor-pointer active:scale-95 transition-sm text-gray-800" onClick={() => setIsShare(false)} />
-                            <h1 className="text-gray-800 block w-full text-xl font-semibold">Share this Question </h1>
+                            <h1 className="text-white block w-full text-xl font-semibold">Share this Question </h1>
                             <>
                                 {window.innerWidth > 769 ?
                                     <>
@@ -758,14 +758,14 @@ function QuestionDetail({ questionData }) {
                 exit="out"
                 variants={pageZoom}
                 transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full blur-blue grid place-items-center z-50" >
-                <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 bg-white rounded-xl shadow-2xl m-4">
-                    <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-gray-800 z-50 leading-tight">
+                <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 blur-white rounded-xl shadow-2xl m-4">
+                    <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-white z-50 leading-tight">
                         Please confirm that you want to place a bid of <div className="flex items-center justify-center">
                             <Coin width="4" height="4" />{bid}
                         </div>
                     </h1>
                     <div className="flex items-center justify-around mt-6">
-                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-800 border border-gray-900 hover:bg-gray-800 hover:text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(false)}>{'Cancel'}</button>
+                        <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose text-gray-100 border border-gray-100 hover:bg-gray-100 hover:text-gray-800 shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={() => setIsActive(false)}>{'Cancel'}</button>
                         <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]" onClick={handleBet}>{'Place Bid'}</button>
                     </div>
                 </div>
