@@ -207,7 +207,7 @@ function QuestionDetail({ questionData }) {
                                         }} className="relative h-72 w-72 sm:h-96 sm:w-96 xl:h-[450px] xl:w-[450px] max-w-md">
                                         <Image src={que?.image_url || `/images/que/${que?.category?.toLowerCase()}.jfif`} className="" objectFit="cover" layout="fill" />
                                         <div className="text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-sm text-xl absolute bottom-0 left-0 w-full p-5 font-medium h-28 hover:h-52 transition-all duration-500 ease-in-out overflow-hidden">
-                                            <div className="w-full h-full overflow-hidden leading-relaxed bg-transparent">
+                                            <div className="w-full h-full overflow-hidden leading-relaxed cursor-pointer bg-transparent">
                                                 <p>Volume: {Volume}</p>
                                                 <p>Bid Open at {moment(que?.goLive).format('lll')}</p>
                                                 <p>Bid Closing at {moment(que?.bidClosing).format('lll')}</p>
@@ -253,15 +253,15 @@ function QuestionDetail({ questionData }) {
                                         <div className="mb-5 w-full flex flex-wrap items-center justify-evenly gap-x-4 gap-y-8 md:gap-x-8">
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
                                                 <h1 className="text-gray-400 text-base font-semibold">Bid Open Date & Time </h1>
-                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.goLive).format('lll')}</h2>
+                                                <h2 className="text-gray-50 text-lg font-medium">{moment(que?.goLive).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
                                                 <h1 className="text-gray-400 text-base font-semibold">Bid Closing Date & Time </h1>
-                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.bidClosing).format('lll')}</h2>
+                                                <h2 className="text-gray-50 text-lg font-medium">{moment(que?.bidClosing).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
                                                 <h1 className="text-gray-400 text-base font-semibold">Settlement Closing Date & Time </h1>
-                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
+                                                <h2 className="text-gray-50 text-lg font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
                                             </div>
                                         </div>
                                         {que?.desc && <>
