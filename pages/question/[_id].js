@@ -232,10 +232,10 @@ function QuestionDetail({ questionData }) {
                                         </h2>
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
 
-                                            <button className="btn-blue min-w-[100px] px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                            <button className="btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
                                             {session?.type === 'admin' && <button className="px-4 py-1 mx-auto min-w-[100px] leading-loose btn-orange text-white shadow text-lg rounded-3xl font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none" onClick={() => setIsQue(que)}>Edit</button>
                                             }
-                                            <button className="inline-flex min-w-[100px] flex-1 items-center justify-end px-5 lg:mr-8 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-10 sm:h-10 text-white cursor-pointer" /></button>
+                                            <button className="inline-flex min-w-[100px] lg:flex-1 items-center lg:justify-end px-5 lg:mr-8 py-2 text-lg font-medium rounded-3xl cursor-pointer" onClick={() => setIsShare(true)}>Share <ShareIcon title="Share this Question" className="w-6 h-6 mx-1 sm:w-7 sm:h-7 text-white cursor-pointer" /></button>
                                         </div>
                                     </motion.div>
 
@@ -251,16 +251,16 @@ function QuestionDetail({ questionData }) {
 
                                         <div className="mb-5 p-5 w-full flex flex-wrap items-center justify-evenly gap-x-4 gap-y-8 md:gap-x-8">
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-base font-semibold">Bid Open Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.goLive).format('lll')}</h2>
+                                                <h1 className="text-gray-400 text-base font-semibold">Bid Open Date & Time </h1>
+                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.goLive).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-base font-semibold">Bid Closing Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.bidClosing).format('lll')}</h2>
+                                                <h1 className="text-gray-400 text-base font-semibold">Bid Closing Date & Time </h1>
+                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.bidClosing).format('lll')}</h2>
                                             </div>
                                             <div className="p-5 blur-black rounded-xl text-left max-w-max">
-                                                <h1 className="text-white text-base font-semibold">Settlement Closing Date & Time </h1>
-                                                <h2 className="text-gray-200 text-xl font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
+                                                <h1 className="text-gray-400 text-base font-semibold">Settlement Closing Date & Time </h1>
+                                                <h2 className="text-gray-50 text-xl font-medium">{moment(que?.settlementClosing).format('lll')}</h2>
                                             </div>
                                         </div>
                                         {que?.desc && <>
