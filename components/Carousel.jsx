@@ -13,7 +13,7 @@ const data = [
 function Carousel({ carouselList }) {
     const router = useRouter();
     const [active, setActive] = useState(0)
-    const [item, setItem] = useState(carouselList[0])
+    const [item, setItem] = useState(data[0])
     const [Size, setSize] = useState(window?.innerWidth < 1024 ? 'sm' : 'lg')
 
     useEffect(() => {
@@ -25,20 +25,20 @@ function Carousel({ carouselList }) {
     }, []);
 
     const prev = () => {
-        active > 0 ? setActive(active - 1) : setActive(carouselList?.length - 1)
-        setItem(carouselList[active])
+        active > 0 ? setActive(active - 1) : setActive(data?.length - 1)
+        setItem(data[active])
     }
 
     const next = () => {
-        active < carouselList?.length - 1 ? setActive(active + 1) : setActive(0)
-        setItem(carouselList[active])
+        active < data?.length - 1 ? setActive(active + 1) : setActive(0)
+        setItem(data[active])
     }
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            active < carouselList?.length - 1 ? setActive(active + 1) : setActive(0)
+            active < data?.length - 1 ? setActive(active + 1) : setActive(0)
         }, 5000);
-        setItem(carouselList[active])
+        setItem(data[active])
         return () => clearTimeout(timer);
     }, [active]);
 
@@ -55,8 +55,8 @@ function Carousel({ carouselList }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>}
                     </button>
-                    {/* {carouselList.map((_, i) => (
-                        <button key={i} onClick={() => { setActive(i); setItem(carouselList[i]) }} className={`p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base font-medium grid place-items-center hover:bg-white hover:text-gray-800 scale-110 ease-out ${active == i && 'bg-white text-gray-800'}`}>
+                    {/* {data.map((_, i) => (
+                        <button key={i} onClick={() => { setActive(i); setItem(data[i]) }} className={`p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base font-medium grid place-items-center hover:bg-white hover:text-gray-800 scale-110 ease-out ${active == i && 'bg-white text-gray-800'}`}>
                             {i + 1}
                         </button>
                     ))} */}
