@@ -33,6 +33,7 @@ const CarouselItem = ({ item, onSelect }) => {
             setNewData(response)
         }
         setIsSending(false)
+        setIsActive(false)
         // }
     }
     return (
