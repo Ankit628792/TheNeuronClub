@@ -49,7 +49,7 @@ function verification({ data }) {
                             ))}
                         </>
                         :
-                        <h1 className="text-lg sm:text-xl 2xl:text-2xl text-white font-medium max-w-5xl mx-auto p-5 rounded-lg gradient-shadow">No Questions Available</h1>
+                        <h1 className="text-lg sm:text-xl 2xl:text-2xl text-white blur-gray font-medium max-w-5xl mx-auto p-5 rounded-lg gradient-shadow">No Questions Available</h1>
 
                     }
                 </div>

@@ -63,7 +63,7 @@ function contact() {
                   animate="in"
                   exit="out"
                   variants={pageZoom}
-                  transition={pageTransition} className="blur-white text-white rounded gradient-shadow p-7 sm:p-10 m-2">
+                  transition={pageTransition} className="blur-black text-white rounded gradient-shadow p-7 sm:p-10 m-2">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-1 sm:mb-2">
                       <label htmlFor="Name" className="inline-block mb-1 font-medium">Name<span className="mx-1 text-red-500">*</span></label>
@@ -75,7 +75,7 @@ function contact() {
                         name="name"
                         value={data.name}
                         onChange={handleChange}
-                        className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 blur-gray border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
+                        className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 blur-black border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
                       />
                     </div>
                     <div className="mb-1 sm:mb-2">
@@ -88,7 +88,7 @@ function contact() {
                         value={data.email}
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                         onChange={handleChange}
-                        className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 blur-gray border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
+                        className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 blur-black border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
                       />
                     </div>
                     <div className="mb-1 sm:mb-2">
@@ -101,7 +101,7 @@ function contact() {
                         name="message"
                         value={data.message}
                         onChange={handleChange}
-                        className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 blur-gray border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
+                        className="flex-grow w-full resize-none py-2 h-24 px-4 mb-2 transition duration-200 blur-black border border-gray-300 rounded shadow-sm appearance-none focus:border-purple-300 placeholder-gray-200 focus:outline-none focus:shadow-outline"
                       />
                     </div>
                     <div className="mb-2 sm:mb-3">

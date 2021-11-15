@@ -67,7 +67,7 @@ function UserDropDown({ session }) {
             <div className="relative font-medium flex items-center">
             {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-gray-800" onClick={() => setIsActive(!isActive)}>
-                    <div className="MuiAvatar-root MuiAvatar-circle btn-blue text-white capitalize">
+                    <div className="MuiAvatar-root MuiAvatar-circle btn-blue !shadow text-white capitalize">
                         {session?.image_url ?
                             <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                             : session?.name?.[0]}
@@ -109,9 +109,9 @@ function UserDropDown({ session }) {
                             animate="in"
                             exit="out"
                             variants={pageZoom}
-                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 blur-gray rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
+                            transition={pageTransition} className="relative max-w-sm md:max-w-md py-10 md:py-12 px-8 blur-blue rounded-xl shadow-2xl m-4 flex items-center justify-center flex-wrap gap-4">
                             <XIcon className="h-8 w-8 md:w-10 md:h-10 absolute top-4 right-4 cursor-pointer active:scale-95 transition-sm text-gray-50" onClick={() => setIsShare(false)} />
-                            <h1 className="text-gray-800 block w-full text-xl font-semibold">Invite a Friend &amp; Earn 500 Coins </h1>
+                            <h1 className="text-gray-50 block w-full text-xl font-semibold">Invite a Friend &amp; Earn 500 Coins </h1>
                             <>
                                 {window.innerWidth > 769 ?
                                     <>

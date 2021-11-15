@@ -149,7 +149,7 @@ function login() {
                                 <h1 className="text-white">Don't have an account ?&nbsp;<a href="/account/register" className="text-yellow-300 font-medium">Register</a></h1>
                             </form>
                             :
-                            <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-white py-10mblur-white gradient-shadow">User aleady registered, Verify your email to continue</h1>
+                            <h1 className="text-center max-w-xl p-7 text-3xl font-semibold text-white py-10 blur-white gradient-shadow">User aleady registered, Verify your email to continue</h1>
                         }
                         <h1 className="text-xl font-medium mt-6 tracking-wide text-gray-100">Or Login With </h1>
                         <div className="flex items-center">

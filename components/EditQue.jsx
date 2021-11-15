@@ -182,7 +182,7 @@ export const EditQue = (props) => {
 
                 <> {isQueEdit ? <div className="px-5 pb-10">
                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={updateQuestion}>{isUpdating ? 'Wait...' : 'Update'}</button>
-                    <button className={`px-4 py-2 leading-loose text-gray-50 hover:text-gray-800 hover:bg-gray-50 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => { setIsQueEdit(false); if (props.from === 'queDetail') { props.setIsQue(null) } }}>Cancel</button>
+                    <button className={`px-4 py-2 leading-loose text-gray-50 border border-white hover:text-gray-800 hover:bg-gray-50 hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 cursor-pointer`} onClick={() => { setIsQueEdit(false); if (props.from === 'queDetail') { props.setIsQue(null) } }}>Cancel</button>
                 </div> :
                     <button className={`px-4 py-2 leading-loose shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 btn-blue text-white cursor-pointer`} onClick={() => setIsQueEdit(true)}>Edit Question</button>
                 }

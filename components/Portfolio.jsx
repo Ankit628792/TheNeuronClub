@@ -39,7 +39,7 @@ function Portfolio() {
     }, [image])
 
     const updateUser = async () => {
-        setIsUpdating(true)
+        if(image?.size < 5000000){setIsUpdating(true)
         const formData = new FormData();
         formData.append("image", image);
         formData.append("email", data.email);
@@ -60,7 +60,7 @@ function Portfolio() {
             console.log("User Unauthorized")
         }
         setIsUpdating(false);
-        setIsEdit(false)
+        setIsEdit(false)}
     }
 
     const [userQuestions, setUserQuestions] = useState()
@@ -99,12 +99,12 @@ function Portfolio() {
                             }
                         }} />
                     </div>
-                    {(image?.size > 5000000) && <p className="text-red-400 text-sm my-2 text-lg">Maximum image upload size must be 5MB </p>}
+                    {(image?.size > 5000000) && <p className="text-red-400 text-sm my-2 lg:text-lg">Maximum image upload size must be 5MB </p>}
                     {isEdit ?
                         <>
                             <div className="flex">
-                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-green-500 transition-sm items-center inline-flex" onClick={updateUser}>{isUpdating ? 'Updating...' : <><CheckIcon className="w-6 mr-1" />Update </>}</button>
-                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-red-500 transition-sm items-center inline-flex" onClick={() => setIsEdit(false)}> <XIcon className="w-6 mr-1" />Cancel</button>
+                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-green-500 transition-sm items-center inline-flex" disabled={isUpdating} onClick={updateUser}>{isUpdating ? 'Updating...' : <><CheckIcon className="w-6 mr-1" />Update </>}</button>
+                                <button className="px-4 py-2 text-lg lg:text-xl text-gray-50 rounded-xl font-semibold hover:text-red-500 transition-sm items-center inline-flex" disabled={isUpdating} onClick={() => setIsEdit(false)}> <XIcon className="w-6 mr-1" />Cancel</button>
                             </div>
                         </>
                         :
@@ -112,7 +112,7 @@ function Portfolio() {
                     }
                 </div>
             </div>
-            <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium px-10 pt-32 lg:pt-36 pb-5">
+            <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium px-10 pt-28 lg:pt-32 pb-5">
                 <div className="flex items-center max-w-max space-x-4">
                     <h1 className="text-white">Name:&nbsp; </h1>
                     {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg text-gray-50 break-all">{session?.name}</h2>}

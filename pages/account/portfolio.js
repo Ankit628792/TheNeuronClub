@@ -90,13 +90,13 @@ function portfolio() {
                                 variants={pageZoom}
                                 transition={pageTransition} className="max-w-[300px] mx-auto gradient-shadow bg-gray-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 space-x-4 flex items-center border-b-4 info__border">
 
-                                <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full btn-blue font-bold text-4xl grid place-items-center text-white">
+                                <div className="w-16 h-16 mx-auto border-8 flex-shrink-0 pb-1 border-white shadow-md hover:shadow-lg rounded-full btn-blue font-bold text-4xl grid place-items-center text-white">
                                     {session?.image_url ?
                                         <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                                         : session?.name?.[0]}
                                 </div>
                                 <div className="text-xl font-medium text-white">
-                                    <h2>{session?.name}</h2>
+                                    <h2 className="line-clamp-1">{session?.name}</h2>
                                     {/* <h1 className="text-gray-500 text-base">{session?.country}</h1> */}
                                 </div>
                             </motion.div>

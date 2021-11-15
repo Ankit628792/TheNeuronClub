@@ -135,6 +135,7 @@ function setting({ carouselList }) {
             carouselData?.length > 0 ? setCarouselData([response, ...carouselData]) : setCarouselData([...response])
         }
         setIsSending(false)
+        setIsForm(false)
         // }
     }
 
