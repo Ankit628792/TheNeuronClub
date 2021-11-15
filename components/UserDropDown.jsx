@@ -63,7 +63,7 @@ function UserDropDown({ session }) {
     }
     return (
         <>
-            {onBoard && <OnBoard onSelect={closeOnboard} />}
+            {/* {onBoard && <OnBoard onSelect={closeOnboard} />} */}
             <div className="relative font-medium flex items-center">
             {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-gray-800" onClick={() => setIsActive(!isActive)}>
@@ -94,9 +94,6 @@ function UserDropDown({ session }) {
                         }
                         {session?.type ==='admin' &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/setting')}><CogIcon className="w-6 h-6 mr-1 text-gray-700" />Setting</li>
-                        }
-                        {session?.type ==='admin' &&
-                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setOnBoard(true)}><ViewBoardsIcon className="w-6 h-6 mr-1 text-gray-700" />OnBoard</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>
