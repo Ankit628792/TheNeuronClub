@@ -67,7 +67,7 @@ function UserDropDown({ session }) {
             <div className="relative font-medium flex items-center">
             {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-gray-800" onClick={() => setIsActive(!isActive)}>
-                    <div className="MuiAvatar-root MuiAvatar-circle gradient-bg text-white capitalize">
+                    <div className="MuiAvatar-root MuiAvatar-circle btn-blue text-white capitalize">
                         {session?.image_url ?
                             <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                             : session?.name?.[0]}

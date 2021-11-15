@@ -90,7 +90,7 @@ function portfolio() {
                                 variants={pageZoom}
                                 transition={pageTransition} className="max-w-[300px] mx-auto gradient-shadow bg-gray-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 space-x-4 flex items-center border-b-4 info__border">
 
-                                <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full gradient-bg font-bold text-4xl grid place-items-center text-white">
+                                <div className="w-16 h-16 mx-auto border-8 pb-1 border-white shadow-md hover:shadow-lg rounded-full btn-blue font-bold text-4xl grid place-items-center text-white">
                                     {session?.image_url ?
                                         <img className="w-full h-full object-cover rounded-full" src={session?.image_url} alt="" />
                                         : session?.name?.[0]}

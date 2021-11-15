@@ -18,7 +18,7 @@ function Modal({ state, text, link }) {
                     <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-white z-50 leading-tight">
                         {text}
                     </h1>
-                    {link && <button className="btn-orange mx-auto w-[100px] " onClick={() => Router.push(`${link}`)}>Login</button>}
+                    {link && <button className="btn-orange py-2 px-5 rounded-xl mx-auto w-[100px] " onClick={() => Router.push(`${link}`)}>Login</button>}
                 </div>
             </motion.div>}
         </>
