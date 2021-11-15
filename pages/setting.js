@@ -51,7 +51,7 @@ const CarouselItem = ({ item, onSelect }) => {
                     <form className="max-w-md m-4 my-6 p-5 bg-white" onSubmit={updateCarousel}>
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="attachment" className="inline-block mb-1 font-medium">Carousel Image<span className="mx-1 text-red-500">*</span></label>
-                            <input type="file" required name="attachment" accept="image/*"
+                            <input type="file" name="attachment" accept="image/*"
                                 onChange={(e) => setNewImage(e.target.files[0])}
                                 className="flex-grow w-full py-2 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
@@ -130,8 +130,8 @@ function setting({ carouselList }) {
                 heading: '',
                 desc: ''
             })
-            console.log(response)
             setCarouselImage(null)
+            setIsSending(false)
             carouselData?.length > 0 ? setCarouselData([response, ...carouselData]) : setCarouselData([...response])
         }
         setIsSending(false)
@@ -152,6 +152,7 @@ function setting({ carouselList }) {
             } else {
                 console.warn(`Can't remove carousel`)
             }
+            setIsForm(false)
             setCarouselData([...carouselData]);
         }
     }

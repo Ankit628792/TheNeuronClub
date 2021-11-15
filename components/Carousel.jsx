@@ -7,7 +7,7 @@ const data = [
     { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/800x800/?science', category: 'science' },
     { id: 1, heading: 'Politics', desc: "Latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/800x800/?politics', category: 'politics' },
     { id: 2, heading: 'Entertainment', desc: 'Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film and music industries.', imgSrc: 'https://source.unsplash.com/800x800/?entertaiment', category: 'entertaiment' },
-    { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cypto currencies', imgSrc: 'https://source.unsplash.com/800x800/?crypto', category: 'crypto' },
+    { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cyrpto currencies', imgSrc: 'https://source.unsplash.com/800x800/?crypto', category: 'crypto' },
     { id: 4, heading: 'Coronavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/800x800/?coronavirus', category: 'coronavirus' },
 ]
 function Carousel({carouselList}) {
@@ -106,7 +106,7 @@ function Carousel({carouselList}) {
                                         type: "spring",
                                         stiffness: 200,
                                         damping: 35,
-                                    }} className="font-semibold text-4xl sm:text-5xl">{item.heading}</motion.h1>
+                                    }} className="font-semibold capitalize text-4xl sm:text-5xl">{item.heading}</motion.h1>
                                 <motion.p
                                     initial={Size == 'sm' ? { opacity: 0.5, translateX: '1000px' } : { opacity: 0.5, translateY: '1000px' }}
                                     animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
