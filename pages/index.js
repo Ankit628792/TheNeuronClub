@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OnBoard from '../components/OnBoard'
 
-export default function Home({ questions }) {
+export default function Home({ questions, carouselList }) {
   const [onBoard, setOnBoard] = useState(false)
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Home({ questions }) {
           <title>The Neuron</title>
           <link rel="icon" href="/favicon.png" />
         </Head>
-        <Header />
+        <Header carouselList={carouselList} />
         {/* <Header2 />
         <Header3 /> */}
         <QuestionGroup questions={questions?.trending} category={"Trending Topics"} />
@@ -53,9 +53,11 @@ export default function Home({ questions }) {
 export async function getServerSideProps(context) {
   // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
   const questions = await fetch(`${process.env.HOST}/api/question/ques`).then((res) => res.json());
+  const carouselList = await fetch(`${process.env.HOST}/api/carousel`).then((res) => res.json());
   return {
     props: {
-      questions
+      questions,
+      carouselList
     }
   }
 }

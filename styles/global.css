@@ -224,6 +224,11 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 .btn-orange:hover{
     filter: saturate(2);
 }
+.btn-red{
+    background: rgba(240,30,92,1);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(240,30,92,0.5)
+}
 
 .text-white{
     text-shadow: 1px 1px 10px rgba( 255, 255, 255, 0.2 );

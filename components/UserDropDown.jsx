@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {  ChevronDownIcon, ChevronUpIcon, CogIcon, CubeIcon, LogoutIcon, ShareIcon, StarIcon, UserIcon, UsersIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
+import {  ChevronDownIcon, ChevronUpIcon, CogIcon, CubeIcon, LogoutIcon, ShareIcon, StarIcon, UserIcon, UsersIcon, ViewBoardsIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useDispatch } from 'react-redux'
@@ -94,6 +94,9 @@ function UserDropDown({ session }) {
                         }
                         {session?.type ==='admin' &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/setting')}><CogIcon className="w-6 h-6 mr-1 text-gray-700" />Setting</li>
+                        }
+                        {session?.type ==='admin' &&
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setOnBoard(true)}><ViewBoardsIcon className="w-6 h-6 mr-1 text-gray-700" />OnBoard</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
                     </ul>
