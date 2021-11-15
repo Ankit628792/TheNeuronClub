@@ -30,7 +30,6 @@ const CarouselItem = ({ item, onSelect }) => {
         const response = await res.json();
         console.log(res.status)
         if (response) {
-            setIsSent(true)
             setNewData(response)
         }
         setIsSending(false)
