@@ -40,8 +40,6 @@ export default function Home({ questions, carouselList }) {
           <link rel="icon" href="/favicon.png" />
         </Head>
         <Header carouselList={carouselList} />
-        {/* <Header2 />
-        <Header3 /> */}
         <QuestionGroup questions={questions?.trending} category={"Trending Topics"} />
         <QuestionGroup questions={questions?.newest} category={"New Topics"} />
       </div>
