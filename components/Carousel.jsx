@@ -70,6 +70,7 @@ function Carousel({ carouselList }) {
                     {item?.imgSrc &&
                         <motion.div
                             layoutId={item._id}
+                            key={item._id}
                             initial={Size == 'sm' ? { opacity: 0, translateX: '400px' } : { opacity: 0, translateY: '400px' }}
                             animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                             exit={{ opacity: 0 }}
@@ -83,6 +84,7 @@ function Carousel({ carouselList }) {
                             <div className="carousel__scroll absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10">
                                 <motion.div
                                     layoutId={item._id}
+                                    key={item._id}
                                     initial={{ opacity: 0, width: '0px' }}
                                     animate={{ opacity: 1, width: '100%' }}
                                     exit={{ opacity: 0 }}
@@ -96,6 +98,7 @@ function Carousel({ carouselList }) {
                                 </motion.div>
                                 <motion.h1
                                     layoutId={item._id}
+                                    key={item._id}
                                     initial={Size == 'sm' ? { opacity: 0.5, translateX: '1000px' } : { opacity: 0.5, translateY: '1000px' }}
                                     animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                                     exit={{ opacity: 0 }}
@@ -107,6 +110,7 @@ function Carousel({ carouselList }) {
                                     }} className="font-semibold capitalize text-4xl sm:text-5xl">{item.heading}</motion.h1>
                                 <motion.p
                                     layoutId={item._id}
+                                    key={item._id}
                                     initial={Size == 'sm' ? { opacity: 0.5, translateX: '1000px' } : { opacity: 0.5, translateY: '1000px' }}
                                     animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                                     exit={{ opacity: 0 }}
