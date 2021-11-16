@@ -40,12 +40,14 @@ const CarouselItem = ({ item, onSelect }) => {
         <>
             {
                 !isActive ?
-                    <div className="max-w-md m-4 my-6 p-3 blur-white relative">
-                        <PencilIcon className="absolute -top-4 right-10 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-blue-600" onClick={() => setIsActive(true)} />
-                        <TrashIcon className="absolute -top-4 -right-2 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-red-600" onClick={() => onSelect(item?._id)} />
-                        <img className="w-full object-cover rounded-md" src={newData.imgSrc} alt="" />
-                        <h1 className="text-xl mt-2 font-semibold text-gray-50">{newData.heading}</h1>
-                        <p className="text-base font-medium text-gray-50">{newData.desc}</p>
+                    <div className="m-4 my-6 relative">
+                        <PencilIcon className="absolute -top-5 right-10 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-blue-600" onClick={() => setIsActive(true)} />
+                        <TrashIcon className="absolute -top-5 -right-2 cursor-pointer p-2 rounded-full bg-white shadow-lg w-10 h-10 text-red-600" onClick={() => onSelect(item?._id)} />
+                        <img className="w-96 h-96 object-cover rounded-md" src={newData.imgSrc} alt="" />
+                        <div className="absolute bottom-0 w-full p-3 blur-black">
+                        <h1 className="text-2xl font-semibold text-gray-50">{newData.heading}</h1>
+                        <p className="text-lg font-medium text-gray-50">{newData.desc}</p>
+                        </div>
                     </div>
                     :
                     <form className="max-w-md m-4 my-6 p-5 bg-white" onSubmit={updateCarousel}>

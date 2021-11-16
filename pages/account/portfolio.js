@@ -1,7 +1,6 @@
 
 import { userSession } from "../../lib/user-session"
 import { useState, useEffect } from 'react'
-import QuestionGroup from "../../components/QuestionGroup";
 import Loader from "../../components/Loader";
 import Router from 'next/router'
 import Head from 'next/head'

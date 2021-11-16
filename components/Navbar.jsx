@@ -1,30 +1,26 @@
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid'
 import { userSession } from '../lib/user-session'
 import UserDropDown from './UserDropDown'
 import { updateBalance } from '../slices/userBalance'
+import { updateLoader } from '../slices/loader'
 import { useDispatch } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from './Loader'
 import { signOut } from 'next-auth/client'
 import { motion } from 'framer-motion'
 import { fadeOut, pageTransition } from '../util'
 
 function Navbar() {
-    const router = useRouter();
     const session = userSession();
     const dispatch = useDispatch();
     const [scrolled, setScrolled] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
-    const [isLoader, setIsLoader] = useState(false)
-
     const userSignOut = () => signOut();
     const logout = async () => {
-        setIsLoader(true)
+        dispatch(updateLoader(true))
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
             method: 'POST',
@@ -36,7 +32,7 @@ function Navbar() {
         if (res.status === 200) {
             userSignOut();
         }
-        setIsLoader(false)
+        dispatch(updateLoader(false))
     }
 
     const checkDailyVisit = async () => {
@@ -161,9 +157,6 @@ function Navbar() {
                 </motion.div>
             }
             <ToastContainer style={{ textAlign: "center", zIndex: '49' }} />
-            {isLoader && <div className=" w-full h-full blur-white grid place-items-center fixed top-0 right-0">
-                <Loader />
-            </div>}
         </>
     )
 }

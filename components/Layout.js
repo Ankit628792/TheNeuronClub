@@ -1,10 +1,14 @@
 import Head from 'next/head'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { getLoader } from '../slices/loader'
+import Loader from './Loader'
+import { useSelector } from 'react-redux'
 
 export default function Layout({ children }) {
     const router = useRouter()
+    const loader = useSelector(getLoader)
     return (
         <>
             <Head>
@@ -15,6 +19,7 @@ export default function Layout({ children }) {
             </Head>
             <div className="w-full relative min-h-screen bg-transparent flex flex-col justify-between max_w_3xl">
                 <div className="bg-contain w-full h-full top-0 left-0 right-0 bottom-0 fixed gradient-dark" style={{ zIndex: '-10' }}></div>
+                {loader && <div className=" w-full h-screen blur-black grid place-items-center fixed inset-0 z-50"><Loader /> </div>}
                 {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Navbar />}
                 <main>{children}</main>
                 {(router.pathname !== '/account/login' && router.pathname !== '/account/register') && <Footer />}

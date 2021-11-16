@@ -3,14 +3,15 @@ import { motion } from "framer-motion";
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const data = [
-    { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/800x800/?science', category: 'science' },
-    { id: 1, heading: 'Politics', desc: "Latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/800x800/?politics', category: 'politics' },
-    { id: 2, heading: 'Entertainment', desc: 'Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film and music industries.', imgSrc: 'https://source.unsplash.com/800x800/?entertaiment', category: 'entertaiment' },
-    { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cyrpto currencies', imgSrc: 'https://source.unsplash.com/800x800/?crypto', category: 'crypto' },
-    { id: 4, heading: 'Coronavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/800x800/?coronavirus', category: 'coronavirus' },
-]
+// const data = [
+//     { id: 0, heading: 'Science', desc: 'Explore major advances across the sciences that have transformed our understanding of the world and our universe, and our lives.', imgSrc: 'https://source.unsplash.com/800x800/?science', category: 'science' },
+//     { id: 1, heading: 'Politics', desc: "Latest politics news of different countries, current affairs politics news, political standard brings you all the Latest news, election news", imgSrc: 'https://source.unsplash.com/800x800/?politics', category: 'politics' },
+//     { id: 2, heading: 'Entertainment', desc: 'Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film and music industries.', imgSrc: 'https://source.unsplash.com/800x800/?entertaiment', category: 'entertaiment' },
+//     { id: 3, heading: 'Crypto', desc: 'Current and upcoming Crypto market stocks, NFT related market, market place of different cyrpto currencies', imgSrc: 'https://source.unsplash.com/800x800/?crypto', category: 'crypto' },
+//     { id: 4, heading: 'Coronavirus', desc: 'Cases in country, vaccination ratio, vaccine availabilty, covid affect on different categories', imgSrc: 'https://source.unsplash.com/800x800/?coronavirus', category: 'coronavirus' },
+// ]
 function Carousel({ carouselList }) {
+    const data = [...carouselList]
     const router = useRouter();
     const [active, setActive] = useState(0)
     const [item, setItem] = useState(data[0])
@@ -55,11 +56,6 @@ function Carousel({ carouselList }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>}
                     </button>
-                    {/* {data.map((_, i) => (
-                        <button key={i} onClick={() => { setActive(i); setItem(data[i]) }} className={`p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base font-medium grid place-items-center hover:bg-white hover:text-gray-800 scale-110 ease-out ${active == i && 'bg-white text-gray-800'}`}>
-                            {i + 1}
-                        </button>
-                    ))} */}
                     <button onClick={next} className="p-1 border rounded-full w-7 h-7 sm:w-10 sm:h-10 text-sm sm:text-base grid place-items-center hover:bg-white hover:text-gray-800 font-medium scale-110 ease-out">
                         {Size == 'lg' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -73,6 +69,7 @@ function Carousel({ carouselList }) {
                 <div className="relative flex-1">
                     {item?.imgSrc &&
                         <motion.div
+                            layoutId={item._id}
                             initial={Size == 'sm' ? { opacity: 0, translateX: '400px' } : { opacity: 0, translateY: '400px' }}
                             animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                             exit={{ opacity: 0 }}
@@ -83,9 +80,9 @@ function Carousel({ carouselList }) {
                             }}
                             className={`relative shadow-xl w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] cursor-pointer`} key={item.id} onClick={() => router.push(`/question?category=${item.category?.toLowerCase() || item.heading?.toLowerCase()}`)}>
                             <Image src={item?.imgSrc} layout="fill" className="w-full h-full rounded-md" objectFit="contain" />
-                            {/* <img src={item.imgSrc} className="w-full h-full rounded-md object-cover" alt="" /> */}
-                            <div className="absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10">
+                            <div className="carousel__scroll absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10">
                                 <motion.div
+                                    layoutId={item._id}
                                     initial={{ opacity: 0, width: '0px' }}
                                     animate={{ opacity: 1, width: '100%' }}
                                     exit={{ opacity: 0 }}
@@ -98,6 +95,7 @@ function Carousel({ carouselList }) {
 
                                 </motion.div>
                                 <motion.h1
+                                    layoutId={item._id}
                                     initial={Size == 'sm' ? { opacity: 0.5, translateX: '1000px' } : { opacity: 0.5, translateY: '1000px' }}
                                     animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                                     exit={{ opacity: 0 }}
@@ -108,6 +106,7 @@ function Carousel({ carouselList }) {
                                         damping: 35,
                                     }} className="font-semibold capitalize text-4xl sm:text-5xl">{item.heading}</motion.h1>
                                 <motion.p
+                                    layoutId={item._id}
                                     initial={Size == 'sm' ? { opacity: 0.5, translateX: '1000px' } : { opacity: 0.5, translateY: '1000px' }}
                                     animate={Size == 'sm' ? { opacity: 1, translateX: '0px' } : { opacity: 1, translateY: '0px' }}
                                     exit={{ opacity: 0 }}

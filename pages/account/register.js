@@ -1,10 +1,10 @@
-import { ArrowLeftIcon, ArrowRightIcon, GlobeAltIcon, LockClosedIcon, MailIcon, UserIcon, UsersIcon } from '@heroicons/react/solid'
+import { LockClosedIcon, MailIcon, UserIcon, UsersIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { countries, pageTransition, pageZoom } from '../../util'
+import { pageTransition, pageZoom } from '../../util'
 import { userSession } from '../../lib/user-session'
 import { useRouter } from 'next/router'
 import { useSession, signIn } from "next-auth/client"
@@ -95,7 +95,6 @@ function register({ referral_code }) {
                 {isEmail && <div className="fixed inset-0 w-full grid place-items-center blur-white z-40" onClick={() => setIsEmail(false)}><Modal state={isEmail} text="The account already exists, please sign-in instead" link={'/account/login'} /> </div>}
                     <div className="min-h-[300px] p-7 w-full flex flex-col items-center justify-end md:justify-center">
                         <Link href="/">
-                            {/* <h1 className="absolute top-5 left-5 text-white text-3xl lg:text-4xl font-bold cursor-pointer">LOGO.</h1> */}
                             <div className="absolute top-5 left-5 cursor-pointer">
                                 <div className="relative h-12 w-48">
                                     <Image src="/images/logo.png" layout="fill" objectFit="contain" className="drop-shadow-md overflow-hidden" />
@@ -116,7 +115,6 @@ function register({ referral_code }) {
                             isForm ?
                             <>
                                 <form className="max-w-lg p-10 min-w-[380px] blur-black gradient-shadow" onSubmit={handleSubmit}>
-                                    {/* {isEmail && <p className="text-sm text-red-400 text-center">Email already exist</p>} */}
                                     <div className="flex border-b border-gray-100 py-2">
                                         <UserIcon className="h-6 text-white" />
                                         <input onChange={handleChange} className="outline-none flex-grow px-2 bg-transparent text-white focus:bg-transparent" type="text" name="name" minLength="1" value={data.name} required placeholder="Your Name " />

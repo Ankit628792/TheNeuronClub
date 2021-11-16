@@ -52,9 +52,6 @@ function login() {
         } else if (res.status === 203) {
             setIsVerified(false)
         }
-        // else if (res.status === 401) {
-        //     setIsNew(true)
-        // }
         else {
             setIsValid(false);
             console.log("User Unauthorized")

@@ -12,6 +12,9 @@
     max-width: 1900px;
     margin: auto;
 }
+.carousel__scroll::-webkit-scrollbar{
+    display: none
+}
 
 /* just for custom scrollbar*/
 ::-webkit-scrollbar {
@@ -129,8 +132,8 @@ body {
 .blur-white{
     background: rgba( 255, 255, 255, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
+backdrop-filter: blur( 10px );
+-webkit-backdrop-filter: blur( 10px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 
@@ -144,8 +147,8 @@ border: 1px solid rgba( 255, 255, 255, 0.2 );
 .blur-black{
     background: rgba( 0, 0, 0, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
+backdrop-filter: blur( 10px );
+-webkit-backdrop-filter: blur( 10px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 .blur-yellow{

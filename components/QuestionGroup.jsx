@@ -1,7 +1,6 @@
-import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import { ArrowRightIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import Question from "./Question";
-import { useState } from 'react'
 import Image from 'next/image'
 
 function QuestionGroup({ questions, category }) {
@@ -18,7 +17,7 @@ function QuestionGroup({ questions, category }) {
                     {
                         questions && questions?.length > 0 ?
                             <>
-                                {questions?.slice(0,6).map((item, i) => (
+                                {questions?.slice(0, 6).map((item, i) => (
                                     <Question question={item} key={i} />
                                 ))}
                             </>

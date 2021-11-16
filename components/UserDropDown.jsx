@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {  ChevronDownIcon, ChevronUpIcon, CogIcon, CubeIcon, LogoutIcon, ShareIcon, StarIcon, UserIcon, UsersIcon, ViewBoardsIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
+import { ChevronDownIcon, ChevronUpIcon, CogIcon, CubeIcon, LogoutIcon, ShareIcon, UserIcon, UsersIcon, ViewGridIcon, ViewListIcon, XIcon } from "@heroicons/react/solid"
 import Router from 'next/router'
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useDispatch } from 'react-redux'
@@ -7,20 +7,19 @@ import { updateBalance } from '../slices/userBalance';
 import { useSelector } from 'react-redux'
 import { balance } from '../slices/userBalance';
 import Coin from './Coin';
-import OnBoard from './OnBoard';
-import Loader from './Loader';
 import { signOut } from 'next-auth/client';
 import { motion } from 'framer-motion';
 import { fadeOut, pageTransition, pageZoom } from '../util';
+import { updateLoader } from '../slices/loader';
 
 function UserDropDown({ session }) {
     const [isActive, setIsActive] = useState(false)
     const [isShare, setIsShare] = useState(false)
-    const [isLoader, setIsLoader] = useState(false)
     const dispatch = useDispatch();
     const amount = useSelector(balance)
+    
     const urlSrc = `https://neuron-club.vercel.app/account/register?referral_code=${session?.referral_code}`
- 
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsActive(false)
@@ -42,7 +41,7 @@ function UserDropDown({ session }) {
 
     const userSignOut = () => signOut()
     const logout = async () => {
-        setIsLoader(true)
+        dispatch(updateLoader(true))
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
             method: 'POST',
@@ -54,18 +53,12 @@ function UserDropDown({ session }) {
         if (res.status === 200) {
             userSignOut();
         }
-        setIsLoader(false)
-    }
-    const [onBoard, setOnBoard] = useState(false)
-
-    const closeOnboard = () => {
-        setOnBoard(false);
+        dispatch(updateLoader(true))
     }
     return (
         <>
-            {/* {onBoard && <OnBoard onSelect={closeOnboard} />} */}
             <div className="relative font-medium flex items-center">
-            {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
+                {amount && <span className="inline-flex mr-2 items-center font-medium text-lg cursor-pointer" onClick={() => Router.push('/account/portfolio')}><Coin width="4" height="4" />{amount}</span>}
                 <div className="flex items-center p-1 bg-white rounded-full cursor-pointer text-gray-800" onClick={() => setIsActive(!isActive)}>
                     <div className="MuiAvatar-root MuiAvatar-circle btn-blue !shadow text-white capitalize">
                         {session?.image_url ?
@@ -83,16 +76,16 @@ function UserDropDown({ session }) {
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/')}><UserIcon className="w-6 h-6 mr-1 text-gray-700" />My Account</li>
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/account/portfolio')}><ViewGridIcon className="w-6 h-6 mr-1 text-gray-700" />Portfolio</li>
                         <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><ShareIcon className="w-6 h-6 mr-1 text-gray-700" />Invite a Friend</li>
-                        {session?.referral_code &&
+                        {/* {session?.referral_code &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => setIsShare(true)}><UsersIcon className="w-6 h-6 mr-1 text-gray-700" />Refer: {session?.referral_code}</li>
-                        }
-                        {session?.type ==='admin' &&
+                        } */}
+                        {session?.type === 'admin' &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/verification')}><CubeIcon className="w-6 h-6 mr-1 text-gray-700" />Que's Verification</li>
                         }
-                        {session?.type ==='admin' &&
-                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/settled')}><StarIcon className="w-6 h-6 mr-1 text-gray-700" />Settled Ques</li>
+                        {session?.type === 'admin' &&
+                            <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/question/settled')}><ViewListIcon className="w-6 h-6 mr-1 text-gray-700" />Settled Ques</li>
                         }
-                        {session?.type ==='admin' &&
+                        {session?.type === 'admin' &&
                             <li className="hover:text-gray-900 cursor-pointer transition-sm flex items-center" onClick={() => Router.push('/setting')}><CogIcon className="w-6 h-6 mr-1 text-gray-700" />Setting</li>
                         }
                         <li onClick={logout} className="hover:text-gray-900 cursor-pointer transition-sm flex items-center"><LogoutIcon className="w-6 h-6 mr-1 text-gray-700" />Logout </li>
@@ -167,9 +160,6 @@ function UserDropDown({ session }) {
                     </div>
                 </>
             }
-            {isLoader && <div className=" w-full h-full blur-white grid place-items-center fixed inset-0">
-                <Loader />
-            </div>}
         </>
     )
 }

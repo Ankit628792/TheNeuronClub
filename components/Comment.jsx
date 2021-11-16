@@ -29,7 +29,6 @@ function Comment({ user, comment, onSelect }) {
                 }
                 <div className="comment__box py-2 pl-4 pr-10 sm:pl-6 sm:pr-14" onClick={() => setIsMenu(false)}>
                     <h2 className="text-gray-50 font-medium text-sm">{comment?.name}</h2>
-                    {/* <h2 className="text-gray-400 text-xs">{moment(comment?.createdAt).format('ll')}</h2> */}
                     <h2 className="text-gray-300 text-xs">{moment(comment?.createdAt).fromNow()}</h2>
                     <div className="leading-normal text-gray-50 my-1 text-base break-words break-all">{comment?.comment}</div>
                 </div>

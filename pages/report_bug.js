@@ -4,6 +4,7 @@ import Modal from '../components/Modal'
 import { userSession } from '../lib/user-session/index'
 import { motion } from 'framer-motion'
 import { pageTransition, pageZoom } from '../util';
+
 function report_bug() {
     const session = userSession();
     const [isSending, setIsSending] = useState(false)

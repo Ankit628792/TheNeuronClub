@@ -4,7 +4,8 @@ import { pageSlide, pageTransition } from "../util"
 
 function Steps({ step, type }) {
     return (
-        <motion.div initial="initial"
+        <motion.div layoutId={step.no}
+            initial="initial"
             animate="in"
             exit="out"
             variants={pageSlide}

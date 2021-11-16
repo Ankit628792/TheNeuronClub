@@ -5,9 +5,8 @@ import Coin from "./Coin";
 import { PencilIcon, CheckIcon, XIcon } from "@heroicons/react/solid";
 import { useRef, useEffect, useState } from "react";
 import Question from "./Question";
-import { countries } from '../util'
 
-function Portfolio() {
+function Profile() {
     const session = userSession();
     const amount = useSelector(balance)
 
@@ -39,28 +38,28 @@ function Portfolio() {
     }, [image])
 
     const updateUser = async () => {
-        if(image?.size < 5000000){setIsUpdating(true)
-        const formData = new FormData();
-        formData.append("image", image);
-        formData.append("email", data.email);
-        formData.append("_id", session?._id);
-        formData.append("name", data.name);
-        // formData.append("username", data.username);
-        // formData.append("country", data.country);
-        const res = await fetch(`/api/user/update_user`, {
-            method: 'POST',
-            body: formData
-        })
-        const response = await res.json();
-        if (res.status === 200) {
-            window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
-            setIsEdit(false);
+        if (image?.size < 5000000) {
+            setIsUpdating(true)
+            const formData = new FormData();
+            formData.append("image", image);
+            formData.append("email", data.email);
+            formData.append("_id", session?._id);
+            formData.append("name", data.name);
+            const res = await fetch(`/api/user/update_user`, {
+                method: 'POST',
+                body: formData
+            })
+            const response = await res.json();
+            if (res.status === 200) {
+                window.localStorage.setItem('neuron-token', JSON.stringify(response.token))
+                setIsEdit(false);
+            }
+            else {
+                console.log("User Unauthorized")
+            }
+            setIsUpdating(false);
+            setIsEdit(false)
         }
-        else {
-            console.log("User Unauthorized")
-        }
-        setIsUpdating(false);
-        setIsEdit(false)}
     }
 
     const [userQuestions, setUserQuestions] = useState()
@@ -121,26 +120,14 @@ function Portfolio() {
                     <h1 className="text-white">Email:&nbsp; </h1>
                     <h2 className="font-normal break-all text-lg text-gray-100">{session?.email}</h2>
                 </div>
-                {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1 className="text-white">Username:&nbsp; </h1>
-                    {isEdit ? <input type="text" name="username" onChange={handleChange} value={data.username} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal break-all">{session?.username}</h2>}
-                </div> */}
-                {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1 className="text-white">Country:&nbsp; </h1>
-                    {isEdit ? <select onChange={handleChange} className="outline-none text-lg h-10 cursor-pointer px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" type="country" name="country" value={data.country} required placeholder="Country ">
-                        <option value="" disabled>Choose Your Country </option>
-                        {countries.map((country, i) => <option key={i} value={country.country} >{country.country}</option>)}
-                    </select>
-                        : <h2 className="font-normal break-all">{session.country}</h2>}
-                </div> */}
+                <div className="flex items-center max-w-max space-x-4">
+                    <h1 className="text-white">Referral Code:&nbsp; </h1>
+                    <h2 className="font-normal break-all text-lg text-gray-100">{session?.referral_code}</h2>
+                </div>
                 <div className="flex items-center max-w-max space-x-4">
                     <h1 className="text-white">Balance:&nbsp; </h1>
                     <h2 className="inline-flex items-center text-lg font-normal text-white"><Coin width="5" height="5" />{amount}</h2>
                 </div>
-                {/* <div className="flex items-center max-w-max space-x-4">
-                    <h1 className="text-white">Referred user:&nbsp; </h1>
-                    <h2 className="font-normal text-lg">{0} </h2>
-                </div> */}
             </div>
             {session?.type === 'admin' &&
                 <>
@@ -164,4 +151,4 @@ function Portfolio() {
     )
 }
 
-export default Portfolio
+export default Profile
