@@ -61,7 +61,7 @@ const settleQue = async (req, res) => {
 const undoSettlement = async (req, res) => {
     const { _id, result, message, reason } = req.body;
     try {
-        const ques = await Question.findOneAndUpdate({ _id: _id }, { qstatus: reason==='invalid' ? 'invalid' : 'verified', result: 'null' }, { new: true });
+        const ques = await Question.findOneAndUpdate({ _id: _id }, { qstatus: reason === 'invalid' ? 'invalid' : 'verified', result: 'null' }, { new: true });
         const { Volume, Favour, Against } = ques;
         const transList = await Transaction.find({ questionId: _id }, { userId: 1, amount: 1, odd: 1, createdAt: 1 });
         // const trans = await Transaction.deleteMany({ questionId: _id });

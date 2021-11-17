@@ -15,6 +15,9 @@
 .carousel__scroll::-webkit-scrollbar{
     display: none
 }
+body::-webkit-scrollbar{
+    display: none
+}
 
 /* just for custom scrollbar*/
 ::-webkit-scrollbar {
@@ -52,12 +55,6 @@
   }
 
 /* @media(prefers-color-scheme: light){ */
-body {
-    /* background: #e7fdfd; */
-    /* background: #e6faff; */
-    /* background: #f4f9fc; */
-    background: #fff
-}
 
 .line-clamp-1 {
     display: -webkit-box;
@@ -137,13 +134,6 @@ backdrop-filter: blur( 10px );
 border: 1px solid rgba( 255, 255, 255, 0.2 );
 }
 
-.blur-gd-black{
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba( 0, 0, 0, 0.3 ) );
-box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
-border: 1px solid rgba( 255, 255, 255, 0.2 );
-}
 .blur-black{
     background: rgba( 0, 0, 0, 0.3 );
 box-shadow: 5px 5px 32px 0 rgba( 31, 38, 135, 0.2 );
@@ -292,45 +282,6 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
 .bet table td {
     @apply px-4 text-left align-middle
-}
-
-
-.custom-shape-divider-bottom-1630315778 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-bottom-1630315778 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 60px;
-}
-
-.custom-shape-divider-top-1630316193 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: scale(1.01) rotate(180deg);
-}
-
-.custom-shape-divider-top-1630316193 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 50px;
-}
-
-.shape-fill {
-    /* fill: #f4f9fc; */
-    fill: #fff;
 }
 
 .policy h1 {
@@ -538,7 +489,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     border: 3px solid transparent;
     border-top-color: #008744;
     border-radius: 50%;
-    /* box-shadow: 0 0 20px rgba(0, 135, 68, 0.1); */
+    box-shadow: 0 0 20px rgba(0, 135, 68, 0.1);
     -webkit-animation: spinLoader 2s linear infinite;
     animation: spinLoader 2s linear infinite;
 }
@@ -552,7 +503,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     left: 4.5rem;
     border: 3px solid transparent;
     border-radius: 50%;
-    /* box-shadow: 0 0 20px rgb(214 45 32 / 10%) ; */
+    box-shadow: 0 0 20px rgb(214 45 32 / 10%) ;
     border-top-color: #d62d20;
     -webkit-animation: spinLoader 3s linear infinite;
     animation: spinLoader 3s linear infinite;
@@ -567,7 +518,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     left: 2rem;
     border: 3px solid transparent;
     border-radius: 50%;
-    /* box-shadow: 0 0 20px rgb(255 167 0 / 10%); */
+    box-shadow: 0 0 20px rgb(255 167 0 / 10%);
     border-top-color: #ffa8;
     -webkit-animation: spinLoader 1.5s linear infinite;
     animation: spinLoader 1.5s linear infinite;
