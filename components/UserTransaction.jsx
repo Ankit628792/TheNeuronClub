@@ -7,7 +7,7 @@ import { container, item, pageTransition } from '../util'
 function UserTransaction({ queId, userId }) {
     const [transaction, setTransaction] = useState(null)
     const getUser = async () => {
-        const res = await fetch(`/api/user/getUser?_id=${userId}&quesId=${queId}`);
+        const res = await fetch(`/api/user/getUser?_id=${userId}&queId=${queId}`);
         if (res.status === 200) {
             const response = await res.json();
             setTransaction(response?.questions)
@@ -19,7 +19,7 @@ function UserTransaction({ queId, userId }) {
 
     return (
         <>
-            {transaction && <motion.div initial="hidden"
+            {transaction?.length > 0 && <motion.div initial="hidden"
                 animate="visible"
                 variants={container}
                 transition={pageTransition} className="mx-auto hidden lg:inline-block max-w-max mt-10 p-5 gradient-shadow blur-black rounded-md max-h-screen overflow-y-auto">

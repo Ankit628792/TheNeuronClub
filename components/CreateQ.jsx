@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import addDays from 'date-fns/addDays'
 import { motion } from 'framer-motion'
 import { formats, modules, pageTransition, pageZoom } from '../util'
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+const QuillNoSSRWrapper = dynamic(() => import('react-quill') , {
     ssr: false,
     loading: () => <p className="text-gray-100">Loading ...</p>,
 })
@@ -18,7 +18,7 @@ function CreateQ({ session }) {
     const [goLiveDate, setGoLiveDate] = useState(currentDate)
     const [bidClosingDate, setBidClosingDate] = useState(addDays(goLiveDate, 1))
     const [settlementClosingDate, setSettlementClosingDate] = useState(addDays(bidClosingDate, 1))
-    const [qImage, setQImage] = useState(null);
+    const [qImage, setQImage] = useState('');
     const [data, setData] = useState({
         question: '',
         userId: session?._id,
@@ -45,8 +45,10 @@ function CreateQ({ session }) {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (qImage?.size < 500000 && qImage.size > 10) {
+        if(e){
+            e.preventDefault();
+        }
+        if (qImage?.size < 1000000 && qImage.size > 10) {
             setIsSending(true);
             const formData = new FormData();
             formData.append("image", qImage);
@@ -59,7 +61,7 @@ function CreateQ({ session }) {
             formData.append("options", data.options);
             formData.append("qstatus", data.qstatus);
             formData.append("desc", desc);
-            formData.append("link", link);
+            formData.append("reference", link);
             const res = await fetch(`/api/question/create_question`, {
                 method: 'POST',
                 body: formData
@@ -77,7 +79,7 @@ function CreateQ({ session }) {
                     goLive: '',
                     settlementClosing: '',
                 })
-                setQImage(null);
+                setQImage('');
                 setLink('');
                 setDesc('');
                 setIsSending(false)
@@ -160,7 +162,6 @@ function CreateQ({ session }) {
                                 placeholder="Settlement Link ..."
                                 type="text"
                                 value={link}
-                                required
                                 onChange={(e) => setLink(e.target.value)}
                                 className="flex-grow w-full resize-none py-2 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
@@ -170,12 +171,12 @@ function CreateQ({ session }) {
                             <QuillNoSSRWrapper modules={modules} placeholder='Add description here ...' value={desc} onChange={setDesc} formats={formats} className="bg-white" theme="snow" />
                         </div>
                         <div className="my-2 sm:my-3">
-                            <button type="submit" className="btn-primary">{isSending ? `Adding` : `Add Question`}</button>
+                            <button type="submit" className="btn-primary" disabled={isSending}>{isSending ? `Adding` : `Add Question`}</button>
                         </div>
                     </motion.form>
                 </div>
             </div>
-            {isSent && <Modal state={isSent} text="Question created successfully" />}
+            {isSent && <div onClick={() => setIsSent(false)}><Modal state={isSent} text="Question created successfully" /> </div>}
         </>
     )
 }

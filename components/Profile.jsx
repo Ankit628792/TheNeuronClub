@@ -112,19 +112,19 @@ function Profile() {
                 </div>
             </div>
             <div className="flex flex-col justify-start w-full max-w-max gap-y-4 gap-x-6 md:gap-y-6 md:gap-x-8 xl:gap-x-10 text-xl lg:text-2xl mx-auto font-medium px-10 pt-28 lg:pt-32 pb-5">
-                <div className="flex items-center max-w-max space-x-4">
+                <div className="flex items-center max-w-max space-x-2">
                     <h1 className="text-white">Name:&nbsp; </h1>
                     {isEdit ? <input type="text" name="name" onChange={handleChange} value={data.name} className="outline-none text-lg h-10 px-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" /> : <h2 className="font-normal text-lg text-gray-50 break-all">{session?.name}</h2>}
                 </div>
-                <div className="flex items-center max-w-max space-x-4">
+                <div className="flex items-center max-w-max space-x-2">
                     <h1 className="text-white">Email:&nbsp; </h1>
                     <h2 className="font-normal break-all text-lg text-gray-100">{session?.email}</h2>
                 </div>
-                <div className="flex items-center max-w-max space-x-4">
+                <div className="flex items-center max-w-max space-x-2">
                     <h1 className="text-white">Referral Code:&nbsp; </h1>
                     <h2 className="font-normal break-all text-lg text-gray-100">{session?.referral_code}</h2>
                 </div>
-                <div className="flex items-center max-w-max space-x-4">
+                <div className="flex items-center max-w-max space-x-2">
                     <h1 className="text-white">Balance:&nbsp; </h1>
                     <h2 className="inline-flex items-center text-lg font-normal text-white"><Coin width="5" height="5" />{amount}</h2>
                 </div>
@@ -137,7 +137,7 @@ function Profile() {
                         {userQuestions?.length > 0 &&
                             <>
                                 <h1 className="text-2xl sm:text-3xl font-semibold  text-white my-6 sm:px-5">My Questions</h1>
-                                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 question__group">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center items-stretch question__group">
                                     {userQuestions?.map(item => (
                                         <Question key={item?._id} question={item} />
                                     ))}

@@ -17,9 +17,11 @@ import { pageSlide, pageTransition, pageZoom } from '../../util'
 import CommentBox from '../../components/CommentBox';
 import Settlement from '../../components/Settlement';
 import UserTransaction from '../../components/UserTransaction'
-import { EditQue } from '../../components/EditQue'
 import { UndoSettle } from '../../components/UndoSettle'
-
+import dynamic from 'next/dynamic'
+const EditQue = dynamic(() => import('../../components/EditQue'), {
+    ssr: false
+})
 
 function QuestionDetail({ questionData }) {
     const session = userSession();
@@ -51,10 +53,12 @@ function QuestionDetail({ questionData }) {
     const urlSrc = `https://www.theneuron.club/question/${que?._id}`
 
     const getUserInfo = async () => {
-        const res = await fetch(`/api/user/info?_id=${questionData?.userId}`)
-        if (res.status == 200) {
-            const response = await res.json();
-            setUserInfo(response)
+        if (questionData?.userId?.length > 10) {
+            const res = await fetch(`/api/user/info?_id=${questionData?.userId}`)
+            if (res.status == 200) {
+                const response = await res.json();
+                setUserInfo(response)
+            }
         }
     }
     useEffect(() => {
@@ -70,13 +74,13 @@ function QuestionDetail({ questionData }) {
                 Volume = Volume + bid
                 odd == 'Favour' ? Favour = Favour + bid : Against = Against + bid;
 
-                const { _id, question, category, settlementClosing } = que
+                const { _id, question, category, settlementClosing, image_url } = que
                 const res = await fetch(`/api/transaction/question`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ bid, _id, userId: session?._id, question, category, odd, settlementClosing })
+                    body: JSON.stringify({ bid, _id, userId: session?._id, question, image_url, category, odd, settlementClosing })
                 })
                 console.log(res.status)
                 const response = await res.json();
@@ -114,7 +118,7 @@ function QuestionDetail({ questionData }) {
 
     const validate = () => {
         if (que.qstatus === 'verified' && que.bidClosing > new Date().toISOString()) {
-            if (bid > 0 && bid <= 1000) {
+            if (bid > 0 && bid <= 10000) {
                 if (que.qstatus == 'verified') {
                     (session) ? setIsActive(true) : setIsLoggedIn(true)
                 }
@@ -127,7 +131,7 @@ function QuestionDetail({ questionData }) {
     const checkBid = (e) => {
         setBid(e.target.value);
         setLowBalance(false)
-        if (e.target.value < 1 || e.target.value > 1000) {
+        if (e.target.value < 1 || e.target.value > 10000) {
             setBidLimit(true)
         } else {
             setBidLimit(false)
@@ -148,8 +152,8 @@ function QuestionDetail({ questionData }) {
                 <title>Question: {que?.question}</title>
             </Head>
             <ToastContainer />
+            {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} from="queDetail" />}
             <div className="py-10 relative">
-                {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} from="queDetail" />}
                 {
                     que && que?.category ?
                         <>
@@ -192,17 +196,17 @@ function QuestionDetail({ questionData }) {
                                         </h2>
                                         <div className="flex space-x-3 items-center justify-center lg:justify-start">
                                             {que?.qstatus === 'verified' ?
-                                            <>
-                                             {   que?.bidClosing < new Date().toISOString()
-                                                    ?
-                                                    session?.type === 'admin'
-                                                        ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>
-                                                        : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>
-                                                    : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
-                                            }
-                                              </>
+                                                <>
+                                                    {que?.bidClosing < new Date().toISOString()
+                                                        ?
+                                                        session?.type === 'admin'
+                                                            ? <button className={`select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointerpointer`} onClick={() => setIsSettle(true)}>Settle This Question</button>
+                                                            : <button className="select-none btn-gray text-gray-500 cursor-not-allowed min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer">Bidding Closed</button>
+                                                        : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setBidPlaceModal(true)}>Place a bid</button>
+                                                    }
+                                                </>
                                                 : <button className="select-none btn-blue min-w-max px-5 py-2 text-lg font-medium rounded-3xl mr-3 cusor-pointer" onClick={() => setIsUndoSettle(true)}>Undo Settlement</button>
-                                                
+
                                             }
 
                                             {
@@ -276,8 +280,8 @@ function QuestionDetail({ questionData }) {
                                                 <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                                 <div className="relative flex items-center space-x-4 mt-4">
                                                     <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
-                                                    <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                                                    <input type="number" min="1" minLength="1" maxLength="10000" max="10000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 9951 && setBid(+bid + +50); setLowBalance(false) }} />
                                                 </div>
                                             </div>
                                             {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
@@ -285,7 +289,7 @@ function QuestionDetail({ questionData }) {
                                             }
                                             {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
                                             {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
-                                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-1000 </p>}
+                                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-10000 </p>}
                                             <table>
                                                 <tbody>
                                                     <tr>
@@ -324,7 +328,7 @@ function QuestionDetail({ questionData }) {
                 }
                 {
                     bidPlaceModal &&
-                    <div className="fixed inset-0 text-white w-full h-full blur-black z-40">
+                    <div className="fixed inset-0 text-white w-full h-screen blur-black z-40">
 
                         <motion.div initial="initial"
                             animate="in"
@@ -345,8 +349,8 @@ function QuestionDetail({ questionData }) {
                                 <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
                                 <div className="relative flex items-center space-x-4 mt-4">
                                     <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false) }} />
-                                    <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
-                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false) }} />
+                                    <input type="number" min="1" minLength="1" maxLength="10000" max="10000" value={bid} onChange={checkBid} className="border border-gray-100 font-semibold text-blue-500 text-center rounded focus:outline-none" />
+                                    <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-100 text-gray-900 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 9951 && setBid(+bid + +50); setLowBalance(false) }} />
                                 </div>
                             </div>
                             {isSending ? <button className="px-3 py-1 mt-2 mb-2 mx-auto leading-loose btn-blue text-white shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px]">{'Wait...'}</button>
@@ -354,7 +358,7 @@ function QuestionDetail({ questionData }) {
                             }
                             {bid > 0 === 'false' && <p className="text-red-500 text-base mb-4"> Bid amount is low </p>}
                             {lowBalance && <p className="text-red-500 text-base mb-4"> Not enough balance to bet </p>}
-                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-1000 </p>}
+                            {bidLimit && <p className="text-red-500 text-base mb-4"> Bid amount should in range of 1-10000 </p>}
                             <table>
                                 <tbody>
                                     <tr>
@@ -447,7 +451,7 @@ function QuestionDetail({ questionData }) {
                         </motion.div>
                     </div>
                 }
-               
+
             </div>
             {isUndoSettle && <UndoSettle setIsUndoSettle={setIsUndoSettle} finalResult={que?.result} queId={que?._id} setQue={setQue} />}
             {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
@@ -455,7 +459,7 @@ function QuestionDetail({ questionData }) {
                 animate="in"
                 exit="out"
                 variants={pageZoom}
-                transition={pageTransition} className="fixed top-0 left-0 right-0 bottom-0 w-full h-full blur-black grid place-items-center z-50" >
+                transition={pageTransition} className="fixed inset-0 w-full h-screen blur-black grid place-items-center z-50" >
                 <div className="relative max-w-sm md:max-w-md py-10 md:py-14 px-5 md:px-10 blur-gray rounded-xl shadow-2xl m-4">
                     <h1 className="text-xl md:text-2xl my-4 text-center font-medium text-white z-50 leading-tight">
                         Please confirm that you want to place a bid of <div className="flex items-center justify-center">

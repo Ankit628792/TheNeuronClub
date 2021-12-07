@@ -1,5 +1,6 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import Router from 'next/router'
+import Image from 'next/image'
 import moment from 'moment';
 import { motion } from 'framer-motion';
 import { pageTransition, pageZoom } from './../util';
@@ -34,15 +35,13 @@ function Question({ question }) {
         if (session && bidModal?.odd) {
             setIsSending(true)
             if (amount > 0 && amount >= bid) {
-                console.log(que)
-                const { _id, question, category, settlementClosing } = que
-                console.log({ bid, _id, userId: session?._id, question, category, odd: bidModal?.odd, settlementClosing })
+                const { _id, question, category, settlementClosing, image_url } = que
                 const res = await fetch(`/api/transaction/question`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ bid, _id, userId: session?._id, question, category, odd: bidModal?.odd, settlementClosing })
+                    body: JSON.stringify({ bid, _id, userId: session?._id, question, image_url, category, odd: bidModal?.odd, settlementClosing })
                 })
                 console.log(res.status)
                 const response = await res.json();
@@ -62,7 +61,7 @@ function Question({ question }) {
     const checkBid = (e) => {
         setBid(e.target.value);
         setLowBalance(false)
-        if (e.target.value < 1 || e.target.value > 1000) {
+        if (e.target.value < 1 || e.target.value > 10000) {
             setBidLimit(true)
         } else {
             setBidLimit(false)
@@ -76,11 +75,15 @@ function Question({ question }) {
                 exit="out"
                 variants={pageZoom}
                 transition={pageTransition} className="text-white max-w-xs p-5 shadow-lg relative blur-black rounded-lg">
-                <h1 className="absolute top-0 right-0 py-1 px-2 blur-blue rounded-tr-lg rounded-bl-lg">{closingTime?.includes('ago') ? `closed ${closingTime}` : `closing ${closingTime}`}</h1>
-                <img className="w-full h-48 object-cover rounded-lg cursor-pointer" onClick={handleClick} src={question?.image_url || `images/que/${question.category}.jfif`} alt="" />
+                <h1 className="absolute top-0 right-0 py-1 px-2 blur-blue rounded-tr-lg rounded-bl-lg z-20">{closingTime?.includes('ago') ? `closed ${closingTime}` : `closing ${closingTime}`}</h1>
+                <div className="relative w-[280px] h-48 object-cover rounded-lg cursor-pointer z-10" onClick={handleClick}>
+                    <Image src={question?.image_url || `/images/que/${question.category}.jfif`} layout="fill" objectFit="cover" className="w-full h-full object-cover rounded-lg cursor-pointer" placeholder="blur" blurDataURL={question?.image_url || `/images/que/${question.category}.jfif`} alt="" />
+                </div>
                 <div className="py-5 font-medium h-full">
                     <h1 className="text-lg text-center mb-4 cursor-pointer line-clamp-3 h-[88px]" onClick={handleClick}>{question.question}</h1>
-                    <div className="flex justify-around items-center text-lg">
+                   {question?.qstatus ==='closed' 
+                   ? <h1 className="text-lg text-center font-medium text-yellow-300">Bidding Closed</h1>
+                   : <div className="flex justify-around items-center text-lg">
                         <div className="flex flex-col items-center justify-center">
                             <button className="font-semibold btn-blue rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Favour' }) : setIsLoggedIn(true)}>Yes</button>
                             <h1 className="font-normal text-center leading-none">{question?.Favour > 0 ? Math.round((question?.Favour * 100 / question.Volume)) : 0}%<br />says yes</h1>
@@ -89,7 +92,7 @@ function Question({ question }) {
                             <button className="font-semibold btn-orange rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Against' }) : setIsLoggedIn(true)}>No</button>
                             <h1 className="font-normal text-center leading-none">{question?.Against > 0 ? Math.round((question?.Against * 100 / question.Volume)) : 0}%<br />says no</h1>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </motion.div>
 
@@ -98,16 +101,16 @@ function Question({ question }) {
                 animate="in"
                 exit="out"
                 variants={pageZoom}
-                transition={pageTransition} className="fixed inset-0 w-full h-full grid place-items-center z-50 blur-black max_w_3xl" >
+                transition={pageTransition} className="fixed inset-0 w-full h-screen grid place-items-center z-50 blur-black max_w_3xl" >
                 <div className="relative max-w-sm md:max-w-md p-5 lg:py-10 md:px-10 blur-black text-white rounded-xl shadow-2xl m-4">
                     <div className="my-4 flex flex-col items-center">
                         <h1 className="font-medium text-2xl lg:text-3xl text-center">{que?.question} </h1>
                         {lowBalance && <p className="text-red-500 text-base mt-2"> Not enough balance to bet </p>}
-                        {bidLimit && <p className="text-red-500 text-base mt-2"> Bid amount should in range of 1-1000 </p>}
+                        {bidLimit && <p className="text-red-500 text-base mt-2"> Bid amount should in range of 1-10000 </p>}
                         <div className="relative flex items-center space-x-4 my-4">
                             <MinusIcon className="w-7 h-7 p-1 font-semibold bg-gray-50 text-gray-800 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid > 50 && setBid(bid - 50); setLowBalance(false); setBidLimit(false) }} />
-                            <input type="number" min="1" minLength="1" maxLength="1000" max="1000" value={bid} onChange={checkBid} className="border border-gray-800 font-semibold text-blue-400 text-center text-xl lg:text-2xl rounded focus:outline-none" />
-                            <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-50 text-gray-800 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 951 && setBid(+bid + +50); setLowBalance(false); setBidLimit(false) }} />
+                            <input type="number" min="1" minLength="1" maxLength="10000" max="10000" value={bid} onChange={checkBid} className="border border-gray-800 font-semibold text-blue-400 text-center text-xl lg:text-2xl rounded focus:outline-none" />
+                            <PlusIcon className="w-7 h-7 p-1 font-semibold bg-gray-50 text-gray-800 rounded-full cursor-pointer shadow-lg hover:scale-[1.03] active:scale-[0.99]" onClick={() => { bid < 9951 && setBid(+bid + +50); setLowBalance(false); setBidLimit(false) }} />
                         </div>
                         <h1 className="font-medium text-gray-50 text-xl lg:text-2xl flex items-center justify-center flex-wrap">You're placing a bid of &nbsp;<span className="text-blue-400 inline-flex items-center"><Coin width="4" height="4" />{bid}</span>&nbsp;in <span className="text-blue-400 capitalize">{bidModal?.odd}</span> </h1>
                     </div>
@@ -123,7 +126,7 @@ function Question({ question }) {
                 variants={pageZoom}
                 transition={pageTransition}
                 onClick={() => setIsBidPlaced(false)}
-                className="fixed inset-0 w-full h-full grid place-items-center z-50 blur-black max_w_3xl" >
+                className="fixed inset-0 w-full h-screen grid place-items-center z-50 blur-black max_w_3xl" >
                 <Modal state={isBidPlaced} text="Bid Placed Successfully" />
             </motion.div>
             }
@@ -133,7 +136,7 @@ function Question({ question }) {
                 variants={pageZoom}
                 transition={pageTransition}
                 onClick={() => setIsLoggedIn(false)}
-                className="fixed inset-0 w-full h-full grid place-items-center z-50 blur-black max_w_3xl" >
+                className="fixed inset-0 w-full h-screen grid place-items-center z-50 blur-black max_w_3xl" >
                 <Modal state={isLoggedIn} text="Please login to place a bid" link={'/account/login'} />
             </motion.div>
             }

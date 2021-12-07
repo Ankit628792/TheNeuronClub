@@ -5,15 +5,13 @@ import { modules, formats, pageTransition, pageZoom } from '../util'
 import { XIcon } from '@heroicons/react/solid';
 import DatePicker from "react-datepicker";
 import addDays from 'date-fns/addDays'
-
 import dynamic from 'next/dynamic'
-
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     ssr: false,
-    loading: () => <p>Loading ...</p>,
+    loading: () => <p className="text-gray-100">Loading ...</p>,
 })
 
-export const EditQue = (props) => {
+const EditQue = (props) => {
     const [isVerify, setIsVerify] = useState(false)
     const [isInValid, setIsInValid] = useState(false)
     const [userInfo, setUserInfo] = useState()
@@ -60,13 +58,13 @@ export const EditQue = (props) => {
 
     const updateQuestion = async () => {
         setIsUpdating(true)
-        const { _id, question } = updatedQue;
+        const { _id, question, reference } = updatedQue;
         const res = await fetch(`/api/question/update_que`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ _id, desc, question, bidClosing: bidClosingDate, settlementClosing: settlementClosingDate })
+            body: JSON.stringify({ _id, desc, reference, question, bidClosing: bidClosingDate, settlementClosing: settlementClosingDate })
         })
         console.log(res.status)
         const response = await res.json();
@@ -85,7 +83,7 @@ export const EditQue = (props) => {
         return { __html: que?.desc };
     }
     return (
-        <div className="fixed top-0 left-0 grid place-items-center blur-black w-full min-h-screen p-1 z-50">
+        <div className="fixed top-0 left-0 grid place-items-center blur-black w-full h-screen p-1 z-50">
             <XIcon className="bg-white text-gray-700 w-12 h-12 cursor-pointer rounded-full p-1 absolute top-5 right-6 z-[55] gradient-shadow" onClick={() => props.setIsQue(null)} />
             <motion.div initial="initial"
                 animate="in"
@@ -160,7 +158,6 @@ export const EditQue = (props) => {
                                 placeholder="Settlement Link"
                                 type="text"
                                 name="reference"
-                                required
                                 value={updatedQue?.reference}
                                 onChange={handleChange}
                                 className="w-full flex-1 h-12 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
@@ -190,3 +187,5 @@ export const EditQue = (props) => {
         </div >
     )
 }
+
+export default EditQue

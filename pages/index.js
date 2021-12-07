@@ -5,9 +5,26 @@ import QuestionGroup from '../components/QuestionGroup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OnBoard from '../components/OnBoard'
+// import dynamic from 'next/dynamic'
 
-export default function Home({ questions, carouselList }) {
+// const Header = dynamic(() => import('../components/Header'), {
+//   ssr: false
+// })
+
+export default function Home({ carouselList }) {
   const [onBoard, setOnBoard] = useState(false)
+  const [questions, setQuestions] = useState([])
+
+  async function getQue() {
+    const ques = await fetch(`${process.env.host}/api/question/ques`).then((res) => res.json());
+    if (ques) {
+      setQuestions(ques)
+    }
+
+  }
+  useEffect(() => {
+    getQue()
+  }, [])
 
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
@@ -49,12 +66,9 @@ export default function Home({ questions, carouselList }) {
 }
 
 export async function getServerSideProps(context) {
-  // const questions = await fetch('https://sample-api-data.vercel.app/api/tnc/questions').then((res) => res.json());
-  const questions = await fetch(`${process.env.HOST}/api/question/ques`).then((res) => res.json());
   const carouselList = await fetch(`${process.env.HOST}/api/carousel`).then((res) => res.json());
   return {
     props: {
-      questions,
       carouselList
     }
   }
