@@ -14,24 +14,30 @@ const dUri = new DatauriParser();
 
 const dataUri = req => dUri.format(`.${req.file.originalname.split('.').pop()}`, req.file.buffer);
 
+const getTotal = obj => Object.values(obj).reduce((a, b) => a + b);
+
 handler.post(async (req, res) => {
     if (req.file) {
         const file = dataUri(req).content;
         const result = await uploader.upload(file)
         if (result) {
             const image_url = result.secure_url
-            const questionCreated = new Question({ ...req.body, image_url });
-            const saveQuestion = await questionCreated.save();
-            if (!saveQuestion) {
-                console.log('unable to add question')
-                res.status(400).send('Error');
-            }
-            else {
-                const link = `${process.env.host}/question/${saveQuestion?._id}`;
-                const data = { subject: `New Question added to The Neuron Club`, text: link, email: `${process.env.mail_to}`, html: `<p style="font-size:20px;font-weight: 500;font-family: 'Roboto'">${saveQuestion?.question} </p><p style="font-size:16px;font-weight: 400;font-family: 'Roboto'">Click to <a href="${link}" target="_blank">View Question Details</a></p>` };
-                const result = await sendEMail(data);
-                console.log(result)
-                res.status(201).send(questionCreated)
+            try {
+                const questionCreated = new Question({ ...req.body, options: JSON.parse(req.body.options), image_url });
+                const saveQuestion = await questionCreated.save();
+                if (!saveQuestion) {
+                    console.log('unable to add question')
+                    res.status(400).send('Error');
+                }
+                else {
+                    const link = `${process.env.host}/question/${saveQuestion?._id}`;
+                    const data = { subject: `New Question added to The Neuron Club`, text: link, email: `${process.env.mail_to}`, html: `<p style="font-size:20px;font-weight: 500;font-family: 'Roboto'">${saveQuestion?.question} </p><p style="font-size:16px;font-weight: 400;font-family: 'Roboto'">Click to <a href="${link}" target="_blank">View Question Details</a></p>` };
+                    const result = await sendEMail(data);
+                    console.log(result)
+                    res.status(201).send(questionCreated)
+                }
+            } catch (error) {
+                console.log(error)
             }
         }
     }

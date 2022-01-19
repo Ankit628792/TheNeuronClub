@@ -5,15 +5,29 @@ import DatePicker from "react-datepicker";
 import addDays from 'date-fns/addDays'
 import { motion } from 'framer-motion'
 import { formats, modules, pageTransition, pageZoom } from '../util'
-const QuillNoSSRWrapper = dynamic(() => import('react-quill') , {
+import { RefreshIcon, XIcon } from '@heroicons/react/solid';
+import { PlusIcon } from '@heroicons/react/outline';
+const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     ssr: false,
     loading: () => <p className="text-gray-100">Loading ...</p>,
 })
 
-function CreateQ({ session }) {
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+function getTotal(items, prop) {
+    if (items) {
+        return items.reduce(function (a, b) {
+            return a + b[prop];
+        }, 0);
+    }
+};
+function CreateQ({ session, categories }) {
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [link, setLink] = useState('')
+    const [options, setOptions] = useState([]);
+    const [option, setOption] = useState('');
     const [currentDate, setCurrentDate] = useState(new Date())
     const [goLiveDate, setGoLiveDate] = useState(currentDate)
     const [bidClosingDate, setBidClosingDate] = useState(addDays(goLiveDate, 1))
@@ -25,7 +39,7 @@ function CreateQ({ session }) {
         category: '',
         bidClosing: '',
         goLive: '',
-        options: ['Yes', 'No'],
+        // options: [{ name: 'Yes', value: getRandom(53, 98) }, { name: 'No', value: getRandom(53, 98) }],
         settlementClosing: '',
         qstatus: 'created',
     })
@@ -45,10 +59,11 @@ function CreateQ({ session }) {
     }
 
     const handleSubmit = async (e) => {
-        if(e){
+        if (e) {
             e.preventDefault();
         }
-        if (qImage?.size < 1000000 && qImage.size > 10) {
+        if (options?.length < 2) window.alert('Minium 2 Options Required for Creating Question')
+        if (qImage?.size < 1000000 && qImage.size > 10 && options?.length >= 2) {
             setIsSending(true);
             const formData = new FormData();
             formData.append("image", qImage);
@@ -58,7 +73,8 @@ function CreateQ({ session }) {
             formData.append("goLive", goLiveDate.toISOString());
             formData.append("bidClosing", bidClosingDate.toISOString());
             formData.append("settlementClosing", settlementClosingDate.toISOString());
-            formData.append("options", data.options);
+            formData.append("options", JSON.stringify(options));
+            formData.append("Volume", getTotal(options, 'value'));
             formData.append("qstatus", data.qstatus);
             formData.append("desc", desc);
             formData.append("reference", link);
@@ -87,7 +103,15 @@ function CreateQ({ session }) {
             setIsSending(false)
         }
     }
-
+    const delOption = async (optionId) => {
+        const index = options.findIndex((option) => option.optionId == optionId)
+        if (index >= 0) {
+            options.splice(index, 1)
+        } else {
+            console.warn(`Can't remove option`)
+        }
+        setOptions([...options]);
+    }
 
     return (
         <>
@@ -120,6 +144,21 @@ function CreateQ({ session }) {
                             {(qImage?.size > 1000000) && <p className="text-red-500 text-sm">Maximum image upload size is 1MB </p>}
                         </div>
                         <div className="mb-1 sm:mb-2">
+                            <label htmlFor="Question Options" className="block mb-1 text-white font-medium">Question Options<span className="mx-1 text-red-500">*</span><span className='text-gray-200 text-xs font-normal'>min 2 and max 4 allowed</span></label>
+                            <div className='flex items-center space-x-2 flex-wrap'>
+                                {options?.length < 4 && <><input type="text" value={option} onChange={(e) => setOption(e.target.value)} name="option" className=" py-2 px-4 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline" />
+                                    <div className="btn-blue rounded-full p-2">
+                                        <PlusIcon className="w-5 h-5 sm:w-7 sm:h-7 text-gray-100 cursor-pointer" onClick={() => {
+                                            if (option?.length > 1) {
+                                                setOptions([...options, { name: option, value: getRandom(5, 10), optionId: Date.now() }]);
+                                                setOption('')
+                                            }
+                                        }} />
+                                    </div></>}
+                                {options?.length > 0 && options.map(item => <p key={item.optionId} className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{item.name}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => delOption(item.optionId)} /></p>)}
+                            </div>
+                        </div>
+                        <div className="mb-1 sm:mb-2">
                             <label htmlFor="category" className="inline-block mb-1 text-white font-medium">Question Category<span className="mx-1 text-red-500">*</span></label>
                             <select
                                 placeholder="category"
@@ -131,17 +170,7 @@ function CreateQ({ session }) {
                                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             >
                                 <option value="" disabled>Choose a category</option>
-                                <option value="politics">Politics</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="sports">Sports</option>
-                                <option value="economics">Economics</option>
-                                <option value="climate">Climate</option>
-                                <option value="coronavirus">Coronavirus</option>
-                                <option value="crypto">Crypto</option>
-                                <option value="business">Business</option>
-                                <option value="crime">Crime</option>
-                                <option value="arts">Arts</option>
-                                <option value="technology">Technology</option>
+                                {categories?.map(item => <option key={item._id} value={item.category} className="capitalize">{item.category}</option>)}
                             </select>
                         </div>
                         <div className="mb-1 sm:mb-2">

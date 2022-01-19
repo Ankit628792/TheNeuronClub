@@ -58,11 +58,11 @@ function Navbar() {
         }
     }
 
-    useEffect(() => {
-        if (session) {
-            checkDailyVisit()
-        }
-    }, [session])
+    // useEffect(() => {
+    //     if (session) {
+    //         checkDailyVisit()
+    //     }
+    // }, [session])
 
 
     return (
@@ -82,7 +82,7 @@ function Navbar() {
                     </div>
                 </Link>
                 <div className="flex items-center">
-                    <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg">
+                    <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg 2xl:text-xl">
                         <Link href="/question/">Explore</Link>
                         {session?.type === 'admin' && <Link href="/create_question">Create Question</Link>}
                         <Link href="/how_it_works">How it Works</Link>
@@ -99,7 +99,7 @@ function Navbar() {
                             :
                             <>
                                 <Link href="/account/register">
-                                    <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Get Started</button>
+                                    <button className="btn hidden md:inline-block cursor-pointer active:scale-95 transition-sm">Sign Up</button>
                                 </Link>
                             </>
                     }
@@ -135,7 +135,7 @@ function Navbar() {
                                 <button onClick={logout} className="font-bold" > <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Logout</h1> </button>
                                 :
                                 <Link href="/account/register">
-                                    <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Get Started</h1>
+                                    <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Sign Up</h1>
                                 </Link>
                         }
                     </ul>
