@@ -3,7 +3,7 @@ import Link from "next/link";
 import Question from "./Question";
 
 function QuestionGroup({ questions, category }) {
-    const items = [1, 2, 3, 4, 5, 6, 7, 8]
+    const items = [1, 2, 3, 4, 5, 6]
     return (
         <>
             <div className={`p-5 py-10 sm:p-10 xl:px-20 min-w-full mx-auto text-white`}>

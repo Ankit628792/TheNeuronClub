@@ -127,7 +127,7 @@ function HomeSection() {
                 </div>
 
 
-                <div className='mt-5 lg:flex lg:items-center lg:justify-evenly p-10 gap-10'>
+                {/* <div className='mt-5 lg:flex lg:items-center lg:justify-evenly p-10 gap-10'>
                     <div className='max-w-lg text-center lg:text-left mx-auto'>
                         <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Our Company Values Culture 💝</h1>
                         <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 my-2'>We specialize in creating Magnam vitae iure expedita iste! Error, nobis! Unde maxime nisi consequatur praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
@@ -140,7 +140,7 @@ function HomeSection() {
                         <div className='py-2 px-4 font-semibold m-4 text-gray-800 text-base sm:text-lg xl:text-xl 2xl:text-2xl bg-white rounded-3xl min-w-max max-w-min'>Keep up</div>
                         <div className='py-2 px-4 font-semibold m-4 text-gray-800 text-base sm:text-lg xl:text-xl 2xl:text-2xl bg-white rounded-3xl min-w-max max-w-min'>Cryptography</div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
         </>

@@ -19,6 +19,9 @@
 iframe::-webkit-scrollbar{
     display: none
 }
+.testimonial::-webkit-scrollbar{
+    display: none
+}
 .carousel__scroll::-webkit-scrollbar{
     display: none
 }
