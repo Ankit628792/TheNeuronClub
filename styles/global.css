@@ -6,16 +6,22 @@
     font-family: 'Barlow', sans-serif;
     /* user-select: none; */
 }
+body{
+    background-image: radial-gradient( circle farthest-corner at 84% 100%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );
+}
 
 #__next {
-    overflow-x: hidden;
     max-width: 1900px;
     margin: auto;
     filter: saturate(1.25);
+    background-image: radial-gradient( circle farthest-corner at 84% 100%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );
     /* background-image: linear-gradient(to bottom right, #0f0c29, #000046); */
     /* background-image: radial-gradient( circle farthest-corner at 84% 100%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% ); */
 }
 
+*::-webkit-scrollbar{
+    display: none
+}
 iframe::-webkit-scrollbar{
     display: none
 }
@@ -180,11 +186,11 @@ backdrop-filter: blur( 4px );
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
-.gradient-dark{
+/* .gradient-dark{
     background-image: radial-gradient(circle, #0c6764, #005e66, #005466, #004a63, #003f5e, #003e5c, #003c5b, #003b59, #00425b, #00495a, #004f57, #005553);
     background-size: 150% 150%;
     animation: movingGradient 10s linear infinite alternate;
-}
+} */
 .gradient-dark{
     background-image: radial-gradient( circle farthest-corner at 84% 100%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );
 }
