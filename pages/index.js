@@ -7,6 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import OnBoard from '../components/OnBoard'
 import HomeSection from '../components/Home';
 import Image from 'next/image'
+import { userSession } from '../lib/user-session/index'
+import { useRouter } from 'next/router';
+
 
 const bids = [
     {
@@ -49,52 +52,54 @@ const faq = [
 ]
 
 export default function Home({ carouselList }) {
-  const [onBoard, setOnBoard] = useState(false)
-  const [questions, setQuestions] = useState([])
-  const [data, setData] = useState();
+    const session = userSession();
+    const router = useRouter();
+    const [onBoard, setOnBoard] = useState(false)
+    const [questions, setQuestions] = useState([])
+    const [data, setData] = useState();
     useEffect(() => {
         fetch('https://testimonialapi.toolcarton.com/api').then(res => res.json()).then(data => setData(data)).catch(e => console.log(e))
     }, [])
 
-  async function getQue() {
-    const ques = await fetch(`${process.env.host}/api/question/ques`).then((res) => res.json());
-    if (ques) {
-      setQuestions(ques)
+    async function getQue() {
+        const ques = await fetch(`${process.env.host}/api/question/ques`).then((res) => res.json());
+        if (ques) {
+            setQuestions(ques)
+        }
+
+    }
+    useEffect(() => {
+        getQue()
+    }, [])
+
+    useEffect(() => {
+        const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
+        if (data === true) {
+            toast("🦄 Wow, You've won 200 Neuron coins! 🥳", {
+                position: "top-center",
+                autoClose: 100000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setOnBoard(true);
+        }
+        window.localStorage.setItem('neuron-newUser', false)
+    }, [])
+
+
+    const closeOnboard = () => {
+        setOnBoard(false);
     }
 
-  }
-  useEffect(() => {
-    getQue()
-  }, [])
-
-  useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem('neuron-newUser'));
-    if (data === true) {
-      toast("🦄 Wow, You've won 200 Neuron coins! 🥳", {
-        position: "top-center",
-        autoClose: 100000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setOnBoard(true);
-    }
-    window.localStorage.setItem('neuron-newUser', false)
-  }, [])
-
-
-  const closeOnboard = () => {
-    setOnBoard(false);
-  }
-
-  return (
-    <>
-      {onBoard && <OnBoard onSelect={closeOnboard} />}
-      {/* <div className="w-full flex flex-col pb-10"> */}
-      <div className="max_w_3xl pb-10 space-y-20">
-      <Header carouselList={carouselList} />
+    return (
+        <>
+            {onBoard && <OnBoard onSelect={closeOnboard} />}
+            {/* <div className="w-full flex flex-col pb-10"> */}
+            <div className="max_w_3xl pb-10 space-y-20">
+                <Header carouselList={carouselList} />
 
                 <div className='text-white py-10'>
                     <h1 className='text-4xl sm:text-5xl xl:text-6xl text-center mb-5 font-semibold '>How it Works ?</h1>
@@ -102,7 +107,7 @@ export default function Home({ carouselList }) {
                     <div className='flex flex-wrap py-5 justify-evenly items-stretch gap-10'>
                         {bids.map(item =>
                             <div key={item.no} className='max-w-[300px] 2xl:max-w-[350px] min-w-[250px] p-8 rounded-md shadow-lg blur-blue opacity-90 rotate-[-1deg] hover:opacity-100 hover:rotate-[0deg] transition-all duration-200 ease-out' >
-                                <div className="relative mx-auto w-28 h-28 xl:w-36 xl:h-36 2xl:w-48 2xl:h-48">
+                                <div className="relative mx-auto w-28 h-28 md:w-32 md:h-32 xl:w-36 xl:h-36 2xl:w-48 2xl:h-48">
                                     <Image src={item.img} layout="fill" objectFit="fill" className="rounded-xl drop-shadow-xl" />
                                 </div>
                                 <h2 className='text-2xl lg:text-3xl 2xl:text-4xl font-semibold my-2 text-center'>{item.heading}</h2>
@@ -119,7 +124,12 @@ export default function Home({ carouselList }) {
                         </div>
                         <div className='max-w-lg text-center lg:text-left mx-auto'>
                             <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>We Provide The Best</h1>
-                            <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam vitae iure expedita iste! Error, nobis! Unde maxime nisi consequatur praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
+                            <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 my-2'>Lorem ipsum dolor sit, amet adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicin consequatur praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
+                            {session ?
+                                <button className='btn-primary mt-2' onClick={() => router.push('/crypto')}>Checkout</button>
+                                :
+                                <button className='btn-primary mt-2' onClick={() => router.push('/account/login')}>Login</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -132,7 +142,11 @@ export default function Home({ carouselList }) {
                         <div className='max-w-lg text-center lg:text-left mx-auto'>
                             <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Real Time Transaction Report</h1>
                             <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde maxime nisi consequatur praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
-                            <button className='btn-primary mt-2'>View Portfolio</button>
+                            {session ?
+                                <button className='btn-primary mt-2' onClick={() => router.push('/account/portfolio')}>View Portfolio</button>
+                                :
+                                <button className='btn-primary mt-2' onClick={() => router.push('/account/login')}>Login</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -188,25 +202,25 @@ export default function Home({ carouselList }) {
                     </div>
                 </div> */}
 
-            {/* </div> */}
-        <Head>
-          <title>The Neuron</title>
-          <link rel="icon" href="/favicon.png" />
-        </Head>
-        {/* <HomeSection /> */}
-        {/* <QuestionGroup questions={questions?.newest} category={"New Topics"} /> */}
-      </div>
-      <ToastContainer style={{ textAlign: 'center', zIndex: '49' }} />
-    </>
-  )
+                {/* </div> */}
+                <Head>
+                    <title>The Neuron</title>
+                    <link rel="icon" href="/favicon.png" />
+                </Head>
+                {/* <HomeSection /> */}
+                {/* <QuestionGroup questions={questions?.newest} category={"New Topics"} /> */}
+            </div>
+            <ToastContainer style={{ textAlign: 'center', zIndex: '49' }} />
+        </>
+    )
 }
 
 export async function getServerSideProps(context) {
-  const carouselList = await fetch(`${process.env.HOST}/api/carousel`).then((res) => res.json());
-  return {
-    props: {
-      carouselList
+    const carouselList = await fetch(`${process.env.HOST}/api/carousel`).then((res) => res.json());
+    return {
+        props: {
+            carouselList
+        }
     }
-  }
 }
 
