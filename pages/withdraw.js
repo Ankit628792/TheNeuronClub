@@ -2,7 +2,11 @@ import Router from 'next/router';
 import { useState, useEffect } from 'react'
 import Accordion from '../components/Accordion';
 import Modal from '../components/Modal';
+import getCrypto from '../lib/getCrypto';
+import { balance, updateBalance } from '../slices/userBalance'
+import { useDispatch, useSelector } from 'react-redux'
 import { userSession } from '../lib/user-session';
+import getCurrency from '../lib/getCurrency';
 
 const accordionData = [
     {
@@ -51,33 +55,104 @@ const accordionData = [
 ];
 
 function withdraw() {
+    const amount = useSelector(balance);
+    const dispatch = useDispatch();
     const session = userSession()
+    const cryptoApi = getCrypto();
+    const currencyApi = getCurrency()
     useEffect(() => {
         if (!session) {
             Router.push('/')
         }
     }, [session])
     const [isSending, setIsSending] = useState(false)
-    const [isSent, setIsSent] = useState(false)
+    const [isSent, setIsSent] = useState(null)
+    const [currency, setCurrency] = useState('USD')
+    const [currencyValue, setCurrencyValue] = useState(null)
+    const [userInfo, setUserInfo] = useState()
     const [data, setData] = useState({
-        amount: null,
-        name: null,
-        mob: null
+        coins: '',
+        crypto: '',
+        wallet: ''
     })
+
+    const getUserInfo = async () => {
+        if (session) {
+            const res = await fetch(`/api/user/info?_id=${session?._id}`)
+            if (res.status == 200) {
+                const response = await res.json();
+                setUserInfo(response)
+            } else {
+                setUserInfo(null)
+            }
+        }
+    }
+
+    useEffect(() => getUserInfo(), [])
+
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
-    console.log(data)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         if (e) {
             e.preventDefault(0);
         }
         setIsSending(true);
-        setIsSent(true)
+        if (data) {
+            const res = await fetch(`/api/payment/withdrawCoins`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...data, 
+                    userId: userInfo?._id,
+                    name: userInfo?.name,
+                    image_url: userInfo?.image_url,
+                    email: userInfo?.email,
+                    balance: amount,
+                    isVerified: userInfo?.isVerified,
+                    country: userInfo?.country,
+                    type: userInfo?.type,
+                })
+            })
+            if (res.status == 200) {
+                const response = await res.json();
+                setIsSent(response?.message)
+                dispatch(updateBalance(response?.newBalance))
+                setData({
+                    ...data,
+                    balance: response?.newBalance,
+                    coins: '',
+                    crypto: '',
+                    wallet: ''
+                })
+
+            } else if(res.status ==403){
+                window.alert('Fill all the fields')
+            }
+             else {
+                setIsSent("Error in Sending the Request")
+            }
+        }
         setIsSending(false)
     }
+
+    useEffect(() => {
+        fetch(`https://currency-exchange.p.rapidapi.com/exchange?from=USD&to=${currency}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "currency-exchange.p.rapidapi.com",
+                "x-rapidapi-key": "5c40381fc0msh7880c0810bb8aa0p134a9ajsne3214a4398a4"
+            }
+        }).then(response => response.json())
+            .then(response => {
+                setCurrencyValue(response)
+            })
+            .catch(err => {
+                console.error("Cannot get currency data");
+            });
+    }, [currency, amount])
+
     return (
         <>
             {session &&
@@ -93,38 +168,60 @@ function withdraw() {
 
                     <form onSubmit={handleSubmit} className="blur-blue text-left max-w-xs md:max-w-sm px-5 py-10 sm:px-10 rounded-xl mx-auto">
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="amount" className="inline-block mb-1 text-white font-medium">Amount<span className="mx-1 text-red-500">*</span></label>
+                            <label htmlFor="coins" className="inline-block mb-1 text-white font-medium">Coins<span className="mx-1 text-red-500">*</span></label>
                             <input
-                                placeholder="Amount to Withdraw"
-                                min={0}
+                                placeholder="Coins to Withdraw"
+                                min={50}
                                 type="number"
-                                name="amount"
+                                required
+                                name="coins"
+                                value={data?.coins}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 max-w-xs md:max-w-sm transition duration-200 text-gray-800 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full font-medium h-12 px-4 mb-2 max-w-xs md:max-w-sm transition duration-200 text-gray-800 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="name" className="inline-block mb-1 text-white font-medium">Full Name<span className="mx-1 text-red-500">*</span></label>
-                            <input
-                                placeholder="Your Name"
+                            <label htmlFor="crypto" className="inline-block mb-1 text-white font-medium">Crypto Currency<span className="mx-1 text-red-500">*</span></label>
+                            <select
+                                placeholder="Crypto"
+                                required
                                 type="text"
-                                name="name"
-                                className="flex-grow w-full h-12 px-4 mb-2 max-w-xs md:max-w-sm transition duration-200 text-gray-800 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                value={data?.crypto}
+                                name='crypto'
                                 onChange={handleChange}
-                            />
+                                className=" h-12 px-4 mb-2 w-full flex-grow transition duration-200 text-gray-800 font-medium bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                            >
+                                <option value="" disabled>Choose a Cypto Currency</option>
+                                {cryptoApi?.map(item => <option key={item.uuid} value={`${item.name} (${item.symbol})`} className="capitalize">{`${item.name} (${item.symbol})`}</option>)}
+                            </select>
                         </div>
+
+                        {currencyApi && data?.coins && <div className="mb-1 sm:mb-2">
+                            <label htmlFor="currency" className="inline-block mb-1 text-white font-medium">Choose Your Currency<span className="mx-1 text-red-500">*</span></label>
+                            <div className='flex items-center h-12'>
+                                <select
+                                    value={currency}
+                                    onChange={(e) => setCurrency(e.target.value)}
+                                    className="px-2 py-1 transition duration-200 text-gray-800 font-medium bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                >
+                                    {currencyApi?.map(item => <option key={item} value={item}>{item}</option>)}
+                                </select>
+                                {currencyValue && <h1 className='text-xl ml-2 font-semibold'>{((data?.coins / 100) * currencyValue).toFixed(5)}</h1>}
+                            </div>
+                        </div>}
                         <div className="mb-1 sm:mb-2">
-                            <label htmlFor="mob" className="inline-block mb-1 text-white font-medium">Mobile No<span className="mx-1 text-red-500">*</span></label>
+                            <label htmlFor="wallet" className="inline-block mb-1 text-white font-medium">Crypto Wallet Address<span className="mx-1 text-red-500">*</span></label>
                             <input
-                                placeholder="Include Country Code"
-                                minLength={8}
+                                placeholder="Wallet Address"
                                 type="text"
-                                name="mob"
+                                required
+                                name="wallet"
+                                value={data?.wallet}
                                 onChange={handleChange}
-                                className="flex-grow w-full h-12 px-4 mb-2 max-w-xs md:max-w-sm transition duration-200 text-gray-800 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
+                                className="flex-grow w-full font-medium h-12 px-4 mb-2 max-w-xs md:max-w-sm transition duration-200 text-gray-800 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             />
                         </div>
-                        <button type='submit' className='btn-primary mt-4 capitalize mx-auto w-full min-w-max'>Send the Request</button>
+                        <button type='submit' className='btn-primary mt-4 capitalize mx-auto w-full min-w-max' disabled={isSending}>{isSending ? 'Wait...' : 'Send the Request'}</button>
                     </form>
 
                     <div className="p-5 py-10">
@@ -135,7 +232,7 @@ function withdraw() {
                     </div>
                 </div>
             }
-            {isSent && <div onClick={() => setIsSent(false)}><Modal state={isSent} text="Request Sent successfully" /> </div>}
+            {isSent && <div onClick={() => setIsSent(null)}><Modal state={Boolean(isSent)} text={isSent} /> </div>}
         </>
     )
 }

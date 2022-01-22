@@ -33,9 +33,6 @@ const questionSchema = new mongoose.Schema({
     options: {
         type: Object
     },
-    // options: {
-    //     type: Array
-    // },
     reference: {
         type: String
     },
