@@ -19,7 +19,7 @@ const getTotal = obj => Object.values(obj).reduce((a, b) => a + b);
 handler.post(async (req, res) => {
     if (req.file) {
         const file = dataUri(req).content;
-        const result = await uploader.upload(file)
+        const result = await uploader.upload(file, { folder: 'question'})
         if (result) {
             const image_url = result.secure_url
             try {

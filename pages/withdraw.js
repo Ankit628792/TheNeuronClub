@@ -2,11 +2,9 @@ import Router from 'next/router';
 import { useState, useEffect } from 'react'
 import Accordion from '../components/Accordion';
 import Modal from '../components/Modal';
-import getCrypto from '../lib/getCrypto';
 import { balance, updateBalance } from '../slices/userBalance'
 import { useDispatch, useSelector } from 'react-redux'
 import { userSession } from '../lib/user-session';
-import getCurrency from '../lib/getCurrency';
 
 const accordionData = [
     {
@@ -54,12 +52,12 @@ const accordionData = [
 
 ];
 
+const cryptoApi = [{ id: "Qwsogvtv82FCd", name: 'Bitcoin (BTC)', symbol: 'BTC' }, { id: "razxDUgYGNAdQ", name: 'Ethereum (ETH)', symbol: '(ETH)' }, { id: "HIVsRcGKkPFtW", name: 'Tether USD (USDT)', symbol: 'USDT' }, { id: "aKzUVe4Hh_CON", name: 'USDC', symbol: 'USDC' }, { id: "a91GCGd_u96cF", name: 'Dogecoin (DOGE)', symbol: 'DOGE' }]
+
 function withdraw() {
     const amount = useSelector(balance);
     const dispatch = useDispatch();
     const session = userSession()
-    const cryptoApi = getCrypto();
-    const currencyApi = getCurrency()
     useEffect(() => {
         if (!session) {
             Router.push('/')
@@ -67,12 +65,12 @@ function withdraw() {
     }, [session])
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(null)
-    const [currency, setCurrency] = useState('USD')
+    const [currency, setCurrency] = useState('')
+    const [crypto, setCrypto] = useState()
     const [currencyValue, setCurrencyValue] = useState(null)
     const [userInfo, setUserInfo] = useState()
     const [data, setData] = useState({
         coins: '',
-        crypto: '',
         wallet: ''
     })
 
@@ -90,6 +88,10 @@ function withdraw() {
 
     useEffect(() => getUserInfo(), [])
 
+    useEffect(() => {
+        const res = cryptoApi.filter(item => item.id == currency)
+        setCrypto(res?.[0])
+    }, [currency])
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -104,7 +106,7 @@ function withdraw() {
             const res = await fetch(`/api/payment/withdrawCoins`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    ...data, 
+                    ...data,
                     userId: userInfo?._id,
                     name: userInfo?.name,
                     image_url: userInfo?.image_url,
@@ -112,6 +114,7 @@ function withdraw() {
                     balance: amount,
                     isVerified: userInfo?.isVerified,
                     country: userInfo?.country,
+                    crypto: crypto?.name,
                     type: userInfo?.type,
                 })
             })
@@ -123,14 +126,14 @@ function withdraw() {
                     ...data,
                     balance: response?.newBalance,
                     coins: '',
-                    crypto: '',
                     wallet: ''
                 })
+                setCrypto();
 
-            } else if(res.status ==403){
+            } else if (res.status == 403) {
                 window.alert('Fill all the fields')
             }
-             else {
+            else {
                 setIsSent("Error in Sending the Request")
             }
         }
@@ -138,29 +141,27 @@ function withdraw() {
     }
 
     useEffect(() => {
-        fetch(`https://currency-exchange.p.rapidapi.com/exchange?from=USD&to=${currency}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "currency-exchange.p.rapidapi.com",
-                "x-rapidapi-key": "5c40381fc0msh7880c0810bb8aa0p134a9ajsne3214a4398a4"
-            }
-        }).then(response => response.json())
-            .then(response => {
-                setCurrencyValue(response)
-            })
-            .catch(err => {
-                console.error("Cannot get currency data");
-            });
-    }, [currency, amount])
+        if (currency && data?.coins) {
+            fetch(`https://coinranking1.p.rapidapi.com/coin/yhjMzLPhuIDl/price?referenceCurrencyUuid=${currency}`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "coinranking1.p.rapidapi.com",
+                    "x-rapidapi-key": "5c40381fc0msh7880c0810bb8aa0p134a9ajsne3214a4398a4"
+                }
+            }).then(response => response.json())
+                .then(response => {
+                    setCurrencyValue(+response?.data?.price)
+                })
+                .catch(err => {
+                    console.error("Cannot get Crypto data");
+                });
+        }
+    }, [currency, data?.coins])
 
     return (
         <>
             {session &&
                 <div className='text-white text-center p-5 min-h[500px]'>
-                    {/* <div className='blur-blue rounded-2xl max-w-max p-5 lg:px-8 mx-auto'>
-                    <h1 className='text-xl font-semibold sm:text-2xl lg:text-3xl'>Available for Withdrawal</h1>
-                    <p className='font-medium text-gray-100 py-2 text-xl sm:text-2xl'>$10,000</p>
-                </div> */}
                     <div className='py-10'>
                         <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Transaction in Crypto is Possible</h1>
                         <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde maxime praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
@@ -186,29 +187,20 @@ function withdraw() {
                                 placeholder="Crypto"
                                 required
                                 type="text"
-                                value={data?.crypto}
+                                value={currency}
                                 name='crypto'
-                                onChange={handleChange}
+                                onChange={(e) => setCurrency(e.target.value)}
                                 className=" h-12 px-4 mb-2 w-full flex-grow transition duration-200 text-gray-800 font-medium bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
                             >
                                 <option value="" disabled>Choose a Cypto Currency</option>
-                                {cryptoApi?.map(item => <option key={item.uuid} value={`${item.name} (${item.symbol})`} className="capitalize">{`${item.name} (${item.symbol})`}</option>)}
+                                {cryptoApi?.map(item => <option key={item?.id} value={item?.id} className="capitalize">{item.name}</option>)}
                             </select>
                         </div>
 
-                        {currencyApi && data?.coins && <div className="mb-1 sm:mb-2">
-                            <label htmlFor="currency" className="inline-block mb-1 text-white font-medium">Choose Your Currency<span className="mx-1 text-red-500">*</span></label>
-                            <div className='flex items-center h-12'>
-                                <select
-                                    value={currency}
-                                    onChange={(e) => setCurrency(e.target.value)}
-                                    className="px-2 py-1 transition duration-200 text-gray-800 font-medium bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline"
-                                >
-                                    {currencyApi?.map(item => <option key={item} value={item}>{item}</option>)}
-                                </select>
-                                {currencyValue && <h1 className='text-xl ml-2 font-semibold'>{((data?.coins / 100) * currencyValue).toFixed(5)}</h1>}
-                            </div>
+                        {currencyValue && currency && data?.coins && <div className="mb-1 sm:mb-2">
+                            {<h1 className='text-xl ml-2 font-semibold'>{((data?.coins / 100) * currencyValue).toFixed(10)}&nbsp;{crypto?.symbol}</h1>}
                         </div>}
+
                         <div className="mb-1 sm:mb-2">
                             <label htmlFor="wallet" className="inline-block mb-1 text-white font-medium">Crypto Wallet Address<span className="mx-1 text-red-500">*</span></label>
                             <input
