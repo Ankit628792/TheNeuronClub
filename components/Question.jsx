@@ -83,21 +83,9 @@ function Question({ question }) {
                     <h1 className="text-lg text-center mb-4 cursor-pointer line-clamp-3 h-[88px]" onClick={handleClick}>{question.question}</h1>
                     {question?.qstatus === 'closed' || new Date(question?.bidClosing) < new Date(new Date().toISOString())
                         ? <h1 className="text-lg text-center font-medium text-yellow-300">Bidding Closed</h1>
-                        : <div className="flex justify-around items-center text-lg">
-                            {question?.options?.length > 0 && question?.options?.map((option, i) => <div className="flex flex-col items-center justify-center">
-                                <button className={`font-semibold ${i == 0 ? 'btn-blue' : 'btn-orange'} rounded-3xl py-2 px-6 mb-2 capitalize`} onClick={() => session ? setBidModal({ state: true, odd: option.name, optionId: option.optionId }) : setIsLoggedIn(true)}>{option.name}</button>
-                                <h1 className="font-normal text-center leading-none">{option.value > 0 ? Math.round((option.value * 100 / question.Volume)) : 0}%<br />says {option.name}</h1>
-                            </div>)}
-
-                            {/* <div className="flex flex-col items-center justify-center">
-                                <button className="font-semibold btn-blue rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Favour' }) : setIsLoggedIn(true)}>Yes</button>
-                                <h1 className="font-normal text-center leading-none">{question?.Favour > 0 ? Math.round((question?.Favour * 100 / question.Volume)) : 0}%<br />says yes</h1>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                                <button className="font-semibold btn-orange rounded-3xl py-2 px-6 mb-2" onClick={() => session ? setBidModal({ state: true, odd: 'Against' }) : setIsLoggedIn(true)}>No</button>
-                                <h1 className="font-normal text-center leading-none">{question?.Against > 0 ? Math.round((question?.Against * 100 / question.Volume)) : 0}%<br />says no</h1>
-                            </div> */}
-                        </div>}
+                        :
+                        <button className={`font-semibold ${!isLoggedIn ? 'btn-blue' : 'btn-orange'} rounded-3xl py-2 px-6 mb-2 capitalize`} onClick={() => session ? handleClick() : setIsLoggedIn(true)}>{!isLoggedIn ? 'Place a Bid' : 'Login'}</button>
+                    }
                 </div>
             </motion.div>
 
