@@ -41,7 +41,7 @@ function Question({ question }) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ bid, _id, userId: session?._id, question, image_url, category, odd: bidModal?.odd, settlementClosing })
+                    body: JSON.stringify({ bid, _id, userId: session?._id, question, image_url, category, optionId: bidModal?.optionId, odd: bidModal?.odd, settlementClosing })
                 })
                 console.log(res.status)
                 const response = await res.json();
@@ -85,7 +85,7 @@ function Question({ question }) {
                         ? <h1 className="text-lg text-center font-medium text-yellow-300">Bidding Closed</h1>
                         : <div className="flex justify-around items-center text-lg">
                             {question?.options?.length > 0 && question?.options?.map((option, i) => <div className="flex flex-col items-center justify-center">
-                                <button className={`font-semibold ${i==0 ?'btn-blue': 'btn-orange'} rounded-3xl py-2 px-6 mb-2 capitalize`} onClick={() => session ? setBidModal({ state: true, odd: option.name, optionId: option.optionId }) : setIsLoggedIn(true)}>{option.name}</button>
+                                <button className={`font-semibold ${i == 0 ? 'btn-blue' : 'btn-orange'} rounded-3xl py-2 px-6 mb-2 capitalize`} onClick={() => session ? setBidModal({ state: true, odd: option.name, optionId: option.optionId }) : setIsLoggedIn(true)}>{option.name}</button>
                                 <h1 className="font-normal text-center leading-none">{option.value > 0 ? Math.round((option.value * 100 / question.Volume)) : 0}%<br />says {option.name}</h1>
                             </div>)}
 

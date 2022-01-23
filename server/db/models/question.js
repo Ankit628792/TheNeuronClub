@@ -27,6 +27,14 @@ const questionSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    Favour: {
+        type: Number,
+        default: 0
+    },
+    Against: {
+        type: Number,
+        default: 0
+    },
     qstatus: {
         type: String,
     },

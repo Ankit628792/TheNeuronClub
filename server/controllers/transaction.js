@@ -19,16 +19,16 @@ const question = async (req, res) => {
             //     const updateUserNotification = await User.findOneAndUpdate({ _id: userId }, { $push: { notification: `You've earned 200 coins on ${moment(transactionRegistered?.createdAt).format('ll')} for making the golden transaction 🥳` } }, { new: true });
             // }
             if (updatedUser) {
-                console.log(odd)
-                const updatedq = await Question.updateOne({ _id: _id, 'options.optionId': optionId }, { $inc: { "options.$[].value": +bid, Volume: +bid } });
-                // const updatedq = odd == 'Favour' ? await Question.updateOne({ _id: _id }, { $inc: { Volume: bid, Favour: bid } }, { new: true }) : await Question.updateOne({ _id: _id }, { $inc: { Volume: bid, Against: bid } }, { new: true });
-                if (updatedq) {
+
+                const up = await Question.findOne({ _id: _id, 'options.optionId': optionId });
+                const updatedq = await Question.updateOne({ _id: _id, 'options.optionId': optionId }, { $inc: { "options.$[ele].value": +bid, Volume: +bid } }, { arrayFilters: [{ 'ele.optionId': optionId }] });
+                // if (updatedq) {
                     const updatedQuestion = await Question.findOne({ _id: _id });
                     thirdTransaction ? res.status(203).send({ ...updatedQuestion, reductionAmount }) : res.status(201).send({ ...updatedQuestion, reductionAmount })
-                }
-                else {
-                    res.status(400).send({ mg: "error" })
-                }
+                // }
+                // else {
+                //     res.status(400).send({ mg: "error" })
+                // }
             }
             else {
                 res.status(400).send({ mg: "error" })
@@ -41,14 +41,16 @@ const question = async (req, res) => {
     }
 }
 
+
 const settleQue = async (req, res) => {
     const { _id, result } = req.body;
     try {
         const ques = await Question.findOneAndUpdate({ _id: _id }, { qstatus: 'closed', result: result }, { new: true });
-        const { Volume, Favour, Against } = ques;
+        const { Volume, options } = ques;
         const trans = await Transaction.updateMany({ questionId: _id }, { qstatus: 'closed', result: result }, { multi: true });
         const transList = await Transaction.find({ questionId: _id }, { userId: 1, amount: 1, odd: 1, createdAt: 1 });
-        const winAmount = result == 'Favour' ? Volume / Favour : Volume / Against;
+        const option = options.filter(item => item.name == result)?.[0]
+        const winAmount = option?.value / Volume;
         await Promise.all(transList.map(async (element) => {
             (element.odd === result) ?
                 await User.updateOne({ _id: element.userId }, { $inc: { balance: element.amount * winAmount, earning: element.amount * winAmount }, $push: { notification: `Congratulations, You've won ${element.amount * winAmount} coins on ${moment(element?.createdAt).format('ll')} by bidding question` } }, { new: true })
@@ -66,10 +68,11 @@ const undoSettlement = async (req, res) => {
     const { _id, result, message, reason } = req.body;
     try {
         const ques = await Question.findOneAndUpdate({ _id: _id }, { qstatus: reason === 'invalid' ? 'invalid' : 'verified', result: 'null' }, { new: true });
-        const { Volume, Favour, Against } = ques;
+        const { Volume, options } = ques;
         const transList = await Transaction.find({ questionId: _id }, { userId: 1, amount: 1, odd: 1, createdAt: 1 });
         // const trans = await Transaction.deleteMany({ questionId: _id });
-        const winAmount = result == 'Favour' ? Volume / Favour : Volume / Against;
+        const option = options.filter(item => item.name == result)?.[0]
+        const winAmount = option?.value / Volume;
         await Promise.all(transList.map(async (element) => {
             (element.odd === result)
                 ? await User.updateOne({ _id: element.userId }, { $inc: { balance: 0 - (element.amount * winAmount) + element.amount, earning: 0 - (element.amount * winAmount) }, $push: { notification: `we've undo the settlement due to ${message}` } }, { new: true })
