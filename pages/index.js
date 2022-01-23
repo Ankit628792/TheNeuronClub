@@ -60,7 +60,7 @@ const values = [
     },
     {
         id: 2,
-        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946318/secure_nrnsvo.jpg",
+        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946953/network-ge3c64f90e_1920_fyfabb.jpg",
         heading: "Secure",
         desc: "Your deposits are securely maintained in Coinbase wallet"
 
