@@ -257,7 +257,7 @@ function QuestionDetail({ questionData }) {
                                             exit="out"
                                             variants={pageZoom}
                                             transition={pageTransition} className="bet__container flex flex-col items-center justify-center p-5 blur-black rounded-md">
-                                            <div className="flex flex-wrap w-full items-center justify-around gap-4">
+                                            <div className="flex flex-wrap w-full items-center justify-around gap-4 max-w-[300px]">
                                                 {que.options.map((option, i) =>
                                                     <input className='hidden' type="radio" name="odd" id={`${option.name}`} value={option.name} onChange={(e) => { setOdd(e.target.value); setOptions(option) }} />
                                                 )}
@@ -335,7 +335,7 @@ function QuestionDetail({ questionData }) {
                             variants={pageZoom}
                             transition={pageTransition} className="flex flex-col items-center justify-center p-5 py-7 sm:p-7 md:p-10 blur-blue rounded-md absolute top-1/2 left-1/2 !transform !-translate-x-1/2 !-translate-y-1/2 !z-50">
                             <XIcon className="w-10 h-10 p-1 absolute -top-4 -right-4 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setBidPlaceModal(false)} />
-                            <div className="flex flex-wrap w-full items-center justify-around gap-4">
+                            <div className="flex flex-wrap w-full items-center justify-around gap-4 max-w-[300px]">
                                 {que.options.map((option, i) =>
                                     <input className='hidden' type="radio" name="odd" id={`${option.name}`} value={option.name} onChange={(e) => { setOdd(e.target.value); setOptions(option) }} />
                                 )}
