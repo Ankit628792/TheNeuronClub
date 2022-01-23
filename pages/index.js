@@ -8,6 +8,7 @@ import OnBoard from '../components/OnBoard'
 import Image from 'next/image'
 import { userSession } from '../lib/user-session/index'
 import { useRouter } from 'next/router';
+import Accordion from '../components/Accordion'
 
 
 const bids = [
@@ -33,20 +34,29 @@ const bids = [
 
 const faq = [
     {
-        title: 'What is the Neuron Club?',
-        content: `Neuron Club is an application designed for those who are proud to have an opinion. This is a financial exchange for users to trade on opinions regarding the outcome of events of interest`
+        title: 'How does Neuron Club work?',
+        content: `Neuron Club provides a trading platform where users can trade on the outcome of events. Based on your opinion, you can choose to bet on how a specific event will turn out to be. Once the question is frozen for trading, no more trades are allowed. Thereafter, when the question is decided based on an independent source, the trading pool is distributed amongst those who predicted the correct outcome`
+    },
+    {
+        title: `How is the winning payout decided?`,
+        content: `The winner’s payout is proportional to the amount invested in the question. All the trades are combined to create a question prize pool. Once the question has been decided, the question pool is distributed amongst those with a correct prediction, in proportion to the amount invested`,
     },
     {
         title: `How is Neuron different from a gambling or betting platform?`,
         content: `There are several fundamental differences between trading on a prediction market vs a gambling platform:`,
+        desc: [`On the Neuron platform, you are competing against other players who have a different opinion than you on the events of interest. However, on a gambling platform, you are competing against the booker (sports betting website). So betting websites are incentivized to tweak the odds against you while The Neuron club team remains a neutral market observer and doesn’t take a stake on any side`, `Trading on the Neuron platform is a game of skill. In a game of skill, you can increase your odds of winning by doing research, strategizing, and selectively picking the questions. However, on a betting platform, luck plays a very important role in deciding the winner and anyone can make a bet and get lucky.`, `In a game of skill, players are seen to get better with time as they learn more about the strategies to maximize your winning. However, in a gambling platform, players do not necessarily get better with time`]
     },
     {
-        title: `How do i withdraw money?`,
-        content: `Simply fill the withdrawal request form with your details. Withdrawals are processed within 2 working days. 97% requests are fulfilled within 24 hours`
+        title: `How is Neuron different from a stock trading platform?`,
+        content: `Our vision for TheNeruon.club is to develop it along the lines of a stock trading platform and offer users similar functionalities. The Neuron platform allows users to trade on the outcome of events beyond the business domain, thus offering a much wider scope of services`
+    }, ,
+    {
+        title: `What is a Neuron coin?`,
+        content: `Neuron.club points is currency which you can use on Neuron.club to invest. 100 coins are equivalent of 1$`
     },
     {
-        title: `How is the winning payout decided?`,
-        content: `The winner’s payout is proportional to the amount invested in the question. All the trades are combined to create a question prize pool. Once the question has been decided, the question pool is distributed amongst those with a correct prediction, in proportion to the amount invested`
+        title: `How can I convert coins to money?`,
+        content: `We will soon begin supporting converting coins to money. Meanwhile, please continue to bet and earn more coins`
     }
 ]
 
@@ -182,7 +192,7 @@ export default function Home({ carouselList }) {
                 </div> */}
 
                 <div className='p-5 py-10 flex items-center justify-evenly flex-wrap gap-10 lg:gap-y-20'>
-                    {values?.map(item => <div key={item.id} className={`relative shadow-xl w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] blur-black rounded-xl`} key={item.id}>
+                    {values?.map(item => <div key={item.id} className={`relative shadow-xl w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] 2xl:w-[550px] 2xl:h-[550px] blur-black rounded-xl`} key={item.id}>
                         <Image src={item?.imgSrc} layout="fill" className="w-full h-full object-cover rounded-md" objectFit="cover" placeholder="blur" blurDataURL={item?.imgSrc} alt="" />
                         <div className="carousel__scroll absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10 blur-black rounded-br-lg rounded-bl-lg">
                             {/* <div className="w-full h-full absolute top-0 left-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-sm">
@@ -199,12 +209,15 @@ export default function Home({ carouselList }) {
                 <div className='p-5'>
                     <h1 className='text-4xl sm:text-5xl text-white text-center mb-10 font-semibold '>Frequently Asked Questions</h1>
                     <div className='grid grid-cols-1 sm:grid-cols-2 place-items-start justify-items-stretch gap-10 mx-auto max-w-7xl'>
-                        {faq.map(item =>
+                        {/* {faq.map(item =>
                             <details key={item.title} className='max-w-lg p-5 blur-gray rounded-lg'>
                                 <summary className='text-white text-lg 2xl:text-xl font-semibold'>{item.title}</summary>
                                 <p className='text-gray-200 text-base 2xl:text-lg my-2'>{item.content}</p>
                             </details>
-                        )}
+                        )} */}
+                        {faq.map((item, i) => (
+                            <Accordion key={i} title={item.title} content={item.content} desc={item?.desc} />
+                        ))}
                     </div>
                 </div>
 
