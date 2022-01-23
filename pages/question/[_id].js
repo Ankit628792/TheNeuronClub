@@ -257,12 +257,12 @@ function QuestionDetail({ questionData }) {
                                             exit="out"
                                             variants={pageZoom}
                                             transition={pageTransition} className="bet__container flex flex-col items-center justify-center p-5 blur-black rounded-md">
-                                            <div className="flex w-full items-center justify-around">
+                                            <div className="flex flex-wrap w-full items-center justify-around gap-4">
                                                 {que.options.map((option, i) =>
                                                     <input className='hidden' type="radio" name="odd" id={`${option.name}`} value={option.name} onChange={(e) => { setOdd(e.target.value); setOptions(option) }} />
                                                 )}
                                                 {que.options.map((option, i) =>
-                                                    <label for={`${option.name}`} class={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == option.name && 'btn-blue text-white'} cursor-pointer`}>
+                                                    <label for={`${option.name}`} class={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] ${odd == option.name && 'btn-blue text-white'} cursor-pointer`}>
                                                         <span>{option.name}</span>
                                                     </label>
                                                 )}
@@ -335,12 +335,12 @@ function QuestionDetail({ questionData }) {
                             variants={pageZoom}
                             transition={pageTransition} className="flex flex-col items-center justify-center p-5 py-7 sm:p-7 md:p-10 blur-blue rounded-md absolute top-1/2 left-1/2 !transform !-translate-x-1/2 !-translate-y-1/2 !z-50">
                             <XIcon className="w-10 h-10 p-1 absolute -top-4 -right-4 bg-white cursor-pointer rounded-full text-gray-700" onClick={() => setBidPlaceModal(false)} />
-                            <div className="flex w-full items-center justify-around">
+                            <div className="flex flex-wrap w-full items-center justify-around gap-4">
                                 {que.options.map((option, i) =>
                                     <input className='hidden' type="radio" name="odd" id={`${option.name}`} value={option.name} onChange={(e) => { setOdd(e.target.value); setOptions(option) }} />
                                 )}
                                 {que.options.map((option, i) =>
-                                    <label for={`${option.name}`} class={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == option.name && 'btn-blue text-white'} cursor-pointer`}>
+                                    <label for={`${option.name}`} class={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] ${odd == option.name && 'btn-blue text-white'} cursor-pointer`}>
                                         <span>{option.name}</span>
                                     </label>
                                 )}

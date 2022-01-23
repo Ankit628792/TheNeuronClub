@@ -86,7 +86,7 @@ function withdraw() {
         }
     }
 
-    useEffect(() => getUserInfo(), [])
+    useEffect(() => getUserInfo(), [amount])
 
     useEffect(() => {
         const res = cryptoApi.filter(item => item.id == currency)
@@ -163,8 +163,8 @@ function withdraw() {
             {session &&
                 <div className='text-white text-center p-5 min-h[500px]'>
                     <div className='py-10'>
-                        <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Transaction in Crypto is Possible</h1>
-                        <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde maxime praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
+                        <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Withdraw Neuron Coins</h1>
+                        <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Please fill up the request form to withdraw money</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="blur-blue text-left max-w-xs md:max-w-sm px-5 py-10 sm:px-10 rounded-xl mx-auto">

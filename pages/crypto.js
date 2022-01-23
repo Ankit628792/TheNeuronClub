@@ -35,8 +35,8 @@ function crypto() {
     return (
         <>
             <div className='text-white text-center max-w-5xl mx-auto p-5 my-10 min-h-[350px]'>
-                <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Transaction in Crypto is Possible</h1>
-                <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde maxime praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
+                <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Add More Neuron Coins</h1>
+                <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Now you can easily purchase Neuron Coins with Bitcoin. Please enter the amount of coins that you would like to purchase</p>
                 {cryptoApi && <div className="my-2 lg:my-4 flex justify-center items-center space-x-10">
                     <input
                         placeholder="Enter Amount in USD"
@@ -59,8 +59,8 @@ function crypto() {
                 <button className='btn-primary mt-4 capitalize'>Pay the Amount</button>
             </div>
             <div className='text-white text-center max-w-5xl mx-auto p-5 min-h-[350px]'>
-                <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Withdraw the Amount</h1>
-                <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde maxime praesentium numquam nesciunt facilis magni vel animi corrupti?</p>
+                <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Withdraw Neuron Coins</h1>
+                <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>visit withdrawal page and fill out some details to withdraw coins</p>
                 <button className='btn-primary mt-4 capitalize' onClick={() => router.push('/withdraw')}>Withdraw Amount</button>
             </div>
         </>
