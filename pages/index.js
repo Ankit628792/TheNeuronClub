@@ -184,7 +184,7 @@ export default function Home({ carouselList }) {
                 <div className='p-5 py-10 flex items-center justify-evenly flex-wrap gap-10 lg:gap-y-20'>
                     {values?.map(item => <div key={item.id} className={`relative shadow-xl w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] blur-black rounded-xl`} key={item.id}>
                         <Image src={item?.imgSrc} layout="fill" className="w-full h-full object-cover rounded-md" objectFit="cover" placeholder="blur" blurDataURL={item?.imgSrc} alt="" />
-                        <div className="carousel__scroll absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10 blur-black rounded-br-xl rounded-bl-xl">
+                        <div className="carousel__scroll absolute left-0 overflow-x-hidden bottom-0 w-full text-white p-5 sm:px-7 xl:px-10 z-10 blur-black rounded-br-lg rounded-bl-lg">
                             {/* <div className="w-full h-full absolute top-0 left-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-sm">
 
                         </div> */}
