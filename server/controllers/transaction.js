@@ -66,6 +66,7 @@ const settleQue = async (req, res) => {
 
 const undoSettlement = async (req, res) => {
     const { _id, result, message, reason } = req.body;
+
     try {
         const ques = await Question.findOneAndUpdate({ _id: _id }, { qstatus: reason === 'invalid' ? 'invalid' : 'verified', result: 'null' }, { new: true });
         const { Volume, options } = ques;
@@ -76,7 +77,7 @@ const undoSettlement = async (req, res) => {
         await Promise.all(transList.map(async (element) => {
             (element.odd === result)
                 ? await User.updateOne({ _id: element.userId }, { $inc: { balance: 0 - (element.amount * winAmount) + element.amount, earning: 0 - (element.amount * winAmount) }, $push: { notification: `we've undo the settlement due to ${message}` } }, { new: true })
-                : await User.updateOne({ _id: element.userId }, { $inc: { balance: element.amount }, $push: { notification: message } }, { new: true })
+                : await User.updateOne({ _id: element.userId }, { $inc: { balance: element.amount }, $push: { notification: message || 'Settlement has been reverted due to some reason' } }, { new: true })
         }))
         res.status(200).send(ques);
     } catch (error) {

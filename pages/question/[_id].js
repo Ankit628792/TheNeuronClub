@@ -461,7 +461,7 @@ function QuestionDetail({ questionData }) {
 
             </div>
             {isUndoSettle && <UndoSettle setIsUndoSettle={setIsUndoSettle} finalResult={que?.result} queId={que?._id} setQue={setQue} />}
-            {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} queId={que?._id} setQue={setQue} />}
+            {isSettle && <Settlement isSettle={isSettle} setIsSettle={setIsSettle} que={que} setQue={setQue} />}
             {isActive && <motion.div initial="initial"
                 animate="in"
                 exit="out"
