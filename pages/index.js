@@ -63,28 +63,28 @@ const faq = [
 const values = [
     {
         id: 1,
-        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946293/easy_uqulak.jpg",
+        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946293/Values/easy.jpg",
         heading: "Easy",
         desc: "Easily make predictions through our intuitive interface"
 
     },
     {
         id: 2,
-        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946953/network-ge3c64f90e_1920_fyfabb.jpg",
+        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946953/Values/secure.jpg",
         heading: "Secure",
         desc: "Your deposits are securely maintained in Coinbase wallet"
 
     },
     {
         id: 3,
-        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946255/uni_tdslly.jpg",
+        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946255/Values/unique.jpg",
         heading: "Unique",
         desc: "One of a kind prediction platform focused on entertainment events"
 
     },
     {
         id: 4,
-        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1642946216/fun_ubwpom.jpg",
+        imgSrc: "https://res.cloudinary.com/theneuron/image/upload/v1643003552/Values/fun.jpg",
         heading: "Fun",
         desc: "Compete against fans and even run your own contests"
 
@@ -208,7 +208,7 @@ export default function Home({ carouselList }) {
 
                 <div className='p-5'>
                     <h1 className='text-4xl sm:text-5xl text-white text-center mb-10 font-semibold '>Frequently Asked Questions</h1>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 place-items-start justify-items-stretch gap-10 mx-auto max-w-7xl'>
+                    <div className=' mx-auto max-w-7xl'>
                         {/* {faq.map(item =>
                             <details key={item.title} className='max-w-lg p-5 blur-gray rounded-lg'>
                                 <summary className='text-white text-lg 2xl:text-xl font-semibold'>{item.title}</summary>
