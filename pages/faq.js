@@ -4,7 +4,7 @@ import Accordion from "../components/Accordion";
 function faq() {
     const accordionData = [
         {
-            title: 'What is the Neuron Club?',
+            title: 'What is the Neuron Coin?',
             content: `The Neuron Coin is our in-game currency, used for making transactions on the platform. Neuron Coin is pegged to US Dollar and 1 USD is equivalent to 100 Neuron Coins`
         },
         {
@@ -26,11 +26,7 @@ function faq() {
         },
         {
             title: `What is the signup offer?`,
-            content: `When you join, you receive 200 as a welcome bonus. You can use these coins to start investing in the questions ar TheNeuron.club, without needing any credit card. You can check your coin balance on top of the page.`
-        },
-        {
-            title: `What are neuron.club points?`,
-            content: ` Neuron.club points is currency which you can use on Neuron.club to invest. 100 coins are equivalent of 1$`
+            content: `When you join, you receive 200 neuron coins as a welcome bonus. You can use these coins to start investing in the questions ar TheNeuron.club, without needing any credit card. You can check your coin balance on top of the page.`
         },
         {
             title: `How to submit a question`,
@@ -50,8 +46,7 @@ function faq() {
         },
         {
             title: `How do i withdraw money?`,
-            content: `Simply fill the withdrawal request form with your details. Withdrawals are processed within 2 working days.`,
-            desc: [`97% requests are fulfilled within 24 hours`]
+            content: `Simply fill the withdrawal request form with your details. Withdrawals are processed within 2 working days. 97% requests are fulfilled within 24 hours`,
         },
 
     ];
