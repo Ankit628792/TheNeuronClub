@@ -25,6 +25,18 @@ const EditQue = (props) => {
     const [settlementClosingDate, setSettlementClosingDate] = useState(new Date(que?.settlementClosing))
     const [categories, setCategories] = useState(null)
 
+    useEffect(() => {
+        if (new Date(goLiveDate) > new Date(bidClosingDate)) {
+            setBidClosingDate(addDays(goLiveDate, 1))
+        }
+    }, [goLiveDate])
+
+    useEffect(() => {
+        if (new Date(settlementClosingDate) < new Date(bidClosingDate)) {
+            setSettlementClosingDate(addDays(bidClosingDate, 1))
+        }
+    }, [bidClosingDate])
+
     const getUser = async () => {
         if (que?.userId?.length === 24 || que?.userId?.length === 12) {
             const res = await fetch(`/api/user/info?_id=${que?.userId}`)
@@ -160,7 +172,7 @@ const EditQue = (props) => {
                                         window.alert('Only Image allowed')
                                     }
                                 }} />
-                                <div className='blur-blue text-sm rounded-xl p-1 text-center cursor-pointer' onClick={() => (fileInputRef.current.click())} >
+                                <div className='blur-blue text-sm rounded-xl p-1 inline-block text-center cursor-pointer' onClick={() => (fileInputRef.current.click())} >
                                     {preview ? <img className='w-12 h-12 border border-white shadow-lg hover:scale-105 transition-md object-cover rounded-full' src={preview} alt='' /> : <>Change <br /> Image</>}
                                 </div>
                             </>
