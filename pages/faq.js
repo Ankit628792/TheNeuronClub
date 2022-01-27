@@ -4,10 +4,6 @@ import Accordion from "../components/Accordion";
 function faq() {
     const accordionData = [
         {
-            title: 'What is the Neuron Coin?',
-            content: `The Neuron Coin is our in-game currency, used for making transactions on the platform. Neuron Coin is pegged to US Dollar and 1 USD is equivalent to 100 Neuron Coins`
-        },
-        {
             title: `How does Neuron Club work?`,
             content: `Neuron Club provides a trading platform where users can trade on the outcome of events. Based on your opinion, you can choose to bet on how a specific event will turn out to be. Once the question is frozen for trading, no more trades are allowed. Thereafter, when the question is decided based on an independent source, the trading pool is distributed amongst those who predicted the correct outcome`
         },
@@ -37,6 +33,10 @@ function faq() {
             content: ` Everyone is welcome to submit a new question. If you are someone who is ahead of the trends and can shape opinions, write to us expressing your interest and suggested questions to add `
         },
         {
+            title: 'What is the Neuron Coin?',
+            content: `The Neuron Coin is our in-game currency, used for making transactions on the platform. Neuron Coin is pegged to US Dollar and 1 USD is equivalent to 100 Neuron Coins`
+        },
+        {
             title: `How can I convert coins to money?`,
             content: `We will soon begin supporting converting coins to money. Meanwhile, please continue to bet and earn more coins`
         },
@@ -53,7 +53,7 @@ function faq() {
     return (
         <>
             <Head>
-                <title>The Neuron | FAQs</title>
+                <title>The Neuron Club | FAQs</title>
             </Head>
             <div className="pb-20 pt-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-50 text-center mt-10">Frequently Asked Questions</h1>

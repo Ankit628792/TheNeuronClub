@@ -128,7 +128,7 @@ export default function Home({ carouselList }) {
         <>
             {onBoard && <OnBoard onSelect={closeOnboard} />}
             {/* <div className="w-full flex flex-col pb-10"> */}
-            <div className="max_w_3xl pb-10 space-y-20">
+            <div className="max_w_3xl pb-10 space-y-24">
                 <Header carouselList={carouselList} />
 
                 <div className='text-white py-10'>
@@ -209,7 +209,7 @@ export default function Home({ carouselList }) {
                 </div> */}
                 <div className='max-w-7xl mx-auto p-5'>
                     <h1 className='text-4xl sm:text-5xl xl:text-6xl text-center my-5 font-semibold text-white'>Trending Topics</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-8 place-items-center items-stretch question__group p-10">
+                    <div className="p-10 flex items-center justify-evenly gap-10 flex-wrap">
                         {
                             questions?.trending?.length > 0 ?
                                 <>
@@ -221,7 +221,7 @@ export default function Home({ carouselList }) {
                                 <>
                                     {
                                         [0, 1, 2].map(item => (
-                                            <div key={item} className="max-w-xs min-w-[75%] p-5 shadow-lg relative blur-black animate-pulse rounded-lg">
+                                            <div key={item} className="max-w-xs min-w-[300px] p-5 shadow-lg relative blur-black animate-pulse rounded-lg">
                                                 <div className="w-full h-48 rounded-lg bg-gray-500 bg-opacity-70"></div>
                                                 <div className="py-5 h-full">
                                                     <h1 className="mb-4 h-[80px] bg-gray-600 bg-opacity-50"></h1>
@@ -294,7 +294,7 @@ export default function Home({ carouselList }) {
 
                 {/* </div> */}
                 <Head>
-                    <title>The Neuron</title>
+                    <title>The Neuron Club | Predict Future and Win Rewards</title>
                     <link rel="icon" href="/favicon.png" />
                 </Head>
                 {/* <HomeSection /> */}
