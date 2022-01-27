@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { userSession } from '../../lib/user-session';
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const EditQue = dynamic(() => import('../../components/EditQue') , {
     ssr: false,
@@ -35,6 +36,9 @@ function verification({ data }) {
 
     return (
         <>
+        <Head>
+            <title>The Neuron Club | Question Verification</title>
+        </Head>
             {session &&
                 <div className="py-10">
                     {isQue && <EditQue queData={isQue} setIsQue={setIsQue} updateQues={updateQues} from="queVerification" />}
