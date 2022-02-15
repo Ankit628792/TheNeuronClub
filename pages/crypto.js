@@ -88,8 +88,10 @@ function crypto() {
                     </select>
                 </div>}
                 {data && <h1 className='text-xl xl:text-2xl max-w-xl mx-auto text-center font-medium text-white'> {amount || 1} USD =  {(amount || 1) * (+data?.price)?.toFixed(10)} {cryptoData()?.symbol}</h1>}
-                <button onClick={createCharge} disabled={charge ? true : false} className='btn-primary my-4 capitalize disabled:!bg-gray-600 '>Initialize Payment</button>
-                {charge && <CoinbaseCommerceButton className='btn-primary my-4 capitalize' chargeId={charge?.code} onChargeSuccess={() => setPaymentSuccess(true)} onModalClosed={() => setCharge(null)} customMetadata={JSON.stringify(charge?.metadata)}>Pay now</CoinbaseCommerceButton>}
+                {charge ?
+                    <CoinbaseCommerceButton className='btn-primary my-4 capitalize' chargeId={charge?.code} onChargeSuccess={() => setPaymentSuccess(true)} onModalClosed={() => setCharge(null)} customMetadata={JSON.stringify(charge?.metadata)}>Pay now</CoinbaseCommerceButton>
+                    : <button onClick={createCharge} className='btn-primary my-4 capitalize disabled:!bg-gray-400'>Initialize Payment</button>
+                }
             </div>
             <div className='text-white text-center max-w-5xl mx-auto p-5 min-h-[350px]'>
                 <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Withdraw Neuron Coins</h1>
