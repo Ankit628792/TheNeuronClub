@@ -4,19 +4,19 @@ import { sanityClient, urlFor } from '../sanity'
 
 export default function blogs({ posts }) {
   return (
-    <div className='max-w-7xl mx-auto pb-10'>
+    <div className='max-w-7xl mx-auto p-10'>
       <Head>
         <title>The Neuron Club | Blogs</title>
       </Head>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap3 md:gap-6 p-2 md:p-6 py-10 md:py-20'>
-        {posts.map(post => <Link key={post._id} href={`/post/${post.slug.current}`}>
-          <div className='group cursor-pointer border rounded-lg overflow-hidden'>
+        {posts.map(post => <Link key={post._id} href={`/blog/${post.slug.current}`}>
+          <div className='group cursor-pointer border rounded-lg overflow-hidden blur-white'>
             <img className='h-60 w-full object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out' src={urlFor(post.mainImage)?.url()} alt="" />
-            <div className='flex items-center justify-between p-5 bg-white'>
+            <div className='flex items-center justify-between p-5'>
               <div>
-                <p className='text-lg font-bold text-gray-900'>{post.title}</p>
-                <p className='text-sm text-gray-700'>{post.description} by {post.author.name}</p>
+                <p className='text-lg font-bold text-white'>{post.title}</p>
+                <p className='text-sm text-gray-100'>{post.description} by {post.author.name}</p>
               </div>
               <img className='h-12 w-12 rounded-full' src={urlFor(post.author.image)?.url()} alt="" />
             </div>
