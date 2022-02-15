@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { userSession } from '../lib/user-session';
 import CoinbaseCommerceButton from 'react-coinbase-commerce';
@@ -36,6 +37,7 @@ function crypto() {
         }
     }
     useEffect(() => {
+        setCharge(null)
         fetch(`https://coinranking1.p.rapidapi.com/coin/yhjMzLPhuIDl/price?referenceCurrencyUuid=${currency}`, {
             "method": "GET",
             "headers": {
@@ -63,6 +65,7 @@ function crypto() {
 
     return (
         <>
+        <Head><title>The Neuron Club | Payment</title></Head>
             <div className='text-white text-center max-w-5xl mx-auto p-5 my-10 min-h-[350px]'>
                 <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Add More Neuron Coins</h1>
                 <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Now you can easily purchase Neuron Coins with Bitcoin. Please enter the amount of coins that you would like to purchase</p>

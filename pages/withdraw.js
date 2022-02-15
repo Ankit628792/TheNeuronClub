@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Router from 'next/router';
 import { useState, useEffect } from 'react'
 import Accordion from '../components/Accordion';
@@ -192,6 +193,8 @@ function withdraw() {
 
     return (
         <>
+                <Head><title>The Neuron Club | Withdraw Coins</title></Head>
+
             {session &&
                 <div className='text-white text-center p-5 min-h[500px]'>
                     <div className='py-10'>
