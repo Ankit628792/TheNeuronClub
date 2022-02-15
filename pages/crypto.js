@@ -65,7 +65,7 @@ function crypto() {
 
     return (
         <>
-        <Head><title>The Neuron Club | Payment</title></Head>
+            <Head><title>The Neuron Club | Payment</title></Head>
             <div className='text-white text-center max-w-5xl mx-auto p-5 my-10 min-h-[350px]'>
                 <h1 className='text-4xl sm:text-5xl xl:text-6xl text-white mb-2 font-semibold'>Add More Neuron Coins</h1>
                 <p className='text-lg xl:text-xl 2xl:text-2xl text-gray-200 max-w-3xl mx-auto my-2'>Now you can easily purchase Neuron Coins with Bitcoin. Please enter the amount of coins that you would like to purchase</p>
@@ -88,7 +88,7 @@ function crypto() {
                     </select>
                 </div>}
                 {data && <h1 className='text-xl xl:text-2xl max-w-xl mx-auto text-center font-medium text-white'> {amount || 1} USD =  {(amount || 1) * (+data?.price)?.toFixed(10)} {cryptoData()?.symbol}</h1>}
-                <button onClick={createCharge} className='btn-primary my-4 capitalize'>Initiate Payment</button>
+                <button onClick={createCharge} disabled={charge ? true : false} className='btn-primary my-4 capitalize disabled:opacity-50 '>Initiate Payment</button>
                 {charge && <CoinbaseCommerceButton className='btn-primary my-4 capitalize' chargeId={charge?.code} onChargeSuccess={() => setPaymentSuccess(true)} onModalClosed={() => setCharge(null)} customMetadata={JSON.stringify(charge?.metadata)}>Pay now</CoinbaseCommerceButton>}
             </div>
             <div className='text-white text-center max-w-5xl mx-auto p-5 min-h-[350px]'>
