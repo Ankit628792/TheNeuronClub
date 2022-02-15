@@ -116,7 +116,8 @@ const addCoins = async (req, res) => {
     const { amount, currency, userId, name, email } = JSON.parse(req.body);
     var chargeData = {
         name: 'The Neuron Club',
-        description: 'The Neuron Club (TNC) is an online gaming platform that allows users to predict global events across categories and win rewards.',
+        description: 'The Neuron Club (TNC) is an online gaming platform that allows users to predict global events across categories and win rewards',
+        logo_url: `${process.env.HOST}/favicon.png`,
         local_price: {
             amount,
             currency
