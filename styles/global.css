@@ -19,9 +19,10 @@ body{
     /* background-image: radial-gradient( circle farthest-corner at 84% 100%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% ); */
 }
 
-*::-webkit-scrollbar{
+/* *::-webkit-scrollbar{
     display: none
-}
+} */
+
 iframe::-webkit-scrollbar{
     display: none
 }

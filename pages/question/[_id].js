@@ -267,13 +267,6 @@ function QuestionDetail({ questionData }) {
                                                     </label>
                                                 )}
 
-                                                {/* <input type="radio" value="Favour" id="Favour" className="hidden"
-                                                    onChange={(e) => setOdd(e.target.value)} ref={yesRef} name="odd" />
-                                                <div onClick={() => yesRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Favour' && 'btn-blue text-white'} cursor-pointer`}>Yes</div>
-
-                                                <input type="radio" value="Against" id="Against" className="hidden"
-                                                    onChange={(e) => setOdd(e.target.value)} ref={noRef} name="odd" />
-                                                <div onClick={() => noRef.current.click()} className={`px-6 py-1 inline-block text-center leading-loose blur-white hover:btn-blue hover:border-none shadow text-lg rounded font-semibold active:scale-95 transition duration-150 ease-in-out focus:outline-none focus:border-none min-w-[100px] mx-4 ${odd == 'Against' && 'btn-blue text-white'} cursor-pointer`}>No</div> */}
                                             </div>
                                             <div className="my-4 flex flex-col items-center">
                                                 <h1 className="font-medium">Amount to Bid : <span className="text-blue-300 inline-flex items-center"><Coin width="4" height="4" />{bid}</span> </h1>
