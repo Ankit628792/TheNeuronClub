@@ -89,7 +89,7 @@ function CommentBox({ queId, userId, image_url, name }) {
                 </>
                 :
                 <>
-                    <div className="text-center max-w-xs items-center justify-start">
+                    <div className="text-center max-w-[350px] items-center justify-start">
                         <h1 className="text-xl md:text-2xl 2xl:text-3xl font-semibold inline-block leading-relaxed text-white mt-3">No comments yet </h1>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-40 w-40 text-white mx-auto" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
