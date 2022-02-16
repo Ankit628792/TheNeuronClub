@@ -7,18 +7,18 @@ const Post = ({ post }) => {
     return (
         <>
             <Head><title>Blog | {post.title}</title></Head>
-            <main className="text-white py-10">
-                <img className="h-96 object-contain w-full" src={urlFor(post.mainImage)?.url()} alt="" />
-                <article className="max-w-3xl mx-auto p-5">
-                    <h1 className="text-3xl mt-10 mb-3">{post.title}</h1>
-                    <p className="text-xl font-light text-gray-100 mb-2">{post.description}</p>
+            <main className="text-white max-w-4xl mx-auto py-10">
+                <img className="p-5 object-contain max-h-[500px] w-full" src={urlFor(post.mainImage)?.url()} alt="" />
+                <article className="max-w-4xl mx-auto p-5">
+                    <h1 className="text-3xl mb-3">{post.title}</h1>
+                    <p className="text-2xl font-light text-gray-100 mb-2">{post.description}</p>
 
                     <div className="flex items-center space-x-2">
                         <img className="h-10 w-10 rounded-full" src={urlFor(post.author.image)?.url()} alt="" />
                         <p className="text-base font-extralight">Blog post by <span className="text-yellow-300">{post.author.name}</span> - Published at {new Date(post._createdAt).toDateString()}, {new Date(post._createdAt).toLocaleTimeString()}</p>
                     </div>
 
-                    <div className="mt-10">
+                    <div className="mt-10 blog__desc">
                         <PortableText
                             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
                             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
