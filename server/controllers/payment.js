@@ -9,7 +9,7 @@ const { Charge } = resources;
 const withdrawCoins = async (req, res) => {
     try {
         const data = JSON.parse(req.body)
-        const userFound = await User.findById({ _id: data?.userId });
+        const userFound = await User.findByIdAndUpdate({ _id: data?.userId }, { $inc: { balance: -data?.coins } }, {new: true});
         if (!userFound) {
             res.status(400).send('Problem in getting user');
         }
@@ -98,12 +98,11 @@ const withdrawCoins = async (req, res) => {
                 const data = { subject: `Request for Withdrawal`, text: link, email: process.env.MAIL_TO, html: htmlData };
                 const result = await sendEMail(data);
                 console.log(result);
-                res.status(200).send({ message: 'Thank you for submitting your request. We have received your request and are working on it. Please give us up-to 72 hours to fulfil it. ', newBalance: userFound?.balance - saveRequest?.coins })
+                res.status(200).send({ message: 'Thank you for submitting your request. We have received your request and are working on it. Please give us up-to 72 hours to fulfil it. ', newBalance: userFound?.balance })
             } catch (error) {
                 console.log(error)
                 res.status(402).send('Problem in sending request')
             }
-
         }
     } catch (error) {
         console.log(error)
