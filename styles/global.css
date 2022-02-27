@@ -23,6 +23,9 @@ body{
     display: none
 } */
 
+.scroll-hidden::-webkit-scrollbar{
+    display: none
+}
 iframe::-webkit-scrollbar{
     display: none
 }
