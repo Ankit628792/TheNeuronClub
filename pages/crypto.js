@@ -16,7 +16,7 @@ const cryptoApi = [
     { id: "ZlZpzOJo43mIo", name: 'Bitcoin Cash (BCH)', symbol: '(BCH)' },
 ]
 
-function transfer() {
+function crypto() {
     const router = useRouter()
     const session = userSession()
     useEffect(() => {
@@ -106,4 +106,4 @@ function transfer() {
     )
 }
 
-export default transfer
+export default crypto
