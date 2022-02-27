@@ -105,7 +105,7 @@ function QuestionList({ categories, category, contest }) {
                                 <ChevronDownIcon className="absolute top-1/2 transform -translate-y-1/2 right-1 h-6 w-6 bg-white" />
                             </div>
                         </div>
-                        <div className="flex items-center my-5 p-2 gap-x-10 max-w-7xl mx-auto overflow-x-auto scroll-hidden rounded-full">
+                        <div className="flex items-center my-5 p-2 gap-x-4 md:gap-x-8 max-w-7xl mx-auto overflow-x-auto scroll-hidden rounded-full">
                             {categories?.sort((a, b) => a.order - b.order)?.map(item => !item.hidden && <div key={item._id} value={item.category} className={`capitalize relative min-w-max max-w-max py-2 px-4 rounded-full bg-white text-gray-900 font-medium transform hover:scale-105 cursor-pointer transition-sm shadow-md ${filter.category == item.category ? 'scale-105 border-2 border-blue-500 gradient-shadow' : 'border-2 border-gray-500'}`} onClick={() => setFilter({ ...filter, category: item.category })}>{item.category}</div>)}
                         </div>
                     </>
