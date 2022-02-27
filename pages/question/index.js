@@ -1,4 +1,5 @@
 import Head from "next/head";
+import QuestionList from '../../components/QuestionList'
 import { useRouter } from "next/router";
 
 function index({ categories }) {
