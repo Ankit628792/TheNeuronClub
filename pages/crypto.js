@@ -8,12 +8,12 @@ import Modal from '../components/Modal';
 
 const cryptoApi = [
     { id: "Qwsogvtv82FCd", name: 'Bitcoin (BTC)', symbol: 'BTC' },
-    { id: "razxDUgYGNAdQ", name: 'Ethereum (ETH)', symbol: '(ETH)' },
+    { id: "razxDUgYGNAdQ", name: 'Ethereum (ETH)', symbol: 'ETH' },
     { id: "aKzUVe4Hh_CON", name: 'USD Coin', symbol: 'USDC' },
     { id: "a91GCGd_u96cF", name: 'Dogecoin (DOGE)', symbol: 'DOGE' },
     { id: "D7B1x_ks7WhV5", name: 'Litecoin (LTC)', symbol: 'LTC' },
-    { id: "MoTuySvg7", name: 'Dai (Dai)', symbol: '(Dai)' },
-    { id: "ZlZpzOJo43mIo", name: 'Bitcoin Cash (BCH)', symbol: '(BCH)' },
+    { id: "MoTuySvg7", name: 'Dai (Dai)', symbol: 'Dai' },
+    { id: "ZlZpzOJo43mIo", name: 'Bitcoin Cash (BCH)', symbol: 'BCH' },
 ]
 
 function crypto() {

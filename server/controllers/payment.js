@@ -9,7 +9,7 @@ const { Charge } = resources;
 const withdrawCoins = async (req, res) => {
     try {
         const data = JSON.parse(req.body)
-        const userFound = await User.findByIdAndUpdate({ _id: data?.userId }, { $inc: { balance: -data?.coins } }, {new: true});
+        const userFound = await User.findByIdAndUpdate({ _id: data?.userId }, { $inc: { balance: -data?.coins } }, { new: true });
         if (!userFound) {
             res.status(400).send('Problem in getting user');
         }
@@ -112,7 +112,7 @@ const withdrawCoins = async (req, res) => {
 
 
 const addCoins = async (req, res) => {
-    const { amount, currency, userId, name, email } = JSON.parse(req.body);
+    const { amount, coins, currency, userId, name, email } = JSON.parse(req.body);
     var chargeData = {
         name: 'The Neuron Club',
         description: 'The Neuron Club (TNC) is an online gaming platform that allows users to predict global events across categories and win rewards',
@@ -124,6 +124,7 @@ const addCoins = async (req, res) => {
         pricing_type: 'fixed_price',
         metadata: {
             userId,
+            coins,
             name,
             email,
             amount,
