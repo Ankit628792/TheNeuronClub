@@ -129,7 +129,7 @@ const EditQue = (props) => {
         formData.append("question", question);
         formData.append("userId", que?.userId);
         formData.append("category", category);
-        formData.append("tags", JSON.stringify([...tags, category]));
+        formData.append("tags", JSON.stringify([... new Set(tags, category)]));
         formData.append("goLive", goLiveDate.toISOString());
         formData.append("bidClosing", bidClosingDate.toISOString());
         formData.append("settlementClosing", settlementClosingDate.toISOString());
@@ -223,7 +223,7 @@ const EditQue = (props) => {
                                 </select>
                                 <div className='flex flex-wrap items-center gap-2 max-w-xl'>
                                     {category?.length > 0 && <p className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{category}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => setCategory('')} /></p>}
-                                    {tags?.length > 0 && tags.map(item => item !== category && <p key={item} className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{item}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => delTag(item)} /></p>)}
+                                    {tags?.length > 0 && tags.map(item => item != category && category?.length > 1 && <p key={item} className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{item}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => delTag(item)} /></p>)}
                                 </div>
                             </>
                             : <h2 className="flex-1 text-sm text-gray-100 capitalize"> {que?.category} </h2>}

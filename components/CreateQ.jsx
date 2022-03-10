@@ -87,7 +87,7 @@ function CreateQ({ session, categories }) {
             formData.append("question", data.question);
             formData.append("userId", data.userId);
             formData.append("category", category);
-            formData.append("tags", JSON.stringify([...tags, category]));
+            formData.append("tags", JSON.stringify([... new Set(tags, category)]));
             formData.append("goLive", goLiveDate.toISOString());
             formData.append("bidClosing", bidClosingDate.toISOString());
             formData.append("settlementClosing", settlementClosingDate.toISOString());
@@ -203,7 +203,7 @@ function CreateQ({ session, categories }) {
                             </select>
                             <div className='flex flex-wrap items-center gap-2'>
                                 {category?.length > 0 && <p className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{category}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => setCategory('')} /></p>}
-                                {tags?.length > 0 && tags.map(item => item !== category && <p key={item} className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{item}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => delTag(item)} /></p>)}
+                                {tags?.length > 0 && tags.map(item => item != category && category?.length > 1 && <p key={item} className='text-white m-1 blur-blue py-1 px-3 rounded-3xl text-lg font-medium min-w-max flex items-center'>{item}<XIcon className='w-4 h-4 ml-1 cursor-pointer text-gray-100' onClick={() => delTag(item)} /></p>)}
                             </div>
                         </div>
                         <div className="mb-1 sm:mb-2">
