@@ -13,7 +13,7 @@ function contest({ contestList }) {
         <title>Contest | Oscars</title>
         </Head>
             <div>
-                <img className='h-96 w-full rounded max-w-7xl object-contain mx-auto m-5 cursor-pointer' src={session ? contestList[1]?.imgSrc : contestList[0]?.imgSrc} alt="" onClick={() => router.push('/tnc')} />
+                <img className='h-96 w-full rounded max-w-7xl object-contain mx-auto m-5 cursor-pointer' src={session ? contestList[1]?.imgSrc : contestList[0]?.imgSrc} alt="" onClick={() => router.push('/tnc/contest')} />
             </div>
             <QuestionList category={router.query?.category || 'oscars'} contest />
         </>
