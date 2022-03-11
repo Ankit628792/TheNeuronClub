@@ -87,8 +87,9 @@ function Navbar() {
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg 2xl:text-xl">
                         <Link href="/question/">Explore</Link>
+                        <Link href="/contest">Oscars 2022 Contest</Link>
+                        <Link href="/how_it_works">How It Works</Link>
                         {session?.type === 'admin' && <Link href="/create_question">Create Question</Link>}
-                        <Link href="/contest">Oscars 2022 contest</Link>
                         {session && <Link href="/transfer">Add Coins</Link>}
 
                         {!session &&
@@ -131,16 +132,19 @@ function Navbar() {
                         <Link href="/question/">
                             <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Explore</h1>
                         </Link>
+                        <Link href="/contest">
+                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Oscars 2022 Contest</h1>
+                        </Link>
+                        <Link href="/how_it_works">
+                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How It Works</h1>
+                        </Link>
                         {session?.type === 'admin' &&
                             <Link href="/create_question">
                                 <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Create Question</h1>
                             </Link>
                         }
-                        <Link href="/contest">
-                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Oscars 2022 contest</h1>
-                        </Link>
                         <Link href="/contact">
-                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact us</h1>
+                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Contact Us</h1>
                         </Link>
                         {
                             session ?
