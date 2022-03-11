@@ -87,7 +87,7 @@ function Navbar() {
                 <div className="flex items-center">
                     <ul className="flex hidden md:block space-x-5 pr-6 font-medium text-lg 2xl:text-xl">
                         <Link href="/question/">Explore</Link>
-                        <Link href="/contest">Oscars 2022 Contest</Link>
+                        <Link href="/contest">Oscars 2022</Link>
                         <Link href="/how_it_works">How It Works</Link>
                         {session?.type === 'admin' && <Link href="/create_question">Create Question</Link>}
                         {session && <Link href="/transfer">Add Coins</Link>}
@@ -118,7 +118,7 @@ function Navbar() {
                 exit="out"
                 variants={fadeOut}
                 transition={pageTransition} className='w-full text-center capitalize max_w_3xl bg-[#08ffd6] cursor-pointer text-gray-700 hover:text-black py-1 grid place-items-center font-semibold text-base xl:text-lg'>
-                <Link href="/contest">Ace the Oscars Contest Live now! Click here to get started for chance to win exciting rewards</Link>
+                <Link href="/contest">Ace the Oscars Contest Live now! Click here to get started for chance to win rewards upto INR 12,000</Link>
             </motion.div>}
 
             {isActive &&
@@ -133,7 +133,7 @@ function Navbar() {
                             <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Explore</h1>
                         </Link>
                         <Link href="/contest">
-                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Oscars 2022 Contest</h1>
+                            <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >Oscars 2022</h1>
                         </Link>
                         <Link href="/how_it_works">
                             <h1 className="text-gray-100 hover:text-white cursor-pointer transition-sm" onClick={() => setIsActive(false)} >How It Works</h1>
