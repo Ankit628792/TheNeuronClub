@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const User = ({ data, rank }) => {
     const [user, setUser] = useState()
     useEffect(() => {
-        fetch(`http://localhost:3000/api/getUser?_id=${data?._id?.userId}`).then((res) => res.json()).then(data => setUser(data)).catch(e => console.log(e));
+        fetch(`/api/getUser?_id=${data?._id?.userId}`).then((res) => res.json()).then(data => setUser(data)).catch(e => console.log(e));
     }, [])
 
     return (
