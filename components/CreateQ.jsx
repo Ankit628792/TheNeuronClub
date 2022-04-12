@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import addDays from 'date-fns/addDays'
 import { motion } from 'framer-motion'
 import { formats, modules, pageTransition, pageZoom } from '../util'
-import { RefreshIcon, XIcon } from '@heroicons/react/solid';
+import { XIcon } from '@heroicons/react/solid';
 import { PlusIcon } from '@heroicons/react/outline';
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     ssr: false,
