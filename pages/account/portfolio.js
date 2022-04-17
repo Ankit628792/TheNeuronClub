@@ -67,13 +67,6 @@ function portfolio() {
                             <h1 className="font-semibold text-2xl text-white">Net Returns</h1>
                             <h2 className="text-xl text-gray-200 inline-flex items-center"><Coin width="5" height="5" />{Math.round(userData?.earning) || '0'}</h2>
                         </motion.div>
-                        {/* <motion.div initial="hidden"
-                            animate="visible"
-                             variants={pageZoom}
-                            transition={pageTransition} className="max-w-xs gradient-shadow bg-green-200 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-xl p-6 m-2 space-y-2 border-b-4 lose__border">
-                            <h1 className="font-semibold text-2xl text-gray-700">Loses</h1>
-                            <h2 className="text-xl text-gray-600 inline-flex items-center"><Coin width="5" height="5" />{investment?.lose}</h2>
-                        </motion.div> */}
                         <motion.div initial="initial"
                             animate="in"
                             exit="out"
@@ -96,7 +89,6 @@ function portfolio() {
                                 </div>
                                 <div className="text-xl font-medium text-white">
                                     <h2 className="line-clamp-1">{session?.name}</h2>
-                                    {/* <h1 className="text-gray-500 text-base">{session?.country}</h1> */}
                                 </div>
                             </motion.div>
                         </div>
