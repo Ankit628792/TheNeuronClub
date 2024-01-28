@@ -23,6 +23,7 @@ function Navbar() {
     const userSignOut = () => signOut();
     const logout = async () => {
         dispatch(updateLoader(true))
+        console.log(session)
         window.localStorage.setItem('neuron-token', '');
         const res = await fetch(`/api/account/logout`, {
             method: 'POST',
@@ -31,6 +32,7 @@ function Navbar() {
             },
             body: JSON.stringify({ _id: session?._id })
         });
+        console.log(res)
         if (res.status === 200) {
             userSignOut();
         }
