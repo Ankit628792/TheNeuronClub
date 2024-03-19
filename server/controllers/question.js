@@ -35,8 +35,8 @@ const ques = async (req, res) => {
             res.status(200).send(expiring)
         }
         else {
-            const trending = await Question.find({ goLive: { $lte: new Date(new Date().toISOString()) }, bidClosing: { $gte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ Volume: -1 }).limit(3);
-            const newest = await Question.find({ goLive: { $lte: new Date(new Date().toISOString()) }, bidClosing: { $gte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ _id: -1 }).limit(3);
+            const trending = await Question.find({ goLive: { $lte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ Volume: -1 }).limit(3);
+            const newest = await Question.find({ goLive: { $lte: new Date(new Date().toISOString()) }, qstatus: 'verified' }).sort({ _id: -1 }).limit(3);
             res.status(200).send({ trending, newest })
         }
     } catch (error) {

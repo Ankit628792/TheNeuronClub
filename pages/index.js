@@ -92,11 +92,14 @@ export default function Home({ carouselList }) {
     const [questions, setQuestions] = useState([])
 
     async function getQue() {
-        const ques = await fetch(`${process.env.host}/api/question/ques`).then((res) => res.json());
-        if (ques) {
-            setQuestions(ques)
+        try {
+            const ques = await fetch(`${process.env.host}/api/question/ques`).then((res) => res.json());
+            if (ques) {
+                setQuestions(ques)
+            }
+        } catch (error) {
+            console.log(error?.message)
         }
-
     }
 
     useEffect(() => {
